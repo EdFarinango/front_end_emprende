@@ -1,0 +1,101 @@
+.navbar{
+    background-color:transparent !important ;
+    padding-left:10%;
+    padding-right:10%;
+
+    .sign-up-btn{
+        background-color: hsl(180, 66%, 49%);
+        color: white;
+        border-radius: 20px;
+        min-width: 90px;
+        border: none;
+        height: 40px;
+       &:active{
+            background-color: hsla(180, 66%, 49%, 0.502);
+           
+        }
+
+        &:focus{
+            outline: 0;
+        }
+
+        
+       
+    }
+    .navbar-brand{
+        font-size:20pt ;
+        padding-bottom: 10px;
+    }
+    span{
+        cursor: pointer;
+    }
+}
+
+
+
+@media screen and (max-width: 991px) {
+
+
+    
+.navbar{
+    padding: 0;
+}
+
+    .navbar-toggler{
+        border: none;
+        outline: none;
+        &:focus{
+            outline: none;
+            border: none;
+        }
+    } 
+    .navbar-nav {
+        padding-top: 20px;
+        font-weight: bold;
+        text-align: center;
+        background-color: hsl(257, 27%, 26%);
+        width: 100% ;
+        margin-left: auto;
+        margin-right: auto;
+
+        .nav-item{
+            font-size: 14pt;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            .nav-link{
+                color: white !important;
+            }
+        }
+
+    }
+    .sign-up-btn{
+        font-weight: bold;
+        border-radius: 50px !important;
+        width: 80%;
+        height: 60px;
+        margin-bottom: 20px;
+
+       
+    }
+    .left-items{
+        margin-top: 10px;
+        border-radius: 10px 10px 0px 0px;
+
+    }
+    .right-items{
+       padding-top: 0;
+        border-radius: 0px 0px 10px 10px;
+    }
+
+    
+    .divider{
+        border-top: .1px rgba(128, 128, 128, 0.44) solid;
+        width: 90%;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+       
+    }
+   
+
+}

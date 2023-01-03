@@ -1,0 +1,122 @@
+.footer{
+    background-color: #1c1a21;
+    position: relative;
+    overflow-x: hidden !important;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    
+    .main-title{   
+        margin-right: 100px;
+        font-size: 17pt;
+        
+    }
+    
+    .title-wrap{
+        margin-top:7px;
+        cursor: pointer;
+        margin-left: 100px;
+        display: flex;  
+        flex-direction: column;
+        text-align: left;
+
+        .title{
+            transition: .3s ease;
+            font-weight: bold;
+            font-size: 11pt;
+            margin-bottom: 5px;
+            
+           
+        }
+        
+        
+        .sub-title{
+            font-size: 10pt;
+            margin-bottom: 7px;
+            color: #9E9AA8;
+            &:active{
+                color:  hsl(180, 66%, 49%); ;
+            }
+        }
+    }
+
+    .icons{
+        margin-top: 10px;
+        display: flex;
+      
+        margin-left: 100px;
+        
+
+        .icon{
+           width: 35px;
+            cursor: pointer;
+            padding-left: 10px;
+            fill: white;
+            &:active{
+
+                fill: hsl(180, 66%, 49%) !important;
+            }
+            
+        }
+    }
+
+    .attribution{
+        position: absolute;
+        bottom: 10px;
+        font-size: 10pt;
+    }
+}
+
+
+@media screen and(max-width:840px){
+    .footer{
+     
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+
+        .main-title{
+            font-size: 20pt;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .title-wrap{
+            text-align: center;
+            margin-left: 0 !important;
+            .title{
+                margin-bottom: 10px;
+            }
+            .sub-title{
+                margin-bottom: 10px;
+            }
+
+        }
+
+        .icons{
+            margin-left: 0 !important;
+            margin-top: 20px;
+
+            .icon{
+                margin-right: 20px;
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width:1000px){
+    .main-title{   
+        margin-right: 0px !important;
+    }
+
+    .title-wrap{
+        margin-left: 70px !important;
+    }
+}

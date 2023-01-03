@@ -1,0 +1,23 @@
+    .boton {
+        margin-top: 10px;
+        background-color: hsl(180, 66%, 49%);
+        border: 0;
+        height: 50px;
+        width: 175px;
+        color: white;
+        border-radius: 70px;
+        font-family: inherit;
+        font-size: 25pt;
+        text-decoration: none !important;
+        &:active {
+            text-decoration: none;
+        }
+        &:focus {
+            text-decoration: none;
+            outline: 0;
+        }
+        &>a {
+            text-decoration: none;
+            color: white;
+        }
+    }
