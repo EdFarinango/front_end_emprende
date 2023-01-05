@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -28,12 +28,13 @@ const EditForm = (props) => {
         facebook : '',
         instagram : '',
         descuento : '',
+        segundo_estado : '1',
       
         
 
     });
 
-    const navigate = useNavigate();
+
 
     const handleChange = (e) => {
         setForm({
@@ -54,6 +55,7 @@ const EditForm = (props) => {
                 await axios.post(`https://backend-emprende.herokuapp.com/api/v1/emprendimiento/create`, form, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
+              
                
             } catch (error) {
                 console.log(error);
@@ -62,6 +64,7 @@ const EditForm = (props) => {
       props.toogle();
     }
 
+    
     return (
         <Form onSubmit={handleSubmit}>
              
@@ -201,6 +204,18 @@ const EditForm = (props) => {
                     onChange={handleChange}
                 />
             </FormGroup>
+            <FormGroup>
+                <Label for="segundo_estado">Segundo Estado</Label>
+                <Input
+                    type="text"
+                    name="segundo_estado"
+                    id="segundo_estado"
+                    placeholder="Segundo Estado"
+                    value={form.segundo_estado }
+                    onChange={handleChange}
+                />
+            </FormGroup>
+            
             <Button>Submit</Button>
         </Form>
     );

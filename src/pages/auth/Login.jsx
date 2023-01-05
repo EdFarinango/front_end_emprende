@@ -5,32 +5,43 @@ import { AuthContext } from '../../contexts';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FaNetworkWired } from 'react-icons/fa';
-import axiosClient from '../../services/axios-client';
+
+import axios from 'axios';
+import { Modal } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 export const Login = () => {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    
+    
+
     const onLogin = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axiosClient.post('login', {
+            const response = await axios.post('https://backend-emprende.herokuapp.com/api/v1/login', {
                 email,
                 password
             });
-
             const { access_token, token_type, user } = response.data.data
             console.warn(access_token, token_type, user);
 
             login(user, `${token_type} ${access_token}`);
+             // eslint-disable-next-line no-lone-blocks
+            {
+               
 
-            {user.rol === 'superadmin' ? navigate('/administracion') : navigate('/administracion')
-}
+
+                navigate('/administracion');
+            }
         } catch (error) {
             if (!FaNetworkWired) {
-                console.log('sdaasdads', error);
+                console.log(error);
             } else {
                 console.log(error.response.data.message, error);
                 setEmail('');
@@ -41,6 +52,8 @@ export const Login = () => {
 
     return (
         <>
+            
+                    
             <h2 className='text-2xl md:text-3xl font-bold'>Bienvenido </h2>
             <p className='text-sm text-gray-500 pb-6'>Ingresa a tu cuenta</p>
             <form className='space-y-7 text-left' onSubmit={onLogin}>
@@ -68,6 +81,7 @@ export const Login = () => {
                         type='password'
                         value={password}
                         placeholder='Ingresa tu contraseña'
+                        maxLength="35"
                         required
                         onChange={e => setPassword(e.target.value)}
                     />

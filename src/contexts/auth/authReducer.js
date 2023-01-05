@@ -1,7 +1,5 @@
 import { types } from "./types";
 
-
-// https://reactjs.org/docs/hooks-reference.html#usereducer
 export const authReducer = (state, action) => 
 {
     

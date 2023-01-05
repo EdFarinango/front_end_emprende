@@ -19,10 +19,10 @@ const ModalForm = (props) => {
     const getAdmin = async () => {
         try {
             const response = await axios.get(
-                `https://backend-tesis.herokuapp.com/api/superadmin`,
+                `https://backend-emprende.herokuapp.com/api/v1/superadmin`,
                 { headers: { 'accept': 'application/json', 'authorization': token } }
             );
-            console.log("sss", response)
+           
             setAdmin(response.data.data.users)
         } catch (error) {
             console.log(error);

@@ -10,8 +10,7 @@ import axiosClient from '../../services/axios-client';
 
 
 
-export const DashboardTemplate = () => 
-{
+export const DashboardTemplate = () => {
 
     const { user, logout } = useContext(AuthContext);
     const location = useLocation();
@@ -20,32 +19,31 @@ export const DashboardTemplate = () =>
     const token = localStorage.getItem('token');
 
     function Detectar(props) {
-        
-        if (props === 'admin') {
-          return (
 
-            <ul className="">
+        if (props === 'admin') {
+            return (
+
+                <ul className="">
                 </ul>
-            
-          );
+
+            );
 
         } else if (props === 'superadmin') {
 
             return (
                 <ul className="">
-                    
+
                     <button type="button" onClick={onLogout} className="m-auto text-white text-2xl block mt-4 hover:text-red-300 text-center bg-red-900 p-1 rounded-lg">Logout</button>
                 </ul>
             );
 
-             } 
-             
+        }
+
     }
-    const onLogout = async () => 
-    {
+    const onLogout = async () => {
         try {
             await axios.post(
-                'https://backend-tesis.herokuapp.com/api/logout',
+                'api/logout',
                 {}, { headers: { 'accept': 'application/json', 'authorization': token } }
             );
             navigate('/', { replace: true });
@@ -54,51 +52,51 @@ export const DashboardTemplate = () =>
         } catch (error) {
             console.log(error);
         }
-        
+
     };
     return (
         <div className='md:flex '>
 
 
-            
-            
-              
-       
 
-          
-            
+
+
+
+
+
+
             <div className='flex flex-col flex-1'>
-                    <div className='container mx-auto px-6 py-8'>
-                        <h3 className='text-gray-700 text-3xl font-medium'>Dashboard</h3>
-                        <div className='mt-4'>
-                            <div className='flex flex-wrap -mx-6'>
-                                
-                               
-                                
-                            </div>
-                          </div>
-                          <div className='mt-8'>
-                        
-                            <div className='mt-4'>
-                                
-                                <div className='mt-4'>
-                                    {user.role === 'superadmin' ?  <Inicio />: <Outlet />
+                <div className='container mx-auto px-6 py-8'>
+                    <h3 className='text-gray-700 text-3xl font-medium'>Dashboard</h3>
+                    <div className='mt-4'>
+                        <div className='flex flex-wrap -mx-6'>
 
-                                    }
-                                   
-                                
-                                </div>
+
+
+                        </div>
+                    </div>
+                    <div className='mt-8'>
+
+                        <div className='mt-4'>
+
+                            <div className='mt-4'>
+                                {user.role === 'superadmin' ? <Inicio /> : <Outlet />
+
+                                }
+
+
                             </div>
                         </div>
                     </div>
-             
+                </div>
+
             </div>
         </div>
-        
 
 
-            
-                
-           
+
+
+
+
     );
 }

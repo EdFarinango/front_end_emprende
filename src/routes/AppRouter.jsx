@@ -14,6 +14,11 @@ import { Inicio} from '../pages/landingPage/Inicio';
 
 import { Perfil } from '../pages/users/admin/perfil';
 import { Emprendimientos } from '../pages/empredimientos/Emprendimientos';
+import { ConfirmPassword } from '../pages/auth/ConfirmPassword';
+import CatalogoEmp from '../pages/empredimientos/CatalogoEmp';
+import DashboardUsers from '../components/templates/DashboardUsers';
+import AdminCard from '../components/organisms/AdminCard';
+import AdminsCard from '../components/organisms/AdminsCard';
 
 
 
@@ -22,18 +27,26 @@ import { Emprendimientos } from '../pages/empredimientos/Emprendimientos';
 
 export const AppRouter = () => {
     return (
+        
+        
+
         <AuthProvider>
             <NavBar />
       
             <Routes>
-                
+            < Route path='/catalogo' element={<CatalogoEmp />} />
+            < Route path='/404' element={<h1>Error por parte del servidor, contactese con el administrador</h1>} />   
             < Route path='*' element={<h1>404: Especifique una ruta correctamente</h1>} />
+              
             <Route path='/' element={<Inicio />} />
                 <Route path='login/*' element={
                     
                     <PublicRoute>
-                    
+                       
+                        
+
                         <Routes>
+                       
                             <Route element={<AuthTemplate />}>
                                 <Route path='/*' element={<Login />} />
                               
@@ -44,7 +57,8 @@ export const AppRouter = () => {
                 } />
 
                 <Route element={<AuthTemplate />}>
-                <Route path='/recovery/*' element={<Recovery />} /> 
+                <Route path='/recovery' element={<Recovery/>} /> 
+                <Route path='/confirmarCon' element={<ConfirmPassword/>} />
                 
                
                 </Route>
@@ -52,12 +66,16 @@ export const AppRouter = () => {
                 
                 
                 
-                                        <Route path='/administracion/*'  element={
+                    <Route path='/administracion/*'  element={
                     <PrivateRoute>
                         <Routes>
                           
                                 <Route element={<DashboardTemplate />}>
+
                                     <Route path='/*' element={<App />} />
+                                    <Route path='/panel' element={<DashboardUsers />} />
+                                    <Route path='/admin' element={<AdminsCard />} />
+                                    <Route path='/super' element={<AdminCard />} />
                                     <Route path='/users' element={<Perfil />} />
 
                                   
@@ -78,6 +96,7 @@ export const AppRouter = () => {
                           
                             >
                                 <Route path='/emprendimientos' element={<Emprendimientos />} 
+
                               
                                 
                                 />

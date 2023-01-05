@@ -31,10 +31,13 @@ const useStyles = makeStyles({
   },
 });
 export const App = () => {
-  const classes = useStyles();
-  
 
-  
+
+
+  const classes = useStyles();
+
+
+
   const { user } = useContext(AuthContext);
   const token = localStorage.getItem('token');
   const [data, setData] = useState([]);
@@ -44,10 +47,10 @@ export const App = () => {
   const getData = async () => {
     try {
       const response = await axios.get(
-        `https://backend-tesis.herokuapp.com/api/emprendimiento`,
+        `https://backend-emprende.herokuapp.com/api/v1/emprendimiento`,
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
-     
+
       setData(response.data.data.emprendimientos)
     } catch (error) {
       console.log(error);
@@ -56,181 +59,145 @@ export const App = () => {
 
 
 
-  
 
 
 
 
-  
+
+
 
   useEffect(() => {
     getData();
   }, []);
-  
+
   return (
-   
 
-   <> 
- 
- <Row className='mt-2 '>
-    
-    <Card className={classes.root}>
-      <CardActionArea>
-        {
-          user && user.rol === 'superadmin' && (
-            <Link to="/administracion/users" >
-              <CardMedia
-          className={classes.media}
-          image="https://cdn-icons-png.flaticon.com/512/1705/1705768.png"
-          title="Super Usuario"
+
+    <>
+
+      <Row className='mt-2 d-flex justify-content-between'>
+
+        {user && user.rol === 'superadmin' && (
+          <Card className={classes.root}>
+            <CardActionArea>
+
+              <Link to="/administracion/super" >
+                <CardMedia
+                  className={classes.media}
+                  image="https://cdn-icons-png.flaticon.com/512/1705/1705768.png"
+                  title="Super Usuario"
+
+                />
+              </Link>
+
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Super Administradores
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                  across all continents except Antarctica
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+              <Button size="small" color="primary">
+                Learn More
+              </Button>
+
+
+            </CardActions>
+          </Card>
+
           
-        />
-        </Link>
-       
-
-
         )}
-        {user && user.rol === 'admin' && (
 
-
+        {user && user.rol === 'superadmin' && (
           
 
+        <Card className={classes.root}>
+          <CardActionArea>
+          <Link to="/administracion/admin" >
+                <CardMedia
+                  className={classes.media}
+                  image="https://cdn-icons-png.flaticon.com/512/1705/1705768.png"
+                  title="Super Usuario"
 
-<CardMedia
-className={classes.media}
-image="https://cdn-icons-png.flaticon.com/512/1705/1705768.png"
-title="Super Usuario"
-/>
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-        )
-       
-        }
+                />
+              </Link>
+            
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                Administradores
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                across all continents except Antarctica
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
 
 
-     
-      
+            <Button size="small" color="primary">
+              Learn More
+            </Button>
+          </CardActions>
+        </Card>
 
-       
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Super Administradores
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
- 
-       
-        
-        
-    
+)}
 
 
+        <Card className={classes.root}>
+          <CardActionArea>
 
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-        
-        
-      </CardActions>
-    </Card>
-  
- 
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="https://www.pngmart.com/files/21/Admin-Profile-PNG-Photos.png"
-          title="Usuario"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Administradores
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-     
-       
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
-    </Card>
+            <Link
 
 
-    
-    <Card className={classes.root}>
-      <CardActionArea>
-     
-          <Link 
-      
-      
-      to="/users/emprendimientos" >
-      <CardMedia
-          className={classes.media}
-          image="https://cdn-icons-png.flaticon.com/512/2103/2103716.png"
-          title="emprendimiento"
-        />
-        </Link>
-        
+              to="/users/emprendimientos" >
+              <CardMedia
+                className={classes.media}
+                image="https://cdn-icons-png.flaticon.com/512/2103/2103716.png"
+                title="emprendimiento"
+              />
+            </Link>
 
 
-      
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-           Administración de emprendimientos
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-     
-       
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
-    </Card>
-    
- 
- </Row>
-  
- 
-
-    
-
-   </>
-
-   
 
 
-    
-  
- 
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                Administración de emprendimientos
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                across all continents except Antarctica
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+
+
+            <Button size="small" color="primary">
+              Learn More
+            </Button>
+          </CardActions>
+        </Card>
+
+
+      </Row>
+
+
+
+
+
+    </>
+
+
+
+
+
+
+
   );
 }

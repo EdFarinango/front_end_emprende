@@ -21,14 +21,12 @@ const EditForm = (props) => {
     {
 
 
-      id: props.item?.id ?? "",
-      first_name: props.item?.first_name ?? "",
-      last_name: props.item?.last_name ?? "",
-      email: props.item?.email ?? "",
-      parsonal_phone: props.item?.parsonal_phone ?? "",
-      linkedin : props.item?.linkedin ?? "",
-      state: props.item?.state ?? ""
-
+      first_name: "",
+      last_name:  "",
+      email:  "",
+      parsonal_phone:  "",
+      linkedin :  "",
+      state: "1"
 
     }
   );
@@ -44,15 +42,7 @@ const EditForm = (props) => {
   const FormEdit = async (e) => {
     e.preventDefault();
 
-    if (Object.values(form).includes("")) {
-      console.log(e);
-      setError(true)
-      setTimeout(() => {
-        setError(false)
-      }, 2500);
-      return;
-    }
-
+   
     try {
 
       if (props.item?.id) {
@@ -75,41 +65,19 @@ const EditForm = (props) => {
       console.log(error);
     }
     props.toggle();
-    props.updateState();
+   
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  useEffect(() => {
-    if (props.item) {
-      const { id, first_name, last_name, email, personal_phone, linkedin } = props.item;
-      setForm({ id, first_name, last_name, email, personal_phone, linkedin});
-    }
-  }, [props.item]);
+  
 
 
 
 
   return (
     <Form onSubmit={FormEdit} >
+
+
 
       <FormGroup>
         <Label for="first_name">First Name</Label>
@@ -142,9 +110,19 @@ const EditForm = (props) => {
         />
       </FormGroup>
       <FormGroup>
+        <Label for="password">Password</Label>
+        <Input
+          type="password"
+          name="password"
+          id="password"
+          onChange={handleChange}
+          value={form.password === null ? "" : form.password}
+        />
+      </FormGroup>
+
+      <FormGroup>
         <Label for="personal_phone">Personal Phone</Label>
         <Input
-
           type="text"
           name="personal_phone"
           id="personal_phone"
@@ -152,7 +130,6 @@ const EditForm = (props) => {
           value={form.personal_phone === null ? "" : form.personal_phone}
         />
       </FormGroup>
-
       <FormGroup>
         <Label for="linkedin">Linkedin</Label>
         <Input
@@ -165,7 +142,8 @@ const EditForm = (props) => {
         />
       </FormGroup>
       
-    
+
+      
 
 
 

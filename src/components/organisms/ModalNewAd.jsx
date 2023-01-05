@@ -1,28 +1,43 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
-import EditForm from "../templates/FormEditAd";
+import EditForm from "../templates/FormNewAd";
 
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect } from "react";
 
 
 const ModalForm = (props) => {
 
-    let button = "";
+   
 
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const navigate = useNavigate();
-    const token = localStorage.getItem('token');
+    const [form, setForm] = useState({
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        state : '1',
+        role: 'admin'
+    });
+
     const [admin, setAdmin] = useState([]);
-    const getAdmin = async () => {
+
+
+    const token = localStorage.getItem('token');
+
+   
+    const nweAdmin = async () => {
         try {
-            const response = await axios.get(
-                `https://backend-emprende.herokuapp.com/api/v1/admin`,
-                { headers: { 'accept': 'application/json', 'authorization': token } }
-            );
-           
+            const response = await axios.post(
+                `https://backend-emprende.herokuapp.com/api/v1/admin/create`,
+                
+                  
+                    { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
+                );
+         
             setAdmin(response.data.data.users)
         } catch (error) {
             console.log(error);
@@ -32,10 +47,8 @@ const ModalForm = (props) => {
 
 
 
-    useEffect(() => {
-        getAdmin();
-    }
-        , [])
+
+
     return (
         <div>
 

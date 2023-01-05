@@ -34,7 +34,7 @@ function NavBar() {
     handleCloseUserMenu();
     try {
       await axios.post(
-        'https://backend-tesis.herokuapp.com/api/logout',
+        'https://backend-emprende.herokuapp.com/api/v1/logout',
         {}, { headers: { 'accept': 'application/json', 'authorization': token } }
       );
       navigate('/', { replace: true });
@@ -124,7 +124,7 @@ function NavBar() {
               fontWeight: 'bold',
               flexGrow: 12,
               fontFamily: 'Montserrat',
-             
+
 
 
               color: 'White',
@@ -210,7 +210,7 @@ function NavBar() {
                 {user && user.full_name && user.rol === 'admin' ?
                   <Button component={Link} to="/administracion" onClick={handleCloseUserMenu}
                     sx={{ display: 'block' }}>Admin</Button> :
-                  <Button component={Link} to="/administracion/users" onClick={handleCloseUserMenu}
+                  <Button component={Link} to="/administracion" onClick={handleCloseUserMenu}
                     sx={{ display: 'block' }}>User</Button>
                 }
               </MenuItem>

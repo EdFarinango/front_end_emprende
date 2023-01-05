@@ -14,8 +14,7 @@ export const Perfil= () => {
 
   return (
     <div>
-      <h1 className='text-4xl font-bold'>Super Administradores</h1>
-      <AdminCard />
+     
       
  
       

@@ -1,43 +1,24 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
-import EditForm from "../templates/FormEditAd";
+
 
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useEffect } from "react";
+
+import EditForm from "../templates/FormPeticionEmp";
 
 
-const ModalForm = (props) => {
-
-    let button = "";
+const ModalNewEmp = (props) => {
 
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const navigate = useNavigate();
-    const token = localStorage.getItem('token');
-    const [admin, setAdmin] = useState([]);
-    const getAdmin = async () => {
-        try {
-            const response = await axios.get(
-                `https://backend-emprende.herokuapp.com/api/v1/admin`,
-                { headers: { 'accept': 'application/json', 'authorization': token } }
-            );
-           
-            setAdmin(response.data.data.users)
-        } catch (error) {
-            console.log(error);
-        }
-    }
+ 
 
+    
+    
 
-
-
-    useEffect(() => {
-        getAdmin();
-    }
-        , [])
-    return (
-        <div>
+        return (
+            <div>
 
             <Button color="success" onClick={toggle}>
                 {props.buttonLabel}
@@ -56,15 +37,21 @@ const ModalForm = (props) => {
                         updateState={props.updateState}
                         toggle={toggle}
                         item={props.item}
-                        admins={admin}
+                
                     />
                 </ModalBody>
             </Modal>
         </div>
-    );
+        )
 
 
 
-}
 
-export default ModalForm;
+        }
+
+    
+
+
+
+
+export default ModalNewEmp;

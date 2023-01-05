@@ -5,8 +5,11 @@ import './index.css';
 import { AppRouter } from './routes/AppRouter';
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+
+
     <BrowserRouter>
 
       <AppRouter/>

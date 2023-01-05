@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const EditFormEmp = ({emprendimientos}) => {
+const EditFormEmp = ({ emprendimientos }) => {
 
   const [form, setForm] = useState({
     id: emprendimientos.id ?? "",
@@ -26,11 +26,11 @@ const EditFormEmp = ({emprendimientos}) => {
   });
 
 
-   
- 
+
+
   const token = localStorage.getItem("token");
   const [modal, setModal] = useState(false);
- 
+
   const toggle = () => setModal(!modal);
 
   const handleChange = (e) => {
@@ -43,13 +43,13 @@ const EditFormEmp = ({emprendimientos}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (Object.values(form).includes("")) {
-      console.log("error");
+      console.log(e);
       return;
     }
     try {
       if (emprendimientos.id) {
         await axios.post(
-          `https://backend-tesis.herokuapp.com/api/emprendimiento/${emprendimientos.id}/update`,
+          `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${emprendimientos.id}/update`,
           {
             ...form,
           },
@@ -58,7 +58,7 @@ const EditFormEmp = ({emprendimientos}) => {
         toggle();
       } else {
         await axios.post(
-          `https://backend-tesis.herokuapp.com/api/emprendimiento/create`,
+          `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/create`,
           {
             ...form,
           },
@@ -75,57 +75,38 @@ const EditFormEmp = ({emprendimientos}) => {
 
 
 
-  useEffect(() => {
-  
-    setForm({
-      id: emprendimientos.id ?? "",
-      rol_esfot: emprendimientos.rol_esfot ?? "",
-      nombre: emprendimientos.nombre ?? "",
-      descripcion: emprendimientos.descripcion ?? "",
-      categoria: emprendimientos.categoria ?? "",
-      direccion: emprendimientos.direccion ?? "",
-      cobertura: emprendimientos.cobertura ?? "",
-      pagina_web: emprendimientos.pagina_web ?? "",
-      telefono: emprendimientos.telefono ?? "",
-      whatsapp: emprendimientos.whatsapp ?? "",
-      facebook: emprendimientos.facebook ?? "",
-      instagram: emprendimientos.instagram ?? "",
-      estado: emprendimientos.estado ?? "",
-    });
-  }
-  , [emprendimientos]);
-
+ 
   return (
     <Form onSubmit={handleSubmit}>
 
-<FormGroup>
+      <FormGroup>
         <Label for="nombre">Id</Label>
-       
+
         <Input
           type="text"
           name="id"
           id="id"
           placeholder="Id"
-    
-          value={form.id === null ? "" : form.id }
+
+          value={form.id === null ? "" : form.id}
           onChange={handleChange}
-          
+
 
         />
       </FormGroup>
-        <FormGroup>
+      <FormGroup>
         <Label for="nombre">Rol</Label>
         <Input
           type="text"
           name="rol_esfot"
-         
+
           placeholder="Rol"
           value={form.rol_esfot === null ? "" : form.rol_esfot}
           onChange={handleChange}
 
         />
       </FormGroup>
-        <FormGroup>
+      <FormGroup>
         <Label for="nombre">Nombre</Label>
         <Input
           type="text"
@@ -144,7 +125,7 @@ const EditFormEmp = ({emprendimientos}) => {
           name="descripcion"
           id="descripcion"
           placeholder="Descripcion"
-          value={form.descripcion=== null ? "" : form.descripcion}
+          value={form.descripcion === null ? "" : form.descripcion}
           onChange={handleChange}
         />
       </FormGroup>
@@ -155,7 +136,7 @@ const EditFormEmp = ({emprendimientos}) => {
           name="categoria"
           id="categoria"
           placeholder="Categoria"
-          value={form.categoria=== null ? "" : form.categoria}
+          value={form.categoria === null ? "" : form.categoria}
           onChange={handleChange}
         />
       </FormGroup>
@@ -166,7 +147,7 @@ const EditFormEmp = ({emprendimientos}) => {
           name="direccion"
           id="direccion"
           placeholder="Direccion"
-          value={form.direccion=== null ? "" : form.direccion}
+          value={form.direccion === null ? "" : form.direccion}
           onChange={handleChange}
         />
       </FormGroup>
@@ -188,7 +169,7 @@ const EditFormEmp = ({emprendimientos}) => {
           name="pagina_web"
           id="pagina_web"
           placeholder="Pagina Web"
-          value={form.pagina_web=== null ? "" : form.pagina_web}
+          value={form.pagina_web === null ? "" : form.pagina_web}
           onChange={handleChange}
         />
       </FormGroup>
@@ -199,7 +180,7 @@ const EditFormEmp = ({emprendimientos}) => {
           name="telefono"
           id="telefono"
           placeholder="Telefono"
-          value={form.telefono=== null ? "" : form.telefono}
+          value={form.telefono === null ? "" : form.telefono}
           onChange={handleChange}
         />
       </FormGroup>
@@ -210,7 +191,7 @@ const EditFormEmp = ({emprendimientos}) => {
           name="whatsapp"
           id="whatsapp"
           placeholder="Whatsapp"
-          value={form.whatsapp=== null ? "" : form.whatsapp}
+          value={form.whatsapp === null ? "" : form.whatsapp}
           onChange={handleChange}
         />
       </FormGroup>
@@ -222,7 +203,7 @@ const EditFormEmp = ({emprendimientos}) => {
           name="facebook"
           id="facebook"
           placeholder="Facebook"
-          value={form.facebook=== null ? "" : form.facebook}
+          value={form.facebook === null ? "" : form.facebook}
           onChange={handleChange}
         />
       </FormGroup>
@@ -238,19 +219,19 @@ const EditFormEmp = ({emprendimientos}) => {
         />
       </FormGroup>
 
-    
+
       <Button type="submit" color="primary">
         Guardar
       </Button>
 
-      
+
 
 
 
     </Form>
   );
 
-    
+
 }
 
 export default EditFormEmp;
