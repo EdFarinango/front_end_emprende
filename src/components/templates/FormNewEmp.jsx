@@ -3,14 +3,26 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import InputLabel from '@mui/material/InputLabel';
+
+
+import MenuItem from '@mui/material/MenuItem';
+
+import Select from '@mui/material/Select';
+
+import FormControl from '@mui/material/FormControl';
 
 
 
 
-const EditForm = (props) => {
 
-  
 
+
+const EditForm  = (props) => {
+
+    const [image , setImage] = useState(props.value);
+
+    const [open, setOpen] = React.useState(false);
 
     const token = localStorage.getItem('token');
 
@@ -28,14 +40,59 @@ const EditForm = (props) => {
         facebook : '',
         instagram : '',
         descuento : '',
+        
       
         
 
     });
 
-    const navigate = useNavigate();
+   
+    // const formData = new FormData();
+    // formData.append('rol_esfot', form.rol_esfot);
+    // formData.append('nombre', form.nombre);
+    // formData.append('descripcion', form.descripcion);
+    // formData.append('categoria', form.categoria);
+    // formData.append('direccion', form.direccion);
+
+    // formData.append('cobertura', form.cobertura);
+    // formData.append('pagina_web', form.pagina_web);
+    // formData.append('telefono', form.telefono);
+    // formData.append('whatsapp', form.whatsapp);
+    // formData.append('facebook', form.facebook);
+    // formData.append('instagram', form.instagram);
+    // formData.append('descuento', form.descuento);
+    // formData.append('image', image);
+
+    
+    // const onFileChange = (e) => {
+      
+    //     setImage(e.target.files[0]);
+    //     formData.append('image', e.target.files[0]);
+
+    //     setForm({
+    //         ...form,
+    //         [e.target.name]: e.target.files[0]
+    //     });
+
+        
+         
+
+
+  
+    //     console.log(form);
+
+    // }
+
+
+
+  
 
     const handleChange = (e) => {
+
+
+        
+        
+
         setForm({
             ...form,
             [e.target.name]: e.target.value,
@@ -45,39 +102,74 @@ const EditForm = (props) => {
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-        if (Object.values(form).includes("")) {
-            console.log(e);
-            return;
-        }
+        
         try {
            
-                await axios.post(`https://backend-emprende.herokuapp.com/api/v1/emprendimiento/create`, form, {
+                await axios.post(`https://backend-emprende.herokuapp.com/api/v1/emprendimiento/create`, form,  {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                
             } catch (error) {
+                console.log(form);
                 console.log(error);
             }
         
-      props.toogle();
+   
     }
+
+  
+  
+
+
+  
+
+
+
+   
+
+
+
+
+
+
+   
+    
+
+
 
     return (
         <Form onSubmit={handleSubmit}>
-             
-       
-
             <FormGroup>
-                <Label for="rol_esfot">Rol Esfot</Label>
-                <Input
-                    type="text"
-                    name="rol_esfot"
-                    id="rol_esfot"
-                    placeholder="Rol Esfot"
-                    value={form.rol_esfot}
-                    onChange={handleChange}
-                />
+
+<InputLabel id="rol_esfot">Rol Esfot</InputLabel>
+            <Select
+         
+                labelId="rol_esfot"
+                id="rol_esfot"
+                placeholder="Rol Esfot"
+                value={form.rol_esfot}
+                label="Rol Esfot"
+                name="rol_esfot"
+                onChange={handleChange}
+            >
+                
+                 <MenuItem value="">
+            <em>-</em>
+            </MenuItem>
+                <MenuItem value={"Estudiante"}>Estudiante</MenuItem>
+                <MenuItem value={"Egresado"}>Egresado</MenuItem>
+                <MenuItem value={"Docente"}>Docente</MenuItem>
+                <MenuItem value={"Administrativo"}>Administrativo</MenuItem>
+                <MenuItem value={"Otro"}>Otro</MenuItem>
+            </Select>
+
             </FormGroup>
+
+
+             
+            
+
+            
             <FormGroup>
                 <Label for="nombre">Nombre</Label>
                 <Input
@@ -101,15 +193,28 @@ const EditForm = (props) => {
                 />
             </FormGroup>
             <FormGroup>
-                <Label for="categoria">Categoría</Label>
-                <Input
-                    type="text"
-                    name="categoria"
-                    id="categoria"
-                    placeholder="Categoría"
-                    value={form.categoria}
-                    onChange={handleChange}
-                />
+            <InputLabel id="categoria">Categoría</InputLabel>
+            <Select
+                labelId="categoria"
+                id="categoria"
+                placeholder="Categoría"
+                value={form.categoria}
+                label="Categoría"
+                name="categoria"
+                onChange={handleChange}
+            >
+                    <MenuItem value="">
+            <em>-</em>
+            </MenuItem>
+                
+                <MenuItem value={"Comida"}>Comida</MenuItem>
+                <MenuItem value={"Hogar y limpieza"}>Hogar y limpieza</MenuItem>
+                <MenuItem value={"Salud"}>Salud</MenuItem>
+                <MenuItem value={"Tecnologia"}>Tecnología"</MenuItem>
+                <MenuItem value={"Textil"}>Textil</MenuItem>
+                <MenuItem value={"Otro"}>Otro</MenuItem>
+            </Select>
+
             </FormGroup>
             <FormGroup>
                 <Label for="direccion">Dirección</Label>
@@ -123,15 +228,27 @@ const EditForm = (props) => {
                 />
             </FormGroup>
             <FormGroup>
-                <Label for="cobertura">Cobertura</Label>
-                <Input
-                    type="text"
-                    name="cobertura"
-                    id="cobertura"
-                    placeholder="Cobertura"
-                    value={form.cobertura}
-                    onChange={handleChange}
-                />
+                <InputLabel id="cobertura">Zona de cobertura</InputLabel>
+            <Select
+                labelId="cobertura"
+                id="cobertura"
+                placeholder="Cobertura"
+                value={form.cobertura}
+                label="Cobertura"
+                name="cobertura"
+                onChange={handleChange}
+            >
+                    <MenuItem value="">
+            <em>-</em>
+            </MenuItem>
+                <MenuItem value={"Quito Sur"}>Quito Sur</MenuItem>
+                <MenuItem value={"Quito Centro"}>Quito Centro</MenuItem>
+                <MenuItem value={"Quito Norte"}>Quito Norte</MenuItem>
+                <MenuItem value={"Cumbaya - Tumbaco"}>Cumbayá - Tumbaco</MenuItem>
+                <MenuItem value={"Valle de los Chillos"}>Valle de los Chillos</MenuItem>
+                <MenuItem value={"Otro"}>Otro</MenuItem>
+
+            </Select>
             </FormGroup>
             <FormGroup>
                 <Label for="pagina_web">Página Web</Label>
@@ -201,6 +318,10 @@ const EditForm = (props) => {
                     onChange={handleChange}
                 />
             </FormGroup>
+           
+            
+        
+                
             <Button>Submit</Button>
         </Form>
     );

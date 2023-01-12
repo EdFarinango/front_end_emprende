@@ -1,4 +1,4 @@
-.footer{
+.footer {
     background-color: #1c1a21;
     position: relative;
     overflow-x: hidden !important;
@@ -9,114 +9,91 @@
     flex-direction: row;
     padding-top: 50px;
     padding-bottom: 50px;
-    
-    .main-title{   
+    .main-title {
         margin-right: 100px;
         font-size: 17pt;
-        
     }
-    
-    .title-wrap{
-        margin-top:7px;
+    .title-wrap {
+        margin-top: 7px;
         cursor: pointer;
         margin-left: 100px;
-        display: flex;  
+        display: flex;
         flex-direction: column;
         text-align: left;
-
-        .title{
+        .title {
             transition: .3s ease;
             font-weight: bold;
             font-size: 11pt;
             margin-bottom: 5px;
-            
-           
         }
-        
-        
-        .sub-title{
+        .sub-title {
             font-size: 10pt;
             margin-bottom: 7px;
             color: #9E9AA8;
-            &:active{
-                color:  hsl(180, 66%, 49%); ;
+            &:active {
+                color: hsl(180, 66%, 49%);
+                ;
             }
         }
     }
-
-    .icons{
+    .icons {
         margin-top: 10px;
         display: flex;
-      
         margin-left: 100px;
-        
-
-        .icon{
-           width: 35px;
+        .icon {
+            width: 35px;
             cursor: pointer;
             padding-left: 10px;
             fill: white;
-            &:active{
-
+            &:active {
                 fill: hsl(180, 66%, 49%) !important;
             }
-            
         }
     }
-
-    .attribution{
+    .attribution {
         position: absolute;
         bottom: 10px;
         font-size: 10pt;
     }
 }
 
-
-@media screen and(max-width:840px){
-    .footer{
-     
+@media screen and(max-width:840px) {
+    .footer {
         flex-direction: column;
         align-items: center;
         text-align: center;
-
-
-        .main-title{
+        .main-title {
             font-size: 20pt;
             margin-left: 0 !important;
             margin-right: 0 !important;
             text-align: center;
             margin-bottom: 40px;
         }
-        .title-wrap{
+        .title-wrap {
             text-align: center;
             margin-left: 0 !important;
-            .title{
+            .title {
                 margin-bottom: 10px;
             }
-            .sub-title{
+            .sub-title {
                 margin-bottom: 10px;
             }
-
         }
-
-        .icons{
+        .icons {
             margin-left: 0 !important;
             margin-top: 20px;
-
-            .icon{
+            .icon {
                 margin-right: 20px;
             }
         }
     }
-
 }
 
-@media screen and (max-width:1000px){
-    .main-title{   
+@media screen and (max-width:1000px) {
+    .main-title {
         margin-right: 0px !important;
     }
-
-    .title-wrap{
+    .title-wrap {
         margin-left: 70px !important;
     }
 }

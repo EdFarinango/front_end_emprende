@@ -1,16 +1,45 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Label, Button } from '../../components'
+
 import { AuthContext } from '../../contexts';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { FaNetworkWired } from 'react-icons/fa';
 
 import axios from 'axios';
-import { Modal } from '@mui/material';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
+
+
+import Avatar from '@mui/material/Avatar';
+
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+
+
+function Copyright(props) {
+    return (
+      <Typography variant="body2" color="text.secondary" align="center" {...props}>
+        {'Copyright © '}
+        <Link  href="#" text-decoration="none">
+          2022 - Emprende
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
+  const theme = createTheme();
+  
 export const Login = () => {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -24,7 +53,7 @@ export const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://backend-emprende.herokuapp.com/api/v1/login', {
+            const response = await axios.post('http://127.0.0.1:8000/api/v1/login', {
                 email,
                 password
             });
@@ -51,67 +80,81 @@ export const Login = () => {
     }
 
     return (
-        <>
-            
+        <ThemeProvider theme={theme}>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box
+                    sx={{
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
                     
-            <h2 className='text-2xl md:text-3xl font-bold'>Bienvenido </h2>
-            <p className='text-sm text-gray-500 pb-6'>Ingresa a tu cuenta</p>
-            <form className='space-y-7 text-left' onSubmit={onLogin}>
-                <div>
-                    <Label description="Dirección de correo" htmlFor='email' />
-                    <input
-                        className='rounded-2xl text-base px-4 py-2 border-0 border-b border-gray-300 focus:border-cyan-500 disabled:opacity-50 block mt-2 w-full'
-                        id='email'
-                        name='email'
-                        type='email'
-                        value={email}
-                        placeholder='Ingresa tu correo'
-                        maxLength="35"
-                        required
-                        autoFocus
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <Label description="Contraseña" htmlFor='password' />
-                    <input
-                        className='rounded-2xl text-base px-4 py-2 border-0 border-b border-gray-300 focus:border-cyan-500 disabled:opacity-50 block mt-2 w-full'
-                        id='password'
-                        name='password'
-                        type='password'
-                        value={password}
-                        placeholder='Ingresa tu contraseña'
-                        maxLength="35"
-                        required
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                </div>
-                <div className='flex justify-between items-center'>
-                    <div className='flex items-center'>
-                        <input
+                    <Typography component="h1" variant="h5">
+                        Iniciar Sesión
+                    </Typography>
+                    <Box component="form" onSubmit={onLogin} noValidate sx={{ mt: 1 }}>
+                        <TextField
+                            margin="normal"
+                            required 
+                            fullWidth
+                            id="email"
+                            label="Correo Electrónico"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                            value={email}
+                                           
+                            onChange={(e) => setEmail(e.target.value)}
 
-                            className='rounded-2xl text-base px-4 py-2 border-0 border-b border-gray-300 focus:border-cyan-500 disabled:opacity-50 block mt-2 w-full'
-                            id='remember'
-                            name='remember'
-                            type='checkbox'
+                          
+                          
                         />
-                        <label className='ml-2 text-sm text-gray-500' htmlFor='remember'>
-                            Recuérdame
-                        </label>
-                    </div>
-                    <div className='text-sm text-gray-500'>
-                        <p>Olvidaste tu contraseña? <Link to='/recovery'><span>Recuperarla</span></Link></p>
-                    </div>
-                </div>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Contraseña"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />  
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" />}
+                            label="Recuérdame"
+                        />
+                        
+                        <Grid container>
+                            <Grid item xs>
+                                <Link to="/recovery" variant="body2">
+                                    ¿Olvidaste tu contraseña?
+                                </Link>
+                            </Grid>
+                            
+                            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 , bgcolor: '#15A0A0'}}
+            >
+              Iniciar sesión
+            </Button>
+                        </Grid>
+                    </Box>
+                </Box>
+               
+                <Copyright sx={{ mt: 8, mb: 4 }} />
 
-                <div className='pt-4 flex justify-center'>
-                    <Button name='Iniciar sesión' styles='w-3/5' />
-                </div>
-
-            </form>
+      </Container>
+                    
+          
 
 
-
-        </>
+        </ThemeProvider>
     );
 }

@@ -9,20 +9,20 @@ import ModalForm from '../components/organisms/ModalPeticionEmp';
 const GetStarted = (props) => {
 
     return (
-     
 
 
-        <ModalForm 
-            buttonLabel="Crear cuenta"
+
+        <ModalForm
+            buttonLabel="Fomulario de Peticion"	
             className="modal-lg"
             updateState={props.updateState}
             item={props.item}
         />
 
-        
-          
 
-      
+
+
+
     );
 }
 

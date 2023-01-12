@@ -1,0 +1,64 @@
+.videoCard_container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.videoCard {
+    height: 14rem;
+    box-shadow: var(--medium-box-shadow);
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.videoCard_body {
+    display: flex;
+    padding: 0 var(--space-xs);
+    margin-top: var(--space-xs);
+}
+
+.videoCard_body_content {
+    padding-left: var(--space-xs);
+    width: 80%;
+}
+
+.videoCard_thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* opacity: 0.1; */
+    /* display: none; */
+    border-radius: 1rem;
+}
+
+.sidebar_videogrid_container {
+    display: flex;
+}
+
+.videoCard_grid {
+    width: 100%;
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, 80%);
+    justify-content: center;
+    margin-top: var(--space-xl);
+}
+
+@media screen and (max-width:1193px) {
+     :root {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width:1014px) {
+     :root {
+        font-size: 70%
+    }
+}
+
+@media screen and (min-width: 750px) {
+    .videoCard_grid {
+        grid-template-columns: repeat(auto-fill, 350px)
+    }
+}

@@ -69,11 +69,11 @@ export const MenuItem = styled.li`
 
 export const MenuItemLink = styled.a`
 .rutelog{
-    text-decoration: none;
+    textDecoration: none;
     color: #fff;
 }
 
-text-decoration: none;
+textDecoration: none;
   display: flex;
   justify-content: center;
   align-items: center;

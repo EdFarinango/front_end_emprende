@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import ImageUploading, { ImageListType } from "react-images-uploading";
+
 
 
 
@@ -10,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 const EditFormEmp = ({ emprendimientos }) => {
 
   const [form, setForm] = useState({
-    id: emprendimientos.id ?? "",
+  
     rol_esfot: emprendimientos.rol_esfot ?? "",
     nombre: emprendimientos.nombre ?? "",
     descripcion: emprendimientos.descripcion ?? "",
@@ -22,7 +23,9 @@ const EditFormEmp = ({ emprendimientos }) => {
     whatsapp: emprendimientos.whatsapp ?? "",
     facebook: emprendimientos.facebook ?? "",
     instagram: emprendimientos.instagram ?? "",
-    estado: emprendimientos.estado ?? "",
+    descuento: emprendimientos.descuento ?? "",
+
+    
   });
 
 
@@ -37,7 +40,10 @@ const EditFormEmp = ({ emprendimientos }) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
+
+
     });
+   
   };
 
   const handleSubmit = async (e) => {
@@ -64,12 +70,22 @@ const EditFormEmp = ({ emprendimientos }) => {
           },
           { headers: { accept: "application json", authorization: token } }
         );
+
         toggle();
+
+
+        
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+ 
+  
+ 
+
+
 
 
 
@@ -79,21 +95,7 @@ const EditFormEmp = ({ emprendimientos }) => {
   return (
     <Form onSubmit={handleSubmit}>
 
-      <FormGroup>
-        <Label for="nombre">Id</Label>
-
-        <Input
-          type="text"
-          name="id"
-          id="id"
-          placeholder="Id"
-
-          value={form.id === null ? "" : form.id}
-          onChange={handleChange}
-
-
-        />
-      </FormGroup>
+      
       <FormGroup>
         <Label for="nombre">Rol</Label>
         <Input
@@ -218,6 +220,36 @@ const EditFormEmp = ({ emprendimientos }) => {
           onChange={handleChange}
         />
       </FormGroup>
+
+      <FormGroup>
+        <Label for="descuento">Descuento</Label>
+        <Input
+          type="text"
+          name="descuento"
+          id="descuento"
+          placeholder="Descuento"
+          value={form.descuento === null ? "" : form.descuento}
+          onChange={handleChange}
+        />
+      </FormGroup>
+
+      
+
+     
+   
+
+      
+
+
+
+      
+
+      
+    
+    
+      
+
+      
 
 
       <Button type="submit" color="primary">

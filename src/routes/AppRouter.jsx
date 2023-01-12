@@ -19,6 +19,8 @@ import CatalogoEmp from '../pages/empredimientos/CatalogoEmp';
 import DashboardUsers from '../components/templates/DashboardUsers';
 import AdminCard from '../components/organisms/AdminCard';
 import AdminsCard from '../components/organisms/AdminsCard';
+import Repositorio from '../pages/video/Repositorio';
+import Comision from '../pages/comision/Emprende';
 
 
 
@@ -35,6 +37,8 @@ export const AppRouter = () => {
       
             <Routes>
             < Route path='/catalogo' element={<CatalogoEmp />} />
+            < Route path='/comision' element={<Comision />} />
+            < Route path='/repositorio' element={<Repositorio/>} />
             < Route path='/404' element={<h1>Error por parte del servidor, contactese con el administrador</h1>} />   
             < Route path='*' element={<h1>404: Especifique una ruta correctamente</h1>} />
               

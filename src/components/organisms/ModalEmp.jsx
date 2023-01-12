@@ -38,20 +38,17 @@ const ModalEmp = ({ emprendimientos }) => {
 
     return (
         <div>
-            <Button color="danger" onClick={toggle}>
+            <Button backgroundcolor="grey" onClick={toggle}>
                 Editar
 
             </Button>
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Editar</ModalHeader>
+                <ModalHeader toggle={toggle}>Editar Emprendimiento</ModalHeader>
                 <ModalBody>
-                    <EditFormEmp emprendimientos={emprendimientos}
-                        updateState={getData} toggle={toggle} item={data}
-
-
-
-                    />
+                    <EditFormEmp emprendimientos={emprendimientos} />
                 </ModalBody>
+                
+            
             </Modal>
         </div>
     );

@@ -8,17 +8,73 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Table from 'react-bootstrap/Table';
+
 import ModalEmp from '../../components/organisms/ModalEmp';
 import ModalNewEmp from '../../components/organisms/ModalNewEmp';
-import { Link } from 'react-router-dom';
 
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import Card from "./Card";
+import {
+  
+  Divider,
+  TableContainer,
+  Paper,
+  Table,
+  TableRow,
+  TableHead,
+  TableCell,
+  TableBody
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
+import { Switch, Grid } from "@material-ui/core";
+import { blue } from "@material-ui/core/colors";
+
+const useStyles = makeStyles({
+  gridContainer: {
+    paddingLeft: "20px",
+    paddingRight: "20px",
+    justifyContent: "center"
+  },
+  tableContainer: {
+    marginTop: "20px"
+  },
+  table: {
+    minWidth: 650
+  }
+});
 
 export const Emprendimientos = ({emprendimientos}) => {
   const { user } = useContext(AuthContext);
   const token = localStorage.getItem('token');
   const [data, setData] = useState([]);
+  const [darkMode, setDarkMode] = useState(true);
+  const classes = useStyles();
+  const darkTheme = createMuiTheme({
+    palette: {
+      type: "dark"
+    },
+    color: {
+      primary: blue
+    }
+  });
+
+  const lightTheme = createMuiTheme({
+    palette: {
+      type: "light"
+    },
+    color: {
+      primary: blue
+    }
+  });
+
+  const changeTheme = () => {
+    setDarkMode(!darkMode);
+  };
+
+  
+
+  
 
 
 
@@ -30,6 +86,7 @@ export const Emprendimientos = ({emprendimientos}) => {
       );
 
       setData(response.data.data.emprendimientos)
+      console.log(response.data.data.emprendimientos)
     } catch (error) {
       console.log(error);
     }
@@ -41,8 +98,10 @@ export const Emprendimientos = ({emprendimientos}) => {
         `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${id}/destroy`,
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
+      console.log(id)
+    
 
-      getData();
+      
     } catch (error) {
       console.log(error);
     }
@@ -70,108 +129,72 @@ export const Emprendimientos = ({emprendimientos}) => {
 
 
 
-  useEffect(() => {
-    getData();
-  }, []);
+
 
   return (
 
 
     <>
-      <ModalNewEmp buttonLabel="Crear" updateState={updateState} />
-      <Table responsive hover>
+
+<ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+
+      <Switch checked={darkMode} onChange={changeTheme} />
+      <Grid container spacing={1} className={classes.gridContainer}>
+        <Grid className={classes.gridCardItem} item xs={12} md={4} sm={6}>
+          <Card />
+        </Grid>
+       
 
 
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Rol</th>
-            <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Categoria</th>
-            <th>Direccion</th>
-            <th>Cobertura</th>
-            <th>Web</th>
-            <th>Telefono</th>
-            <th>Whatsapp</th>
-            <th>Facebook</th>
-            <th>Instagram</th>
+      </Grid>
+      <Divider />
+      <TableContainer className={classes.tableContainer} component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Id</TableCell>
+              <TableCell align="right">Rol</TableCell>
+              <TableCell align="right">Nombre</TableCell>
+              <TableCell align="right">Descripción</TableCell>
+              <TableCell align="right">Categoria</TableCell>
+              <TableCell align="right">Dirección</TableCell>
+              
+             
+              <TableCell align="right">Acciones</TableCell>
+           
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data?.map((emprendimientos) => (
+              <TableRow key={emprendimientos}>
+                <TableCell component="th" scope="row">
+                  {emprendimientos.id}
+                </TableCell>
 
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-
-
-          {data?.map((emprendimientos) => (
-            <tr key={emprendimientos}>
-              <td>{emprendimientos.id}</td>
-              <td>{emprendimientos.rol_esfot}</td>
-              <td>{emprendimientos.nombre}</td>
-              <td>{emprendimientos.descripcion}</td>
-              <td>{emprendimientos.categoria}</td>
-              <td>{emprendimientos.direccion}</td>
-              <td>{emprendimientos.cobertura}</td>
-              <td>{emprendimientos.pagina_web}</td>
-
-              <td>{emprendimientos.telefono}</td>
-              <td>{emprendimientos.whatsapp}</td>
-              <td>{emprendimientos.facebook}</td>
-              <td>{emprendimientos.instagram}</td>
-
-
-
-              <td>
-                {emprendimientos.estado === 1 ? (
-                  <button className="btn btn-danger" onClick={() => deleteEmprendimiento(emprendimientos.id)}>Desactivar</button>
+                <TableCell align="right">{emprendimientos.rol_esfot }</TableCell>
+                <TableCell align="right">{emprendimientos.nombre}</TableCell>
+                <TableCell align="right">{ emprendimientos.descripcion}</TableCell>
+                <TableCell align="right">{emprendimientos.categoria}</TableCell>
+                <TableCell align="right">{emprendimientos.direccion}</TableCell>
+                
+              
+               
+                <TableCell align="right">  {emprendimientos.estado === 1? (
+                  <button className="btn btn-info" onClick={() => deleteEmprendimiento(emprendimientos.id)}>Desactivar</button>
                 ) : (
-                  <button className="btn btn-success" onClick={() => deleteEmprendimiento(emprendimientos.id)}>Activar</button>
+                  <button className="btn btn-info" onClick={() => deleteEmprendimiento(emprendimientos.id)}>Activar</button>
                 )}
 
                 <ModalEmp emprendimientos={emprendimientos} updateState={updateState} data={data} />
+                </TableCell>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              </td>
-
-
-
-
-
-
-
-
-            </tr>
-          ))}
-
-
-
-
-
-        </tbody>
-      </Table>
-
-
-
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </ThemeProvider>
+   
 
 
     </>

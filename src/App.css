@@ -9,10 +9,3 @@
             .App button:focus {
                 outline: 0;
             }
-            
-            html,
-            body {
-                overflow-x: hidden !important;
-            }
-            
-            .div {}

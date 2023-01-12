@@ -15,10 +15,13 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import Logout from '@mui/icons-material/Logout';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { AuthContext } from '../../contexts';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Logo from '../assets/logo.png';
+import { AccountCircle } from '@mui/icons-material';
 
 const pages = ['Comisión Emprende', 'Catálogo de Emprendimientos', 'Conferencias y Talleres'];
 
@@ -68,19 +71,18 @@ function NavBar() {
 
       <Container maxWidth="xl" >
         <Toolbar disableGutters >
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-          >
-          </Typography>
+          <Box sx={{ flexGrow: 12, display: { xs: 'none', md: 'flex' } }}>
+            <Link to="/">
+            <img src={Logo} alt="Logo" style={{ width: '150px', height: 'auto' }} />
+            </Link>
+              </Box>
+         
+          
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
-              aria-label="account of current user"
+           
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -115,7 +117,7 @@ function NavBar() {
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
 
-          <Typography
+          {/* <Typography
             variant="h5"
 
             component="a"
@@ -133,7 +135,7 @@ function NavBar() {
             }}
           >
             Emprende
-          </Typography>
+          </Typography> */}
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 
@@ -147,7 +149,7 @@ function NavBar() {
             <Button component={Link} to="/catalogo" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
               Catálogo
             </Button>
-            <Button component={Link} to="/conferencias" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+            <Button component={Link} to="/repositorio" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
               Conferencias y Talleres
             </Button>
           </Box>
@@ -157,7 +159,7 @@ function NavBar() {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 1 }}>
 
                 <Avatar alt={user && user.full_name ? user.full_name : 'Invitado'} style={{ background: '#17b3bb' }}
-                />
+                > {user && user.full_name ? user.full_name[0] : 'I'} </Avatar>
               </IconButton>
             </Tooltip>
             <Typography
@@ -193,9 +195,7 @@ function NavBar() {
 
 
               <MenuItem>
-                <ListItemIcon>
-                  <Logout fontSize="small" />
-                </ListItemIcon>
+               
                 {user && user.full_name ? <Button onClick={handleLogout}
                 >Logout</Button> : <Button component={Link} to="/login"
                   onClick={handleCloseUserMenu} sx={{ display: 'block' }}>
@@ -204,9 +204,7 @@ function NavBar() {
 
               </MenuItem>
               <MenuItem>
-                <ListItemIcon>
-                  <AdbIcon fontSize="small" />
-                </ListItemIcon>
+                
                 {user && user.full_name && user.rol === 'admin' ?
                   <Button component={Link} to="/administracion" onClick={handleCloseUserMenu}
                     sx={{ display: 'block' }}>Admin</Button> :
