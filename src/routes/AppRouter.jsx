@@ -21,6 +21,8 @@ import AdminCard from '../components/organisms/AdminCard';
 import AdminsCard from '../components/organisms/AdminsCard';
 import Repositorio from '../pages/video/Repositorio';
 import Comision from '../pages/comision/Emprende';
+import { Dashboard } from '../pages/dashboard/Dashboard';
+
 
 
 
@@ -34,6 +36,7 @@ export const AppRouter = () => {
 
         <AuthProvider>
             <NavBar />
+            
       
             <Routes>
             < Route path='/catalogo' element={<CatalogoEmp />} />
@@ -76,7 +79,7 @@ export const AppRouter = () => {
                           
                                 <Route element={<DashboardTemplate />}>
 
-                                    <Route path='/*' element={<App />} />
+                                    <Route path='/*' element={<Dashboard />} />
                                     <Route path='/panel' element={<DashboardUsers />} />
                                     <Route path='/admin' element={<AdminsCard />} />
                                     <Route path='/super' element={<AdminCard />} />

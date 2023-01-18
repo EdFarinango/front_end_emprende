@@ -213,3 +213,68 @@
 .contact .email {
     bottom: 10%;
 }
+
+.identidad {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    margin: 20px auto;
+    padding: 20px;
+    height: auto;
+    width: 600px;
+}
+
+.miembros {
+    background: #f5f5f5;
+}
+
+.profile-card {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    background: #fff;
+    border: 1px solid #eee;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border: solid 1px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+
+.profile-card:hover {
+    box-shadow: 0 0 12px 3px rgba(0, 0, 0, 0.08);
+}
+
+.profile-card:hover .avatar img {
+    border-color: rgb(99, 204, 131);
+}
+
+.profile-card .avatar {
+    padding: 20px 0px10px;
+}
+
+.profile-card .avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.profile-card .profile-type {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #888;
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.profile-card .details {
+    padding: 20px 0px;
+    font-size: 15px;
+    color: #888;
+}

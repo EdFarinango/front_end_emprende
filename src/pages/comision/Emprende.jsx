@@ -1,12 +1,16 @@
 import * as React from 'react';
 
-import Back from './back.png'
 
-import { Link } from 'react-router-dom';
 import "./style.css";
 import Logo from './Logo.png';
 import Contact from "./Contact";
+
 import contacts from "./contacts";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import Footer from '../../components/footer';
+
+
+
 
 
 
@@ -20,6 +24,12 @@ import contacts from "./contacts";
 
 
 export default function Comision() {
+
+
+
+
+    
+  
   function addContact(contact) {
     return (
       <Contact
@@ -30,86 +40,104 @@ export default function Comision() {
       />
     );
   }
-  
 
-  
-  
+
+
+
 
   return (
 
-    <div className="home-page hm-pg">
-      <div className="hm-pg__wrapper">
-        <header className="hm-pg__header">
-          <div className="hm-pg__header-wrapper">
-            <nav className="hm-pg__navbar home-nav flex">
-              
-            
-            </nav>
-            <section className="home-hero grid">
-              <div className="home-hero__content">
-                
-                <h1 className="home-hero__title">
-                  Que es EmPreNde
-                </h1>
-                <p>
-                EmPreNde-ESFOT es una comisión, 
-                formada en el periodo 2019B, de la Escuela de Formación de Tecnólogos de la EPN. 
-                Tiene como objetivo promover la mentalidad emprendedora dentro de la comunidad de la ESFOT.
-                </p>
-               
-              </div>
-              <div className="home-hero__img-container">
-                <img src ={Logo} alt="" />
-              </div>
-            </section>
-            
-          </div>
-        </header>
-        <main className="hm-pg__main home-main-pg">
-          <div className="home-main-pg__wrapper">
-            <h1 className="home-main-pg__title">
-              Su IDENTIDAD
-            </h1>
-            <p className="home-main-pg__description">
-            EmPreNde se forma tras la iniciativa de los profesores, de transformar el enfoque del estudiante politécnico hacia uno proactivo, motivado a 
-            contribuir con la sociedad mediante la creación de emprendimientos que generen impacto.El trabajo que se realiza siempre está enmarcado en apertura y colaboración.
-            </p>
-          </div>
-          
-        </main>
-       
-          <div className="home-main-pg__wrapper">
-            
-            <p className="home-main-pg__description">
-            <section className="contacts">
-            <h1 className="home-main-pg__title">
-              Miembros de la comisión 
-            </h1>
-           
-      {contacts.map(addContact)}
-    </section>
-            </p>
-          </div>
-          
-      
-        
-        <footer className="footer">
-          <div className="footer__wrapper">
-          <p className="footer__brand">
-           “No hay fracasos, solo reveses. Y los reveses pueden 
-ser parte del camino.”.
-Iván Vallejo
-            </p>
-            </div>
-         
 
 
-                        
-                              </footer>
-      
+
+
+    <><div className="w3-row w3-padding-64 about" id="about">
+      <div className="w3-content">
+        <div className="w3-col m6 w3-padding-large w3-hide-small">
+          <img src={Logo} className="w3-round w3-image" alt="logo" width={600} height={750} style={{ marginTop: 75 }} />
+        </div>
+        <div className="w3-col m6 w3-padding-large">
+          <h1 className="w3-center"> Que es EmPreNde </h1><br />
+          <h5 className="w3-center">Tradition since 1889</h5>
+          <p className="w3-large">EmPreNde-ESFOT es una comisión,
+            formada en el periodo 2019B, de la Escuela de Formación de Tecnólogos de la EPN.
+            Tiene como objetivo promover la mentalidad emprendedora dentro de la comunidad de la ESFOT.</p>
+        </div>
       </div>
     </div>
+    <div className="w3-row w3-padding-64 identidad" id="idnetidad">
+      <div className="w3-content">
+        
+     
+          <h1 className="w3-center">    Su IDENTIDAD </h1><br />
+          <h5 className="w3-center">ESFOT</h5>
+          <p className="w3-large">
+          EmPreNde se forma tras la iniciativa de los profesores, 
+            de transformar el enfoque del estudiante politécnico hacia uno proactivo, motivado a 
+            contribuir con la sociedad mediante la creación de emprendimientos que generen impacto. 
+            El trabajo que se realiza siempre está enmarcado en apertura y colaboración.
+
+          </p>
+        </div>
+
 
     
-          );
+    
+      </div>
+
+
+
+      <div className="w3-row w3-padding-64 miembros w3-padding-top-24" id="miembros">
+      
+
+          <h1 className="w3-center">    Sus MIEMBROS </h1><br />
+          <h5 className="w3-center">ESFOT</h5>
+          <div className="w3-content w3-padding-top-24">
+          {contacts.map(addContact)}
+          
+           
+     
+        </div>
+
+        
+    
+    
+      </div>
+      <footer className="w3-container w3-theme-d3 w3-padding-16">
+  <Footer />
+  </footer>
+
+    
+
+
+      
+      
+      
+      
+      
+      
+      
+      
+      </>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  );
 }

@@ -61,37 +61,20 @@ const EditFormEmp = ({ emprendimientos }) => {
           },
           { headers: { accept: "application/json", authorization: token } }
         );
-        toggle();
       } else {
         await axios.post(
-          `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/create`,
+          "https://backend-emprende.herokuapp.com/api/v1/emprendimiento/create",
           {
             ...form,
           },
-          { headers: { accept: "application json", authorization: token } }
+          { headers: { accept: "application/json", authorization: token } }
         );
-
-        toggle();
-
-
-        
       }
+        
     } catch (error) {
       console.log(error);
     }
   };
-
- 
-  
- 
-
-
-
-
-
-
-
- 
   return (
     <Form onSubmit={handleSubmit}>
 
@@ -103,7 +86,7 @@ const EditFormEmp = ({ emprendimientos }) => {
           name="rol_esfot"
 
           placeholder="Rol"
-          value={form.rol_esfot === null ? "" : form.rol_esfot}
+          value={form.rol_esfot}
           onChange={handleChange}
 
         />
@@ -115,7 +98,7 @@ const EditFormEmp = ({ emprendimientos }) => {
           name="nombre"
           id="nombre"
           placeholder="Nombre"
-          value={form.nombre === null ? "" : form.nombre}
+          value={form.nombre}
           onChange={handleChange}
         />
       </FormGroup>
@@ -127,7 +110,7 @@ const EditFormEmp = ({ emprendimientos }) => {
           name="descripcion"
           id="descripcion"
           placeholder="Descripcion"
-          value={form.descripcion === null ? "" : form.descripcion}
+          value={form.descripcion}
           onChange={handleChange}
         />
       </FormGroup>

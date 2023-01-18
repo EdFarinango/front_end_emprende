@@ -21,7 +21,7 @@ import { AuthContext } from '../../contexts';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Logo from '../assets/logo.png';
-import { AccountCircle } from '@mui/icons-material';
+
 
 const pages = ['Comisión Emprende', 'Catálogo de Emprendimientos', 'Conferencias y Talleres'];
 
@@ -65,6 +65,12 @@ function NavBar() {
 
 
   };
+
+
+function refreshPage() {
+        window.location.reload(false);
+      }
+  
 
   return (
     <AppBar position="static" color='transparent' style={{ background: '#15A0A0' }} >
@@ -195,22 +201,20 @@ function NavBar() {
 
 
               <MenuItem>
-               
+             
                 {user && user.full_name ? <Button onClick={handleLogout}
-                >Logout</Button> : <Button component={Link} to="/login"
+                >Cerrar Sesión</Button> : <Button component={Link} to="/login"
                   onClick={handleCloseUserMenu} sx={{ display: 'block' }}>
-                  Login</Button>
+                  Iniciar Sesión</Button>
                 }
 
               </MenuItem>
               <MenuItem>
-                
-                {user && user.full_name && user.rol === 'admin' ?
+    
+               {}
                   <Button component={Link} to="/administracion" onClick={handleCloseUserMenu}
-                    sx={{ display: 'block' }}>Admin</Button> :
-                  <Button component={Link} to="/administracion" onClick={handleCloseUserMenu}
-                    sx={{ display: 'block' }}>User</Button>
-                }
+                    sx={{ display: 'block' }}>Administración</Button> 
+                  
               </MenuItem>
 
 

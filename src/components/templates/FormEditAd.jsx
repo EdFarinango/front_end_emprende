@@ -115,7 +115,7 @@ const EditForm = (props) => {
           name="first_name"
           id="first_name"
           onChange={handleChange}
-          value={form.first_name === null ? "" : form.first_name}
+          value={form.first_name}
         />
       </FormGroup>
       <FormGroup>
@@ -125,7 +125,7 @@ const EditForm = (props) => {
           name="last_name"
           id="last_name"
           onChange={handleChange}
-          value={form.last_name === null ? "" : form.last_name}
+          value={form.last_name}
         />
       </FormGroup>
       <FormGroup>
@@ -135,7 +135,7 @@ const EditForm = (props) => {
           name="email"
           id="email"
           onChange={handleChange}
-          value={form.email === null ? "" : form.email}
+          value={ form.email}
         />
       </FormGroup>
 

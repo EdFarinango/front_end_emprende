@@ -17,6 +17,9 @@ import { AuthContext } from '../../contexts/auth/AuthContext';
 import ModalForm from './ModalSu'
 import ModalForm2 from './ModalNewSu';
 
+import './styles.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 
 
@@ -60,7 +63,7 @@ const AdminCard = () => {
         `https://backend-emprende.herokuapp.com/api/v1/superadmin/${id}/destroy`,
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
-      
+
       getAdmin();
     } catch (error) {
       console.log(error);
@@ -94,10 +97,73 @@ const AdminCard = () => {
   return (
 
     //crear un nuevo usuario
+
+    <>
     
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-8 col-lg-6">
+            {/* Section Heading*/}
+            <div className="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style={{ visibility: 'visible', animationDelay: '0.2s', animationName: 'fadeInUp' }}>
+              <h3>EnPreNde <span> Team</span></h3>
+              <ModalForm2 buttonLabel="Crear" />
+
+              <p>Un equipo respaldado por el conocimiento</p>
+              <div className="line" />
+            </div>
+          </div>
+        </div>
+        <div className="row">
+        {admins.map((admin) => (
+
+          
+          
+            <div className="col-12 col-sm-6 col-lg-3">
+              <div className="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style={{ visibility: 'visible', animationDelay: '0.2s', animationName: 'fadeInUp' }}>
+                {/* Team Thumb*/}
+                <div className="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt />
+                  {/* Social Info*/}
+                  <div className="social-info">
+                    <a href="#">
+                    <i className="fa fa-edit" /></a>
+                      <a href="#">
+                        <i className="fa fa-twitter" />
+                        </a><a href="#"><i className="fa fa-linkedin" /></a></div>
+                </div>
+                {/* Team Details*/}
+                <div className="single_advisor_details_info">
+                  <h6>{admin.full_name}</h6>
+                  <p>{admin.email}</p>
+                  <p className={"designation"}>{admin.rol}</p>
+                  <p className={"designation"}>{admin.state === 1 ? 'Activo' : 'Inactivo'}</p>
+                  <div className="line" />
+                  {admin.state === 1 ? <button className="btn btn-danger" onClick={() => deleteSuAdmin(admin.id)}>Desactivar</button> : <button className="btn btn-success" onClick={() => deleteSuAdmin(admin.id)}>Activar</button>
+                  }
+                  
 
 
-    <Row className='mt-2  '>
+
+
+
+
+
+
+
+
+                </div>
+              </div>
+            </div>
+
+         
+
+
+        ))}
+ </div>
+  
+
+
+
+
+      {/* <Row className='mt-2  '>
       <ModalForm2 buttonLabel="Crear" />
       {admins.map((admin) => (
         <Card style={{ width: '18rem' }} >
@@ -172,7 +238,8 @@ const AdminCard = () => {
         </Card>
 
       ))}
-    </Row>
+    </Row> */}
+    </>
   );
 };
 

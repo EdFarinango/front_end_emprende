@@ -2,7 +2,7 @@ import React from 'react'
 import ReactPlayer from 'react-player/youtube'
 import Card from 'react-bootstrap/Card';
 
-import ListGroup from 'react-bootstrap/ListGroup';
+ 
 
 
 
@@ -16,7 +16,7 @@ import { Row} from 'react-bootstrap';
 
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
+
 
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -63,7 +63,7 @@ const videos = [
     id: 2,
     title: 'Conferencia2_TASA',
     description: 'Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.',
-    url: 'https://youtu.be/pA7tv-D8a3s',
+    url: 'https://fb.watch/i54UezKUru/',
   },
 
   {
@@ -84,33 +84,92 @@ const videos = [
 
 const theme = createTheme();
 const Repositorio = () => {
+  
     return (
+
+
+ 
+
+      <ThemeProvider theme={theme}>
+      
+
+    
+        <CssBaseline />
+        <main>
+          {/* Hero unit */}
+          <Box
+            sx={{
+              bgcolor: 'background.paper',
+              pt: 8,
+              pb: 6,
+            }}
+          >
+            <Container maxWidth="sm">
+              <Typography
+                component="h1"
+                variant="h2"
+                align="center"
+                color="text.primary"
+                gutterBottom
+              >
+                Conferencias Emprendimientos ESFOT
+              </Typography>
+              <Typography variant="h5" align="center" color="text.secondary" paragraph>
+                Repositorio de conferencias de emprendimientos de la ESFOT
+              </Typography>
+              <Stack
+                sx={{ pt: 4 }}
+                direction="row"
+                spacing={2}
+
+                justifyContent="center"
+              >
+                <Button variant="contained">Conferencias</Button>
+                <Button variant="outlined">Talleres</Button>
+              </Stack>
+            </Container>
+          </Box>
+          <Container sx={{ py: 8 }} maxWidth="md">
+            {/* End hero unit */}
+            <Grid container spacing={4}>
+              {videos.map((video) => (
+                <Grid item key={video} xs={12} sm={6} md={4}>
+                  <Cards video={video} />
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+          
+            </main>
+
+
+</ThemeProvider>
 
      
 
-<ThemeProvider theme={theme}>
-<CssBaseline />
-<main>
+// <ThemeProvider theme={theme}>
+// <CssBaseline />
+// <main>
 
-  {/* Hero unit */}
-  <Box
-          sx={{
-            bgcolor: 'background.paper',
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            > 
+//   {/* Hero unit */}
+//   <Box
+//           sx={{
+//             bgcolor: 'background.paper',
+//             pt: 8,
+//             pb: 6,
+//           }}
+//         >
+//           <Container maxWidth="sm">
+//             <Typography
+//               component="h1"
+//               variant="h2"
+//               align="center"
+//               color="text.primary"
+//               gutterBottom
+//             > 
 
-              Conferencias Emprendimientos ESFOT
-            </Typography>
+//               Conferencias Emprendimientos ESFOT
+//             </Typography>
 
           
     
@@ -120,62 +179,128 @@ const Repositorio = () => {
 
             
 
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              Repositorio de conferencias de emprendimientos de la ESFOT
+//             <Typography variant="h5" align="center" color="text.secondary" paragraph>
+//               Repositorio de conferencias de emprendimientos de la ESFOT
 
-            </Typography>
-            <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
-              justifyContent="center"
-            >
+//             </Typography>
+//             <Stack
+//               sx={{ pt: 4 }}
+//               direction="row"
+//               spacing={2}
+//               justifyContent="center"
+//             >
 
-</Stack>
-          </Container>
-        </Box>
+// </Stack>
+//           </Container>
+//         </Box>
 
-  <Container sx={{ py: 8 }} maxWidth="md">
-    {/* End hero unit */}
-    <Grid container spacing={4}>
+//   <Container sx={{ py: 8 }} maxWidth="md">
+//     {/* End hero unit */}
+//     <Grid container spacing={4}>
 
 
             
 
-        <Row className='mt-2 d-flex justify-content-between '>
+//         <Row className='mt-2 d-flex justify-content-between '>
     
      
        
 
 
-        <Card style={{ width: '18rem', height: 'auto'  }} >
-        <div>
-        <ReactPlayer
-        url='https://youtu.be/pA7tv-D8a3s'
-        width='100%'
-        height='100%'
-        controls
-        />
-        </div>
+//         <Card style={{ width: '18rem', height: 'auto'  }} >
+//         <div>
+//         <ReactPlayer
+//         url='https://fb.watch/i54UezKUru/'
+//         width='100%'
+//         height='100%'
+//         controls
+//         />
+//         </div>
 
           
         
          
-        <CardContent sx={{ flexGrow: 1 }}>
-        <Typography gutterBottom variant="h5" component="h2">
-                      Conferencia1_TASA
-                    </Typography>
-                    <Typography>
-                    Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    ver video 
+//         <CardContent sx={{ flexGrow: 1 }}>
+//         <Typography gutterBottom variant="h5" component="h2">
+//                       Conferencia1_TASA
+//                     </Typography>
+//                     <Typography>
+//                     Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.
+//                     </Typography>
+//                   </CardContent>
+//                   <CardActions>
+//                     ver video 
 
 
-                    <Button size="small">Edit</Button>
-                  </CardActions>
-        </Card>
+//                     <Button size="small">Edit</Button>
+//                   </CardActions>
+//         </Card>
+
+
+   
+
+
+
+
+
+
+
+
+
+
+//         <Card style={{ width: '18rem', height: 'auto' }} >
+//         <div>
+//         <ReactPlayer
+//         url='https://youtu.be/pA7tv-D8a3s'
+//         width='100%'
+//         height='100%'
+//         controls
+//         />
+//         </div>
+
+//         <CardContent sx={{ flexGrow: 1 }}>
+//         <Typography gutterBottom variant="h5" component="h2">
+//                       Conferencia1_TASA
+//                     </Typography>
+//                     <Typography>
+//                     Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.
+//                     </Typography>
+//                   </CardContent>
+//                   <CardActions>
+//                     ver video 
+
+
+//                     <Button size="small">Edit</Button>
+//                   </CardActions>
+//         </Card>
+
+
+
+//         <Card style={{ width: '18rem' }} >
+//         <div>
+//         <ReactPlayer
+//         url='https://youtu.be/pA7tv-D8a3s'
+//         width='100%'
+//         height='100%'
+//         controls
+//         />
+//         </div>
+
+//         <CardContent sx={{ flexGrow: 1 }}>
+//         <Typography gutterBottom variant="h5" component="h2">
+//                       Conferencia1_TASA
+//                     </Typography>
+//                     <Typography>
+//                     Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.
+//                     </Typography>
+//                   </CardContent>
+//                   <CardActions>
+//                     ver video 
+
+
+//                     <Button size="small">Edit</Button>
+//                   </CardActions>
+//         </Card>
 
 
         
@@ -184,85 +309,18 @@ const Repositorio = () => {
 
 
 
-
-
-
-
-
-
-        <Card style={{ width: '18rem', height: 'auto' }} >
-        <div>
-        <ReactPlayer
-        url='https://youtu.be/pA7tv-D8a3s'
-        width='100%'
-        height='100%'
-        controls
-        />
-        </div>
-
-        <CardContent sx={{ flexGrow: 1 }}>
-        <Typography gutterBottom variant="h5" component="h2">
-                      Conferencia1_TASA
-                    </Typography>
-                    <Typography>
-                    Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    ver video 
-
-
-                    <Button size="small">Edit</Button>
-                  </CardActions>
-        </Card>
-
-
-
-        <Card style={{ width: '18rem' }} >
-        <div>
-        <ReactPlayer
-        url='https://youtu.be/pA7tv-D8a3s'
-        width='100%'
-        height='100%'
-        controls
-        />
-        </div>
-
-        <CardContent sx={{ flexGrow: 1 }}>
-        <Typography gutterBottom variant="h5" component="h2">
-                      Conferencia1_TASA
-                    </Typography>
-                    <Typography>
-                    Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    ver video 
-
-
-                    <Button size="small">Edit</Button>
-                  </CardActions>
-        </Card>
-
-
-        
-
-
-
-
-
-</Row>
-</Grid>
-</Container>
+// </Row>
+// </Grid>
+// </Container>
 
     
 
 
             
-</main>
-            </ThemeProvider>
+// </main>
+//             </ThemeProvider>
        
-    )
+ )
 }
 
 export default Repositorio

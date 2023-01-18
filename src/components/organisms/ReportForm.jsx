@@ -36,12 +36,12 @@ export const ReportForm = ({ report }) => {
             console.log(report)
             if (report?.id) {
                 await axios.post(
-                    `http://127.0.0.1:8000/api/v1/report/${report.id}/update`,
+                    `https://backend-emprende.herokuapp.com/api/v1/report/${report.id}/update`,
                     { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
                 );
             } else {
                 await axios.post(
-                    `http://127.0.0.1:8000/api/v1/report/create`,
+                    `https://backend-emprende.herokuapp.com/api/v1/report/create`,
                     { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
                 );
             }
@@ -105,7 +105,7 @@ export const ReportForm = ({ report }) => {
                 <br></br>
                 <br></br>
                 <div >
-                    <button type="button"  className=" bg-sky-800 w-full p-3 text-white uppercase font-bold rounded-lg hover:bg-sky-900 cursor-pointer transition-all" >
+                    <button type="button" className=" bg-sky-800 w-full p-3 text-white uppercase font-bold rounded-lg hover:bg-sky-900 cursor-pointer transition-all" >
                         <Link to='/reports'>
                             Regresar
                         </Link>

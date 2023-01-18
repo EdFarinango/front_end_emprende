@@ -41,12 +41,12 @@ export const DirectorForm = ({ director }) => {
             console.log(director)
             if (director?.id) {
                 await axios.post(
-                    `http://127.0.0.1:8000/api/v1/director/${director.id}/update`,
+                    `https://backend-emprende.herokuapp.com/api/v1/director/${director.id}/update`,
                     { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
                 );
             } else {
                 await axios.post(
-                    `http://127.0.0.1:8000/api/v1/director/create`,
+                    `https://backend-emprende.herokuapp.com/api/v1/director/create`,
                     { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
                 );
             }
@@ -184,10 +184,10 @@ export const DirectorForm = ({ director }) => {
                 <br></br>
                 <br></br>
                 <div >
-                    <button type="button"  className=" bg-sky-800 w-full p-3 text-white uppercase font-bold rounded-lg hover:bg-sky-900 cursor-pointer transition-all" >
-                    <Link to='/directors'>
-                        Regresar
-                    </Link>
+                    <button type="button" className=" bg-sky-800 w-full p-3 text-white uppercase font-bold rounded-lg hover:bg-sky-900 cursor-pointer transition-all" >
+                        <Link to='/directors'>
+                            Regresar
+                        </Link>
                     </button>
                 </div>
 
