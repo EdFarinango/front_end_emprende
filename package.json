@@ -37,11 +37,12 @@
         "reactstrap": "^9.1.5",
         "styled-components": "^5.3.6",
         "web-vitals": "^2.1.4"
+
     },
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test",
+        "test": "react-scripts test && ava",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {
@@ -67,4 +68,6 @@
         "postcss": "^8.4.16",
         "tailwindcss": "^3.1.8"
     }
+
+
 }

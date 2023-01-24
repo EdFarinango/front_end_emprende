@@ -1,5 +1,5 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -32,6 +32,10 @@ function NavBar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const [imagen, setImagen] = useState(null);
+  const [lista, setLista] =  useState([]);
+
+  const [descripcion, setDescripcion] = useState('');  
 
   const handleLogout = async () => {
     handleCloseUserMenu();
@@ -66,11 +70,9 @@ function NavBar() {
 
   };
 
-
-function refreshPage() {
-        window.location.reload(false);
-      }
   
+  
+
 
   return (
     <AppBar position="static" color='transparent' style={{ background: '#15A0A0' }} >

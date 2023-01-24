@@ -25,9 +25,10 @@ const EditForm = (props) => {
       first_name: props.item?.first_name ?? "",
       last_name: props.item?.last_name ?? "",
       email: props.item?.email ?? "",
-      parsonal_phone: props.item?.parsonal_phone ?? "",
+      personal_phone: props.item?.personal_phone ?? "",
       linkedin : props.item?.linkedin ?? "",
-      state: props.item?.state ?? ""
+      state: props.item?.state ?? "",
+    
 
 
     }
@@ -98,12 +99,12 @@ const EditForm = (props) => {
 
 
 
-  useEffect(() => {
-    if (props.item) {
-      const { id, first_name, last_name, email, personal_phone, linkedin } = props.item;
-      setForm({ id, first_name, last_name, email, personal_phone, linkedin});
-    }
-  }, [props.item]);
+  // useEffect(() => {
+  //   if (props.item) {
+  //     const { id, first_name, last_name, email, personal_phone, linkedin } = props.item;
+  //     setForm({ id, first_name, last_name, email, personal_phone, linkedin});
+  //   }
+  // }, [props.item]);
 
 
 
@@ -118,7 +119,7 @@ const EditForm = (props) => {
           name="first_name"
           id="first_name"
           onChange={handleChange}
-          value={form.first_name === null ? "" : form.first_name}
+          value={form.first_name}
         />
       </FormGroup>
       <FormGroup>
@@ -128,7 +129,7 @@ const EditForm = (props) => {
           name="last_name"
           id="last_name"
           onChange={handleChange}
-          value={form.last_name === null ? "" : form.last_name}
+          value={form.last_name}
         />
       </FormGroup>
       <FormGroup>
@@ -138,7 +139,7 @@ const EditForm = (props) => {
           name="email"
           id="email"
           onChange={handleChange}
-          value={form.email === null ? "" : form.email}
+          value={form.email}
         />
       </FormGroup>
       <FormGroup>
@@ -149,7 +150,7 @@ const EditForm = (props) => {
           name="personal_phone"
           id="personal_phone"
           onChange={handleChange}
-          value={form.personal_phone === null ? "" : form.personal_phone}
+          value={form.personal_phone}
         />
       </FormGroup>
 
@@ -161,7 +162,7 @@ const EditForm = (props) => {
           name="linkedin"
           id="linkedin"
           onChange={handleChange}
-          value={form.linkedin === null ? "" : form.linkedin}
+          value={form.linkedin}
         />
       </FormGroup>
       

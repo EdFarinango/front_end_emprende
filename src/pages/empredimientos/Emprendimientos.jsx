@@ -32,6 +32,7 @@ import { blue } from "@material-ui/core/colors";
 import { Link } from 'react-router-dom';
 import Footer from '../../components/footer';
 import SearchComponent from './SerchComponent';
+import NavBar from '../../components/NavBar/NavBar';
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -87,21 +88,23 @@ export const Emprendimientos = ({ emprendimientos }) => {
 
 
 
+  
+
+
+
+
   const updateState = (item) => {
-    const newData = data.map((emprendimientos) => {
-      if (emprendimientos.id === item.id) {
-        return item;
-      }
-      return emprendimientos;
-    });
-    setData(newData);
-
-
+    const itemIndex = emprendimientos.findIndex(data => data.id === item.id)
+    const newArray = [
+      // destructure all items from beginning to the indexed item
+      ... data.slice(0, itemIndex),
+      // add the updated item to the array
+      item,
+      // add the rest of the items to the array from the index after the replaced item
+      ... data.slice(itemIndex + 1)
+    ]
+    setData(newArray)
   }
-
-
-
-
 
 
 
@@ -110,6 +113,7 @@ export const Emprendimientos = ({ emprendimientos }) => {
 
 
     <>
+
       <div className="container-fluid">
         <div className="row">
           <div className="col-12">
@@ -118,6 +122,7 @@ export const Emprendimientos = ({ emprendimientos }) => {
                 <h4 className="card-title">Catalogo de Emprendimientos</h4>
                 <div className="table-responsive">
                   <div className="container-fluid">
+                  <ModalNewEmp item={data} updateState={updateState} data={data}  />  
                     <h2 className='text-center'>Buscador</h2>
                     <SearchComponent />
                   </div>

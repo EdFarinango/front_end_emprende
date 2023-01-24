@@ -24,6 +24,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import  ModalPswd  from './ModalPswd';
 
 
 function Copyright(props) {
@@ -41,6 +42,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export const Login = () => {
+
+
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
     const [email, setEmail] = useState('')
@@ -88,7 +91,9 @@ export const Login = () => {
     
 
     return (
+        
         <ThemeProvider theme={theme}>
+            
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
@@ -105,16 +110,15 @@ export const Login = () => {
                     </Typography>
                     <Box component="form" onSubmit={onLogin} noValidate sx={{ mt: 1 }}>
                         <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Correo Electrónico"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
-                            value={email}
-
+                           margin="normal"
+                           required
+                           fullWidth
+                           name="mail"
+                           label="Correo electrónico"
+                           type="email"
+                           id="email"
+                           autoComplete="email"
+                           value={email}
                             onChange={(e) => setEmail(e.target.value)}
 
 
@@ -132,17 +136,16 @@ export const Login = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Recuérdame"
-                        />
 
-                        <Grid container>
-                            <Grid item xs>
-                                <Link to="/recovery" variant="body2">
-                                    ¿Olvidaste tu contraseña?
-                                </Link>
-                            </Grid>
+
+
+                           
+                          
+                           <Grid container>
+                        
+
+                     
+                        
 
                             <Button
                                 type="submit"
@@ -152,14 +155,17 @@ export const Login = () => {
                             >
                                 Iniciar sesión
                             </Button>
+
+                            
                         </Grid>
                     </Box>
+                    <ModalPswd variant="body2"/>
                 </Box>
-
+                
                 <Copyright sx={{ mt: 8, mb: 4 }} />
 
             </Container>
-
+           
 
 
 

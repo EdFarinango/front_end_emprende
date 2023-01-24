@@ -154,3 +154,23 @@ body {
 .single_advisor_profile:focus .single_advisor_details_info p {
     color: #ffffff;
 }
+
+.btnedit {
+    background: #f5f5f5;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-peticion :hover {
+    background: #f5f5f5;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+}

@@ -34,6 +34,7 @@ const AdminCard = () => {
       );
       console.log("sss", response)
       setAdmin(response.data.data.users)
+      console(response.data.data.users)
     } catch (error) {
       console.log(error);
     }
@@ -120,7 +121,7 @@ const AdminCard = () => {
             <div className="col-12 col-sm-6 col-lg-3">
               <div className="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style={{ visibility: 'visible', animationDelay: '0.2s', animationName: 'fadeInUp' }}>
                 {/* Team Thumb*/}
-                <div className="advisor_thumb"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt />
+                <div className="advisor_thumb"><img src= {admin.avatar} alt="" />
                   {/* Social Info*/}
                   <div className="social-info">
                     <a href="#">
@@ -138,6 +139,7 @@ const AdminCard = () => {
                   <div className="line" />
                   {admin.state === 1 ? <button className="btn btn-danger" onClick={() => deleteSuAdmin(admin.id)}>Desactivar</button> : <button className="btn btn-success" onClick={() => deleteSuAdmin(admin.id)}>Activar</button>
                   }
+                  <ModalForm buttonLabel="Editar" item={admin} updateState={updateState} admins={admins} /> 
                   
 
 
@@ -163,82 +165,7 @@ const AdminCard = () => {
 
 
 
-      {/* <Row className='mt-2  '>
-      <ModalForm2 buttonLabel="Crear" />
-      {admins.map((admin) => (
-        <Card style={{ width: '18rem' }} >
-          <Card.Img variant="top" src='https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png' />
-
-          <ModalForm buttonLabel="Editar" item={admin} updateState={updateState} admins={admins} />
-
-          <Card.Body>
-
-
-            <Card.Title className="text-center" value='key'>
-              <h1 className="text-2xl font-bold " >{admin.full_name}</h1>
-            </Card.Title>
-            <Card.Text>
-              <p className="text-center">{admin.email}</p>
-            </Card.Text>
-          </Card.Body>
-          <ListGroup className="list-group-flush">
-            <ListGroup.Item className="text-center">{admin.rol}</ListGroup.Item>
-            <ListGroup.Item className="text-center">{admin.state === 1 ? 'Activo' : 'Inactivo'
-
-
-
-
-            }
-           
-            
-            </ListGroup.Item>
-
-            <ListGroup.Item className="text-center" >Linkedin</ListGroup.Item>
-           
-          </ListGroup>
-          <Card.Body className="text-center">
-
-            {admin.id !== user.id && (
-
-              <Button
-                variant="primary"
-                className="text-center"
-                onClick={() => deleteSuAdmin(admin.id)}
-              > {admin.state === 1 ? 'Desactivar' : 'Activar'}</Button>
-            )}
-            {
-
-              admin.id === user.id && (
-                // <Button
-                //   variant="primary"
-                //   className="text-center"
-                //   onClick={() => navigate('/users/admin/perfil')}
-                //  >Editar</Button>
-
-                <ModalForm buttonLabel="Perfil" />
-
-              )
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-          </Card.Body>
-        </Card>
-
-      ))}
-    </Row> */}
+      
     </>
   );
 };
