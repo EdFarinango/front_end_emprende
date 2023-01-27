@@ -143,11 +143,11 @@ const ModalNewEmp = (props) => {
 
         return (
             <div>
-<Button color="primary" onClick={toggle}>Editar</Button>
+<Button color="primary" onClick={toggle}>Crear emprendimientos</Button>
 
 
 <Modal isOpen={modal} toggle={toggle} size="lg">
-    <ModalHeader toggle={toggle}>Editar Emprendimiento</ModalHeader>
+    <ModalHeader toggle={toggle}>Crear Emprendimiento</ModalHeader>
     <ModalBody className="show-grid">
         
         <Container>

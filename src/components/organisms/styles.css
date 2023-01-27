@@ -35,7 +35,7 @@ body {
     content: "";
     background-color: #ffffff;
     -webkit-transform: rotate(-15deg);
-    transform: rotate(-15deg);
+    transform: rotate(-8deg);
 }
 
 @media only screen and (max-width: 575px) {

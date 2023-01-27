@@ -16,26 +16,9 @@ const ModalForm = (props) => {
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
     const [admin, setAdmin] = useState([]);
-    const getAdmin = async () => {
-        try {
-            const response = await axios.get(
-                `https://backend-emprende.herokuapp.com/api/v1/superadmin`,
-                { headers: { 'accept': 'application/json', 'authorization': token } }
-            );
-           
-            setAdmin(response.data.data.users)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-
-
-
-    useEffect(() => {
-        getAdmin();
-    }
-        , [])
+    const [image, setImage] = useState(null);
+    
+      
     return (
         <div>
 

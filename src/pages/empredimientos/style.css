@@ -91,3 +91,17 @@
     .btndesactivar:hover {
         background: #ccc;
     }
+    
+    .btnactivar {
+        background: #f57171;
+        padding: 10px 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        color: #000;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    
+    .btnactivar:hover {
+        background: rgb(250, 47, 47);
+    }

@@ -105,8 +105,8 @@ const ModalPswd = () => {
         
         <Container>
 
-          <h2 className='text-2xl md:text-3xl font-bold'>¿Olvidaste tu contraseña</h2>
-            <p className='text-sm text-gray-500 pb-6'>Por favor ingrese su dirección de correo electronico</p>
+          <h2 className='text-2xl md:text-3xl font-bold'>¿Olvidaste tu contraseña?</h2>
+            <p className='text-sm text-gray-500 pb-6'>Por favor ingrese su dirección de correo electrónico</p>
             <form className='space-y-7 text-left' onSubmit={ressetP}>
                 <div>
                     <Label description="Correo" htmlFor='email' />

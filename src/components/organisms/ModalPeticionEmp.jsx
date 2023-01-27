@@ -147,7 +147,7 @@ const ModalNewEmp = (props) => {
 
 
 <Modal isOpen={modal} toggle={toggle} size="lg">
-    <ModalHeader toggle={toggle}>Editar Emprendimiento</ModalHeader>
+    <ModalHeader toggle={toggle}>Petición Emprendimiento</ModalHeader>
     <ModalBody className="show-grid">
         
         <Container>

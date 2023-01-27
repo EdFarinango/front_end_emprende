@@ -24,6 +24,8 @@ import Comision from '../pages/comision/Emprende';
 import { Dashboard } from '../pages/dashboard/Dashboard';
 import { ConfirmPassword } from '../pages/auth/ConfirmPassword';
 
+//import EditFormNew from '../components/templates/FormNewSu';
+
 
 
 
@@ -86,6 +88,7 @@ export const AppRouter = () => {
                                 <Route path='/admin' element={<AdminsCard />} />
                                 <Route path='/super' element={<AdminCard />} />
                                 <Route path='/users' element={<Perfil />} />
+                            {/* <Route path='/form' element={<EditFormNew/>} /> */}
 
 
 

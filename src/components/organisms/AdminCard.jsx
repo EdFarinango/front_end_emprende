@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 import { Row, Button } from 'react-bootstrap';
@@ -26,15 +26,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const AdminCard = () => {
 
   const [admins, setAdmin] = useState([]);
+  const [adminProfile, setAdminProfile] = useState([]);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+
+  const token = localStorage.getItem('token');
+
   const getAdmin = async () => {
     try {
       const response = await axios.get(
         `https://backend-emprende.herokuapp.com/api/v1/superadmin`,
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
-      console.log("sss", response)
+
       setAdmin(response.data.data.users)
-      console(response.data.data.users)
+
     } catch (error) {
       console.log(error);
     }
@@ -42,11 +49,17 @@ const AdminCard = () => {
 
 
 
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
 
 
-  const token = localStorage.getItem('token');
+
+
+
+
+
+
+
+
+
 
 
 
@@ -83,6 +96,7 @@ const AdminCard = () => {
       ...admins.slice(itemIndex + 1)
     ]
     setAdmin(newArray)
+    getAdmin();
   }
 
 
@@ -90,6 +104,9 @@ const AdminCard = () => {
   useEffect(() => {
 
     getAdmin();
+
+
+
   }, [])
 
 
@@ -100,47 +117,73 @@ const AdminCard = () => {
     //crear un nuevo usuario
 
     <>
-    
-        <div className="row justify-content-center">
-          <div className="col-12 col-sm-8 col-lg-6">
-            {/* Section Heading*/}
-            <div className="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style={{ visibility: 'visible', animationDelay: '0.2s', animationName: 'fadeInUp' }}>
-              <h3>EnPreNde <span> Team</span></h3>
-              <ModalForm2 buttonLabel="Crear" />
 
-              <p>Un equipo respaldado por el conocimiento</p>
-              <div className="line" />
-            </div>
+      <div className="row justify-content-center">
+        <div className="col-12 col-sm-8 col-lg-6">
+          {/* Section Heading*/}
+          <div className="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style={{ visibility: 'visible', animationDelay: '0.2s', animationName: 'fadeInUp' }}>
+            <h3>EnPreNde <span> Team</span></h3>
+            <ModalForm2 buttonLabel="Crear"  />
+
+            <p>Un equipo respaldado por el conocimiento</p>
+            <div className="line" />
           </div>
         </div>
-        <div className="row">
+      </div>
+      <div className="row">
         {admins.map((admin) => (
 
-          
-          
-            <div className="col-12 col-sm-6 col-lg-3">
-              <div className="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style={{ visibility: 'visible', animationDelay: '0.2s', animationName: 'fadeInUp' }}>
-                {/* Team Thumb*/}
-                <div className="advisor_thumb"><img src= {admin.avatar} alt="" />
-                  {/* Social Info*/}
-                  <div className="social-info">
-                    <a href="#">
+
+
+
+
+          <div className="col-12 col-sm-6 col-lg-3" key={admin.id}>
+            <div className="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style={{ visibility: 'visible', animationDelay: '0.2s', animationName: 'fadeInUp' }}>
+              {/* Team Thumb*/}
+              <div className="advisor_thumb"><img src={admin.image} alt="" />
+                {/* Social Info*/}
+                <div className="social-info">
+                  <a href="#">
                     <i className="fa fa-edit" /></a>
-                      <a href="#">
-                        <i className="fa fa-twitter" />
-                        </a><a href="#"><i className="fa fa-linkedin" /></a></div>
-                </div>
-                {/* Team Details*/}
-                <div className="single_advisor_details_info">
-                  <h6>{admin.full_name}</h6>
-                  <p>{admin.email}</p>
-                  <p className={"designation"}>{admin.rol}</p>
-                  <p className={"designation"}>{admin.state === 1 ? 'Activo' : 'Inactivo'}</p>
-                  <div className="line" />
-                  {admin.state === 1 ? <button className="btn btn-danger" onClick={() => deleteSuAdmin(admin.id)}>Desactivar</button> : <button className="btn btn-success" onClick={() => deleteSuAdmin(admin.id)}>Activar</button>
-                  }
-                  <ModalForm buttonLabel="Editar" item={admin} updateState={updateState} admins={admins} /> 
-                  
+                  <a href="#">
+                    <i className="fa fa-twitter" />
+                  </a><a href="#"><i className="fa fa-linkedin" /></a></div>
+              </div>
+              {/* Team Details*/}
+              <div className="single_advisor_details_info">
+                <h6>{admin.full_name}</h6>
+                <p>{admin.email}</p>
+                <p className={"designation"}>{admin.rol}</p>
+                <p className={"designation"}>{admin.state === 1 ? 'Activo' : 'Inactivo'}</p>
+                <div className="line" />
+                {admin.id !== user.id && (
+
+                  <Button
+                    variant="primary"
+                    className="text-center"
+                    onClick={() => deleteSuAdmin(admin.id)}
+                  > {admin.state === 1 ? 'Desactivar' : 'Activar'}</Button>
+                )}
+                {
+
+                  admin.id === user.id && (
+                    // <Button
+                    //   variant="primary"
+                    //   className="text-center"
+                    //   onClick={() => navigate('/users/admin/perfil')}
+                    //  >Editar</Button>
+
+                    //<ModalForm buttonLabel="Perfil" />
+                    <Link to="/administracion" className="btn btn-primary">Panel de administracion </Link>
+
+                  )
+
+
+
+
+                }
+
+                <ModalForm buttonLabel="Editar" item={admin} updateState={updateState} admins={admins} />
 
 
 
@@ -151,21 +194,22 @@ const AdminCard = () => {
 
 
 
-                </div>
+
               </div>
             </div>
+          </div>
 
-         
+
 
 
         ))}
- </div>
-  
+      </div>
 
 
 
 
-      
+
+
     </>
   );
 };
