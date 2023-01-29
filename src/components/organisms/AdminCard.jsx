@@ -1,6 +1,4 @@
-import Card from 'react-bootstrap/Card';
 
-import ListGroup from 'react-bootstrap/ListGroup';
 
 import React, { useEffect, useState } from 'react';
 
@@ -10,7 +8,7 @@ import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 
-import { Row, Button } from 'react-bootstrap';
+import {  Button } from 'react-bootstrap';
 
 import { AuthContext } from '../../contexts/auth/AuthContext';
 
@@ -18,7 +16,7 @@ import ModalForm from './ModalSu'
 import ModalForm2 from './ModalNewSu';
 
 import './styles.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 
 
@@ -26,7 +24,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const AdminCard = () => {
 
   const [admins, setAdmin] = useState([]);
-  const [adminProfile, setAdminProfile] = useState([]);
+ 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 

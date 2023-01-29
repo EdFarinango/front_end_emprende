@@ -23,14 +23,15 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import  ModalPswd  from './ModalPswd';
+import ModalPswd from './ModalPswd';
+import alert from 'sweetalert'
 
 
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>
             {'Copyright © '}
-            <Link href="#" text-decoration="none">
+            <Link href="#" textDecoration="none">
                 2022 - Emprende
             </Link>{' '}
             {new Date().getFullYear()}
@@ -40,59 +41,160 @@ function Copyright(props) {
 }
 const theme = createTheme();
 
+
+
+
+
 export const Login = () => {
 
 
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
-    const [email, setEmail] = useState('')
+    //const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
-
-
+    const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
+    const [response, setResponse] = useState(null);
+    const [form, setForm] = useState({
+        email: "",
+        password: "",
+    });
 
     const onLogin = async (e) => {
         e.preventDefault();
-        if (!email || !password) {
-            return;
-        }
+        setErrors(validationsForm(form));
 
 
-       
+        if (Object.keys(errors).length === 0) {
+            //console.log("No hay errores");
+            setLoading(true);
+            //console.log(form);
+            try {
+                await axios.post('https://backend-emprende.herokuapp.com/api/v1/login',
+                    { ...form }).then((response) => {
+                        const { access_token, token_type, user } = response.data.data
+                        // console.warn(access_token, token_type, user);
+                        // console.log(response);
+                        setLoading(false);
+                        setResponse(true);
+                        setTimeout(() => {
+                            setResponse(false)
+                        }, 2500);
+                        login(user, `${token_type} ${access_token}`);
+                        // eslint-disable-next-line no-lone-blocks
+                        {
+                            alert && alert({
+                                title: ["Bienvenido"],
+                                text: "Ingreso exitoso",
+                                iconColor: "success",
+                                button: false,
+                                timer: "2000",
+                            })
 
-        try {
-            const response = await axios.post('https://backend-emprende.herokuapp.com/api/v1/login', {
-                email,
-                password
-            });
-            const { access_token, token_type, user } = response.data.data
-            console.warn(access_token, token_type, user);
-
-            login(user, `${token_type} ${access_token}`);
-            // eslint-disable-next-line no-lone-blocks
-            {
 
 
+                            navigate('/administracion');
+                        }
+                    }).catch((error) => {
+                        //console.log(error);
+                        setLoading(false);
+                        setResponse(false);
+                    });
 
-                navigate('/administracion');
+            } catch (error) {
+                setLoading(false);
+                setResponse(false);
+                if (!FaNetworkWired) {
+                    //console.log(error);
+                } else {
+                    //console.log(error.response.data.message, error);
+
+                }
             }
-        } catch (error) {
-            if (!FaNetworkWired) {
-                console.log(error);
-            } else {
-                console.log(error.response.data.message, error);
-                setEmail('');
-                setPassword('');
-            }
+        } else {
+            if (errors.email) {
+                alert({
+                    title: "Error",
+                    text: "El email es requerido",
+                    icon: "error",
+                    button: false,
+                    timer: "1500",
+                })
+            } else
+                if (errors.password) {
+                    alert({
+                        title: "Error",
+                        text: "Ingrese una contraseña valida",
+                        icon: "error",
+                        button: false,
+                        timer: "1500",
+                    })
+                }
+
         }
+    };
+
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+
+    const handleBlur = (e) => {
+
+        handleChange(e);
+        setErrors(validationsForm(form));
+
+
     }
 
-    
+
+
+
+
+
+
+    const validationsForm = (form) => {
+        let errors = {};
+        //let regexName = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; // Letras y espacios, pueden llevar acentos.
+        let regexEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+        let regexPassword = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/; // 4 a 12 digitos.
+        //let regexPhone = /^\d{7,10}$/; // 7 a 14 numeros.
+
+
+        if (!form.email) {
+            errors.email = "Por favor ingrese un correo electrónico";
+        } else if (!regexEmail.test(form.email)) {
+            errors.email = "El correo electrónico no es válido";
+
+        } else
+            if (!form.password) {
+                errors.password = "Por favor ingrese una contraseña";
+            }
+            else if (!regexPassword.test(form.password)) {
+                errors.password = "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayúscula y un simbolo";
+            }
+
+
+
+        return errors;
+
+
+
+
+
+
+    };
+
+
 
     return (
-        
+
         <ThemeProvider theme={theme}>
-            
+
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
@@ -107,22 +209,26 @@ export const Login = () => {
                     <Typography component="h1" variant="h5">
                         Iniciar Sesión
                     </Typography>
-                    <Box component="form" onSubmit={onLogin} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" noValidate onSubmit={onLogin} sx={{ mt: 1 }}>
+
                         <TextField
-                           margin="normal"
-                           required
-                           fullWidth
-                           name="mail"
-                           label="Correo electrónico"
-                           type="email"
-                           id="email"
-                           autoComplete="email"
-                           value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="email"
+                            label="Correo electrónico"
+                            type="email"
+                            id="email"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={form.email}
+                            autoComplete="email"
 
 
 
                         />
+
+                        {errors.email && <span className='error'>{errors.email}</span >}
                         <TextField
                             margin="normal"
                             required
@@ -131,20 +237,27 @@ export const Login = () => {
                             label="Contraseña"
                             type="password"
                             id="password"
+
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+
+                            value={form.password}
                             autoComplete="current-password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+
+
                         />
 
 
 
-                           
-                          
-                           <Grid container>
-                        
 
-                     
-                        
+
+
+                        <Grid container>
+
+
+
+
+                            {/* Desactivar boton */}
 
                             <Button
                                 type="submit"
@@ -155,16 +268,20 @@ export const Login = () => {
                                 Iniciar sesión
                             </Button>
 
-                            
+
+
                         </Grid>
+
                     </Box>
-                    <ModalPswd variant="body2"/>
+                    <ModalPswd variant="body2" />
                 </Box>
-                
+
                 <Copyright sx={{ mt: 8, mb: 4 }} />
 
             </Container>
-           
+
+
+
 
 
 

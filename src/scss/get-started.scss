@@ -8,16 +8,16 @@
         border-radius: 70px;
         font-family: inherit;
         font-size: 25pt;
-        text-decoration: none !important;
+        textDecoration: none !important;
         &:active {
-            text-decoration: none;
+            textDecoration: none;
         }
         &:focus {
-            text-decoration: none;
+            textDecoration: none;
             outline: 0;
         }
         &>a {
-            text-decoration: none;
+            textDecoration: none;
             color: white;
         }
     }

@@ -9,3 +9,9 @@ p {
     opacity: 0.8;
     border-radius: 5px;
 }
+
+.error {
+    color: red;
+    font-size: 0.9rem;
+    font-family: sans-serif;
+}

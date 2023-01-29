@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
-import { Link } from 'react-router-dom';
-import { TableCell } from '@mui/material';
+
 import ModalEmp from '../../components/organisms/ModalEmp';
 import './style.css';
 import ModalViewEmp from '../../components/organisms/ModalView';
