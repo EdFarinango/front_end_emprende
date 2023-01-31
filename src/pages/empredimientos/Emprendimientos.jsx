@@ -73,7 +73,7 @@ export const Emprendimientos = ({ emprendimientos }) => {
   return (
     <>
       <div
-        className="h-screen content-center items-center"
+        className="h-screen  w3-content"
         style={{ maxWidth: 1400, marginTop: 15 }}
       >
         <div className="w3-card w3-round w3-white w3-padding-32 w3-center">
