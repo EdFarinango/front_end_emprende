@@ -120,6 +120,7 @@ const EditFormNew = () => {
           setData(respose.data);
         })
         .catch((err) => {
+          console.log(err.response.data.errors);
           if (err.response.data.errors.email) {
             alert({
               title: "Error al registar usuario",

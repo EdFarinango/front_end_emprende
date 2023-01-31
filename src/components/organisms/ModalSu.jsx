@@ -13,10 +13,13 @@ const ModalForm = (props) => {
 
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
-    const navigate = useNavigate();
-    const token = localStorage.getItem('token');
-    const [admin, setAdmin] = useState([]);
-    const [image, setImage] = useState(null);
+
+
+    const [admin, setAdmin] = useState([
+
+        
+    ]);
+  
     
       
     return (

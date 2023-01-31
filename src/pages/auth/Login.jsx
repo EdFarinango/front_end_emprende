@@ -59,7 +59,7 @@ export const Login = () => {
         email: "",
         password: "",
     });
-
+   
     const onLogin = async (e) => {
         e.preventDefault();
         setErrors(validationsForm(form));
@@ -83,51 +83,86 @@ export const Login = () => {
                         login(user, `${token_type} ${access_token}`);
                         // eslint-disable-next-line no-lone-blocks
                         {
+                            console.log("Ingreso exitoso");
                             alert && alert({
                                 title: ["Bienvenido"],
                                 text: "Ingreso exitoso",
                                 iconColor: "success",
                                 button: false,
-                                timer: "2000",
+                                //timer: "2000",
                             })
-
+                           
 
 
                             navigate('/administracion');
                         }
                     }).catch((error) => {
-                        //console.log(error);
-                        setLoading(false);
-                        setResponse(false);
+                        
+                        console.log (error.response.data.message);
+
+                        if (error.response.data.errors.email) {
+                            alert({
+                                title: "Error",
+                                text: "Debe ingresar datos al formulario",
+                                icon: "error",
+                                button: false,
+                                //timer: "1500",
+                            })
+                        } else 
+                        if (error.response.data.errors.password) {
+                            alert({
+                                title: "Error",
+                                text: "Debe ingresar una contraseña válida",
+                                icon: "error",
+                                button: false,
+                                //timer: "1500",
+                            })
+                        }
+                         
                     });
+                    setLoading(false);
+                        setResponse(false);
 
             } catch (error) {
+                
                 setLoading(false);
                 setResponse(false);
                 if (!FaNetworkWired) {
-                    //console.log(error);
+                    console.log(error);
                 } else {
-                    //console.log(error.response.data.message, error);
+                  
+                   
+                        alert({
+                            title: "Error",
+                            text: "Credenciales incorrectas ",
+                            icon: "error",
+                            button: false,
+                            //timer: "1500",
+                        })
+                    }
+                    
 
-                }
+                
             }
         } else {
             if (errors.email) {
                 alert({
                     title: "Error",
-                    text: "El email es requerido",
-                    icon: "error",
+                    text: "El email es requerido, ingrese un correo válido",
+               
+                   iconColor: "blue",
+                   icon : "error",
                     button: false,
-                    timer: "1500",
+                    //timer: "1500",
                 })
             } else
                 if (errors.password) {
                     alert({
                         title: "Error",
-                        text: "Ingrese una contraseña valida",
+                        text: "Revise sus credenciales, ingrese una contraseña válida",
                         icon: "error",
                         button: false,
-                        timer: "1500",
+                        //timer: "1500",
                     })
                 }
 
@@ -160,8 +195,8 @@ export const Login = () => {
     const validationsForm = (form) => {
         let errors = {};
         //let regexName = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; // Letras y espacios, pueden llevar acentos.
-        let regexEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-        let regexPassword = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/; // 4 a 12 digitos.
+        let regexEmail  = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/; // Letras, numeros, guion y guion_bajo
+        let regexPassword = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{2,4}$/; ///^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/; // 4 a 12 digitos.
         //let regexPhone = /^\d{7,10}$/; // 7 a 14 numeros.
 
 
@@ -169,14 +204,13 @@ export const Login = () => {
             errors.email = "Por favor ingrese un correo electrónico";
         } else if (!regexEmail.test(form.email)) {
             errors.email = "El correo electrónico no es válido";
+        }
 
-        } else
-            if (!form.password) {
-                errors.password = "Por favor ingrese una contraseña";
-            }
-            else if (!regexPassword.test(form.password)) {
-                errors.password = "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, una minúscula, una mayúscula y un simbolo";
-            }
+        // }else if (!form.password) {
+        //     errors.password = "Por favor ingrese una contraseña";
+        // } else if (!regexPassword.test(form.password)) {
+        //     errors.password = "La contraseña no es válida";
+        // }
 
 
 
@@ -205,11 +239,28 @@ export const Login = () => {
                         alignItems: 'center',
                     }}
                 >
-
-                    <Typography component="h1" variant="h5">
-                        Iniciar Sesión
+                     <Typography component="h1" variant="h5"
+                        sx={{
+                            color: "#000000",
+                            fontWeight: "bold",
+                            fontFamily: "Montserrat",
+                        }}
+                        
+                     >
+                       EMPRENDE
                     </Typography>
-                    <Box component="form" noValidate onSubmit={onLogin} sx={{ mt: 1 }}>
+                    <Typography component="h2" variant="h5"
+                    sx={{
+                     
+                      
+                        fontFamily: "Montserrat",
+                        fontWeight: "bolder",
+                        fontSize : "1 rem",
+                    }}
+                    >
+                    Ingresa al panel de administración
+                    </Typography>
+                    <Box component="form" noValidate onSubmit={onLogin} sx={{ mt: 1 }} className = "formControl">
 
                         <TextField
                             margin="normal"
@@ -222,13 +273,13 @@ export const Login = () => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={form.email}
-                            autoComplete="email"
+                 
 
 
 
                         />
 
-                        {errors.email && <span className='error'>{errors.email}</span >}
+                    
                         <TextField
                             margin="normal"
                             required
@@ -246,6 +297,7 @@ export const Login = () => {
 
 
                         />
+                        
 
 
 

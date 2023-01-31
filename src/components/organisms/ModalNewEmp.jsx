@@ -27,7 +27,8 @@ import { Form, Label, Input } from "reactstrap";
 
 import { NativeSelect } from "@mui/material";
 
-const ModalNewEmp = (props) => {
+import alert from "sweetalert";
+const ModalNewEmp = () => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const navigate = useNavigate();
@@ -38,7 +39,9 @@ const ModalNewEmp = (props) => {
 
   const [image, setImage] = useState(null);
 
-  const [form, setForm] = useState({
+  const [errors, setErrors] = useState(false);
+
+  const [form, setFormData] = useState({
     rol_esfot: "",
     nombre: "",
     descripcion: "",
@@ -51,64 +54,263 @@ const ModalNewEmp = (props) => {
     facebook: "",
     instagram: "",
     descuento: "",
+    image: "",
   });
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(form);
+    if (Object.keys(errors).length === 0) {
+      console.log("No hay errores");
+      const formData = new FormData();
+      formData.append("rol_esfot", form.rol_esfot);
+      formData.append("nombre", form.nombre);
+      formData.append("descripcion", form.descripcion);
+      formData.append("categoria", form.categoria);
+      formData.append("direccion", form.direccion);
+      formData.append("cobertura", form.cobertura);
+      formData.append("pagina_web", form.pagina_web);
+      formData.append("telefono", form.telefono);
+      formData.append("whatsapp", form.whatsapp);
+      formData.append("facebook", form.facebook);
+      formData.append("instagram", form.instagram);
+      formData.append("descuento", form.descuento);
+      formData.append("image", image);
 
-    await axios
-      .post(
-        `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/create`,
-        { ...form },
+      await axios
+        .post(
+          `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/create`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((response) => {
+          console.log("sss", form);
+          console.log("sss", data);
+          const res = response;
+
+          //console.log("hey",response.data.data.emprendimiento);
+          alert({
+            title: "Emprende",
+            text: "El emprendimiento se ha creado correctamente",
+            icon: "success",
+            button: false,
+          });
+        })
+        .catch((error) => {
+          console.log("uno",form);
+          console.log("dod",error);
+          console.log("ftr",error.response.status);
+          if (error.response.status === 422) {
+            alert({
+              title: "Emprende",
+              text: "No se puede enviar un formulario vacio.",
+              icon: "error",
+              button: false,
+            });
+          }
+        });
+        
+    
+    }else {
+      alert({
+        title: "Emprende",
+        text: "Por favor, rellene todos los campos",
+        icon: "error",
+        button: false,
+      });
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const response = await axios.get(
+        `https://backend-emprende.herokuapp.com/api/v1/emprendimiento`,
         { headers: { accept: "application/json", authorization: token } }
-      )
-      .then((response) => {
-        const res = response.data;
-        console.log(res);
-        toggle();
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log(error.response);
-      });
+      );
+
+      setData(response.data.data.emprendimientos);
+      //console.log("hey",response.data.data)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // const handleUpload = (e) => {
+  //   e.preventDefault();
+
+  //   const formData = new FormData();
+  //   formData.append("image", image);
+
+  //   axios
+  //     .post(
+  //       `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${data.id}/logo`,
+  //       formData,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     )
+  //     .then((response) => {
+  //       const res = response.data;
+  //       console.log(res);
+  //       toggle();
+  //     })
+
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleBlur = (e) => {
+    handleChange(e);
+    setErrors(validationsForm(form));
   };
 
-  const handleUpload = (e) => {
-    e.preventDefault();
+  const validationsForm = (form) => {
+    let errors = {};
 
-    const formData = new FormData();
-    formData.append("image", image);
+    let regexNombre = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; // Letras y espacios, pueden llevar acentos.
+    let regexTelefono = /^\d{7,14}$/; // 7 a 14 numeros.
+    let regexWeb = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; ///^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+    let regexDescuento = /^[0-9]{1,2}$/;
+    let regexRol = /^[a-zA-ZÀ-ÿ\s]{1,18}$/;
+    let regexCobertura = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+    let regexDescripcion = /^[a-zA-ZÀ-ÿ\s]{3,80}$/; // Letras y espacios, pueden llevar acentos.
+    let regexDireccion = /^[a-zA-ZÀ-ÿ\s]{3,40}$/; // Letras y espacios, pueden llevar acentos.
+    let regexCategoria = /^[a-zA-ZÀ-ÿ\s]{3,40}$/; // Letras y espacios, pueden llevar acentos.
+    // Letras y espacios, pueden llevar acentos.
+    let regexWhatsapp = /^\d{7,14}$/; // 7 a 14 numeros.
+    let regexFacebook =
+      /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+    let regexInstagram = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; ///^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+    let regexFoto = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
 
-    axios
-      .post(
-        `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${props.id}/logo`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
-      .then((response) => {
-        const res = response.data;
-        console.log(res);
-        toggle();
-      })
+    if (!form.nombre) {
+      errors.nombre = "El nombre es obligatorio";
+      console.log("hola");
+    } else if (!regexNombre.test(form.nombre)) {
+      errors.nombre = "El nombre no es valido";
+    }
 
-      .catch((error) => {
-        console.log(error);
-      });
+    if (!form.rol_esfot) {
+      errors.rol_esfot = "El rol es obligatorio";
+      console.log("rol obligatorio");
+    } else if (!regexRol.test(form.rol_esfot)) {
+      errors.rol_esfot = "El rol no es valido";
+    }
+
+    //categoria
+    if (!form.categoria) {
+      errors.categoria = "La categoria es obligatoria";
+    } else if (!regexCategoria.test(form.categoria)) {
+      errors.categoria = "La categoria no es valida";
+    }
+    //web
+
+    if (!form.pagina_web) {
+      errors.pagina_web = "La pagina web es obligatoria";
+    } else if (!regexWeb.test(form.pagina_web)) {
+      errors.pagina_web = "La pagina web no es valida";
+    }
+
+    // facebook
+    if (!form.facebook) {
+      errors.facebook = "El facebook es obligatorio";
+      console.log("facebook obligatorio");
+    } else if (!regexFacebook.test(form.facebook)) {
+      errors.facebook = "El facebook no es valido";
+    }
+
+    //Nombre
+
+    // Dirección
+
+    if (!form.direccion) {
+      errors.direccion = "La direccion es obligatoria";
+    } else if (!regexDireccion.test(form.direccion)) {
+      errors.direccion = "La direccion no es valida";
+    }
+    //telefono
+
+    if (!form.telefono) {
+      errors.telefono = "El telefono es obligatorio";
+    } else if (!regexTelefono.test(form.telefono)) {
+      errors.telefono = "El telefono no es valido";
+    }
+
+    //instagram
+    if (!form.instagram) {
+      errors.instagram = "El instagram es obligatorio";
+    } else if (!regexInstagram.test(form.instagram)) {
+      errors.instagram = "El instagram no es valido";
+    }
+    //descripcion
+
+    if (!form.descripcion) {
+      errors.descripcion = "La descripcion es obligatoria";
+    } else if (!regexDescripcion.test(form.descripcion)) {
+      errors.descripcion = "La descripcion no es valida";
+    }
+
+    //Cobertura
+
+    if (!form.cobertura) {
+      errors.cobertura = "La cobertura es obligatoria";
+    } else if (!regexCobertura.test(form.cobertura)) {
+      errors.cobertura = "La cobertura no es valida";
+    }
+
+    //Whatsapp
+
+    if (!form.whatsapp) {
+      errors.whatsapp = "El whatsapp es obligatorio";
+    } else if (!regexWhatsapp.test(form.whatsapp)) {
+      errors.whatsapp = "El whatsapp no es valido";
+    } else if (form.whatsapp.length > 10) {
+      errors.whatsapp = "El whatsapp no puede tener mas de 10 caracteres";
+    } else if (form.whatsapp.length < 10) {
+      errors.whatsapp = "El whatsapp no puede tener menos de 10 caracteres";
+    }
+
+    //descuento
+
+    if (!form.descuento) {
+      errors.descuento = "El descuento es obligatorio";
+    } else if (!regexDescuento.test(form.descuento)) {
+      errors.descuento = "El descuento no es valido";
+    }
+
+    //imagen
+
+    if (!image) {
+      errors.image = "La imagen es obligatoria";
+    } else if (!regexFoto.test(image.name)) {
+      console.log(image);
+      errors.image = "La imagen no es valida";
+    }
+
+    return errors;
   };
+
+
+ 
+
 
   return (
     <div>
@@ -120,7 +322,12 @@ const ModalNewEmp = (props) => {
         <ModalHeader toggle={toggle}>Crear Emprendimiento</ModalHeader>
         <ModalBody className="show-grid">
           <Container>
-            <Form onSubmit={handleSubmit}>
+            <Form
+              onSubmit={handleSubmit}
+              component="form"
+              noValidate
+              className="formControl"
+            >
               <Row>
                 <Col xs={6} md={4}>
                   <FormGroup>
@@ -130,6 +337,7 @@ const ModalNewEmp = (props) => {
 
                     <NativeSelect
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       inputProps={{
                         name: "rol_esfot",
                         id: "rol_esfot",
@@ -144,7 +352,9 @@ const ModalNewEmp = (props) => {
                       <option value={"Otro"}>Otro</option>
                     </NativeSelect>
                   </FormGroup>
+                  <p className="error">{errors.rol_esfot}</p>
                 </Col>
+
                 <Col xs={6} md={4}>
                   <FormGroup>
                     <Label for="nombre">Nombre</Label>
@@ -153,11 +363,14 @@ const ModalNewEmp = (props) => {
                       name="nombre"
                       id="nombre"
                       placeholder="Nombre"
-                      value={form.nombre ?? ""}
+                      value={form.nombre}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </FormGroup>
+                  <p className="error">{errors.nombre}</p>
                 </Col>
+
                 <Col xs={6} md={4}>
                   <FormGroup>
                     <Label for="descripcion">Descripcion</Label>
@@ -168,14 +381,17 @@ const ModalNewEmp = (props) => {
                       placeholder="Descripcion"
                       value={form.descripcion}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </FormGroup>
+                  <p className="error">{errors.descripcion}</p>
                 </Col>
                 <Col xs={6} md={4}>
                   <FormGroup>
                     <InputLabel id="categoria">Categoria</InputLabel>
                     <NativeSelect
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       inputProps={{
                         name: "categoria",
                         id: "categoria",
@@ -190,6 +406,7 @@ const ModalNewEmp = (props) => {
                       <option value={"Otro"}>Otro</option>
                     </NativeSelect>
                   </FormGroup>
+                  <p className="error">{errors.categoria}</p>
                 </Col>
 
                 <Col xs={6} md={4}>
@@ -202,14 +419,17 @@ const ModalNewEmp = (props) => {
                       placeholder="Direccion"
                       value={form.direccion === null ? "" : form.direccion}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </FormGroup>
+                  <p className="error">{errors.direccion}</p>
                 </Col>
                 <Col xs={6} md={4}>
                   <FormGroup>
                     <InputLabel id="cobertura">Cobertura </InputLabel>
                     <NativeSelect
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       inputProps={{
                         name: "cobertura",
                         id: "cobertura",
@@ -227,6 +447,7 @@ const ModalNewEmp = (props) => {
                       <option value={"Otro"}>Otro</option>
                     </NativeSelect>
                   </FormGroup>
+                  <p className="error">{errors.cobertura}</p>
                 </Col>
 
                 <Col xs={6} md={4}>
@@ -239,8 +460,10 @@ const ModalNewEmp = (props) => {
                       placeholder="Pagina Web"
                       value={form.pagina_web === null ? "" : form.pagina_web}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </FormGroup>
+                  <p className="error">{errors.pagina_web}</p>
                 </Col>
                 <Col xs={6} md={4}>
                   <FormGroup>
@@ -252,8 +475,10 @@ const ModalNewEmp = (props) => {
                       placeholder="Telefono"
                       value={form.telefono === null ? "" : form.telefono}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </FormGroup>
+                  <p className="error">{errors.telefono}</p>
                 </Col>
                 <Col xs={6} md={4}>
                   <FormGroup>
@@ -265,8 +490,10 @@ const ModalNewEmp = (props) => {
                       placeholder="Whatsapp"
                       value={form.whatsapp === null ? "" : form.whatsapp}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </FormGroup>
+                  <p className="error">{errors.whatsapp}</p>
                 </Col>
                 <Col xs={6} md={4}>
                   <FormGroup>
@@ -278,8 +505,10 @@ const ModalNewEmp = (props) => {
                       placeholder="Facebook"
                       value={form.facebook === null ? "" : form.facebook}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </FormGroup>
+                  <p className="error">{errors.facebook}</p>
                 </Col>
                 <Col xs={6} md={4}>
                   <FormGroup>
@@ -291,8 +520,10 @@ const ModalNewEmp = (props) => {
                       placeholder="Instagram"
                       value={form.instagram === null ? "" : form.instagram}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </FormGroup>
+                  <p className="error">{errors.instagram}</p>
                 </Col>
                 <Col xs={6} md={4}>
                   <FormGroup>
@@ -304,26 +535,23 @@ const ModalNewEmp = (props) => {
                       placeholder="Descuento"
                       value={form.descuento === null ? "" : form.descuento}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </FormGroup>
+                  <p className="error">{errors.descuento}</p>
+
+                  <FormGroup>
+                    <Input
+                      type="file"
+                      name="image"
+                      id="image"
+                      placeholder="Imagen"
+                      onBlur={handleBlur}
+                      onChange={(e) => setImage(e.target.files[0])}
+                    />
+                  </FormGroup>
+                  <p className="error">{errors.image}</p>
                 </Col>
-                <Row>
-                  <Label for="descuento">Actualizar imagen</Label>
-                  <Col xs={12} md={8}>
-                    <FormGroup>
-                      <Input
-                        type="file"
-                        name="image"
-                        id="image"
-                        placeholder="Imagen"
-                        onChange={(e) => setImage(e.target.files[0])}
-                      />
-                      <Button color="primary" onClick={handleUpload}>
-                        Actualizar
-                      </Button>
-                    </FormGroup>
-                  </Col>
-                </Row>
               </Row>
 
               <Button color="primary" onClick={handleSubmit}>

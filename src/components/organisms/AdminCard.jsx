@@ -16,6 +16,7 @@ import ModalForm from './ModalSu'
 import ModalForm2 from './ModalNewSu';
 
 import './styles.css'
+import alert from 'sweetalert'
 
 
 
@@ -38,8 +39,12 @@ const AdminCard = () => {
         { headers: { 'accept': 'application/json', 'authorization': token } }
       );
 
+     ///revisar  updateState(response.data.data.users)
+
+
       setAdmin(response.data.data.users)
 
+
     } catch (error) {
       console.log(error);
     }
@@ -69,19 +74,120 @@ const AdminCard = () => {
 
 
 
-  const deleteSuAdmin = async (id) => {
-    try {
-      const response = await axios.get(
-        `https://backend-emprende.herokuapp.com/api/v1/superadmin/${id}/destroy`,
-        { headers: { 'accept': 'application/json', 'authorization': token } }
-      );
+  const deleteSuAdmin = async (id, state) => {
+  
 
-      getAdmin();
-    } catch (error) {
-      console.log(error);
-    }
+    if (state === 1 ) {
+
+    alert ({
+      title: "Emprende, mensaje del servidor",
+      text: "¿Está seguro que desea desactivar este usuario?",
+      icon: "warning",
+      buttons: ["Cancelar", "Aceptar"],
+
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        try {
+          const response = await axios.get(
+            `https://backend-emprende.herokuapp.com/api/v1/superadmin/${id}/destroy`,
+            { headers: { 'accept': 'application/json', 'authorization': token } }
+          ).then(response => {
+            const message = response.data.message;
+            console.log("sssss", message);
+    
+           if (response.data.message === 'Usuario desactivado correctamente'  ) {
+            alert({
+              title: "Emprende, mensaje del servidor",
+              text: "El usuario ha sido desactivado correctamente",
+              icon: "success",
+              button: "Aceptar",
+            });
+          } else {
+            alert({
+              title: "Emprende, mensaje del servidor",
+              text: "El usuario ha sido activado correctamente",
+              icon: "info",
+              button: "Aceptar",
+            });
+    
+          }
+    
+          });
+    
+    
+    
+       
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        alert({
+          title: "Emprende, mensaje del servidor",
+          text: "El usuario no ha sido desactivado",
+          icon: "info",
+          button: "Aceptar",
+        });
+      }
+    });
+  } else {
+    alert ({
+      title: "Emprende, mensaje del servidor",
+      text: "¿Está seguro que desea activar este usuario?",
+      icon: "warning",
+      buttons: ["Cancelar", "Aceptar"],
+
+    }).then(async (willDelete) => {
+      if (willDelete) {
+        try {
+          const response = await axios.get(
+            `https://backend-emprende.herokuapp.com/api/v1/superadmin/${id}/destroy`,
+            { headers: { 'accept': 'application/json', 'authorization': token } }
+          ).then(response => {
+            const message = response.data.message;
+            console.log("sssss", message);
+    
+           if (response.data.message === 'Usuario desactivado correctamente'  ) {
+            alert({
+              title: "Emprende, mensaje del servidor",
+              text: "El usuario ha sido desactivado correctamente",
+              icon: "success",
+              button: "Aceptar",
+            });
+          } else {
+            alert({
+              title: "Emprende, mensaje del servidor",
+              text: "El usuario ha sido activado correctamente",
+              icon: "info",
+              button: "Aceptar",
+            });
+    
+          }
+    
+          });
+    
+    
+    
+        
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        alert({
+          title: "Emprende, mensaje del servidor",
+          text: "El usuario no ha sido activado",
+          icon: "info",
+          button: false,
+          timer: 2000,
+        });
+      }
+    });
 
   }
+
+  }
+
+    
+
 
   const updateState = (item) => {
     const itemIndex = admins.findIndex(data => data.id === item.id)
@@ -100,6 +206,8 @@ const AdminCard = () => {
 
 
   useEffect(() => {
+
+   
 
     getAdmin();
 
@@ -159,7 +267,7 @@ const AdminCard = () => {
                   <Button
                     variant="primary"
                     className="text-center"
-                    onClick={() => deleteSuAdmin(admin.id)}
+                    onClick={() => deleteSuAdmin(admin.id, admin.state)}
                   > {admin.state === 1 ? 'Desactivar' : 'Activar'}</Button>
                 )}
                 {
@@ -181,7 +289,7 @@ const AdminCard = () => {
 
                 }
 
-                <ModalForm buttonLabel="Editar" item={admin} updateState={updateState} admins={admins} />
+                <ModalForm buttonLabel="Editar" item={admin}  admins={admins} updateState={updateState} />
 
 
 

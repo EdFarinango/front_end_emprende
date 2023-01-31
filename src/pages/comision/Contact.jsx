@@ -66,6 +66,7 @@ export default function Contact(props) {
         <div className="avatar">
           <img src={props.img} alt={props.name} />
         </div>
+        <div className="details">{props.name}</div>
         <div className="details">{props.descripcion}</div>
         <div className="social">
           <div className="details">{props.email}</div>

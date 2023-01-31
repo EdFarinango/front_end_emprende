@@ -174,3 +174,8 @@ body {
     font-size: 16px;
     cursor: pointer;
 }
+
+.error {
+    color: #CF3A2B;
+    font-size: 10px;
+}

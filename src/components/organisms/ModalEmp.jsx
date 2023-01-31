@@ -10,60 +10,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { NativeSelect } from "@mui/material";
 import './styles.css';
-import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-const schema = yup.object().shape({
-    rol: yup
-        .string()
-        .required("Ingrese el rol.")
-        //.max(255, "El rol debe tener máximo 20 caracteres.")
-        .matches(
-            /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/,
-            "El rol solo debe contener letras"
-        ),
-    nombre: yup
 
-        .string()
-        .required("Ingrese el nombre.")
-        .max(255, "El nombre debe tener máximo 255 caracteres.")
-        .matches(
-            /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/,
-            "El nombre solo debe contener letras"
-        ),
-    descripcion: yup
-        .string()
-        .required("Ingrese la descripción.")
-        .max(255, "La descripción debe tener máximo 255 caracteres.")
-        .matches(
-            /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/,
-            "La descripción solo debe contener letras"
-        ),
-    categoria: yup
-        .string()
-        .required("Ingrese la categoria.")
-        .max(255, "La categoria debe tener máximo 255 caracteres.")
-        .matches(
-            /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/,
-            "La categoria solo debe contener letras"
-        ),
-    direccion: yup
-        .string()
-        .required("Ingrese la dirección.")
-        .max(255, "La dirección debe tener máximo 255 caracteres.")
-        .matches(
-            /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/,
-            "La dirección solo debe contener letras"
-        ),
-    telefono: yup
-        .string()
-        .required("Ingrese el teléfono.")
-        .max(255, "El teléfono debe tener máximo 255 caracteres.")
-        .matches(
-            /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/,
-            "El teléfono solo debe contener letras"
-        ),
-});
 
 const ModalEmp = ({ emprendimientos }) => {
 
@@ -157,12 +106,7 @@ const ModalEmp = ({ emprendimientos }) => {
 
     }
 
-    const {
-        control,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({ resolver: yupResolver(schema) });
-
+   
 
 
 
@@ -280,8 +224,7 @@ const ModalEmp = ({ emprendimientos }) => {
                                             placeholder="Direccion"
                                             value={form.direccion === null ? "" : form.direccion}
                                             onChange={handleChange}
-                                            control={control}
-                                            error={Boolean(errors.direccion)}
+                                            
                                         />
                                     </FormGroup>
                                 </Col>
@@ -421,7 +364,7 @@ const ModalEmp = ({ emprendimientos }) => {
                             </Row>
 
 
-                            <Button color="primary" onClick={handleSubmit}>Guardar</Button>
+                            <Button color="primary" onClick={onSubmit}>Guardar</Button>
 
 
 

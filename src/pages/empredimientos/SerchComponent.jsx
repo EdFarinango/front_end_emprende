@@ -23,7 +23,7 @@ const SearchComponent = () => {
         try {
             const response = await axios.get(
                 `https://backend-emprende.herokuapp.com/api/v1/emprendimiento`,
-                { headers: { 'accept': 'application/json', 'authorization': token } }
+                { headers: { accept: 'application/json', 'authorization': token } }
             );
 
             setData(response.data.data.emprendimientos)
@@ -37,10 +37,10 @@ const SearchComponent = () => {
         try {
             const response = await axios.get(
                 `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${id}/destroy`,
-                { headers: { 'accept': 'application/json', 'authorization': token } }
+                { headers: { accept: 'application/json', 'authorization': token } }
 
             );
-            console.log(response.data)
+            //console.log(response.data)
 
 
 

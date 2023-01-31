@@ -1,222 +1,106 @@
+import React, { useContext } from "react";
+import { AuthContext } from "../../contexts";
+import "bootstrap/dist/css/bootstrap.min.css";
 
+import { useState } from "react";
 
-
-import React, { useContext } from 'react';
-import { AuthContext } from '../../contexts';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import axios from 'axios';
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-import ModalEmp from '../../components/organisms/ModalEmp';
-import ModalNewEmp from '../../components/organisms/ModalNewEmp';
+import ModalNewEmp from "../../components/organisms/ModalNewEmp";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import Card from "./Card";
-import {
 
-  Divider,
-  TableContainer,
-  Paper,
-  Table,
-  TableRow,
-  TableHead,
-  TableCell,
-  TableBody
-} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Switch, Grid } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
-import { Link } from 'react-router-dom';
-import Footer from '../../components/footer';
-import SearchComponent from './SerchComponent';
-import NavBar from '../../components/NavBar/NavBar';
+
+import Footer from "../../components/footer";
+import SearchComponent from "./SerchComponent";
 
 const useStyles = makeStyles({
   gridContainer: {
     paddingLeft: "20px",
     paddingRight: "20px",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   tableContainer: {
-    marginTop: "20px"
+    marginTop: "20px",
   },
   table: {
-    minWidth: 650
-  }
+    minWidth: 650,
+  },
 });
 
 export const Emprendimientos = ({ emprendimientos }) => {
   const { user } = useContext(AuthContext);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
   const classes = useStyles();
   const darkTheme = createMuiTheme({
     palette: {
-      type: "dark"
+      type: "dark",
     },
     color: {
-      primary: blue
-    }
+      primary: blue,
+    },
   });
 
   const lightTheme = createMuiTheme({
     palette: {
-      type: "light"
+      type: "light",
     },
     color: {
-      primary: blue
-    }
+      primary: blue,
+    },
   });
 
   const changeTheme = () => {
     setDarkMode(!darkMode);
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
   const updateState = (item) => {
-    const itemIndex = emprendimientos.findIndex(data => data.id === item.id)
+    const itemIndex = emprendimientos.findIndex((data) => data.id === item.id);
     const newArray = [
       // destructure all items from beginning to the indexed item
-      ... data.slice(0, itemIndex),
+      ...data.slice(0, itemIndex),
       // add the updated item to the array
       item,
       // add the rest of the items to the array from the index after the replaced item
-      ... data.slice(itemIndex + 1)
-    ]
-    setData(newArray)
-  }
-
-
-
+      ...data.slice(itemIndex + 1),
+    ];
+    setData(newArray);
+  };
 
   return (
-
-
     <>
-
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-12">
-            <div className="card">
-              <div className="card-body">
-                <h4 className="card-title">Catalogo de Emprendimientos</h4>
-                <div className="table-responsive">
-                  <div className="container-fluid">
-                  <ModalNewEmp item={data} updateState={updateState} data={data}  />  
-                    <h2 className='text-center'>Buscador</h2>
-                    <SearchComponent />
-                  </div>
-
-
-                </div>
+      <div
+        className="h-screen content-center items-center"
+        style={{ maxWidth: 1400, marginTop: 15 }}
+      >
+        <div className="w3-card w3-round w3-white w3-padding-32 w3-center">
+          <p>
+            <h4 className="card-title">Catalogo de Emprendimientos</h4>
+            <div className="table-responsive">
+              <div className="container-fluid">
+                <ModalNewEmp
+                  item={data}
+                  updateState={updateState}
+                  data={data}
+                />
+                <h2 className="text-center">Buscador</h2>
+                <SearchComponent  item={data}
+                  updateState={updateState}
+                  data={data} />
               </div>
             </div>
-          </div>
+          </p>
         </div>
-
-      </div>
-
-
-
-
-
-      {/* 
-
-
-      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-
-        <Switch checked={darkMode} onChange={changeTheme} />
-        <Grid container spacing={1} className={classes.gridContainer}>
-          <Grid className={classes.gridCardItem} item xs={12} md={4} sm={6}>
-            <Card />
-          </Grid>
-
-
-
-        </Grid>
-        <Divider />
-        <TableContainer className={classes.tableContainer} component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Id</TableCell>
-                <TableCell align="right">Rol</TableCell>
-                <TableCell align="right">Nombre</TableCell>
-                <TableCell align="right">Descripción</TableCell>
-                <TableCell align="right">Categoria</TableCell>
-                <TableCell align="right">Dirección</TableCell>
-
-
-                <TableCell align="right">Acciones</TableCell>
-
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data?.map((emprendimientos) => (
-
-
-
-                <TableRow key={emprendimientos}>
-                  <TableCell component="th" scope="row">
-                    {emprendimientos.id}
-                  </TableCell>
-
-                  <TableCell align="right">{emprendimientos.rol_esfot}</TableCell>
-                  <TableCell align="right">{emprendimientos.nombre}</TableCell>
-                  <TableCell align="right">{emprendimientos.descripcion}</TableCell>
-                  <TableCell align="right">{emprendimientos.categoria}</TableCell>
-                  <TableCell align="right">{emprendimientos.direccion}</TableCell>
-
-
-
-                  <TableCell align="right">  {emprendimientos.estado === 1 ? (
-                    <button className="btn btn-info" onClick={() => deleteEmprendimiento(emprendimientos.id)}>Desactivar</button>
-                  ) : (
-                    <button className="btn btn-info" onClick={() => deleteEmprendimiento(emprendimientos.id)}>Activar</button>
-                  )}
-
-                    <ModalEmp emprendimientos={emprendimientos} updateState={updateState} data={data} />
-                  </TableCell>
-
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </ThemeProvider> */}
-      <footer className="w3-container w3-theme-d3 w3-padding-16">
+        <footer className="w3-container w3-theme-d3 w3-padding-16">
         <Footer />
       </footer>
+      </div>
 
-
+     
     </>
-
-
-
-
-
-
-
   );
-}
+};
 export default Emprendimientos;

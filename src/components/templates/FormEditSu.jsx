@@ -3,8 +3,8 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts";
-
-
+import FormInput from "./Inputs";
+import alert from "sweetalert";
 
 
 
@@ -19,6 +19,7 @@ const EditForm = (props) => {
   const [image, setImage] = useState(null);
   const { user } = useContext(AuthContext);
 
+
   
 
 
@@ -31,8 +32,8 @@ const EditForm = (props) => {
       first_name: props.item?.first_name ?? "",
       last_name: props.item?.last_name ?? "",
       email: props.item?.email ?? "",
-      personal_phone: props.item?.personal_phone ?? "",
-      linkedin : props.item?.linkedin ?? "",
+      personal_phone: props.item?.Teléfono ?? "",
+      linkedin : props.item?.LinkedIn ?? "",
       state: props.item?.state ?? "",
    
     
@@ -41,15 +42,11 @@ const EditForm = (props) => {
     }
   );
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  }
+ 
 
 
   const FormEdit = async (e) => {
+
     e.preventDefault();
 
     if (Object.values(form).includes("")) {
@@ -63,20 +60,28 @@ const EditForm = (props) => {
 
     try {
 
-      if (props.item?.id) {
         await axios.post(
           `https://backend-emprende.herokuapp.com/api/v1/superadmin/${props.item.id}/update`,
           { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
+        ).then(response => {
+         alert ({
+          title: "Usuario actualizado!",
+          icon: "success",
+          timer: 2000,
+          button: false,
+
+        })
+        })
+        .catch(error => {
+          console.log(error);
+        }
         );
 
+    
 
 
-      } else {
-        await axios.post(
-          `https://backend-emprende.herokuapp.com/api/v1/superadmin/create`,
-          { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
-        );
-      }
+
+     
 
 
     } catch (error) {
@@ -98,21 +103,127 @@ const EditForm = (props) => {
     }
 
     ).then(response => {
-        const res = response.data;
-        console.log(res);
+    alert({
+        title: "Foto de perfil actualizada!",
+        icon: "success",
+        timer: 2000,
+        button: false,
+    })
+    props.toggle();
+    props.updateState();
+       
   
 
     })
 
         .catch(error => {
-            console.log(error);
+            //console.log(error);
         });
+}
+
+
+const inputs = [
+  {
+    id: 1,
+    name: "first_name",
+    type: "text",
+    placeholder: "Ingrese el nombre",
+    errorMessage: "Debe ingresar un nombre válido!",
+    label: "Username",
+    pattern: "^[A-Za-zÀ-ÿ]{3,16}$",
+    required: true,
+  
+  },
+  {
+    id: 2,
+    name: "last_name",
+    type: "text",
+    placeholder: "Ingrese el apellido",
+    errorMessage: "Debe ingresar un apellido válido!",
+    label: "Apellido",
+    pattern: "^[A-Za-zÀ-ÿ]{3,16}$",
+    required: true,
+
+  },
+  {
+    id: 3,
+    name: "email",
+    type: "email",
+    placeholder: "Email",
+    errorMessage: "Email no válido!",
+    label: "Email",
+    pattern: "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$",
+    required: true,
+   
+  },
+
+  
+  {
+    id: 4,
+    name: "personal_phone",
+    type: "text",
+    placeholder: "Teléfono",
+    errorMessage: "Ingreser un teléfono válido de hasta 10 dígitos!",
+    label: "Teléfono personal",
+    pattern: "^[0-9]{9,10}$",
+
+    required: true,
+  },
+
+  {
+    id: 5,
+    name: "linkedin",
+    type: "text",
+    placeholder: "Linkedin",
+    errorMessage: "",
+    label: "Linkedin",
+    pattern: null,
+
+    required: true,
+  }
+ 
+];
+
+const inputImg = [
+  {
+    id: 1,
+    name: "image",
+    type: "file",
+    placeholder: "Imagen",
+    errorMessage: "Debe ingresar una imagen válida!",
+    label: "Imagen",
+    pattern: "^[jpe?g|png|gif|bmp]{3,16}$",
+
+  }
+]
+
+
+const getAdmin = async () => {
+  try {
+    const response = await axios.get(
+      `https://backend-emprende.herokuapp.com/api/v1/superadmin`,
+      { headers: { 'accept': 'application/json', 'authorization': token } }
+    );
+
+    setAdmin(response.data.data.users)
+  
+
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 
 
 
 
+const onChange = (e) => {
+  setForm({
+    ...form,
+    [e.target.name]: e.target.value
+  });
+
+};
 
 
 
@@ -125,117 +236,44 @@ const EditForm = (props) => {
 
 
 
-
-  // useEffect(() => {
-  //   if (props.item) {
-  //     const { id, first_name, last_name, email, personal_phone, linkedin } = props.item;
-  //     setForm({ id, first_name, last_name, email, personal_phone, linkedin});
-  //   }
-  // }, [props.item]);
 
 
 
 
   return (
-    <Form onSubmit={FormEdit} >
+    <Form onSubmit={FormEdit} className="form-control">
+        <FormGroup>
+          {inputs.map((input) => (
+            <FormInput
+              key={input.id}
+              {...input}
+              value={form[input.name]}
+              onChange={onChange}
+            />
+          ))}
+        </FormGroup>
 
-      <FormGroup>
-        <Label for="first_name">First Name</Label>
-        <Input
-          autoComplete="false"
-          type="text"
-          name="first_name"
-          id="first_name"
-          onChange={handleChange}
-          value={form.first_name}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="last_name">Last Name</Label>
-        <Input
-        autoComplete="false"
-          type="text"
-          name="last_name"
-          id="last_name"
-          onChange={handleChange}
-          value={form.last_name}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="email">Email</Label>
-        <Input
-        autoComplete="false"
-          type="email"
-          name="email"
-          id="email"
-          onChange={handleChange}
-          value={form.email}
-        />
-       
+        <Button color="info" type="submit" item={admin}  admins={admin} updateState = {props.id}  >
+         
+          Guardar
+        </Button>
+        { props.item.id === user.id &&
+        <FormGroup>
+          {inputImg.map((inputImg) => (
+            <FormInput
+              key={inputImg.id}
+              {...inputImg}
+              value={form[inputImg.name]}
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+          ))}
+          <Button color="info" onClick={handleUpload} item={admin}  admins={admin}  > Subir imagen </Button>
+        </FormGroup>
 
-      </FormGroup>
-      <FormGroup>
-        <Label for="personal_phone">Personal Phone</Label>
-        <Input
-autoComplete="false"
-          type="text"
-          name="personal_phone"
-          id="personal_phone"
-          onChange={handleChange}
-          value={form.personal_phone}
-        />
-      </FormGroup>
-
-      <FormGroup>
-        <Label for="linkedin">Linkedin</Label>
-        <Input
-autoComplete="false"
-          type="text"
-          name="linkedin"
-          id="linkedin"
-          onChange={handleChange}
-          value={form.linkedin}
-        />
-      </FormGroup>
-      { props.item.id === user.id &&
-
-
-
-<FormGroup>
- 
-
-<Input
-    type="file"
-    name="image"
-    id="image"
-    placeholder="Imagen"
-
-    onChange={(e) => setImage(e.target.files[0])}
-/>
-<Button color="primary" onClick={handleUpload}>Actualizar</Button>
-
-
-
-
-
-
-
-
-
-</FormGroup>
-  
-  }
-     
-
+        
+      }
       
-    
-
-
-
-      <Button color="info" >Submit</Button>
-      {error && <p className="text-danger">Todos los campos de datos son obligatorios</p>}
-
-    </Form>
+      </Form>
   );
 
 }

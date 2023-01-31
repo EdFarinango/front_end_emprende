@@ -1,53 +1,46 @@
+import React, { useContext } from "react";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import axios from "axios";
+import { useState } from "react";
+
+import { useEffect } from "react";
+import "./style.css";
+
+import "./responsive";
+
+import "react-slideshow-image/dist/styles.css";
+import { Slide } from "react-slideshow-image";
+import Footer from "../../components/footer";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import Logo from "../../components/assets/logo.png";
+
+import { useRef} from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 
-
-
-import React, { useContext } from 'react';
-import { AuthContext } from '../../contexts';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import axios from 'axios';
-import { useState } from 'react';
-
-import { useEffect } from 'react';
-import './style.css';
-
-import IMG from '../../components/assets/canoaBar.png';
-
-import './responsive';
-import { Link } from '@material-ui/core';
-import 'react-slideshow-image/dist/styles.css'
-import { Slide } from 'react-slideshow-image';
-import Footer from '../../components/footer';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import Logo from '../../components/assets/logo.png';
-import NavBar from '../../components/NavBar/NavBar';
-
-
-
-
-
-
-
+import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 
 
 export const CatalogoEmp = () => {
-
-
   //setear los hooks useState
 
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
 
   //función para traer los datos de la API
 
-
-
   //función de búsqueda
   const searcher = (e) => {
-    setSearch(e.target.value)
-  }
-  //metodo de filtrado 1 
+    setSearch(e.target.value);
+  };
+  //metodo de filtrado 1
   /*  let results = []
   if(!search)
   {
@@ -58,57 +51,46 @@ export const CatalogoEmp = () => {
    )
   } */
 
-  //metodo de filtrado 2   
+  //metodo de filtrado 2
 
-
-
-
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
 
-
-
-
-
   const getData = async () => {
-
     try {
       const response = await axios.get(
         `https://backend-emprende.herokuapp.com/api/v1/emprendimiento`,
-        { headers: { 'accept': 'application/json', 'authorization': token } }
+        { headers: { accept: "application/json", authorization: token } }
       );
       console.log(response.data.data.emprendimientos);
-      setData(response.data.data.emprendimientos)
-
+      setData(response.data.data.emprendimientos);
     } catch (error) {
       console.log(error);
     }
-  }
-  const dato = !search ? data : data.filter((dato) => dato.nombre.toLowerCase().includes(search.toLocaleLowerCase()))
+  };
+  const dato = !search
+    ? data
+    : data.filter((dato) =>
+        dato.nombre.toLowerCase().includes(search.toLocaleLowerCase())
+      );
 
-
-
-
-
-
-
+      const images = [
+        "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+        "https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80",
+        "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+    ];
 
 
   useEffect(() => {
     getData();
-  
+    
   }, []);
 
   return (
     <>
-
+    
       <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
         <div className="w3-row">
-
-
-
-
-
           {/* <!-- Middle Column --> */}
           <div className="w3-col">
             <div className="w3-row-padding">
@@ -116,103 +98,118 @@ export const CatalogoEmp = () => {
                 <div className="w3-card w3-round w3-white">
                   <div className="w3-container w3-padding">
                     <h6 className="w3-opacity">Emprendimientos ESFOT</h6>
+                    <Swiper
+        cssMode={true}
+        navigation={true}
+        pagination={true}
+        mousewheel={true}
+        keyboard={true}
+        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+        className="mySwiper"
+      >
+                   
+            {data.map((item) => (
+             
+              <SwiperSlide>
+                <div className="w3-container w3-card w3-white w3-round w3-margin"   style={{  height: "50%",
+                      width: "auto",}}>
+          
+                  <img
 
-                    <div class="input-group rounded">
+                    src={item.image}
+                    alt="fotoEmprendimiento"
 
+                  
+                  />
+                </div>
+              </SwiperSlide>
 
-
-
-
-                    </div>
-                    <Slide autoplay={false}>
-                      {data.map((item) => (
-
-
-                        <div className="each-slide-effect">
-                          <div
-                            style={{
-                              backgroundImage: `url(${item.image})`,
-                            }}
-                          >
-                            <span className="w3-right w3-opacity-2">
-                              {item.nombre}
-                            </span>
-
-
-
-
-
-                          </div>
-
-
-
-
-
-
-                        </div>
-
-                      ))}
-                    </Slide>
-
+            
+            ))}
+              </Swiper>
+            
+   
                   </div>
                 </div>
               </div>
             </div>
 
-            <input value={search} onChange={searcher} type="text" placeholder='Search' className='form-control search' />
-
+            <input
+              value={search}
+              onChange={searcher}
+              type="text"
+              placeholder="Search"
+              className="form-control search"
+            />
 
             {dato.map((item) => (
-              <div >
-
-                <div className="w3-container w3-card w3-white w3-round w3-margin"><br />
-                  <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" className="w3-left w3-circle w3-margin-right" style={{ width: '60px' }} />
+              <div>
+                <div className="w3-container w3-card w3-white w3-round w3-margin">
+                  <br />
+                  <img
+                    src="https://www.w3schools.com/w3images/avatar2.png"
+                    alt="Avatar"
+                    className="w3-left w3-circle w3-margin-right"
+                    style={{ width: "60px" }}
+                  />
                   <span className="w3-right w3-opacity">1 min</span>
-                  <h4>{item.nombre}</h4><br />
+                  <h4>{item.nombre}</h4>
+                  <br />
                   <hr className="w3-clear" />
 
-                  <div className="w3-row-padding" style={{ margin: '0 -16px' }}>
+                  <div className="w3-row-padding" style={{ margin: "0 -16px" }}>
                     <div className="w3-half">
                       <p className="w3-opacity">Descripcion</p>
                       <p>{item.descripcion}</p>
                     </div>
                     <div className="w3-half">
-
-                      <img src={item.image}
-                        style={{ width: '100%', height: '100%' }} alt="Northern Lights" className="w3-margin-bottom" />
-
-
-
-
+                      <img
+                        src={item.image}
+                        style={{ width: "100%", height: "100%" }}
+                        alt="Northern Lights"
+                        className="w3-margin-bottom"
+                      />
                     </div>
                   </div>
-                  <a className="btn text-white btn-floating m-1" style={{ backgroundColor: '#4c4c4c' }} href="https://www.facebook.com/" target="_blank" role="button"><i /><FacebookIcon></FacebookIcon></a>
-                  <a className="btn text-white btn-floating m-1" style={{ backgroundColor: '#4c4c4c' }} href="https://www.instagram.com/" target="_blank" role="button"><i /><FacebookIcon></FacebookIcon></a>
-                  <a className="btn text-white btn-floating m-1" style={{ backgroundColor: '#4c4c4c' }} href="https://twitter.com/" target="_blank" role="button"><i /><FacebookIcon></FacebookIcon></a>
-
-
-
-
-
-
+                  <a
+                    className="btn text-white btn-floating m-1"
+                    style={{ backgroundColor: "#4c4c4c" }}
+                    href="https://www.facebook.com/"
+                    target="_blank"
+                    role="button"
+                  >
+                    <i />
+                    <FacebookIcon></FacebookIcon>
+                  </a>
+                  <a
+                    className="btn text-white btn-floating m-1"
+                    style={{ backgroundColor: "#4c4c4c" }}
+                    href="https://www.instagram.com/"
+                    target="_blank"
+                    role="button"
+                  >
+                    <i />
+                    <FacebookIcon></FacebookIcon>
+                  </a>
+                  <a
+                    className="btn text-white btn-floating m-1"
+                    style={{ backgroundColor: "#4c4c4c" }}
+                    href="https://twitter.com/"
+                    target="_blank"
+                    role="button"
+                  >
+                    <i />
+                    <FacebookIcon></FacebookIcon>
+                  </a>
                 </div>
-
               </div>
-
             ))}
-
-
 
             {/* <!-- End Middle Column --> */}
           </div>
           {/* <!-- Right Column --> */}
           <div className="w3-col">
-
-
-
-            <img src={Logo} alt="Avatar" style={{ width: '100%' }} />
-
-
+            <img src={Logo} alt="Avatar" style={{ width: "100%" }} />
 
             <br />
 
@@ -222,7 +219,9 @@ export const CatalogoEmp = () => {
             </div>
             <br />
             <div className="w3-card w3-round w3-white w3-padding-32 w3-center">
-              <p><i className="fa fa-bug w3-xxlarge" /></p>
+              <p>
+                <i className="fa fa-bug w3-xxlarge" />
+              </p>
             </div>
             {/* <!-- End Right Column --> */}
           </div>
@@ -242,35 +241,8 @@ export const CatalogoEmp = () => {
       <script src="https://www.w3schools.com/lib/w3colorpicker.js" />
       <script src="https://www.w3schools.com/lib/w3cssmenu.js" />
       <script src="https://www.w3schools.com/lib/w3cssfilter.js" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </>
-
-
-
-
-
-
-
-
-
-
-  )
-
-}
+  );
+};
 
 export default CatalogoEmp;
-
