@@ -148,7 +148,7 @@ export const Login = () => {
             if (errors.email) {
                 alert({
                     title: "Error",
-                    text: "El email es requerido, ingrese un correo válido",
+                    text: "La dirección de correo electrónico es obligatoria, ingrese un correo válido",
                
                    iconColor: "blue",
                    icon : "error",
@@ -159,7 +159,7 @@ export const Login = () => {
                 if (errors.password) {
                     alert({
                         title: "Error",
-                        text: "Revise sus credenciales, ingrese una contraseña válida",
+                        text: "Por favor revise sus credenciales, ingrese una contraseña válida",
                         icon: "error",
                         button: false,
                         //timer: "1500",
