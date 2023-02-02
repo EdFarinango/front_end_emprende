@@ -9,7 +9,7 @@ export const DashboardTemplate = () => {
 
   return (
     <>
-      <div className="content flex flex-col flex-1 h-screen overflow-y-hidden">
+      <div>
         <div className="flex flex-col flex-1">
           <div className="container mx-auto px-6 py-8">
             <h3 className="text-gray-700 text-3xl font-medium">
@@ -27,11 +27,12 @@ export const DashboardTemplate = () => {
             </div>
           </div>
         </div>
+        <footer className="w3-container w3-theme-d3 w3-padding-16">
+      <Footer />
+      </footer>
       </div>
 
-      <footer className="w3-container w3-theme-d3 w3-padding-16">
-        <Footer />
-      </footer>
+      
     </>
   );
 };

@@ -9,7 +9,7 @@ const initialState = {
   first_name: "",
   last_name: "",
   email: "",
-  password: "",
+
   personal_phone: "",
   linkedin: "",
   state: "1",
@@ -61,20 +61,9 @@ const EditFormNew = () => {
      
     },
 
+    
     {
       id: 4,
-      name: "password",
-      type: "password",
-      placeholder: "Password",
-      errorMessage:
-        "La contraseña debe tener entre 4 y 12 caracteres, al menos un dígito, una minúscula, una mayúscula y un simbolo",
-      label: "Password",
-      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{4,12}$`,
-      required: true,
-   
-    },
-    {
-      id: 5,
       name: "personal_phone",
       type: "text",
       placeholder: "Teléfono",
@@ -86,7 +75,7 @@ const EditFormNew = () => {
     },
 
     {
-      id: 6,
+      id: 5,
       name: "linkedin",
       type: "text",
       placeholder: "Linkedin",

@@ -229,7 +229,7 @@ const AdminCard = () => {
           {/* Section Heading*/}
           <div className="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style={{ visibility: 'visible', animationDelay: '0.2s', animationName: 'fadeInUp' }}>
             <h3>EnPreNde <span> Team</span></h3>
-            <ModalForm2 buttonLabel="Crear"  />
+            <ModalForm2 buttonLabel="Crear" type = "button"/>
 
             <p>Un equipo respaldado por el conocimiento</p>
             <div className="line" />
