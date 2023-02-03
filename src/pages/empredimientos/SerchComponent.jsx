@@ -60,7 +60,7 @@ const SearchComponent = () => {
     return (
         <div>
 
-            <input value={search} onChange={searcher} type="text" placeholder='Search' className='form-control' />
+            <input value={search} onChange={searcher} type="text" className='search' />
             <table className="table table-striped table-bordered zero-configuration">
                 <thead>
                     <tr>

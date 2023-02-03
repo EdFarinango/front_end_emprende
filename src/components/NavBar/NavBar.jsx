@@ -23,7 +23,7 @@ import axios from 'axios';
 import Logo from '../assets/logo.png';
 
 
-const pages = ['Comisión Emprende', 'Catálogo de Emprendimientos', 'Conferencias y Talleres'];
+
 
 
 function NavBar() {
@@ -116,11 +116,7 @@ function NavBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -210,10 +206,11 @@ function NavBar() {
                   Iniciar Sesión</Button>
                 }
 
+
               </MenuItem>
               <MenuItem>
     
-               {}
+               
                   <Button component={Link} to="/administracion" onClick={handleCloseUserMenu}
                     sx={{ display: 'block' }}>Administración</Button> 
                   

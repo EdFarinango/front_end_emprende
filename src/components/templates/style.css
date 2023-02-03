@@ -60,3 +60,8 @@ input:invalid[focused="true"] {
 input:invalid[focused="true"]~span {
     display: block;
 }
+
+.img-rcovery {
+    width: 100%;
+    margin: auto;
+}

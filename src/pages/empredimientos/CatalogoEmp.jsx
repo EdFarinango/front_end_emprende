@@ -16,7 +16,7 @@ import Footer from "../../components/footer";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import Logo from "../../components/assets/logo.png";
 
-import { useRef} from "react";
+import { useRef } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -25,9 +25,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
-
 
 export const CatalogoEmp = () => {
   //setear los hooks useState
@@ -74,22 +72,22 @@ export const CatalogoEmp = () => {
         dato.nombre.toLowerCase().includes(search.toLocaleLowerCase())
       );
 
-      const images = [
-        "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-        "https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80",
-        "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-    ];
-
+  const images = [
+    "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+    "https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80",
+    "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+  ];
 
   useEffect(() => {
     getData();
-    
   }, []);
-
+  
   return (
     <>
     
+
       <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
+     
         <div className="w3-row">
           {/* <!-- Middle Column --> */}
           <div className="w3-col">
@@ -98,49 +96,75 @@ export const CatalogoEmp = () => {
                 <div className="w3-card w3-round w3-white">
                   <div className="w3-container w3-padding">
                     <h6 className="w3-opacity">Emprendimientos ESFOT</h6>
+                    <input
+              value={search}
+              onChange={searcher}
+            
+           
+              className="search"
+            />
+                    <div className="slide-container w3-card">
                     <Swiper
-        cssMode={true}
-        navigation={true}
-        pagination={true}
-        mousewheel={true}
-        keyboard={true}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-        className="mySwiper"
-      >
-                   
-            {data.map((item) => (
-             
-              <SwiperSlide>
-                <div className="w3-container w3-card w3-white w3-round w3-margin"   style={{  height: "50%",
-                      width: "auto",}}>
-          
-                  <img
+                      cssMode={true}
+                      navigation={true}
+                      pagination={true}
+                      mousewheel={true}
+                      keyboard={true}
+                      modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+                      className="mySwiper"
+                    >
+                      {data.map((item) => (
+                        <SwiperSlide>
+                          <div className="card"  style={{ height: "400px", width: "auto", margin: 5 }}                         
+                            
+                          >
+                            <img
+                              src={item.image}
+                              alt="fotoEmprendimiento"
+                              
+                              object-fit="cover"
+                            />
+                            
+                           <div className="sobreImagen">
+                             {item.nombre}
+                             <br/>
 
-                    src={item.image}
-                    alt="fotoEmprendimiento"
-
-                  
-                  />
-                </div>
-              </SwiperSlide>
-
-            
-            ))}
-              </Swiper>
-            
-   
+                         
+                           
+                           
+                           
+                            {item.cobertura}
+                            <br/>
+                            {item.categoria}
+                            <br/>
+                           {item.descuento} % de descuento
+                           
+                           </div>
+                         
+                           
+                           
+                          </div>
+                          
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <input
-              value={search}
-              onChange={searcher}
-              type="text"
-              placeholder="Search"
-              className="form-control search"
-            />
+          
+ <div className="box">
+  <div className="container-2">
+    <span className="icon"><i className="fa fa-search" /></span>
+    <input type="search"   value={search} id="search" placeholder="Buscar..." />
+  </div>
+</div>
+
+  
+
+
 
             {dato.map((item) => (
               <div>
@@ -152,23 +176,32 @@ export const CatalogoEmp = () => {
                     className="w3-left w3-circle w3-margin-right"
                     style={{ width: "60px" }}
                   />
-                  <span className="w3-right w3-opacity">1 min</span>
+              
                   <h4>{item.nombre}</h4>
                   <br />
                   <hr className="w3-clear" />
 
                   <div className="w3-row-padding" style={{ margin: "0 -16px" }}>
                     <div className="w3-half">
-                      <p className="w3-opacity">Descripcion</p>
+                      <p className="w3-opacity desc">Descripcion</p>
                       <p>{item.descripcion}</p>
+                      <p className="w3-opacity">Contacto</p>
+                      <p>{item.whatsapp}</p>
+                      <p className="w3-opacity">Cobertura</p>
+                      <p>{item.cobertura}</p>
+                      <p className="w3-opacity">Categoria</p>
+                      <p>{item.categoria}</p>
+                      <p className="w3-opacity">Descuento</p>
+                      <p>{item.descuento}</p>
                     </div>
-                    <div className="w3-half">
+                    <div>
                       <img
                         src={item.image}
-                        style={{ width: "100%", height: "100%" }}
+                        style={{ width: "400px", height: "auto", borderRadius: "10px", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)" }}
                         alt="Northern Lights"
                         className="w3-margin-bottom"
                       />
+                      
                     </div>
                   </div>
                   <a
