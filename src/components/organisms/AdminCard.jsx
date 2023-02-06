@@ -88,13 +88,12 @@ const AdminCard = () => {
     }).then(async (willDelete) => {
       if (willDelete) {
         try {
-          const response = await axios.get(
+         const response = await axios.get(
             `https://backend-emprende.herokuapp.com/api/v1/superadmin/${id}/destroy`,
             { headers: { 'accept': 'application/json', 'authorization': token } }
-          ).then(response => {
-            const message = response.data.message;
-            console.log("sssss", message);
-    
+          );
+            
+          await getAdmin();
            if (response.data.message === 'Usuario desactivado correctamente'  ) {
             alert({
               title: "Emprende, mensaje del servidor",
@@ -102,6 +101,7 @@ const AdminCard = () => {
               icon: "success",
               button: "Aceptar",
             });
+            
           } else {
             alert({
               title: "Emprende, mensaje del servidor",
@@ -111,8 +111,10 @@ const AdminCard = () => {
             });
     
           }
-    
-          });
+        
+       
+
+        
     
     
     

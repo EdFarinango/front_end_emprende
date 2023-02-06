@@ -72,11 +72,7 @@ export const CatalogoEmp = () => {
         dato.nombre.toLowerCase().includes(search.toLocaleLowerCase())
       );
 
-  const images = [
-    "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-    "https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80",
-    "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-  ];
+  
 
   useEffect(() => {
     getData();
@@ -85,24 +81,102 @@ export const CatalogoEmp = () => {
   return (
     <>
     
+    <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
+      <div className="w3-col">
+        <div className="w3-row-padding">
+          <div className="w3-col m12">
+            <div className="w3-card w3-round w3-white">
+              <div className="w3-container w3-padding">
+                <h6 className="w3-opacity">Emprendimientos ESFOT</h6>
+                
+                <div className="slide-container w3-card">
+                  <Swiper
+                    cssMode={true}
+                    navigation={true}
+                    pagination={true}
+                    mousewheel={true}
+                    keyboard={true}
+                    modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+                    className="mySwiper"
+                  >
+                    {dato.map((item) => (
+                      <SwiperSlide>
+                        <div
 
-      <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
+                          className="card"
+                          style={{
+                            height: "400px",
+                            width: "auto",
+                            margin: "auto",
+                          }}
+                        >
+                          <img
+                            src={item.image}
+                            className="card-img-top"
+                            alt="..."
+                            style={{ height: "250px" }}
+                          />
+                          <div className="card-body">
+                            <h5 className="card-title">{item.nombre}</h5>
+                            <p className="card-text">{item.descripcion}</p>
+                            
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                 
+
+
+
+
+
+
+                </div>
+                
+
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    {/* catalodo de emprendimientos */}
+    <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
+
+
+
+
+
+                        
+
+                           
+
+
+
+
+
+                       
+
+
      
-        <div className="w3-row">
-          {/* <!-- Middle Column --> */}
+
+    
+
+ 
+     
+        
           <div className="w3-col">
             <div className="w3-row-padding">
               <div className="w3-col m12">
                 <div className="w3-card w3-round w3-white">
-                  <div className="w3-container w3-padding">
+                  {/* <div className="w3-container w3-padding">
                     <h6 className="w3-opacity">Emprendimientos ESFOT</h6>
-                    <input
-              value={search}
-              onChange={searcher}
-            
-           
-              className="search"
-            />
+                    
                     <div className="slide-container w3-card">
                     <Swiper
                       cssMode={true}
@@ -149,99 +223,121 @@ export const CatalogoEmp = () => {
                       ))}
                     </Swiper>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
 
           
- <div className="box">
-  <div className="container-2">
-    <span className="icon"><i className="fa fa-search" /></span>
-    <input type="search"   value={search} id="search" placeholder="Buscar..." />
-  </div>
-</div>
+ 
+
 
   
 
 
-
+        
             {dato.map((item) => (
-              <div>
-                <div className="w3-container w3-card w3-white w3-round w3-margin">
-                  <br />
+              item.estado === 1 ? (
+                <div  >
+                <div className="w3-container w3-card w3-white w3-round w3-margin"style={{ marginBottom : 10 }}><br />
                   <img
-                    src="https://www.w3schools.com/w3images/avatar2.png"
-                    alt="Avatar"
+                    src={item.image}
+                    alt="fotoEmprendimiento"
                     className="w3-left w3-circle w3-margin-right"
                     style={{ width: "60px" }}
                   />
-              
+                  <span className="w3-right w3-opacity">1 min</span>
                   <h4>{item.nombre}</h4>
                   <br />
                   <hr className="w3-clear" />
-
-                  <div className="w3-row-padding" style={{ margin: "0 -16px" }}>
+                  <p>{item.descripcion}</p>
+                  <div className="w3-row-padding" style={{ margin: 0 }}>
                     <div className="w3-half">
-                      <p className="w3-opacity desc">Descripcion</p>
-                      <p>{item.descripcion}</p>
-                      <p className="w3-opacity">Contacto</p>
-                      <p>{item.whatsapp}</p>
-                      <p className="w3-opacity">Cobertura</p>
-                      <p>{item.cobertura}</p>
-                      <p className="w3-opacity">Categoria</p>
-                      <p>{item.categoria}</p>
-                      <p className="w3-opacity">Descuento</p>
-                      <p>{item.descuento}</p>
-                    </div>
-                    <div>
                       <img
                         src={item.image}
-                        style={{ width: "400px", height: "auto", borderRadius: "10px", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)" }}
-                        alt="Northern Lights"
-                        className="w3-margin-bottom"
+                        style={{ width: "100%", height: "100%" }}
+                        alt="fotoEmprendimiento"
                       />
-                      
+                    </div>
+                    <div className="w3-half">
+                      <img
+                        src={item.image}
+                        style={{ width: "100%", height: "100%" }}
+                        alt="fotoEmprendimiento"
+                      />
                     </div>
                   </div>
-                  <a
-                    className="btn text-white btn-floating m-1"
-                    style={{ backgroundColor: "#4c4c4c" }}
-                    href="https://www.facebook.com/"
-                    target="_blank"
-                    role="button"
+                  <button
+                    type="button"
+                    className="w3-button w3-theme-d1 w3-margin-bottom"
                   >
-                    <i />
-                    <FacebookIcon></FacebookIcon>
-                  </a>
-                  <a
-                    className="btn text-white btn-floating m-1"
-                    style={{ backgroundColor: "#4c4c4c" }}
-                    href="https://www.instagram.com/"
-                    target="_blank"
-                    role="button"
+                    <i className="fa fa-thumbs-up" /> Like
+                  </button>
+                  <button
+                    type="button"
+                    className="w3-button w3-theme-d2 w3-margin-bottom"
                   >
-                    <i />
-                    <FacebookIcon></FacebookIcon>
-                  </a>
-                  <a
-                    className="btn text-white btn-floating m-1"
-                    style={{ backgroundColor: "#4c4c4c" }}
-                    href="https://twitter.com/"
-                    target="_blank"
-                    role="button"
-                  >
-                    <i />
-                    <FacebookIcon></FacebookIcon>
-                  </a>
+                    <i className="fa fa-comment" /> Comment
+                  </button>
                 </div>
-              </div>
-            ))}
+                </div>
 
-            {/* <!-- End Middle Column --> */}
+              
+              ) : (
+               
+                dato.length < 0 ? (
+                  <div className="w3-container w3-card w3-white w3-round w3-margin"style={{ marginBottom : 10 }}><br />
+                  <img
+                    src={item.image}
+                    alt="fotoEmprendimiento"
+                    className="w3-left w3-circle w3-margin-right"
+                    style={{ width: "60px" }}
+                  />
+                  </div>
+                ) : (
+                  <div>
+
+
+                  </div>
+                )
+                                
+                              
+                              
+              )
+              
+            ))
+            
+            }
+            {
+              dato.length < 0 ? (
+                <div className="w3-container w3-card w3-white w3-round w3-margin"style={{ marginBottom : 10 }}><br />
+                <img
+                  src={Logo}
+                  alt="fotoEmprendimiento"
+                  className="w3-left w3-circle w3-margin-right"
+                  style={{ width: "60px" }}
+                />
+                </div>
+              ) : (
+                <div>
+                  </div>
+              )
+
+
+            }
+
+
+
+           
+
+
+
+
+
           </div>
-          {/* <!-- Right Column --> */}
-          <div className="w3-col">
+          
+          
+          {/* <div className="w3-col ">
             <img src={Logo} alt="Avatar" style={{ width: "100%" }} />
 
             <br />
@@ -256,14 +352,15 @@ export const CatalogoEmp = () => {
                 <i className="fa fa-bug w3-xxlarge" />
               </p>
             </div>
-            {/* <!-- End Right Column --> */}
-          </div>
-          {/* <!-- End Grid --> */}
-        </div>
-        {/* <!-- End Page Container --> */}
-      </div>
+       
+          </div> */}
+     
+       
+
+       
+   
       <br />
-      {/* <!-- Footer --> */}
+ 
       <footer className="w3-container w3-theme-d3 w3-padding-16">
         <Footer />
       </footer>
@@ -273,7 +370,8 @@ export const CatalogoEmp = () => {
       <script src="https://www.w3schools.com/lib/w3codecolor.js" />
       <script src="https://www.w3schools.com/lib/w3colorpicker.js" />
       <script src="https://www.w3schools.com/lib/w3cssmenu.js" />
-      <script src="https://www.w3schools.com/lib/w3cssfilter.js" />
+      <script src="https://www.w3schools.com/lib/w3cssfilter.js" /> 
+      </div>
     </>
   );
 };

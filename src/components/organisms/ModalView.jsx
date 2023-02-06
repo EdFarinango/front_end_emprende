@@ -33,7 +33,7 @@ const ModalViewEmp = ({ emprendimientos }) => {
       );
 
       setData(response.data.data.emprendimiento);
-      console.log(response.data.data.emprendimiento);
+      //console.log(response.data.data.emprendimiento);
     } catch (error) {
       console.log(error);
     }

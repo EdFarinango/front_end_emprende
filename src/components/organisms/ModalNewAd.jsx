@@ -29,20 +29,7 @@ const ModalForm = (props) => {
     const token = localStorage.getItem('token');
 
    
-    const nweAdmin = async () => {
-        try {
-            const response = await axios.post(
-                `https://backend-emprende.herokuapp.com/api/v1/admin/create`,
-                
-                  
-                    { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
-                );
-         
-            setAdmin(response.data.data.users)
-        } catch (error) {
-            console.log(error);
-        }
-    }
+   
 
 
 

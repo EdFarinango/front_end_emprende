@@ -46,6 +46,9 @@ export const ConfirmPassword = () => {
       settoken(cadenatoken1.split("&")[0]);
       setEmail(window.location.href.split("email=")[1]);
 
+      console.log("token", token);
+      console.log("email", cadenatoken1);
+
 
        
 

@@ -6,7 +6,7 @@ import { useState } from "react";
 
 import ModalNewEmp from "../../components/organisms/ModalNewEmp";
 
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -35,7 +35,7 @@ export const Emprendimientos = ({ emprendimientos }) => {
   const [data, setData] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
   const classes = useStyles();
-  const darkTheme = createMuiTheme({
+  const darkTheme = createTheme({
     palette: {
       type: "dark",
     },
@@ -44,7 +44,7 @@ export const Emprendimientos = ({ emprendimientos }) => {
     },
   });
 
-  const lightTheme = createMuiTheme({
+  const lightTheme = createTheme({
     palette: {
       type: "light",
     },
@@ -86,8 +86,13 @@ export const Emprendimientos = ({ emprendimientos }) => {
                   updateState={updateState}
                   data={data}
                 />
-                <h2 className="text-center">Buscador</h2>
-                <SearchComponent  item={data}
+                {/* Ver notificaciones */}
+             
+
+                
+
+              
+                <SearchComponent item={data}
                   updateState={updateState}
                   data={data} />
               </div>
@@ -95,11 +100,11 @@ export const Emprendimientos = ({ emprendimientos }) => {
           </p>
         </div>
         <footer className="w3-container w3-theme-d3 w3-padding-16">
-        <Footer />
-      </footer>
+          <Footer />
+        </footer>
       </div>
 
-     
+
     </>
   );
 };

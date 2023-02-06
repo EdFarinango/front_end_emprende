@@ -55,6 +55,7 @@ const ModalNewEmp = () => {
     instagram: "",
     descuento: "",
     image: "",
+    segundo_estado: "1",
   });
 
   const handleSubmit = async (e) => {
@@ -76,6 +77,7 @@ const ModalNewEmp = () => {
       formData.append("instagram", form.instagram);
       formData.append("descuento", form.descuento);
       formData.append("image", image);
+      formData.append("segundo_estado", form.segundo_estado);
 
       await axios
         .post(
