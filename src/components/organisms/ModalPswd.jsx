@@ -54,7 +54,7 @@ const ModalPswd = () => {
             buttons: ["Aceptar"],
             timer: 2500,
           }).then(() => {
-            //Logout();
+            Logout();
           });
         });
 
