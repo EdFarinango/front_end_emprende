@@ -249,7 +249,7 @@ export const Login = () => {
               onBlur={handleBlur}
               value={form.email}
             />
-            {errors.email && <p className="error">{errors.email}</p>}
+       
 
             <TextField
               margin="normal"

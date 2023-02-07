@@ -1,0 +1,12 @@
+        /*hoja de estilo para la pagina de video*/
+        
+        .containerVideo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+            width: 100vw;
+            /*background-color: #000;*/
+            padding-top: 5%;
+        }

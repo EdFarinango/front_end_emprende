@@ -1,109 +1,157 @@
-import React from 'react'
-import ReactPlayer from 'react-player/youtube'
-import Card from 'react-bootstrap/Card';
+import React from "react";
 
- 
+import Button from "@mui/material/Button";
 
+import CssBaseline from "@mui/material/CssBaseline";
+import Grid from "@mui/material/Grid";
 
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-
-
-
-import { Row} from 'react-bootstrap';
-
-
-
-
-import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
-
-
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Toolbar from '@mui/material/Toolbar';
-
-
-import Cards from './Card';
+//import "./css/custom.css";
+import { Box } from "@mui/system";
+//import "./css/custom.css.map";
+//import "./css/normalize.css";
+import "./style.css";
 
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 const cards = [1, 2, 3];
 
-
 const videos = [
   {
     id: 1,
-    title: 'Conferencia1_TASA',
-    description: 'Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.',
-    url: 'https://youtu.be/pA7tv-D8a3s',
-
+    title: "Facturación electrónica",
+    description:
+      "Usuarios de la facturación electrónica se clasifican en personas naturales y jurídicas, los requisitos son la cedula de identidad o RUC. Es obligatoria la facturación electrónica si el régimen RIMPE lo estipula.",
+    url: "https://www.facebook.com/plugins/video.php?height=300&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F725697909140280%2F&show_text=false&width=560&t=0",
   },
   {
     id: 2,
-    title: 'Conferencia2_TASA',
-    description: 'Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.',
-    url: 'https://fb.watch/i54UezKUru/',
+    title: "Innovación Desde sus conceptos hasta su aplicación en emprendimientos",
+    description:
+      "#actitudESFOT #emprendeesfotf",
+    url: "https://www.facebook.com/plugins/video.php?height=302&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F430155859213826%2F&show_text=false&width=560&t=0",
   },
 
   {
     id: 3,
-    title: 'Conferencia3_TASA',
-    description: 'Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.',
-    url: 'https://youtu.be/pA7tv-D8a3s',
+    title: "Soluciones ecológicas y sustentables, el futuro de la construcción",
+    description:
+      "#actitudESFOT #emprendeesfot",
+    url: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F751594912828832%2F&show_text=false&width=560&t=0https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F751594912828832%2F&show_text=false&width=560&t=0",
   },
 
   {
     id: 4,
-    title: 'Conferencia4_TASA',
-    description: 'Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.',
-    url: 'https://youtu.be/pA7tv-D8a3s',
+    title: "La innovación como catalizador de emprendimientos sostenibles.",
+    description:
+      "#actitudESFOT #emprendeesfot.",
+    url: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F761035128684599%2F&show_text=false&width=560&t=0",
   },
-];
+  {
+    id: 5,
+    title: "Concepto de MVP en Startups y como apoya a su crecimiento",
+    description:
+      "Charla dictada por Juan Diego Montero Co-Founder & User Experience Consultant en Tinkin.",
+    url: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F705680330801000%2F&show_text=false&width=560&t=0",
+  },
+  {
+    id: 6,
+    title: "Nichos de negocio en el sector de la cocina y la gastronomía",
+    description:
+      "Daniel Ituma",
+    url: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F402886001611495%2F&show_text=false&width=560&t=0",
+  },
+  {
+    id: 7,
+    title: "Aprendiendo a Emprender",
+    description:
+      "Experiencias del programa Aprendiendo a Emprender y oportunidades de emprendimiento en ingeniería y Tecnología.",
+    url: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F265857248827325%2F&show_text=false&width=560&t=0",
+  },
+  
+  {
+    id: 8,
+    title: "Conversatorio Kradac Movilidad urbana",
+    description:
+      "Bruno Valarezo CEO Kradac Movilidad urbana Parte 1.",
+    url: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F1212375275897794%2F&show_text=false&width=560&t=0",
+  },{
+    id: 9,
+    title: "Conversatorio Kradac Movilidad urbana",
+    description:
+      "Bruno Valarezo CEO Kradac Movilidad urbana Parte 2.",
+    url: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F542238636868667%2F&show_text=false&width=560&t=0",
+  },
+  {
+    id: 10,
+    title: "Economía Circulares parte 1",
+    description:
+      "#actitudESFOT #emprendeesfot",
+    url: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F519750889308318%2F&show_text=false&width=560&t=0",
+  },
+  {
+    id: 11,
+    title: "Economía Circulares parte 2",
+    description:
+      "#actitudESFOT #emprendeesfot",
+    url: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F224386489600392%2F&show_text=false&width=560&t=0",
+  },
+  {
+    id: 12,
+    title: "Tips para emprender",
+    description:
+      "#David Loja Romero actitudESFOT #emprendeesfot",
+    url: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100063704537871%2Fvideos%2F2935239490090638%2F&show_text=false&width=560&t=0",
+  }
+ 
+  
 
+];
 
 const theme = createTheme();
 const Repositorio = () => {
-  
-    return (
 
 
- 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  return (
+    <>
       <ThemeProvider theme={theme}>
-      
-
-    
         <CssBaseline />
+
         <main>
           {/* Hero unit */}
-          <Box
-            sx={{
-              bgcolor: 'background.paper',
-              pt: 8,
-              pb: 6,
-            }}
-          >
+          <div>
             <Container maxWidth="sm">
               <Typography
                 component="h1"
@@ -112,215 +160,201 @@ const Repositorio = () => {
                 color="text.primary"
                 gutterBottom
               >
-                Conferencias Emprendimientos ESFOT
+                Repositorio
               </Typography>
-              <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                Repositorio de conferencias de emprendimientos de la ESFOT
-              </Typography>
-              <Stack
-                sx={{ pt: 4 }}
-                direction="row"
-                spacing={2}
-
-                justifyContent="center"
+              <Typography
+                variant="h5"
+                align="center"
+                color="text.secondary"
+                paragraph
               >
-                <Button variant="contained">Conferencias</Button>
-                <Button variant="outlined">Talleres</Button>
-              </Stack>
+                En esta sección encontrarás videos de conferencias y talleres
+                realizados por Emprende.
+              </Typography>
+              <div>
+                <Grid container spacing={2} justifyContent="center">
+                  <Grid item>
+                    <Button variant="contained" color="primary">
+                      Ver más
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button variant="outlined" color="primary">
+                      Ver más
+                    </Button>
+                  </Grid>
+                </Grid>
+              </div>
             </Container>
-          </Box>
-          <Container sx={{ py: 8 }} maxWidth="md">
-            {/* End hero unit */}
-            <Grid container spacing={4}>
+          </div>
+          <Container sx={{ py: 8 }} maxWidth="lg">
+            {/* Menu a la derecha */}
+            <Grid container spacing={12}>
               {videos.map((video) => (
-                <Grid item key={video} xs={12} sm={6} md={4}>
-                  <Cards video={video} />
+                <Grid item key={video.id}  sm={6} md={4}>
+                  <Box
+                    sx={{
+                      height: "400px",
+                      display: "flex",
+                      flexDirection: "column",
+
+
+                    }}
+                  >
+                   <div className="embed-responsive embed-responsive-16by9 shadow-1-strong rounded mb-4"> 
+                        <iframe
+                          src={video.url}
+                          width="100%"
+                          height="200px"
+                          className="embed-responsive-item"
+                  
+                        
+                          allowFullScreen="true"
+                          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                        />
+                      </div> 
+                    <Box sx={{ flexGrow: 0 }}>
+                      <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="h2"
+                        align="center"
+                      >
+                        {video.title}
+                      </Typography>
+                      <Typography>
+                       {video.description}
+                      </Typography>
+                    </Box>
+                    <Box sx={{ p: 2 }}>
+                      <Grid container spacing={2} justifyContent="center">
+                        <Grid item>
+                          <Button variant="contained" color="primary">
+                            Ver más
+                          </Button>
+                        </Grid>
+                        <Grid item>
+                          <Button variant="outlined" color="primary">
+                            Ver más
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  </Box>
                 </Grid>
               ))}
             </Grid>
-          </Container>
-          
-            </main>
-
-
-</ThemeProvider>
-
-     
-
-// <ThemeProvider theme={theme}>
-// <CssBaseline />
-// <main>
-
-//   {/* Hero unit */}
-//   <Box
-//           sx={{
-//             bgcolor: 'background.paper',
-//             pt: 8,
-//             pb: 6,
-//           }}
-//         >
-//           <Container maxWidth="sm">
-//             <Typography
-//               component="h1"
-//               variant="h2"
-//               align="center"
-//               color="text.primary"
-//               gutterBottom
-//             > 
-
-//               Conferencias Emprendimientos ESFOT
-//             </Typography>
-
-          
-    
 
 
 
 
-            
-
-//             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-//               Repositorio de conferencias de emprendimientos de la ESFOT
-
-//             </Typography>
-//             <Stack
-//               sx={{ pt: 4 }}
-//               direction="row"
-//               spacing={2}
-//               justifyContent="center"
-//             >
-
-// </Stack>
-//           </Container>
-//         </Box>
-
-//   <Container sx={{ py: 8 }} maxWidth="md">
-//     {/* End hero unit */}
-//     <Grid container spacing={4}>
 
 
-            
 
-//         <Row className='mt-2 d-flex justify-content-between '>
-    
-     
+
+
+
+
+
+
+
+           End hero unit 
+            <Grid container spacing={4}>
+              {videos.map((video) => (
+                <main className="containerVideo my-5 my-md-0 vh-md-100 d-flex align-items-center justify-content-center" 
+                sx = {{backgroundColor: "#f5f5f5"}}
+                
+                >
+                  <article className="card overflow-hidden border-0 rounded-3 flex-md-row align-items-center">
+                    <div className="order-md-2 flex-md-grow-1 w-100 p-3 p-md-5">
+        
+                      <div className="embed-responsive embed-responsive-16by9 shadow-1-strong rounded mb-4"> 
+                        <iframe
+                          src={video.url}
+                          width="100%"
+                          height="200px"
+                          className="embed-responsive-item"
+                  
+                        
+                          allowFullScreen="true"
+                          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                        />
+                      </div>
+                     
+                    </div>
+                    <section className="order-md-1 flex-md-grow-1 w-100">
+                      <div className="card-body text-center text-md-start">
+                        <h1 className="card-title h2">{video.title}</h1>
+                        <p className="text-secondary"
+                          style={{
+                            fontSize: "1.2rem",
+                            fontWeight: "400",
+                            lineHeight: "1.5",
+                          }}
+                        >
+                          {video.description}
+                        </p>
        
 
-
-//         <Card style={{ width: '18rem', height: 'auto'  }} >
-//         <div>
-//         <ReactPlayer
-//         url='https://fb.watch/i54UezKUru/'
-//         width='100%'
-//         height='100%'
-//         controls
-//         />
-//         </div>
-
-          
-        
-         
-//         <CardContent sx={{ flexGrow: 1 }}>
-//         <Typography gutterBottom variant="h5" component="h2">
-//                       Conferencia1_TASA
-//                     </Typography>
-//                     <Typography>
-//                     Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.
-//                     </Typography>
-//                   </CardContent>
-//                   <CardActions>
-//                     ver video 
-
-
-//                     <Button size="small">Edit</Button>
-//                   </CardActions>
-//         </Card>
-
-
+                        <div>
+                          <a
+                            href="https://www.facebook.com/profile.php?id=100063704537871"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <p>
+                              <i className="fa fa-facebook w3-xxlarge" />
+                            </p>
+                          </a>
+                          <p className="text-uppercase text-secondary text-companies">
+                            EMPRENDE - ESFOT
+                          </p>
+                        </div>
+                      </div>
+                    </section>
+                  </article>
    
 
+                  
 
 
+                 
 
+               
+                
+                 
 
+                </main>
+              ))}
+            </Grid>
+         
+          </Container>
+        </main>
+        {/* Footer */}
+        <footer>
+          <Typography variant="h6" align="center" gutterBottom>
+            Footer
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            color="text.secondary"
+            component="p"
+          >
+            Something here to give the footer a purpose!
+          </Typography>
+          <Box sx={{ mt: 5 }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              align="center"
+            ></Typography>
+          </Box>
+        </footer>
+        {/* End footer */}
+      </ThemeProvider>
+    </>
+  );
+};
 
-
-
-
-
-//         <Card style={{ width: '18rem', height: 'auto' }} >
-//         <div>
-//         <ReactPlayer
-//         url='https://youtu.be/pA7tv-D8a3s'
-//         width='100%'
-//         height='100%'
-//         controls
-//         />
-//         </div>
-
-//         <CardContent sx={{ flexGrow: 1 }}>
-//         <Typography gutterBottom variant="h5" component="h2">
-//                       Conferencia1_TASA
-//                     </Typography>
-//                     <Typography>
-//                     Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.
-//                     </Typography>
-//                   </CardContent>
-//                   <CardActions>
-//                     ver video 
-
-
-//                     <Button size="small">Edit</Button>
-//                   </CardActions>
-//         </Card>
-
-
-
-//         <Card style={{ width: '18rem' }} >
-//         <div>
-//         <ReactPlayer
-//         url='https://youtu.be/pA7tv-D8a3s'
-//         width='100%'
-//         height='100%'
-//         controls
-//         />
-//         </div>
-
-//         <CardContent sx={{ flexGrow: 1 }}>
-//         <Typography gutterBottom variant="h5" component="h2">
-//                       Conferencia1_TASA
-//                     </Typography>
-//                     <Typography>
-//                     Econonomía circular dentro del pryecto CUERO 360°, Ciclos conscientes.
-//                     </Typography>
-//                   </CardContent>
-//                   <CardActions>
-//                     ver video 
-
-
-//                     <Button size="small">Edit</Button>
-//                   </CardActions>
-//         </Card>
-
-
-        
-
-
-
-
-
-// </Row>
-// </Grid>
-// </Container>
-
-    
-
-
-            
-// </main>
-//             </ThemeProvider>
-       
- )
-}
-
-export default Repositorio
+export default Repositorio;

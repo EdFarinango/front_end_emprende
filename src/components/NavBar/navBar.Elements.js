@@ -175,6 +175,7 @@ export const MobileMenu = styled.div`
   }
 `;
 
+
 export const UserContainer = styled.div`
   display: flex;
   align-items: center;
@@ -394,6 +395,19 @@ export const LogoutButton = styled.div`
         display: flex;
       }
     }
+  }
+`;
+
+export const AccountCircleIcon = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-right: 0.5rem;
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
   }
 `;
 

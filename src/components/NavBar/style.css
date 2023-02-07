@@ -238,3 +238,14 @@
         }
     }
 }
+
+.li {
+    position: relative;
+    display: inline-block;
+    &:hover {
+        .chatNotification {
+            opacity: 1;
+            pointer-events: initial;
+        }
+    }
+}

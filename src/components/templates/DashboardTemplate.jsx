@@ -3,9 +3,18 @@ import { AuthContext } from "../../contexts";
 import { Inicio } from "../../pages/landingPage/Inicio";
 import Footer from "../footer";
 import { Outlet } from "react-router-dom";
+import Loading from "../templates/Loading";
 
 export const DashboardTemplate = () => {
   const { user } = useContext(AuthContext);
+
+ 
+
+ 
+
+ 
+
+  
 
   return (
     <>

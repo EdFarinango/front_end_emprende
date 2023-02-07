@@ -22,9 +22,8 @@ const EditForm = (props) => {
   const [toggle, setToggle] = useState(true);
 
 
-
-  
-
+//actuallizar nombre de usuario en navbar 
+ 
 
 
   const [form, setForm] = useState(
@@ -45,7 +44,11 @@ const EditForm = (props) => {
     }
   );
 
- 
+ const Logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/";
+  };
 
 
   const FormEdit = async (e) => {
@@ -67,16 +70,33 @@ const EditForm = (props) => {
           `https://backend-emprende.herokuapp.com/api/v1/superadmin/${props.item.id}/update`,
           { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
         ).then(response => {
-         alert ({
-          title: "Usuario actualizado!",
-          icon: "success",
-          timer: 2000,
-          button: false,
+        
+          if (user.id === props.item.id) {
+          alert({
+            title: "Emprende, mensaje del servidor",
+            text: "Para poder actuallizar los datos se procedera a cerrar sesión",
+            icon: "success",
+            buttons: ["Aceptar"],
+            timer: 2500,
+          }).then(() => {
+            Logout();
+          });
+        } else {
+          alert({
+            title: "Emprende, mensaje del servidor",
+            text: "Datos actualizados con exito",
+            icon: "success",
+            buttons: ["Aceptar"],
+            timer: 2500,
+          }).then(() => {
+            window.location.reload();
+          }
+          );
 
-        })
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        }
+
+
+        
 
         
       
@@ -279,6 +299,10 @@ const onChange = (e) => {
 
 
 
+
+useEffect(() => {
+  getAdmin();
+}, []);
 
 
 
