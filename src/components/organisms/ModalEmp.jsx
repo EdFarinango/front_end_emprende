@@ -10,8 +10,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { NativeSelect } from "@mui/material";
 import './styles.css';
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import alert from "sweetalert";
 
 
 const ModalEmp = ({ emprendimientos }) => {
@@ -42,6 +41,18 @@ const ModalEmp = ({ emprendimientos }) => {
 
 
     });
+
+ 
+
+
+
+
+
+
+
+
+
+
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -59,12 +70,15 @@ const ModalEmp = ({ emprendimientos }) => {
                 ...form,
             },
             { headers: { accept: "application/json", authorization: token } }
-        ).then(response => {
-            const res = response.data;
-            toggle();
+        );
+        alert("Emprendimiento actualizado correctamente");
 
-        })
+        toggle();
+    
+     
     };
+
+  
     const handleUpload = (e) => {
         e.preventDefault();
 
@@ -77,7 +91,7 @@ const ModalEmp = ({ emprendimientos }) => {
 
         ).then(response => {
             const res = response.data;
-            //console.log(res);
+            console.log(res);
             toggle();
 
         })
@@ -120,7 +134,7 @@ const ModalEmp = ({ emprendimientos }) => {
     return (
         <div>
 
-            <Button className='btnedit' onClick={toggle}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <Button className='btnedit' onClick={toggle} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                 <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
             </svg></Button>
@@ -345,7 +359,7 @@ const ModalEmp = ({ emprendimientos }) => {
 
                                                 onChange={(e) => setImage(e.target.files[0])}
                                             />
-                                            <Button color="primary" onClick={handleUpload}>Actualizar</Button>
+                                            <Button color="primary" onClick={handleUpload} >Actualizar</Button>
 
 
 
@@ -364,7 +378,11 @@ const ModalEmp = ({ emprendimientos }) => {
                             </Row>
 
 
-                            <Button color="primary" onClick={onSubmit}>Guardar</Button>
+                           {/* enviar datso actualizados al otro componente  */}
+                          
+                            <Button color="primary" onClick={onSubmit} >Guardar</Button>
+                            
+
 
 
 

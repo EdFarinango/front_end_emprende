@@ -1,65 +1,39 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+
 import EditForm from "../templates/FormEditAd";
 
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useEffect } from "react";
+
 
 
 const ModalForm = (props) => {
 
-    let button = "";
 
-    const [modal, setModal] = useState(false);
+
+     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
-    const navigate = useNavigate();
-    const token = localStorage.getItem('token');
-    const [admin, setAdmin] = useState([]);
-    const getAdmin = async () => {
-        try {
-            const response = await axios.get(
-                `https://backend-emprende.herokuapp.com/api/v1/admin`,
-                { headers: { 'accept': 'application/json', 'authorization': token } }
-            );
-           
-            setAdmin(response.data.data.users)
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
 
 
 
-    useEffect(() => {
-        getAdmin();
-    }
-        , [])
+        
+ 
+    
+      
     return (
         <div>
 
-            <Button color="success" onClick={toggle}>
-                {props.buttonLabel}
-            </Button>
-            <Modal isOpen={modal}
-                toggle={toggle}
-                className={props.className}
-                backdrop={'static'}
-                keyboard={false}
-            >
-                <ModalHeader toggle={toggle}>{props.buttonLabel}</ModalHeader>
+            <Button color="primary" onClick={toggle}>Editar</Button>
+            <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader toggle={toggle}>Editar</ModalHeader>
                 <ModalBody>
-                    <EditForm
-
-
-                        updateState={props.updateState}
-                        toggle={toggle}
-                        item={props.item}
-                        admins={admin}
+                    <EditForm item={props.item} 
+                    admins={props.admins}
+                    setAdmins={props.setAdmins}
                     />
                 </ModalBody>
             </Modal>
+
         </div>
     );
 

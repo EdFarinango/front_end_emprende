@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import EditForm from "../templates/FormEditSu";
 
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useEffect } from "react";
+
 
 
 const ModalForm = (props) => {
@@ -15,37 +13,27 @@ const ModalForm = (props) => {
     const toggle = () => setModal(!modal);
 
 
-    const [admin, setAdmin] = useState([
+
 
         
-    ]);
-  
+ 
     
       
     return (
         <div>
 
-            <Button color="success" onClick={toggle}>
-                {props.buttonLabel}
-            </Button>
-            <Modal isOpen={modal}
-                toggle={toggle}
-                className={props.className}
-                backdrop={'static'}
-                keyboard={false}
-            >
-                <ModalHeader toggle={toggle}>{props.buttonLabel}</ModalHeader>
+            <Button color="primary" onClick={toggle}>Editar</Button>
+            <Modal isOpen={modal} toggle={toggle}>
+                <ModalHeader toggle={toggle}>Editar</ModalHeader>
                 <ModalBody>
-                    <EditForm
-
-
-                        updateState={props.updateState}
-                        toggle={toggle}
-                        item={props.item}
-                        admins={admin}
+                    <EditForm item={props.item} 
+                    admins={props.admins}
+                    setAdmins={props.setAdmins}
+                    toggle = {props.toggle}
                     />
                 </ModalBody>
             </Modal>
+
         </div>
     );
 

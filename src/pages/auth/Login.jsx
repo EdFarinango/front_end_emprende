@@ -42,7 +42,7 @@ const theme = createTheme();
 export const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-  //const [email, setEmail] = useState('')
+
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -57,9 +57,9 @@ export const Login = () => {
     setErrors(validationsForm(form));
 
     if (Object.keys(errors).length === 0) {
-      //console.log("No hay errores");
+
       setLoading(true);
-      //console.log(form);
+  
       try {
         await axios
           .post("https://backend-emprende.herokuapp.com/api/v1/login", {
@@ -67,8 +67,7 @@ export const Login = () => {
           })
           .then((response) => {
             const { access_token, token_type, user } = response.data.data;
-            // console.warn(access_token, token_type, user);
-            // console.log(response);
+      
             setLoading(false);
             setResponse(true);
             setTimeout(() => {
@@ -77,6 +76,7 @@ export const Login = () => {
             login(user, `${token_type} ${access_token}`);
             // eslint-disable-next-line no-lone-blocks
             {
+              
               console.log("Ingreso exitoso");
               alert &&
                 alert({
@@ -85,10 +85,19 @@ export const Login = () => {
                   iconColor: "success",
                   button: false,
                   timer: "2000",
+                }).then(() => {
+                  window.location.href = "/administracion";
+                  // navigate("/administracion");
+                  //window.location.reload();
                 });
+                //navigate("/administracion");
+                
+                
 
-              navigate("/administracion");
+             
+             
             }
+           
           })
           .catch((error) => {
             console.log(error.response.data.message);

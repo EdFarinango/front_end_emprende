@@ -179,3 +179,28 @@ body {
     color: #CF3A2B;
     font-size: 10px;
 }
+
+.modal-pswd .modal-content {
+    width: 400px;
+    height: 300px;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.primary-btn {
+    display: inline-block;
+    padding: 10px 30px;
+    background: #6cdfc2;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}

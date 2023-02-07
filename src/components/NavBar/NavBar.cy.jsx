@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 describe("componente Navbar", () => {
   it("deberia renderizar el componente", () => {
-    cy.viewport(1024, 750);
+    cy.viewport(1024, 750)
     cy.mount(
       <Router>
         <NavBar />
@@ -15,10 +15,10 @@ describe("componente Navbar", () => {
     cy.get("a")
       .contains("Iniciar Sesión")
       .click();
-    // cy.get("a")
-    //   .contains("Iniciar Sesión")
-    //   .click()
-    //   .url()
-    //   .should("include", "/login");
+    cy.get("a")
+      .contains("Iniciar Sesión")
+      .click()
+      .url()
+      .should("include", "/login");
   });
 });

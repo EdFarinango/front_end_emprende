@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts";
 import FormInput from "./Inputs";
 import alert from "sweetalert";
+import { get } from "react-hook-form";
 
 
 
@@ -18,6 +19,8 @@ const EditForm = (props) => {
   const navigate = useNavigate();
   const [image, setImage] = useState(null);
   const { user } = useContext(AuthContext);
+  const [toggle, setToggle] = useState(true);
+
 
 
   
@@ -59,7 +62,7 @@ const EditForm = (props) => {
     }
 
     try {
-
+      
         await axios.post(
           `https://backend-emprende.herokuapp.com/api/v1/superadmin/${props.item.id}/update`,
           { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
@@ -71,10 +74,39 @@ const EditForm = (props) => {
           button: false,
 
         })
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+
+        
+      
         })
         .catch(error => {
-          console.log(error);
+          if (error.response.status === 403) {
+            alert({
+              title: "Emprende",
+              text: "Error al actualizar usuario, usuario inactivo",
+              icon: "error",
+              timer: 2000,
+              button: false,
+            })
+            setToggle(false);
+          }
+       
+       
+
+          if (error.response.data.errors.email) {
+            alert({
+              title: "Error al registar usuario",
+              text: "El correo electrónico ya esta registrado en el sistema",
+              icon: "error",
+              button: false,
+              timer: 2500,
+            });
+          }
         }
+       
+         
         );
 
     
@@ -87,8 +119,8 @@ const EditForm = (props) => {
     } catch (error) {
       console.log(error);
     }
-    props.toggle();
-    props.updateState();
+ 
+   
   }
 
 
@@ -103,14 +135,23 @@ const EditForm = (props) => {
     }
 
     ).then(response => {
-    alert({
-        title: "Foto de perfil actualizada!",
-        icon: "success",
-        timer: 2000,
-        button: false,
-    })
-    props.toggle();
-    props.updateState();
+
+    console.log(response.data.message);
+
+    if (response.data.message === 'Avatar updated successfully') {
+        alert({
+            title: "Foto de perfil actualizada!",
+            icon: "success",
+            timer: 2000,
+            button: false,
+        })
+    }
+        
+   
+    setTimeout(() => {
+    window.location = window.location.href;
+   }, 1000);
+   
        
   
 
@@ -199,6 +240,7 @@ const inputImg = [
 
 
 const getAdmin = async () => {
+
   try {
     const response = await axios.get(
       `https://backend-emprende.herokuapp.com/api/v1/superadmin`,
@@ -206,7 +248,7 @@ const getAdmin = async () => {
     );
 
     setAdmin(response.data.data.users)
-  
+    
 
   } catch (error) {
     //console.log(error);
@@ -240,6 +282,8 @@ const onChange = (e) => {
 
 
 
+
+
   return (
     <Form onSubmit={FormEdit} className="form-control">
         <FormGroup>
@@ -252,11 +296,18 @@ const onChange = (e) => {
             />
           ))}
         </FormGroup>
+            
+        <Button color="info" type="submit" item={admin}  admins={admin} onClick={toggle} >
 
-        <Button color="info" type="submit" item={admin}  admins={admin} updateState = {props.id}  >
+
          
           Guardar
         </Button>
+       
+       
+
+
+
         { props.item.id === user.id &&
         <FormGroup>
           {inputImg.map((inputImg) => (
@@ -267,7 +318,7 @@ const onChange = (e) => {
               onChange={(e) => setImage(e.target.files[0])}
             />
           ))}
-          <Button color="info" onClick={handleUpload} item={admin}  admins={admin}  > Subir imagen </Button>
+          <Button color="info" onClick={handleUpload} item={admin}  admins={admin}   > Subir imagen </Button>
         </FormGroup>
 
         

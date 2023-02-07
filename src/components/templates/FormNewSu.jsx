@@ -107,6 +107,9 @@ const EditFormNew = () => {
           });
 
           setData(respose.data);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         })
         .catch((err) => {
           console.log(err.response.data.errors);

@@ -14,6 +14,8 @@ import ModalForm2 from "./ModalNewSu";
 
 import "./styles.css";
 import alert from "sweetalert";
+import Loading from '../templates/Loading'
+import ModalPswd from "./ModalPswd";
 
 const AdminCard = () => {
   const [admins, setAdmin] = useState([]);
@@ -23,7 +25,14 @@ const AdminCard = () => {
 
   const token = localStorage.getItem("token");
 
+  const [loading, setLoading] = useState(true);
+
+  const [toggle, setToggle] = useState(false);
+
+
+
   const getAdmin = async () => {
+    setLoading(false);
     try {
       const response = await axios.get(
         `https://backend-emprende.herokuapp.com/api/v1/superadmin`,
@@ -33,9 +42,11 @@ const AdminCard = () => {
       ///revisar  updateState(response.data.data.users)
 
       setAdmin(response.data.data.users);
+   
     } catch (error) {
       console.log(error);
     }
+    setLoading(true);
   };
 
   const deleteSuAdmin = async (id, state) => {
@@ -130,29 +141,22 @@ const AdminCard = () => {
     }
   };
 
-  const updateState = (item) => {
-    const itemIndex = admins.findIndex((data) => data.id === item.id);
-    const newArray = [
-      // destructure all items from beginning to the indexed item
-      ...admins.slice(0, itemIndex),
-      // add the updated item to the array
-      item,
-      // add the rest of the items to the array from the index after the replaced item
-      ...admins.slice(itemIndex + 1),
-    ];
-    setAdmin(newArray);
-    getAdmin();
-  };
+  
 
   useEffect(() => {
     getAdmin();
   }, []);
 
+  if (!loading ) {
+  
+    return <Loading />;
+  }
+
   return (
     //crear un nuevo usuario
 
     <>
-      <div className="row justify-content-center">
+      <div className="row justify-content-center h-100">
         <div className="col-12 col-sm-8 col-lg-6">
           {/* Section Heading*/}
           <div
@@ -222,24 +226,33 @@ const AdminCard = () => {
                   </Button>
                 )}
                 {admin.id === user.id && (
-                  // <Button
-                  //   variant="primary"
-                  //   className="text-center"
-                  //   onClick={() => navigate('/users/admin/perfil')}
-                  //  >Editar</Button>
-
-                  //<ModalForm buttonLabel="Perfil" />
-                  <Link to="/administracion" className="btn btn-primary">
-                    Panel de administracion{" "}
-                  </Link>
+                  // boton para abir el modal para cambio de contraseña
+                  <ModalPswd className = "modal-pswd"
+                    buttonLabel="Cambiar contraseña"
+                    item={admin}
+                    admins={admins}
+                    setAdmins={setAdmin}
+                    toggle = {toggle}
+                  />
                 )}
 
-                <ModalForm
+                {admin.state === 1 ? (
+                  
+                  <ModalForm
                   buttonLabel="Editar"
                   item={admin}
                   admins={admins}
-                  updateState={updateState}
+                  setAdmins={setAdmin}
+                  toggle = {toggle}
                 />
+                ) : (
+                  <></>
+                   )
+
+                
+                }
+
+                
               </div>
             </div>
           </div>

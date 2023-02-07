@@ -4,7 +4,7 @@ import axios from "axios";
 import ModalEmp from "../../components/organisms/ModalEmp";
 import "./style.css";
 import ModalViewEmp from "../../components/organisms/ModalView";
-import NotificationBar from "./NotificationBar";
+
 import alert from "sweetalert"
 
 const SearchComponent = () => {
@@ -13,7 +13,27 @@ const SearchComponent = () => {
   const [search, setSearch] = useState("");
   const [estado1, setEstado1] = useState("");
   const [verEstado, setVerEstado] = useState(false);
-  const [notification, setNotification] = useState(null);
+  const [verModal, setVerModal] = useState(false);
+
+  //variables para modal
+  
+
+ 
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
   const searcher = (e) => {
     setSearch(e.target.value);
   };
@@ -105,7 +125,10 @@ const SearchComponent = () => {
 
   }
 
+  if (!verModal) {
     
+    console.log("no se muestra");
+   }
  
   
 
@@ -288,6 +311,8 @@ const SearchComponent = () => {
                                       <ModalEmp
                                         emprendimientos={item}
                                         data={data}
+                                        setVerModal={true}
+                                        updateState={item}
                                       />
                                       <ModalViewEmp
                                         emprendimientos={item}

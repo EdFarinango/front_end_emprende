@@ -1,176 +1,173 @@
-import React, { useState, useEffect } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import React, { useState  } from "react";
+
+import { Button, Form, FormGroup, Label, Input } from "react-bootstrap";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import alert from "sweetalert";
+import FormInput from "./Inputs";
+
+const initialState = {
+  first_name: "",
+  last_name: "",
+  email: "",
+
+  personal_phone: "",
+  linkedin: "",
+  state: "1",
+};
+const EditFormNew = () => {
+  const [form, setForm] = useState({
+    initialState,
+  });
 
 
 
 
 
-const EditForm = (props) => {
+  const [data, setData] = useState([]);
+  const token = localStorage.getItem("token");
 
-  const [admin, setAdmin] = useState([]);
-  const token = localStorage.getItem('token');
-  const [error, setError] = useState(false);
-  const navigate = useNavigate();
-
-
-
-
-  const [form, setForm] = useState(
+  const inputs = [
     {
+      id: 1,
+      name: "first_name",
+      type: "text",
+      placeholder: "Ingrese el nombre",
+      errorMessage: "Debe ingresar un nombre válido!",
+      label: "Username",
+      pattern: "^[A-Za-z]{3,16}$",
+      required: true,
+    
+    },
+    {
+      id: 2,
+      name: "last_name",
+      type: "text",
+      placeholder: "Ingrese el apellido",
+      errorMessage: "Debe ingresar un apellido válido!",
+      label: "Apellido",
+      pattern: "^[A-Za-z]{3,16}$",
+      required: true,
+  
+    },
+    {
+      id: 3,
+      name: "email",
+      type: "email",
+      placeholder: "Email",
+      errorMessage: "Email no válido!",
+      label: "Email",
+      pattern: "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$",
+      required: true,
+     
+    },
 
+    
+    {
+      id: 4,
+      name: "personal_phone",
+      type: "text",
+      placeholder: "Teléfono",
+      errorMessage: "Solamente se aceptan números de 9 a 10 dígitos",
+      label: "Teléfono personal",
+      pattern: "^[0-9]{9,10}$",
+  
+      required: true,
+    },
 
-      first_name: "",
-      last_name:  "",
-      email:  "",
-      parsonal_phone:  "",
-      linkedin :  "",
-      state: "1"
+    {
+      id: 5,
+      name: "linkedin",
+      type: "text",
+      placeholder: "Linkedin",
+      errorMessage: "",
+      label: "Linkedin",
+      pattern: null,
 
-    }
-  );
+      required: true,
+    },
+  ];
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  }
-
-
-  const FormEdit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-   
     try {
-
-      if (props.item?.id) {
-        await axios.post(
-          `https://backend-emprende.herokuapp.com/api/v1/admin/${props.item.id}/update`,
-          { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
-        );
-
-
-
-      } else {
-        await axios.post(
+      axios
+        .post(
           `https://backend-emprende.herokuapp.com/api/v1/admin/create`,
-          { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
-        );
-      }
+          { ...form },
+          { headers: { accept: "application/json", authorization: token } }
+        )
+        .then((respose) => {
+          alert({
+            title: "Registro Exitoso",
+            text: "Usuario registrado correctamente",
+            icon: "success",
+            button: false,
+            timer: 2000,
+          });
 
-
+          setData(respose.data);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        })
+        .catch((err) => {
+          console.log(err.response.data.errors);
+          if (err.response.data.errors.email) {
+            alert({
+              title: "Error al registar usuario",
+              text: "El correo electrónico ya esta registrado en el sistema",
+              icon: "error",
+              button: false,
+              timer: 2500,
+            });
+          }
+        });
     } catch (error) {
       console.log(error);
     }
-    props.toggle();
-   
-  }
+  };
 
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
+  const reset = () => {
+    setForm(initialState);
+  };
 
   return (
-    <Form onSubmit={FormEdit} >
+    <>
+      <h1>Formulario de Registro</h1>
 
+      <Form onSubmit={handleSubmit} className="form-control">
+        <FormGroup>
+          {inputs.map((input) => (
+            <FormInput
+              key={input.id}
+              {...input}
+              value={form[input.name]}
+              onChange={onChange}
+            />
+          ))}
+        </FormGroup>
 
-
-      <FormGroup>
-        <Label for="first_name">First Name</Label>
-        <Input
-          type="text"
-          name="first_name"
-          id="first_name"
-          onChange={handleChange}
-          value={form.first_name === null ? "" : form.first_name}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="last_name">Last Name</Label>
-        <Input
-          type="text"
-          name="last_name"
-          id="last_name"
-          onChange={handleChange}
-          value={form.last_name === null ? "" : form.last_name}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="email">Email</Label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          onChange={handleChange}
-          value={form.email === null ? "" : form.email}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="password">Password</Label>
-        <Input
-          type="password"
-          name="password"
-          id="password"
-          onChange={handleChange}
-          value={form.password === null ? "" : form.password}
-        />
-      </FormGroup>
-
-      <FormGroup>
-        <Label for="personal_phone">Personal Phone</Label>
-        <Input
-          type="text"
-          name="personal_phone"
-          id="personal_phone"
-          onChange={handleChange}
-          value={form.personal_phone === null ? "" : form.personal_phone}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="linkedin">Linkedin</Label>
-        <Input
-
-          type="text"
-          name="linkedin"
-          id="linkedin"
-          onChange={handleChange}
-          value={form.linkedin === null ? "" : form.linkedin}
-        />
-      </FormGroup>
-      
-
-      
-
-
-
-      <Button color="info" >Submit</Button>
-
-    </Form>
+        <Button color="info" type="submit">
+         
+          Crear
+        </Button>
+        <Button color="danger" onClick={reset}>
+        
+          Limpiar
+        </Button>
+      </Form>
+      <br />
+    </>
   );
+};
 
-}
-
-export default EditForm;
+export default EditFormNew;

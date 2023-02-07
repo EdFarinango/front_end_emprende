@@ -1,19 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-
+import { AuthContext } from "../../contexts";
+import FormInput from "./Inputs";
+import alert from "sweetalert";
+import { get } from "react-hook-form";
 
 
 
 const EditForm = (props) => {
 
+  
+
   const [admin, setAdmin] = useState([]);
   const token = localStorage.getItem('token');
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const [image, setImage] = useState(null);
+  const { user } = useContext(AuthContext);
 
+
+
+  
 
 
 
@@ -25,24 +34,25 @@ const EditForm = (props) => {
       first_name: props.item?.first_name ?? "",
       last_name: props.item?.last_name ?? "",
       email: props.item?.email ?? "",
-      state: props.item?.state ?? ""
+      personal_phone: props.item?.Teléfono ?? "",
+      linkedin : props.item?.LinkedIn ?? "",
+      state: props.item?.state ?? "",
+   
+    
+
 
     }
   );
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  }
+ 
 
 
   const FormEdit = async (e) => {
+
     e.preventDefault();
 
     if (Object.values(form).includes("")) {
-      console.log("error");
+      console.log(e);
       setError(true)
       setTimeout(() => {
         setError(false)
@@ -51,99 +61,251 @@ const EditForm = (props) => {
     }
 
     try {
-
-      if (props.item?.id) {
+      
         await axios.post(
           `https://backend-emprende.herokuapp.com/api/v1/admin/${props.item.id}/update`,
           { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
+        ).then(response => {
+         alert ({
+          title: "Usuario actualizado!",
+          icon: "success",
+          timer: 2000,
+          button: false,
+
+        })
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+
+        
+      
+        })
+        .catch(error => {
+
+
+          if (error.response.data.errors.email) {
+            alert({
+              title: "Error al registar usuario",
+              text: "El correo electrónico ya esta registrado en el sistema",
+              icon: "error",
+              button: false,
+              timer: 2500,
+            });
+          }
+        }
+       
+         
         );
 
+    
 
 
-      } else {
-        await axios.post(
-          `https://backend-emprende.herokuapp.com/api/v1/admin/create`,
-          { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
-        );
-      }
+
+     
 
 
     } catch (error) {
       console.log(error);
     }
-    props.toggle();
-    props.updateState();
+ 
+   
   }
 
 
+  const handleUpload = (e) => {
+    e.preventDefault();
 
+    const formData = new FormData();
+    formData.append('image', image);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  useEffect(() => {
-    if (props.item) {
-      const { id, first_name, last_name, email } = props.item;
-      setForm({ id, first_name, last_name, email });
+    axios.post(`https://backend-emprende.herokuapp.com/api/v1/profile/avatar`, formData, {
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' },
     }
-  }, [props.item]);
+
+    ).then(response => {
+
+    console.log(response.data.message);
+
+    if (response.data.message === 'Avatar updated successfully') {
+        alert({
+            title: "Foto de perfil actualizada!",
+            icon: "success",
+            timer: 2000,
+            button: false,
+        })
+    }
+        
+   
+    setTimeout(() => {
+    window.location = window.location.href;
+   }, 1000);
+   
+       
+  
+
+    })
+
+        .catch(error => {
+            //console.log(error);
+        });
+}
+
+
+const inputs = [
+  {
+    id: 1,
+    name: "first_name",
+    type: "text",
+    placeholder: "Ingrese el nombre",
+    errorMessage: "Debe ingresar un nombre válido!",
+    label: "Username",
+    pattern: "^[A-Za-zÀ-ÿ]{3,16}$",
+    required: true,
+  
+  },
+  {
+    id: 2,
+    name: "last_name",
+    type: "text",
+    placeholder: "Ingrese el apellido",
+    errorMessage: "Debe ingresar un apellido válido!",
+    label: "Apellido",
+    pattern: "^[A-Za-zÀ-ÿ]{3,16}$",
+    required: true,
+
+  },
+  {
+    id: 3,
+    name: "email",
+    type: "email",
+    placeholder: "Email",
+    errorMessage: "Email no válido!",
+    label: "Email",
+    pattern: "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$",
+    required: true,
+   
+  },
+
+  
+  {
+    id: 4,
+    name: "personal_phone",
+    type: "text",
+    placeholder: "Teléfono",
+    errorMessage: "Ingreser un teléfono válido de hasta 10 dígitos!",
+    label: "Teléfono personal",
+    pattern: "^[0-9]{9,10}$",
+
+    required: true,
+  },
+
+  {
+    id: 5,
+    name: "linkedin",
+    type: "text",
+    placeholder: "Linkedin",
+    errorMessage: "",
+    label: "Linkedin",
+    pattern: null,
+
+    required: true,
+  }
+ 
+];
+
+const inputImg = [
+  {
+    id: 1,
+    name: "image",
+    type: "file",
+    placeholder: "Imagen",
+    errorMessage: "Debe ingresar una imagen válida!",
+    label: "Imagen",
+    pattern: "^[jpe?g|png|gif|bmp]{3,16}$",
+
+  }
+]
+
+
+const getAdmin = async () => {
+
+  try {
+    const response = await axios.get(
+      `https://backend-emprende.herokuapp.com/api/v1/admin`,
+      { headers: { 'accept': 'application/json', 'authorization': token } }
+    );
+
+    setAdmin(response.data.data.users)
+    
+
+  } catch (error) {
+    //console.log(error);
+  }
+}
+
+
+
+
+
+const onChange = (e) => {
+  setForm({
+    ...form,
+    [e.target.name]: e.target.value
+  });
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
   return (
-    <Form onSubmit={FormEdit} >
+    <Form onSubmit={FormEdit} className="form-control">
+        <FormGroup>
+          {inputs.map((input) => (
+            <FormInput
+              key={input.id}
+              {...input}
+              value={form[input.name]}
+              onChange={onChange}
+            />
+          ))}
+        </FormGroup>
 
-      <FormGroup>
-        <Label for="first_name">First Name</Label>
-        <Input
-          type="text"
-          name="first_name"
-          id="first_name"
-          onChange={handleChange}
-          value={form.first_name}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="last_name">Last Name</Label>
-        <Input
-          type="text"
-          name="last_name"
-          id="last_name"
-          onChange={handleChange}
-          value={form.last_name}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="email">Email</Label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          onChange={handleChange}
-          value={ form.email}
-        />
-      </FormGroup>
+        <Button color="info" type="submit" item={admin}  admins={admin}  >
+         
+          Guardar
+        </Button>
+        { props.item.id === user.id &&
+        <FormGroup>
+          {inputImg.map((inputImg) => (
+            <FormInput
+              key={inputImg.id}
+              {...inputImg}
+              value={form[inputImg.name]}
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+          ))}
+          <Button color="info" onClick={handleUpload} item={admin}  admins={admin}  > Subir imagen </Button>
+        </FormGroup>
 
-
-
-      <Button color="info" >Submit</Button>
-
-    </Form>
+        
+      }
+      
+      </Form>
   );
 
 }
