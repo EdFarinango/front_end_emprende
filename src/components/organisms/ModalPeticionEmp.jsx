@@ -210,7 +210,7 @@ const ModalNewEmp = () => {
       console.log("hola");
     } else if (!regexNombre.test(form.nombre)) {
       errors.nombre = "El nombre ingresado no es valido";
-    }
+    }else
 
     if (!form.rol_esfot) {
       errors.rol_esfot = "Obligatorio";
