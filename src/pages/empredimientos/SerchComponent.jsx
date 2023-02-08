@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import axios from "axios";
 
 import ModalEmp from "../../components/organisms/ModalEmp";
@@ -7,6 +8,8 @@ import ModalViewEmp from "../../components/organisms/ModalView";
 
 import alert from "sweetalert"
 
+import Loading from "../../components/atoms/Loading";
+
 const SearchComponent = () => {
   const [data, setData] = useState([]);
   const token = localStorage.getItem("token");
@@ -14,6 +17,8 @@ const SearchComponent = () => {
   const [estado1, setEstado1] = useState("");
   const [verEstado, setVerEstado] = useState(false);
   const [verModal, setVerModal] = useState(false);
+  const [pendientes, setPendientes] = useState(0)
+  const [loading, setLoading] = useState(false)
 
   //variables para modal
   
@@ -35,6 +40,7 @@ const SearchComponent = () => {
 
 
   const searcher = (e) => {
+ 
     setSearch(e.target.value);
   };
 
@@ -43,15 +49,28 @@ const SearchComponent = () => {
   };
 
   const getData = async () => {
+    setLoading(false)
     try {
       const response = await axios
         .get(`https://backend-emprende.herokuapp.com/api/v1/emprendimiento`, {
           headers: { 'accept': "application/json", 'authorization': token },
         });
+        let pend =0
       setData(response.data.data.emprendimientos);
+      for (let i = 0; i < response.data.data.emprendimientos.length; i++) {
+        if(response.data.data.emprendimientos[i].estado1 === 0){
+          pend = pend + 1
+        }
+       
+      }
+      setPendientes(pend)
+      setLoading(true)
+      
+
     } catch (error) {
       console.log(error);
     }
+    
   };
 
   const deleteEmprendimiento = async (id) => {
@@ -91,20 +110,38 @@ const SearchComponent = () => {
    
 
   const estadoEmprendimiento = async (id) => {
+   
+
     try {
-      const response = await axios
-        .get(
-          `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${id}/estado`,
-          { headers: { accept: "application/json", authorization: token } }
-        );
 
-        await getData();
-        
+   
+     alert ({
+        title: "¿Estas seguro de aprobar esta solicitud?",
+        text : "El emprendimiento no podra regresar a este estado",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then(async (willDelete) => {
+        if (willDelete) {
 
-      //console.log(response.data)
+           await axios.get(
+            `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${id}/estado`,
+            { headers: { accept: 'application/json', authorization: token } }
+          );
+       getData();
+          alert("El emprendimiento ha sido autorizado, debe activarlo para que sea visible en el catálogo", {
+            icon: "success",
+          });
+          
+        } else {
+          alert("No se ha realizado ningun cambio");
+        }
+      });
     } catch (error) {
       console.log(error);
     }
+ 
   };
 
 
@@ -125,10 +162,6 @@ const SearchComponent = () => {
 
   }
 
-  if (!verModal) {
-    
-    console.log("no se muestra");
-   }
  
   
 
@@ -165,30 +198,32 @@ const SearchComponent = () => {
 
   useEffect(() => {
     getData();
+    
 
-   
-
+ 
   }, []);
 
-  //renderizamos la vista
+  if (!loading ) {
+  
+    return (
+      <div className="container-fluid contentLoading">
+<Loading />
+      </div>
+    
+    );
+    
+    
+    
+    
+  }
+
+ 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid contentTable">
       <nav>
         <div className="nav nav-tabs" id="nav-tab" role="tablist">
           {verEstado ? (
-            <p
-              className="nav-item nav-link active"
-              id="nav-home-tab"
-              data-toggle="tab"
-              role="tab"
-              aria-controls="nav-home"
-              aria-selected="true"
-              onClick={(e) => setVerEstado(false)}
-            >
-              Emprendimientos Aprobados
-            </p>
-          ) : (
-            <p
+            <div
               className="nav-item nav-link"
               id="nav-home-tab"
               data-toggle="tab"
@@ -197,11 +232,54 @@ const SearchComponent = () => {
               aria-selected="true"
               onClick={(e) => setVerEstado(false)}
             >
+              <p> 
               Emprendimientos Aprobados
-            </p>
+              </p>
+            </div>
+            
+          ) : (
+            <div
+              className="nav-item nav-link cli active"
+             
+              data-toggle="tab"
+              role="tab"
+              aria-controls="nav-home"
+              aria-selected="true"
+              onClick={(e) => setVerEstado(false)}
+            >
+              <p>
+              Emprendimientos Aprobados
+              </p>
+            </div>
           )}
           {verEstado ? (
-            <p
+           
+            <div
+              className="nav-item nav-link active"
+              id="nav-profile-tab"
+              data-toggle="tab"
+              role="tab"
+              aria-controls="nav-profile"
+              
+              onClick={(e) => setVerEstado(true)}
+            >
+              <p>
+              Solicitudes
+              {
+                pendientes > 0 ? (
+                  <span className="badge badge-pill badge-danger spanRed">{pendientes}</span>
+                ) : (
+                  <span className="badge badge-pill badge-danger spanGreen">{pendientes}</span>
+                )
+              }
+              </p>
+             
+            </div>
+            
+            
+
+          ) : (
+            <div
               className="nav-item nav-link"
               id="nav-profile-tab"
               data-toggle="tab"
@@ -209,36 +287,35 @@ const SearchComponent = () => {
               aria-controls="nav-profile"
               aria-selected="false"
               onClick={(e) => setVerEstado(true)}
-            >
+            ><p>
               Solicitudes
-            </p>
-          ) : (
-            <p
-              className="nav-item nav-link active"
-              id="nav-profile-tab"
-              data-toggle="tab"
-              role="tab"
-              aria-controls="nav-profile"
-              aria-selected="false"
-              onClick={(e) => setVerEstado(true)}
-            >
-              Solicitudes
-            </p>
+              {
+                pendientes > 0 ? (
+                  <span className="badge badge-pill badge-danger spanRed">{pendientes}</span>
+                ) : (
+                  <span className="badge badge-pill badge-danger spanGreen">{pendientes}</span>
+                )
+              }
+              </p>
+            </div>
           )}
+          
+
         </div>
       </nav>
       <div className="tab-content" id="nav-tabContent">
         <div
-          className="tab-pane fade show active"
+          className="tab-pane fade show active "
           id="nav-home"
           role="tabpanel"
           aria-labelledby="nav-home-tab"
+
         >
           <div className="row">
             <div className="col-12">
               <div className="card">
                 <div className="card-header">
-                  <h4 className="card-title">Emprende</h4>
+                  <h4 className="card-title">Emprendimientos</h4>
                 </div>
                 <div className="card-content">
                   <div className="card-body card-dashboard">
@@ -293,7 +370,7 @@ const SearchComponent = () => {
                                       <button
                                         className="btnactivar"
                                         onClick={() =>
-                                          estadoEmprendimiento(item.id) && updateState(item)
+                                          estadoEmprendimiento(item.id) 
                                         }
                                         title="Activar Solicitud"
                                       >

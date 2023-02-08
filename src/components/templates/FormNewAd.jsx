@@ -45,7 +45,7 @@ const EditFormNew = () => {
       placeholder: "Ingrese el apellido",
       errorMessage: "Debe ingresar un apellido válido!",
       label: "Apellido",
-      pattern: "^[A-Za-z]{3,16}$",
+      pattern: "^[ A-Za-z]{3,16}$",
       required: true,
   
     },

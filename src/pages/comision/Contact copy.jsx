@@ -1,21 +1,17 @@
-import React, { Component } from "react";
-import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBCard,
-  MDBCardText,
-  MDBCardBody,
-  MDBCardImage,
-  MDBBtn,
-  MDBTypography,
-  MDBIcon,
-} from "mdb-react-ui-kit";
-import "./style.css";
+import React, { Component } from 'react';
+import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
+import './style.css';
+
 
 export default function Contact(props) {
+
+
+
   return (
     <div>
+
+
+
       {/* 
       <div className="contact">
         <h1 className="name">{props.name}</h1>
@@ -56,21 +52,74 @@ export default function Contact(props) {
         </MDBRow>
       </MDBContainer> */}
 
-      <div className="row">
-        <div className="card-body">
-          <div className="profile-card contacto">
-            <div className="profile-type"> Esfot </div>
-            <div className="avatar">
-              <img src={props.img} alt={props.name} />
-            </div>
-            <div className="details">{props.name}</div>
-            <div className="details">{props.descripcion}</div>
-            <div className="social">
-              <div className="details">{props.email}</div>
-            </div>
-          </div>
+
+
+      
+
+
+        <div className="row">
+         
+          
+              <div className="card-body">
+      <div className="profile-card">
+        <div className="profile-type"> Esfot </div>
+        <div className="avatar">
+          <img src={props.img} alt={props.name} />
+        </div>
+        <div className="details">{props.name}</div>
+        <div className="details">{props.descripcion}</div>
+        <div className="social">
+          <div className="details">{props.email}</div>
         </div>
       </div>
-    </div>
+      </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   );
 }

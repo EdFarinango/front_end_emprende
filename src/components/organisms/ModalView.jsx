@@ -5,19 +5,16 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Alert,
+
 } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 
-import InputLabel from "@mui/material/InputLabel";
-import { Form, FormGroup, Label, Input } from "reactstrap";
-import Col from "react-bootstrap/Col";
+
 import Container from "react-bootstrap/Container";
 
-import Row from "react-bootstrap/Row";
-import { NativeSelect } from "@mui/material";
+
 
 const ModalViewEmp = ({ emprendimientos }) => {
   const [modal, setModal] = useState(false);

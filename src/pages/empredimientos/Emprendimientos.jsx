@@ -73,38 +73,30 @@ export const Emprendimientos = ({ emprendimientos }) => {
   return (
     <>
       <div
-        className="h-screen  w3-content"
-        style={{ maxWidth: 1400, marginTop: 15 }}
+        className="h-screen w3-content w3-padding contp"
+        style={{ maxWidth: 1400, marginTop: 25 }}
       >
         <div className="w3-card w3-round w3-white w3-padding-32 w3-center">
-          <p>
+          <div className="container-fluid containerEmp">
             <h4 className="card-title">Catalogo de Emprendimientos</h4>
-            <div className="table-responsive">
-              <div className="container-fluid">
-                <ModalNewEmp
-                  item={data}
-                  updateState={updateState}
-                  data={data}
-                />
-                {/* Ver notificaciones */}
-             
 
-                
+            <ModalNewEmp item={data} updateState={updateState} data={data} />
+            <hr className="sep" />
+          </div>
+         
 
-              
-                <SearchComponent item={data}
-                  updateState={updateState}
-                  data={data} />
-              </div>
-            </div>
-          </p>
+          <div className="table-responsive">
+            <SearchComponent
+              item={data}
+              updateState={updateState}
+              data={data}
+            />
+          </div>
         </div>
         <footer className="w3-container w3-theme-d3 w3-padding-16">
           <Footer />
         </footer>
       </div>
-
-
     </>
   );
 };

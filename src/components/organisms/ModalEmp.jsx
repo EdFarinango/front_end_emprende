@@ -71,10 +71,12 @@ const ModalEmp = ({ emprendimientos }) => {
             },
             { headers: { accept: "application/json", authorization: token } }
         );
-        alert("Emprendimiento actualizado correctamente");
+        alert("Emprendimiento actualizado correctamente").then(() => {
+
+        window.location.reload();
 
         toggle();
-    
+        });
      
     };
 

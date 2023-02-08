@@ -9,12 +9,19 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
+import { useState, useEffect } from "react";
 //import "./css/custom.css";
 import { Box } from "@mui/system";
 //import "./css/custom.css.map";
 //import "./css/normalize.css";
 import "./style.css";
+import axios from "axios";
+
+import { Form, FormGroup, Label, Input } from "react-bootstrap";
+import FormInput from "../../components/templates/Inputs";
+import { FacebookProvider, EmbeddedPost } from 'react-facebook';
+
+
 
 
 function Copyright() {
@@ -126,6 +133,29 @@ const videos = [
 const theme = createTheme();
 const Repositorio = () => {
 
+  const [data, setData] = useState([]);
+  const token = localStorage.getItem("token");
+  const [form, setForm] = useState({
+    title: "",
+    url: ""
+  });
+
+
+  const handleInputChange = (event) => {
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+
+    // const url = event.target.value;
+    // const urlEncoded = encodeURIComponent(url);
+    // console.log(urlEncoded);
+  };
+
+
+  
+
+ 
 
 
 
@@ -138,6 +168,102 @@ const Repositorio = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    
+    axios
+      .post(`https://backend-emprende.herokuapp.com/api/v1/videoconferencia/create`, form,
+      { headers: { accept: "application/json", authorization: token } })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+  const getData = async () => {
+    try {
+      const response = await axios
+        .get(`https://backend-emprende.herokuapp.com/api/v1/videoconferencia`, {
+          headers: { 'accept': "application/json", 'authorization': token },
+        });
+        setData(response.data.data.video_conferencias);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+  const inputs = [
+    {
+      id: 1,
+      name: "nombre",
+      type: "text",
+      placeholder: "Ingrese el nombre",
+      errorMessage: "Debe ingresar un nombre válido!",
+      label: "Titulo",
+      //pattern: "^[A-Za-z]{3,255}$",
+      required: true,
+    
+    },
+    {
+      id: 2,
+      name: "url",
+      type: "text",
+      placeholder: "Ingrese la dirección del video",
+      errorMessage: "Debe ingresar un apellido válido!",
+      label: "Dirección del video",
+      pattern: "^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$",
+      required: true,
+  
+    }
+  ];
+
+
+  const updateVideo = async (id) => {
+    try {
+      const response = await axios
+        .get(
+          `https://backend-emprende.herokuapp.com/api/v1/videoconferencia/${id}/update`,
+          { headers: { accept: "application/json", authorization: token } }
+        );
+
+        await getData();
+        
+
+      //console.log(response.data)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
+
+
+
+
+
+
+
+
+useEffect(() => {
+    getData();
+  }, []);
+  
 
 
 
@@ -148,6 +274,27 @@ const Repositorio = () => {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+       <h1>Formulario de Registro</h1>
+
+      <Form onSubmit={handleSubmit} className="form-control">
+        <FormGroup>
+          {inputs.map((input) => (
+            <FormInput
+              key={input.id}
+              {...input}
+              value={form[input.name]}
+              onChange={handleInputChange}
+            />
+          ))}
+        </FormGroup>
+
+        <Button color="info" type="submit">
+         
+          Crear
+        </Button>
+        
+      </Form>
+      <br />
 
         <main>
           {/* Hero unit */}
@@ -188,10 +335,10 @@ const Repositorio = () => {
             </Container>
           </div>
           <Container sx={{ py: 8 }} maxWidth="lg">
-            {/* Menu a la derecha */}
+
             <Grid container spacing={12}>
-              {videos.map((video) => (
-                <Grid item key={video.id}  sm={6} md={4}>
+              {data.map((item) => (
+                <Grid item key={item.id}  sm={6} md={4}>
                   <Box
                     sx={{
                       height: "400px",
@@ -203,7 +350,7 @@ const Repositorio = () => {
                   >
                    <div className="embed-responsive embed-responsive-16by9 shadow-1-strong rounded mb-4"> 
                         <iframe
-                          src={video.url}
+                          src={item.url}
                           width="100%"
                           height="200px"
                           className="embed-responsive-item"
@@ -220,11 +367,9 @@ const Repositorio = () => {
                         component="h2"
                         align="center"
                       >
-                        {video.title}
+                        {item.nombre}
                       </Typography>
-                      <Typography>
-                       {video.description}
-                      </Typography>
+                      
                     </Box>
                     <Box sx={{ p: 2 }}>
                       <Grid container spacing={2} justifyContent="center">
@@ -258,7 +403,7 @@ const Repositorio = () => {
 
 
 
-           End hero unit 
+   
             <Grid container spacing={4}>
               {videos.map((video) => (
                 <main className="containerVideo my-5 my-md-0 vh-md-100 d-flex align-items-center justify-content-center" 

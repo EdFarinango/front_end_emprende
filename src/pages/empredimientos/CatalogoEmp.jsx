@@ -31,29 +31,12 @@ export const CatalogoEmp = () => {
   //setear los hooks useState
 
   const [search, setSearch] = useState("");
-
-  //función para traer los datos de la API
-
-  //función de búsqueda
+  const token = localStorage.getItem("token");
+  const [data, setData] = useState([]);
+  
   const searcher = (e) => {
     setSearch(e.target.value);
   };
-  //metodo de filtrado 1
-  /*  let results = []
-  if(!search)
-  {
-      results = users
-  }else{
-       results = users.filter( (dato) =>
-       dato.name.toLowerCase().includes(search.toLocaleLowerCase())
-   )
-  } */
-
-  //metodo de filtrado 2
-
-  const token = localStorage.getItem("token");
-  const [data, setData] = useState([]);
-
   const getData = async () => {
     try {
       const response = await axios.get(
@@ -66,6 +49,7 @@ export const CatalogoEmp = () => {
       console.log(error);
     }
   };
+
   const dato = !search
     ? data
     : data.filter((dato) =>
@@ -81,15 +65,17 @@ export const CatalogoEmp = () => {
   return (
     <>
     
-    <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
-      <div className="w3-col">
-        <div className="w3-row-padding">
-          <div className="w3-col m12">
-            <div className="w3-card w3-round w3-white">
-              <div className="w3-container w3-padding">
-                <h6 className="w3-opacity">Emprendimientos ESFOT</h6>
-                
-                <div className="slide-container w3-card">
+ 
+               <div
+        className="w3-container w3-padding"
+               
+               >
+         
+           
+              
+             
+               
+       
                   <Swiper
                     cssMode={true}
                     navigation={true}
@@ -97,10 +83,21 @@ export const CatalogoEmp = () => {
                     mousewheel={true}
                     keyboard={true}
                     modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-                    className="mySwiper"
+                   
+                    
                   >
+
+
+
+
+
+                  
+
+
                     {dato.map((item) => (
-                      <SwiperSlide>
+                      item.state === 1 || item.estado1 === 1 ?  (
+
+                        <SwiperSlide>
                         <div
 
                           className="card"
@@ -108,13 +105,17 @@ export const CatalogoEmp = () => {
                             height: "400px",
                             width: "auto",
                             margin: "auto",
+                            borderRadius: "10px",
                           }}
                         >
                           <img
                             src={item.image}
                             className="card-img-top"
                             alt="..."
-                            style={{ height: "250px" }}
+                            style={{ height: "250px", 
+                            borderRadius: "10px",
+                          
+                          }}
                           />
                           <div className="card-body">
                             <h5 className="card-title">{item.nombre}</h5>
@@ -123,7 +124,34 @@ export const CatalogoEmp = () => {
                           </div>
                         </div>
                       </SwiperSlide>
+                      ) : 
+                        
+                          item.length > 1 ? <h1>No hay emprendimientos</h1> : null
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+
+
+                    
                     ))}
+                    
+
+
+
+
+
+
+
+
+
+
+
+
                   </Swiper>
                  
 
@@ -132,17 +160,17 @@ export const CatalogoEmp = () => {
 
 
 
-                </div>
+      
                 
 
 
                 
-              </div>
-            </div>
-          </div>
+            
+        
+        
         </div>
-      </div>
-    </div>
+
+ 
 
 
     {/* catalodo de emprendimientos */}
