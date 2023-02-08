@@ -206,107 +206,107 @@ const ModalNewEmp = () => {
     let regexFoto = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
 
     if (!form.nombre) {
-      errors.nombre = "El nombre es obligatorio";
+      errors.nombre = "Obligatorio";
       console.log("hola");
     } else if (!regexNombre.test(form.nombre)) {
-      errors.nombre = "El nombre no es valido";
+      errors.nombre = "El nombre ingresado no es valido";
     }
 
     if (!form.rol_esfot) {
-      errors.rol_esfot = "El rol es obligatorio";
+      errors.rol_esfot = "Obligatorio";
       console.log("rol obligatorio");
     } else if (!regexRol.test(form.rol_esfot)) {
-      errors.rol_esfot = "El rol no es valido";
-    }
+      errors.rol_esfot = "El rol ingresado no es valido";
+    } else
 
     //categoria
     if (!form.categoria) {
-      errors.categoria = "La categoria es obligatoria";
+      errors.categoria = "Obligatoria";
     } else if (!regexCategoria.test(form.categoria)) {
-      errors.categoria = "La categoria no es valida";
-    }
+      errors.categoria = "La categoria ingresado no es valida";
+    }else
     //web
 
     if (!form.pagina_web) {
-      errors.pagina_web = "La pagina web es obligatoria";
+      errors.pagina_web = "Obligatoria";
     } else if (!regexWeb.test(form.pagina_web)) {
-      errors.pagina_web = "La pagina web no es valida";
-    }
+      errors.pagina_web = "La pagina web ingresado no es valida";
+    }else
 
     // facebook
     if (!form.facebook) {
-      errors.facebook = "El facebook es obligatorio";
+      errors.facebook = "Obligatorio";
       console.log("facebook obligatorio");
     } else if (!regexFacebook.test(form.facebook)) {
-      errors.facebook = "El facebook no es valido";
-    }
+      errors.facebook = "El facebook ingresado no es valido";
+    }else
 
     //Nombre
 
     // Dirección
 
     if (!form.direccion) {
-      errors.direccion = "La direccion es obligatoria";
+      errors.direccion = "Obligatoria";
     } else if (!regexDireccion.test(form.direccion)) {
-      errors.direccion = "La direccion no es valida";
-    }
+      errors.direccion = "La direccion ingresado no es valida";
+    }else
     //telefono
 
     if (!form.telefono) {
-      errors.telefono = "El telefono es obligatorio";
+      errors.telefono = "Obligatorio";
     } else if (!regexTelefono.test(form.telefono)) {
-      errors.telefono = "El telefono no es valido";
-    }
+      errors.telefono = "El telefono ingresado no es valido";
+    }else
 
     //instagram
     if (!form.instagram) {
-      errors.instagram = "El instagram es obligatorio";
+      errors.instagram = "Obligatorio";
     } else if (!regexInstagram.test(form.instagram)) {
-      errors.instagram = "El instagram no es valido";
-    }
+      errors.instagram = "El instagram ingresado no es valido";
+    }else
     //descripcion
 
     if (!form.descripcion) {
-      errors.descripcion = "La descripcion es obligatoria";
+      errors.descripcion = "Obligatoria";
     } else if (!regexDescripcion.test(form.descripcion)) {
-      errors.descripcion = "La descripcion no es valida";
-    }
+      errors.descripcion = "La descripcion ingresado no es valida";
+    }else
 
     //Cobertura
 
     if (!form.cobertura) {
-      errors.cobertura = "La cobertura es obligatoria";
+      errors.cobertura = "Obligatoria";
     } else if (!regexCobertura.test(form.cobertura)) {
-      errors.cobertura = "La cobertura no es valida";
-    }
+      errors.cobertura = "La cobertura ingresado no es valida";
+    }else
 
     //Whatsapp
 
     if (!form.whatsapp) {
-      errors.whatsapp = "El whatsapp es obligatorio";
+      errors.whatsapp = "Obligatorio";
     } else if (!regexWhatsapp.test(form.whatsapp)) {
-      errors.whatsapp = "El whatsapp no es valido";
+      errors.whatsapp = "El whatsapp ingresado no es valido";
     } else if (form.whatsapp.length > 10) {
       errors.whatsapp = "El whatsapp no puede tener mas de 10 caracteres";
     } else if (form.whatsapp.length < 10) {
       errors.whatsapp = "El whatsapp no puede tener menos de 10 caracteres";
-    }
+    }else
 
     //descuento
 
     if (!form.descuento) {
-      errors.descuento = "El descuento es obligatorio";
+      errors.descuento = "Obligatorio";
     } else if (!regexDescuento.test(form.descuento)) {
-      errors.descuento = "El descuento no es valido";
-    }
+      errors.descuento = "El descuento ingresado no es valido";
+    }else
 
     //imagen
 
     if (!image) {
-      errors.image = "La imagen es obligatoria";
+      errors.image = "Obligatoria";
     } else if (!regexFoto.test(image.name)) {
       console.log(image);
-      errors.image = "La imagen no es valida";
+      errors.image = "La imagen ingresado no es valida";
     }
 
     return errors;
