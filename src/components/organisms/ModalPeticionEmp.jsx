@@ -544,7 +544,7 @@ const ModalNewEmp = () => {
                     />
                   </FormGroup>
                   <p className="error">{errors.descuento}</p>
-
+                  <Label for="descuento">Imagen promocional</Label>
                   <FormGroup>
                     <Input
                       type="file"
