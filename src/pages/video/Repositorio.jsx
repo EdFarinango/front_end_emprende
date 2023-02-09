@@ -135,7 +135,7 @@ const videos = [
 ];
 
 const theme = createTheme();
-const Repositorio = ({ video }) => {
+const Repositorio = ({video}) => {
 
   const [data, setData] = useState([]);
   const token = localStorage.getItem("token");
@@ -396,9 +396,9 @@ if (user){
                       <Grid container spacing={2} justifyContent="center">
                         <Grid item>
                         <ModalVideo 
-                        video={video}
+                       video={item}
                       
-                        setData={setData}
+                        
                      
                         buttonLabel="Editar" type="button" className="btn btn-primary" id={item.id} updateVideo={updateVideo} />
                         </Grid>

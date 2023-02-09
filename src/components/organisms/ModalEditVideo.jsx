@@ -13,36 +13,57 @@ import './styles.css';
 import alert from "sweetalert";
 import FormInput from "../../components/templates/Inputs";
 
-const ModalVideo = () => {
+const ModalVideo = ({video}) => {
 
     const [modal, setModal] = useState(false);
-    const [data, setData] = useState([]);
-    const token = localStorage.getItem('token');
-    const toggle = () => setModal(!modal);
-    
-
-
-
+    const token = localStorage.getItem("token");
     const [form, setForm] = useState({
         nombre: "",
         descripcion: "",
-        url: "",
-      
+        url: ""
+        
     });
+
+    const toggle = () => setModal(!modal);
+
+    const inputs = [
+        {
+            id: 1,
+            name: "nombre",
+            type: "text",
+            label: "Titulo",
+            placeholder: "Titulo del video",
+        },
+        {
+            id: 2,
+            name: "descripcion",
+            type: "text",
+            label: "Descripcion",
+            placeholder: "Descripcion del video",
+        },
+        {
+            id: 3,
+            name: "url",
+            type: "text",
+            label: "Url",
+            placeholder: "Url del video",
+        },
+      
+
+    ];
 
     const handleChange = (e) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value,
         });
-
     };
 
-
-    const onSubmit = async (id) => {
+    const onSubmit = async (e) => {
+        e.preventDefault();
     
         await axios.post(
-            `https://backend-emprende.herokuapp.com/api/v1/videoconferencia/${id}/update`,
+            `https://backend-emprende.herokuapp.com/api/v1/videoconferencia/${video.id}/update`,
             {
                 ...form,
             },
@@ -50,86 +71,29 @@ const ModalVideo = () => {
         );
         alert("El video ha actualizado correctamente").then(() => {
 
-        window.location.reload();
+       
 
-        toggle();
+        
         });
      
     };
 
-  
-   
-
-
-    const getData = async () => {
-        try {
-          const response = await axios
-            .get(`https://backend-emprende.herokuapp.com/api/v1/videoconferencia`, {
-              headers: { 'accept': "application/json", 'authorization': token },
-            });
-            setData(response.data.data.video_conferencias);
-          console.log(response.data.data.video_conferencias);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-    
-
-    const inputs = [
-        {
-          id: 1,
-          name: "nombre",
-          type: "text",
-          placeholder: "Ingrese el nombre",
-          errorMessage: "Debe ingresar un nombre válido!",
-          label: "Titulo",
-          //pattern: "^[A-Za-z]{3,255}$",
-          required: true,
-        
-        },
-        {
-          id: 2,
-          name: "descripcion",
-          type: "text",
-          placeholder: "Descripción del video de la comisión Emprende-ESFOT",
-          errorMessage: "Debe ingresar un apellido válido!",
-          label: "Descripción del video",
-          //pattern: "^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$",
-          required: true,
-      
-        },
-        {
-          id: 3,
-          name: "url",
-          type: "text",
-          placeholder: "Ingrese la dirección del video",
-          errorMessage: "Debe ingresar un apellido válido!",
-          label: "Dirección del video",
-          pattern: "^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$",
-          required: true,
-      
-        }
-      ];
-
-
-
-
-
 
     useEffect(() => {
-        getData();
-    },  [
-        form.nombre = data.nombre,
-        form.descripcion= data.descripcion,
-        form.url= data.url,
+        setForm({
+            nombre: video.nombre,
+            descripcion: video.descripcion,
+            url: video.url,
+           
+        });
+    }, [video]
+
+
+
+
+
+
     
-
-
-
-
-
-    ]
-
     );
 
     return (
@@ -157,7 +121,7 @@ const ModalVideo = () => {
 
         <Button color="info" type="submit">
          
-          Crear
+          Enviar
         </Button>
         
       </Form>
@@ -186,3 +150,8 @@ const ModalVideo = () => {
 }
 
 export default ModalVideo;
+
+
+
+
+
