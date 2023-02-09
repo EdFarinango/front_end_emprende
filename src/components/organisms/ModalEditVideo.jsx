@@ -11,9 +11,9 @@ import Row from 'react-bootstrap/Row';
 import { NativeSelect } from "@mui/material";
 import './styles.css';
 import alert from "sweetalert";
+import FormInput from "../../components/templates/Inputs";
 
-
-const ModalEmp = ({ videos }) => {
+const ModalVideo = () => {
 
     const [modal, setModal] = useState(false);
     const [data, setData] = useState([]);
@@ -23,35 +23,12 @@ const ModalEmp = ({ videos }) => {
 
 
 
-
     const [form, setForm] = useState({
-
-        rol_esfot: emprendimientos.rol_esfot ?? "",
-        nombre: emprendimientos.nombre ?? "",
-        descripcion: emprendimientos.descripcion ?? "",
-        categoria: emprendimientos.categoria ?? "",
-        direccion: emprendimientos.direccion ?? "",
-        cobertura: emprendimientos.cobertura ?? "",
-        pagina_web: emprendimientos.pagina_web ?? "",
-        telefono: emprendimientos.telefono ?? "",
-        whatsapp: emprendimientos.whatsapp ?? "",
-        facebook: emprendimientos.facebook ?? "",
-        instagram: emprendimientos.instagram ?? "",
-        descuento: emprendimientos.descuento ?? "",
-
-
+        nombre: "",
+        descripcion: "",
+        url: "",
+      
     });
-
- 
-
-
-
-
-
-
-
-
-
 
     const handleChange = (e) => {
         setForm({
@@ -62,16 +39,16 @@ const ModalEmp = ({ videos }) => {
     };
 
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
+    const onSubmit = async (id) => {
+    
         await axios.post(
-            `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${emprendimientos.id}/update`,
+            `https://backend-emprende.herokuapp.com/api/v1/videoconferencia/${id}/update`,
             {
                 ...form,
             },
             { headers: { accept: "application/json", authorization: token } }
         );
-        alert("Emprendimiento actualizado correctamente").then(() => {
+        alert("El video ha actualizado correctamente").then(() => {
 
         window.location.reload();
 
@@ -81,48 +58,58 @@ const ModalEmp = ({ videos }) => {
     };
 
   
-    const handleUpload = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-        formData.append('image', image);
-
-        axios.post(`https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${emprendimientos.id}/logo`, formData, {
-            headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' },
-        }
-
-        ).then(response => {
-            const res = response.data;
-            console.log(res);
-            toggle();
-
-        })
-
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
-
-
+   
 
 
     const getData = async () => {
         try {
-            const response = await axios.get(
-                `https://backend-emprende.herokuapp.com/api/v1/emprendimiento`,
-                { headers: { 'accept': 'application/json', 'authorization': token } }
-            );
-
-            setData(response.data.data.emprendimientos)
-
+          const response = await axios
+            .get(`https://backend-emprende.herokuapp.com/api/v1/videoconferencia`, {
+              headers: { 'accept': "application/json", 'authorization': token },
+            });
+            setData(response.data.data.video_conferencias);
+          console.log(response.data.data.video_conferencias);
         } catch (error) {
-            console.log(error);
+          console.log(error);
         }
+      };
+    
 
-    }
-
-
+    const inputs = [
+        {
+          id: 1,
+          name: "nombre",
+          type: "text",
+          placeholder: "Ingrese el nombre",
+          errorMessage: "Debe ingresar un nombre válido!",
+          label: "Titulo",
+          //pattern: "^[A-Za-z]{3,255}$",
+          required: true,
+        
+        },
+        {
+          id: 2,
+          name: "descripcion",
+          type: "text",
+          placeholder: "Descripción del video de la comisión Emprende-ESFOT",
+          errorMessage: "Debe ingresar un apellido válido!",
+          label: "Descripción del video",
+          //pattern: "^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$",
+          required: true,
+      
+        },
+        {
+          id: 3,
+          name: "url",
+          type: "text",
+          placeholder: "Ingrese la dirección del video",
+          errorMessage: "Debe ingresar un apellido válido!",
+          label: "Dirección del video",
+          pattern: "^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$",
+          required: true,
+      
+        }
+      ];
 
 
 
@@ -131,276 +118,49 @@ const ModalEmp = ({ videos }) => {
 
     useEffect(() => {
         getData();
-    }, [])
+    },  [
+        form.nombre = data.nombre,
+        form.descripcion= data.descripcion,
+        form.url= data.url,
+    
+
+
+
+
+
+    ]
+
+    );
 
     return (
         <div>
 
-            <Button className='btnedit' onClick={toggle} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-            </svg></Button>
+            <Button className='btnedit' onClick={toggle} >Editar</Button>
 
 
             <Modal isOpen={modal} toggle={toggle} size="lg">
-                <ModalHeader toggle={toggle}>Editar Emprendimiento</ModalHeader>
+                <ModalHeader toggle={toggle}>Editar video del repositorio</ModalHeader>
                 <ModalBody className="show-grid">
                     <Container>
-                        <Form onSubmit={onSubmit}>
-                            <Row>
+                        
+                    <Form onSubmit={onSubmit} className="form-control">
+        <FormGroup>
+          {inputs.map((input) => (
+            <FormInput
+              key={input.id}
+              {...input}
+              value={form[input.name]}
+              onChange={handleChange}
+            />
+          ))}
+        </FormGroup>
 
-                                <Col xs={6} md={4}>
-                                    <FormGroup >
-
-                                        <InputLabel id="rol_esfot">Rol Esfot</InputLabel>
-
-                                        <NativeSelect
-
-                                            onChange={handleChange}
-                                            defaultValue={form.rol_esfot}
-                                            inputProps={{
-
-                                                name: 'rol_esfot',
-                                                id: 'rol_esfot',
-
-
-                                            }}
-                                        >   <option value={""}></option>
-
-                                            <option value={"Egresado"}>Egresado</option>
-                                            <option value={"Docente"}>Docente</option>
-                                            <option value={"Administrativo"}>Administrativo</option>
-                                            <option value={"Estudiante"}>Estudiante</option>
-                                            <option value={"Otro"}>Otro</option>
-                                        </NativeSelect>
-
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={6} md={4}>
-                                    <FormGroup>
-                                        <Label for="nombre">Nombre</Label>
-                                        <Input
-                                            type="text"
-                                            name="nombre"
-                                            id="nombre"
-                                            placeholder="Nombre"
-                                            value={form.nombre}
-                                            onChange={handleChange}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={6} md={4}>
-                                    <FormGroup>
-                                        <Label for="descripcion">Descripcion</Label>
-                                        <Input
-
-                                            type="text"
-                                            name="descripcion"
-                                            id="descripcion"
-                                            placeholder="Descripcion"
-                                            value={form.descripcion}
-                                            onChange={handleChange}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={6} md={4}>
-                                    <FormGroup>
-
-                                        <InputLabel id='categoria'>Categoria</InputLabel>
-                                        <NativeSelect
-                                            defaultValue={form.categoria}
-                                            onChange={handleChange}
-
-                                            inputProps={{
-
-                                                id: 'categoria',
-                                                name: 'categoria',
-                                            }}
-                                        >
-                                            <option value={""}></option>
-                                            <option value={"Tecnologia"}>Tecnologia</option>
-                                            <option value={"Educacion"}>Educacion</option>
-                                            <option value={"Salud"}>Salud</option>
-                                            <option value={"Agroindustria"}>Agroindustria</option>
-                                            <option value={"Turismo"}>Turismo</option>
-                                            <option value={"Otro"}>Otro</option>
-
-                                        </NativeSelect>
-                                    </FormGroup>
-
-                                </Col>
-
-                                <Col xs={6} md={4}>
-                                    <FormGroup>
-                                        <Label for="direccion">Direccion</Label>
-                                        <Input
-                                            type="text"
-                                            name="direccion"
-                                            id="direccion"
-                                            placeholder="Direccion"
-                                            value={form.direccion === null ? "" : form.direccion}
-                                            onChange={handleChange}
-
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={6} md={4}>
-                                    <FormGroup>
-
-                                        <InputLabel id="cobertura">Cobertura </InputLabel>
-                                        <NativeSelect
-                                            onChange={handleChange}
-                                            value={form.cobertura}
-                                            inputProps={{
-                                                name: 'cobertura',
-                                                id: 'cobertura',
-                                            }}
-                                        >
-                                            <option value={""}></option>
-                                            <option value={"Quito Centro"}>Quito Centro</option>
-                                            <option value={"Quito Norte"}>Quito Norte</option>
-                                            <option value={"Cumbaya - Tumbaco"}>Cumbaya - Tumbaco</option>
-                                            <option value={"Valle de los Chillos"}>Valle de los Chillos</option>
-                                            <option value={"Otro"}>Otro</option>
-
-                                        </NativeSelect>
-                                    </FormGroup>
-                                </Col>
-
-
-                                <Col xs={6} md={4}>
-                                    <FormGroup>
-                                        <Label for="pagina_web">Pagina Web</Label>
-                                        <Input
-                                            type="text"
-                                            name="pagina_web"
-                                            id="pagina_web"
-                                            placeholder="Pagina Web"
-                                            value={form.pagina_web === null ? "" : form.pagina_web}
-                                            onChange={handleChange}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={6} md={4}>
-                                    <FormGroup>
-                                        <Label for="telefono">Telefono</Label>
-                                        <Input
-                                            type="text"
-                                            name="telefono"
-                                            id="telefono"
-                                            placeholder="Telefono"
-                                            value={form.telefono === null ? "" : form.telefono}
-                                            onChange={handleChange}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={6} md={4}>
-                                    <FormGroup>
-                                        <Label for="whatsapp">Whatsapp</Label>
-                                        <Input
-                                            type="text"
-                                            name="whatsapp"
-                                            id="whatsapp"
-                                            placeholder="Whatsapp"
-                                            value={form.whatsapp === null ? "" : form.whatsapp}
-                                            onChange={handleChange}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={6} md={4}>
-                                    <FormGroup>
-                                        <Label for="facebook">Facebook</Label>
-                                        <Input
-
-                                            type="text"
-                                            name="facebook"
-                                            id="facebook"
-                                            placeholder="Facebook"
-                                            value={form.facebook === null ? "" : form.facebook}
-                                            onChange={handleChange}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={6} md={4}>
-                                    <FormGroup>
-                                        <Label for="instagram">Instagram</Label>
-                                        <Input
-                                            type="text"
-                                            name="instagram"
-                                            id="instagram"
-                                            placeholder="Instagram"
-                                            value={form.instagram === null ? "" : form.instagram}
-                                            onChange={handleChange}
-                                        />
-                                    </FormGroup>
-                                </Col>
-                                <Col xs={6} md={4}>
-                                    <FormGroup>
-                                        <Label for="descuento">Descuento</Label>
-                                        <Input
-                                            type="text"
-                                            name="descuento"
-                                            id="descuento"
-                                            placeholder="Descuento"
-                                            value={form.descuento === null ? "" : form.descuento}
-                                            onChange={handleChange}
-                                        />
-                                    </FormGroup>
-
-                                </Col>
-                                <Row>
-                                    <Label for="descuento">Actualizar imagen</Label>
-                                    <Col xs={12} md={8}>
-                                        <FormGroup>
-
-                                            <Input
-                                                type="file"
-                                                name="image"
-                                                id="image"
-                                                placeholder="Imagen"
-
-                                                onChange={(e) => setImage(e.target.files[0])}
-                                            />
-                                            <Button color="primary" onClick={handleUpload} >Actualizar</Button>
-
-
-
-
-
-
-
-
-                                        </FormGroup>
-
-
-                                    </Col>
-                                </Row>
-
-
-                            </Row>
-
-
-                           {/* enviar datso actualizados al otro componente  */}
-                          
-                            <Button color="primary" onClick={onSubmit} >Guardar</Button>
-                            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        </Form>
-
+        <Button color="info" type="submit">
+         
+          Crear
+        </Button>
+        
+      </Form>
 
                     </Container>
 
@@ -425,4 +185,4 @@ const ModalEmp = ({ videos }) => {
 
 }
 
-export default ModalEmp;
+export default ModalVideo;

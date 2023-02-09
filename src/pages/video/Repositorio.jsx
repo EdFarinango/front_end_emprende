@@ -22,6 +22,7 @@ import FormInput from "../../components/templates/Inputs";
 
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/auth/AuthContext";
+import ModalVideo from "../../components/organisms/ModalEditVideo";
 
 
 
@@ -134,13 +135,14 @@ const videos = [
 ];
 
 const theme = createTheme();
-const Repositorio = () => {
+const Repositorio = ({ video }) => {
 
   const [data, setData] = useState([]);
   const token = localStorage.getItem("token");
   const {user} = useContext(AuthContext);
   const [form, setForm] = useState({
-    title: "",
+    nombre: "",
+    descripcion: "",
     url: ""
   });
 
@@ -183,7 +185,7 @@ const Repositorio = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+    console.log(form);
     axios
       .post(`https://backend-emprende.herokuapp.com/api/v1/videoconferencia/create`, form,
       { headers: { accept: "application/json", authorization: token } })
@@ -225,6 +227,17 @@ const Repositorio = () => {
     },
     {
       id: 2,
+      name: "descripcion",
+      type: "text",
+      placeholder: "Descripción del video de la comisión Emprende-ESFOT",
+      errorMessage: "Debe ingresar un apellido válido!",
+      label: "Descripción del video",
+      //pattern: "^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$",
+      required: true,
+  
+    },
+    {
+      id: 3,
       name: "url",
       type: "text",
       placeholder: "Ingrese la dirección del video",
@@ -375,14 +388,19 @@ if (user){
                       >
                         {item.nombre}
                       </Typography>
+                      <Typography align="center">{item.descripcion}</Typography>
+
                       
                     </Box>
                     <Box sx={{ p: 2 }}>
                       <Grid container spacing={2} justifyContent="center">
                         <Grid item>
-                          <Button variant="contained" color="primary">
-                            Ver más
-                          </Button>
+                        <ModalVideo 
+                        video={video}
+                      
+                        setData={setData}
+                     
+                        buttonLabel="Editar" type="button" className="btn btn-primary" id={item.id} updateVideo={updateVideo} />
                         </Grid>
                         <Grid item>
                           <Button variant="outlined" color="primary">
@@ -410,7 +428,7 @@ if (user){
 
 
    
-            <Grid container spacing={4}>
+            {/* <Grid container spacing={4}>
               {videos.map((video) => (
                 <main className="containerVideo my-5 my-md-0 vh-md-100 d-flex align-items-center justify-content-center" 
                 sx = {{backgroundColor: "#f5f5f5"}}
@@ -477,7 +495,7 @@ if (user){
 
                 </main>
               ))}
-            </Grid>
+            </Grid> */}
          
           </Container>
         </main>

@@ -916,7 +916,7 @@ export const CatalogoEmp = () => {
                   src={item.image}
                   alt="fotoEmprendimiento"
                   className="w3-left w3-circle w3-margin-right"
-                  style={{ width: "60px" }}
+                  style={{ width: "500px" }}
                 />
               </div>
             ) : (
@@ -933,7 +933,7 @@ export const CatalogoEmp = () => {
                 src={Logo}
                 alt="fotoEmprendimiento"
                 className="w3-left w3-circle w3-margin-right"
-                style={{ width: "60px" }}
+                style={{ width: "600px" }}
               />
             </div>
           ) : (
