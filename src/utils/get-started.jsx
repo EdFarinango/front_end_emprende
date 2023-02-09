@@ -14,11 +14,11 @@ const GetStarted = (props) => {
 
         <ModalForm
             buttonLabel="Fomulario de Peticion"	
-            className="modal-lg"
+            className="modal-lg animate-left-3 me-3 ms-2"
             updateState={props.updateState}
             item={props.item}
         />
-
+  
 
 
 

@@ -19,7 +19,7 @@ import axios from "axios";
 
 import { Form, FormGroup, Label, Input } from "react-bootstrap";
 import FormInput from "../../components/templates/Inputs";
-import { FacebookProvider, EmbeddedPost } from 'react-facebook';
+
 
 
 
