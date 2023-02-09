@@ -1,7 +1,5 @@
         .footerLand {
-            background-color: #DDE0E345;
             text-align: center;
-            bottom: 0;
             width: 100%;
         }
         
@@ -24,16 +22,55 @@
         }
         
         .mapa {
-            position: relative;
-            margin-bottom: 50px;
-            -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
-            z-index: 1;
-            border-radius: 15px;
-            -webkit-box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
-            box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
-            float: right;
             display: block;
-            margin-right: 50px;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .linktext {
+            color: #15A0A0;
+            text-decoration: none;
+            font-weight: 20px;
+        }
+        
+        .linktext:hover {
+            color: #cf3a2b;
+            text-decoration: none;
+            font-weight: 20px;
+        }
+        
+        .linktextFb {
+            color: #15A0A0;
+            text-decoration: none;
+            font-weight: 20px;
+        }
+        
+        .linktextFb:hover {
+            color: blue;
+            text-decoration: none;
+            font-weight: 20px;
+            size: 20px;
+        }
+        
+        .textUb {
+            color: #15A0A0;
+            text-decoration: none;
+            font-weight: 20px;
+            font-size: 32px;
+            display: block;
             margin-bottom: 50px;
+        }
+        
+        .imageFooter {
+            margin-bottom: 50px;
+            margin-top: 50px;
+            padding: 20px 100px 20px 100px;
+        }
+        
+        .imagecontainer {
+            display: block;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
         }
