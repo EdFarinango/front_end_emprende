@@ -1,6 +1,7 @@
         .footerLand {
             text-align: center;
             width: 100%;
+            background-color: #eee;
         }
         
         .bold {
@@ -65,12 +66,12 @@
         .imageFooter {
             margin-bottom: 50px;
             margin-top: 50px;
-            padding: 20px 100px 20px 100px;
+            padding: 50px 50px 10px;
         }
         
         .imagecontainer {
             display: block;
-            width: 60%;
+            width: 30%;
             margin-left: auto;
             margin-right: auto;
         }

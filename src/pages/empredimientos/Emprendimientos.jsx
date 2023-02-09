@@ -73,10 +73,10 @@ export const Emprendimientos = ({ emprendimientos }) => {
   return (
     <>
       <div
-        className="h-screen w3-content w3-padding contp"
+        className="h-screen w3-content w3-padding contp h-100"
         style={{ maxWidth: 1400, marginTop: 25 }}
       >
-        <div className="w3-card w3-round w3-white w3-padding-32 w3-center">
+        <div className=" w3-round w3-white w3-padding-32 w3-center">
           <div className="container-fluid containerEmp">
             <h4 className="card-title">Catalogo de Emprendimientos</h4>
 
@@ -93,11 +93,14 @@ export const Emprendimientos = ({ emprendimientos }) => {
             />
           </div>
         </div>
-        <footer className="w3-container w3-theme-d3 w3-padding-16">
-          <Footer />
-        </footer>
+        
       </div>
-    </>
+      <footer>
+    
+          <Footer />
+       
+      </footer>
+          </>
   );
 };
 export default Emprendimientos;

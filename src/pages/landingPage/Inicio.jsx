@@ -7,7 +7,7 @@ import Main from '../../components/main-section';
 export const Inicio = () => {
          
     return (
-<div >
+<div className="App">
       <Main />
       <Footer/>
     </div>
