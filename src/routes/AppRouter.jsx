@@ -63,7 +63,11 @@ export const AppRouter = () => {
         />
 
         <Route element={<AuthRecovery />}>
-          <Route path="/confirmarCon" element={<ConfirmPassword />} />
+          <Route path="/confirmarCon" element={
+          <ConfirmPassword />} />
+          <Route> 
+            <Route path="/confirmarCon/*" element={<Login />} />
+          </Route>
         </Route>
 
         <Route
