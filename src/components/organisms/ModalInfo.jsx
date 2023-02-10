@@ -67,7 +67,7 @@ const ModalInfo = () => {
         </svg>
       </Button>
 
-      <Modal isOpen={modal} toggle={toggle} size="lg">
+      <Modal isOpen={modal} toggle={toggle} size="ls">
         <ModalHeader toggle={toggle}>EmPreNde</ModalHeader>
         <ModalBody className="show-grid">
           <Container>
@@ -119,14 +119,7 @@ const ModalInfo = () => {
                       )}
                     </p>
 
-                    <div className="w3-half">
-                    <img
-                      src={avatar}
-                      style={{ width: "100%", height: "100%" }}
-                      alt="Northern Lights"
-                      className="w3-margin-bottom"
-                    />
-                    </div>
+                    
                    
                      {/*<p className="w3-opacity">Descripcion</p>
                     <p>{data.descripcion}</p>

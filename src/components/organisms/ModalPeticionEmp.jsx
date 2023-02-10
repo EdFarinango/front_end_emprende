@@ -165,7 +165,7 @@ const ModalNewEmp = () => {
 
     let regexNombre = /^[a-zA-ZÀ-ÿ\s]{3,255}$/; // Letras y espacios, pueden llevar acentos.
     let regexTelefono = /^\d{9,10}$/; // 7 a 14 numeros.
-    let regexWeb =  /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/; //  ;
+    //let regexWeb =  /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/; //  ;
     let regexDescuento = /^[0-9]{1,2}$/;
     let regexRol = /^[a-zA-ZÀ-ÿ\s]{1,18}$/;
     //let regexCobertura = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
@@ -209,9 +209,7 @@ const ModalNewEmp = () => {
 
     if (!form.pagina_web) {
       errors.pagina_web = "Obligatoria";
-    } else if (!regexWeb.test(form.pagina_web)) {
-      errors.pagina_web = "La pagina web ingresado no es valida";
-    }else
+    } else
 
     // facebook
     if (!form.facebook) {
