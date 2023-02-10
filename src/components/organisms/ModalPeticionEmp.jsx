@@ -93,26 +93,40 @@ const ModalNewEmp = () => {
           }
         )
         .then((response) => {
-          console.log("sss", form);
-          console.log("sss", data);
-          const res = response;
+          setModal(!modal);
 
-          //console.log("hey",response.data.data.emprendimiento);
+   
           alert({
             title: "Emprende",
             text: "El emprendimiento se ha creado correctamente",
             icon: "success",
             button: false,
           });
+            window.location.reload();
         })
         .catch((error) => {
-          console.log("uno",form);
-          console.log("dod",error);
-          console.log("ftr",error.response.status);
-          if (error.response.status === 422) {
+          if (error.response.data.message === 'El campo image no debe ser mayor que 512 kilobytes.') {
+            alert({
+              title: "Emprende",
+              text: "Peso máximo del archivo 512kb, por favor seleccione una imagen mas liviana",
+              icon: "error",
+              button: false,
+            });
+          }else 
+
+
+ 
+          if (error.response.statusText === "Unprocessable Content") {
             alert({
               title: "Emprende",
               text: "No se puede enviar un formulario vacio.",
+              icon: "error",
+              button: false,
+            });
+          } else {
+            alert({
+              title: "Emprende",
+              text: "Ha ocurrido un error, por favor intente más tarde.",
               icon: "error",
               button: false,
             });
@@ -385,12 +399,12 @@ const ModalNewEmp = () => {
                       }}
                     >
                       <option value={""}></option>
-                      <option value={"Tecnologia"}>Tecnologia</option>
+                      <option value={"Alimentación"}>Alimentación</option>
                       <option value={"Educacion"}>Educacion</option>
-                      <option value={"Salud"}>Salud</option>
-                      <option value={"Agroindustria"}>Agroindustria</option>
-                      <option value={"Turismo"}>Turismo</option>
-                      <option value={"Otro"}>Otro</option>
+                      <option value={"Tecnología"}>Tecnología</option>
+                      <option value={"Textil"}>Textil</option>
+                      <option value={"Hogar y Limpieza"}>Hogar y Limpieza</option>
+                      <option value={"Otro"}>Otros</option>
                     </NativeSelect>
                   </FormGroup>
                   <p className="error">{errors.categoria}</p>

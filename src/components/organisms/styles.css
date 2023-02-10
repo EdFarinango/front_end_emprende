@@ -158,6 +158,17 @@
     color: #000;
     font-size: 16px;
     cursor: pointer;
+    margin-right: 25px;
+}
+
+.btneditEmp {
+    background: #f5f5f5;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .btn-peticion :hover {
@@ -189,13 +200,21 @@
 }
 
 .primary-btn {
+    background: #f5f5f5;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
     display: inline-block;
     padding: 10px 30px;
-    background: #6cdfc2;
     color: #fff;
-    font-size: 16px;
     font-weight: 500;
-    border-radius: 5px;
-    cursor: pointer;
     transition: all 0.3s ease 0s;
+    margin-right: 25px;
+}
+
+.btneditEmp :hover {
+    background: #ccc;
 }

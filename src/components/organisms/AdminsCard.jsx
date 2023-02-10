@@ -17,7 +17,7 @@ import ModalForm2 from './ModalNewAd';
 
 import "./styles.css";
 import alert from "sweetalert";
-import Loading from '../templates/Loading'
+import Loading from '../atoms/Loading';
 
 const AdminCard = () => {
   const [admins, setAdmin] = useState([]);
@@ -147,9 +147,10 @@ const AdminCard = () => {
     getAdmin();
   }, []);
 
-  if (!loading ) {
-  
-    return <Loading />;
+  if (!loading) {
+    return (<div className="container-fluid contentLoading">
+    <Loading />
+  </div>);
   }
 
   return (
@@ -193,18 +194,7 @@ const AdminCard = () => {
               {/* Team Thumb*/}
               <div className="advisor_thumb">
                 <img src={admin.image} alt="" />
-                {/* Social Info*/}
-                <div className="social-info">
-                  <a href="#">
-                    <i className="fa fa-edit" />
-                  </a>
-                  <a href="#">
-                    <i className="fa fa-twitter" />
-                  </a>
-                  <a href="#">
-                    <i className="fa fa-linkedin" />
-                  </a>
-                </div>
+                
               </div>
               {/* Team Details*/}
               <div className="single_advisor_details_info">
@@ -215,14 +205,76 @@ const AdminCard = () => {
                   {admin.state === 1 ? "Activo" : "Inactivo"}
                 </p>
                 <div className="line" />
+                <div className="d-flex justify-content-center w3-padding separacion">
                 {admin.id !== user.id && (
                   <Button
                     variant="primary"
-                    className="text-center"
+                    className="btnedit btn-secondary"
                     onClick={() => deleteSuAdmin(admin.id, admin.state)}
                   >
                     {" "}
-                    {admin.state === 1 ? "Desactivar" : "Activar"}
+                    {admin.state === 1 ?  
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.62 16L11.12 17.5L14.37 14.5"
+                          stroke="black"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M8.80994 2L5.18994 5.63M15.1899 2L18.8099 5.63"
+                          stroke="black"
+                          stroke-width="1.5"
+                          stroke-miterlimit="10"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M2 7.84998C2 5.99998 2.99 5.84998 4.22 5.84998H19.78C21.01 5.84998 22 5.99998 22 7.84998C22 9.99998 21.01 9.84998 19.78 9.84998H4.22C2.99 9.84998 2 9.99998 2 7.84998Z"
+                          stroke="black"
+                          stroke-width="1.5"
+                        />
+                        <path
+                          d="M3.5 10L4.91 18.64C5.23 20.58 6 22 8.86 22H14.89C18 22 18.46 20.64 18.82 18.76L20.5 10"
+                          stroke="black"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                        />
+                      </svg> : 
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8.49994 14.25C8.49994 16.17 10.0799 17.75 11.9999 17.75C13.9199 17.75 15.4999 16.17 15.4999 14.25M8.80994 2L5.18994 5.63M15.1899 2L18.8099 5.63"
+                          stroke="black"
+                          stroke-width="1.5"
+                          stroke-miterlimit="10"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M2 7.84998C2 5.99998 2.99 5.84998 4.22 5.84998H19.78C21.01 5.84998 22 5.99998 22 7.84998C22 9.99998 21.01 9.84998 19.78 9.84998H4.22C2.99 9.84998 2 9.99998 2 7.84998Z"
+                          stroke="black"
+                          stroke-width="1.5"
+                        />
+                        <path
+                          d="M3.5 10L4.91 18.64C5.23 20.58 6 22 8.86 22H14.89C18 22 18.46 20.64 18.82 18.76L20.5 10"
+                          stroke="black"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                        />
+                      </svg>}
                   </Button>
                 )}
                 {admin.id === user.id && (
@@ -254,6 +306,7 @@ const AdminCard = () => {
 
                 
                 }
+                </div>
                
               </div>
             </div>

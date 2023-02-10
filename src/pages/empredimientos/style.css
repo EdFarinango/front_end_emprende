@@ -264,7 +264,7 @@ body {
 }
 
 .active {
-    margin-top: -10px;
+    margin-top: -8px;
 }
 
 .content {
@@ -289,7 +289,7 @@ body {
     height: 2px;
     background: #eee;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
 }
 
 
@@ -415,80 +415,6 @@ dd {
     align-items: center;
 }
 
-.buy-link {
-    display: inline-block;
-    background-color: #F8D456;
-    border-radius: 6px;
-    padding: 15px 25px;
-    position: relative;
-    margin-right: 30px;
-    border-bottom-width: 0;
-    border: 2px solid #F8D456;
-}
-
-.buy-link:hover {
-    background-color: inherit;
-    border: 2px solid #F8D456;
-}
-
-.buy-link:focus {
-    background-color: #F8D456;
-    border: 2px solid #0D0417;
-}
-
-.buy-link:disabled {
-    background-color: #E5E4E1;
-    color: #A6A5A2;
-}
-
-.availability-link {
-    text-decoration: none;
-    font-weight: 500;
-    line-height: 19px;
-    color: #0D0417;
-}
-
-.availability-link:focus {
-    text-decoration: underline;
-    text-decoration-color: #F8D456;
-}
-
-.availability-link:visited {
-    color: #797980;
-}
-
-.availability-link:disabled {
-    color: #B6B6BF;
-}
-
-.availability-link::after {
-    content: "";
-    width: 18px;
-    height: 18px;
-    background-image: url("https://raw.githubusercontent.com/jenyadev3/card/f3100e3316866811507796cf04830e95672c1b9c/images/arrow%20left.svg");
-    background-color: white;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
-    background-size: 3px 6px;
-    border-radius: 50%;
-    margin-left: 20px;
-}
-
-.availability-link:hover::after {
-    content: "";
-    width: 18px;
-    height: 18px;
-    background-image: url("https://raw.githubusercontent.com/jenyadev3/card/f3100e3316866811507796cf04830e95672c1b9c/images/arrow%20left.svg");
-    background-color: #F8D456;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
-    background-size: 3px 6px;
-    border-radius: 50%;
-    margin-left: 20px;
-}
-
 .imgEmprendimiento {
     width: 100%;
     height: 100%;
@@ -505,10 +431,9 @@ dd {
 
 .divHr {
     width: 100%;
-    height: 2px;
+    height: 1px;
     background: #eee;
     margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .spanDesc {

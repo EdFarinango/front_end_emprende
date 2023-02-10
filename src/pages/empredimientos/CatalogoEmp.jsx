@@ -11,9 +11,9 @@ import "./style.css";
 import "./responsive";
 
 import "react-slideshow-image/dist/styles.css";
-import { Slide } from "react-slideshow-image";
+
 import Footer from "../../components/footer";
-import FacebookIcon from "@mui/icons-material/Facebook";
+
 import Logo from "../../components/assets/logo.png";
 
 import { useRef } from "react";
@@ -24,7 +24,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import Cupon from "../../components/assets/cupon.png";
+
+import Loading from "../../components/atoms/Loading";
+
 
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 
@@ -34,11 +36,13 @@ export const CatalogoEmp = () => {
   const [search, setSearch] = useState("");
   const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const searcher = (e) => {
     setSearch(e.target.value);
   };
   const getData = async () => {
+    setLoading(false);
     try {
       const response = await axios.get(
         `https://backend-emprende.herokuapp.com/api/v1/emprendimiento`,
@@ -49,21 +53,55 @@ export const CatalogoEmp = () => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(true);
+  };
+  const del = (e) => {
+    setSearch("");
   };
 
   const dato = !search
     ? data
     : data.filter((dato) =>
-        dato.nombre.toLowerCase().includes(search.toLocaleLowerCase())
+        dato.categoria.toLowerCase().includes(search.toLocaleLowerCase())
       );
 
   useEffect(() => {
     getData();
   }, []);
 
+  if (!loading) {
+    return (<div className="container-fluid contentLoading">
+    <Loading />
+  </div>);
+  }
+
   return (
     <>
-      <div className="w3-container w3-padding">
+ <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
+              <div className="w3-col m12">
+                <div className="w3-card w3-round w3-white">
+                  <div className="w3-container w3-padding">
+                    <h2 className="w3-opacity center">Emprendimientos a tu servicio</h2>
+                    <div className="col-12">
+                        <div className="float-right">
+                          <div className="input-group mb-3">
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Buscar"
+                              aria-label="Buscar"
+                              aria-describedby="basic-addon2"
+                              value={search}
+                              onChange={searcher}
+                              onBlur={del}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="input-group rounded">
+
+                
         <Swiper
           cssMode={true}
           navigation={true}
@@ -78,21 +116,28 @@ export const CatalogoEmp = () => {
                 <div
                   className="card"
                   style={{
-                    height: "400px",
+                    height: "450x",
                     width: "auto",
                     margin: "auto",
                     borderRadius: "10px",
                   }}
                 >
+                  
                   <img
                     src={item.image}
-                    className="card-img-top"
-                    alt="..."
-                    style={{ height: "250px", borderRadius: "10px" }}
+                    className="card-img-bottom"
+                    alt="imgEmprendimiento"
+                    style={{ height: "300px" , borderRadius: "10px"}}
                   />
+                  
                   <div className="card-body">
                     <h5 className="card-title">{item.nombre}</h5>
-                    <p className="card-text">{item.descripcion}</p>
+                    <p className="card-text">{item.descripcion}
+                    
+                    
+                    
+                    </p>
+                    
                   </div>
                 </div>
               </SwiperSlide>
@@ -103,13 +148,28 @@ export const CatalogoEmp = () => {
         </Swiper>
       </div>
 
+
+
+
+                    </div>
+                   
+
+                  </div>
+                </div>
+              </div>
+        
+      
       {/* catalodo de emprendimientos */}
+     
       <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
+        
         <div className="w3-col">
           <div className="w3-row-padding">
             <div className="w3-col m12">
               <div className="w3-card w3-round w3-white">
-                
+          
+                     
+                   
               </div>
             </div>
           </div>
@@ -941,23 +1001,7 @@ export const CatalogoEmp = () => {
           )}
         </div>
 
-        {/* <div className="w3-col ">
-            <img src={Logo} alt="Avatar" style={{ width: "100%" }} />
-
-            <br />
-
-            <br />
-            <div className="w3-card w3-round w3-white w3-padding-16 w3-center">
-              <p>ADS</p>
-            </div>
-            <br />
-            <div className="w3-card w3-round w3-white w3-padding-32 w3-center">
-              <p>
-                <i className="fa fa-bug w3-xxlarge" />
-              </p>
-            </div>
        
-          </div> */}
 
         <br />
 

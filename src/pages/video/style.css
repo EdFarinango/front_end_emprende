@@ -11,6 +11,18 @@
             padding-top: 5%;
         }
         
-        img .imgAling {
+        .imgAling {
             vertical-align: text-top;
+            padding-right: 25px;
+        }
+        
+        .containerForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+            width: 100vw;
+            /*background-color: #000;*/
+            padding-top: 5%;
         }

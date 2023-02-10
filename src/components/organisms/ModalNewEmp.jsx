@@ -62,7 +62,7 @@ const ModalNewEmp = () => {
     e.preventDefault();
 
     if (Object.keys(errors).length === 0) {
-      console.log("No hay errores");
+  
       const formData = new FormData();
       formData.append("rol_esfot", form.rol_esfot);
       formData.append("nombre", form.nombre);
@@ -91,23 +91,34 @@ const ModalNewEmp = () => {
           }
         )
         .then((response) => {
-          console.log("sss", form);
-          console.log("sss", data);
-          const res = response;
+          setModal(!modal);
 
-          //console.log("hey",response.data.data.emprendimiento);
+        
           alert({
             title: "Emprende",
             text: "El emprendimiento se ha creado correctamente",
             icon: "success",
             button: false,
+            timer: 3000,
           });
+          window.location.reload();
+          
         })
         .catch((error) => {
-          console.log("uno",form);
-          console.log("dod",error);
-          console.log("ftr",error.response.status);
-          if (error.response.status === 422) {
+          
+
+          if (error.response.data.message === 'El campo image no debe ser mayor que 512 kilobytes.') {
+            alert({
+              title: "Emprende",
+              text: "Peso máximo del archivo 512kb, por favor seleccione una imagen mas liviana",
+              icon: "error",
+              button: false,
+            });
+          }else 
+
+
+ 
+          if (error.response.statusText === "Unprocessable Content") {
             alert({
               title: "Emprende",
               text: "No se puede enviar un formulario vacio.",
@@ -384,11 +395,11 @@ const ModalNewEmp = () => {
                       }}
                     >
                       <option value={""}></option>
-                      <option value={"Tecnologia"}>Alimentación</option>
+                      <option value={"Alimentación"}>Alimentación</option>
                       <option value={"Educacion"}>Educacion</option>
-                      <option value={"Salud"}>Tecnología</option>
-                      <option value={"Agroindustria"}>Textil</option>
-                      <option value={"Turismo"}>Hogar y Limpieza</option>
+                      <option value={"Tecnología"}>Tecnología</option>
+                      <option value={"Textil"}>Textil</option>
+                      <option value={"Hogar y Limpieza"}>Hogar y Limpieza</option>
                       <option value={"Otro"}>Otros</option>
                     </NativeSelect>
                   </FormGroup>

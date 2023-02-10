@@ -63,22 +63,27 @@ const ModalEmp = ({ emprendimientos }) => {
 
 
     const onSubmit = async (e) => {
-        e.preventDefault();
-        await axios.post(
-            `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${emprendimientos.id}/update`,
-            {
-                ...form,
-            },
-            { headers: { accept: "application/json", authorization: token } }
-        );
-        alert("Emprendimiento actualizado correctamente").then(() => {
+        try {
+            e.preventDefault();
+            const response = await axios.post(
+                `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${emprendimientos.id}/update`,
+                {
+                    ...form,
+                },
+                { headers: { accept: "application/json", authorization: token } }
+            );
+            alert("Emprendimiento actualizado correctamente").then(() => {
 
-        window.location.reload();
+                window.location.reload();
 
-        toggle();
-        });
-     
+                toggle();
+            });
+
+        }	catch (error) {
+            console.log(error);
+        }
     };
+        
 
   
     const handleUpload = (e) => {
@@ -136,10 +141,10 @@ const ModalEmp = ({ emprendimientos }) => {
     return (
         <div>
 
-            <Button className='btnedit' onClick={toggle} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+            <button className='btneditEmp' onClick={toggle} ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                 <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-            </svg></Button>
+            </svg></button>
 
 
             <Modal isOpen={modal} toggle={toggle} size="lg">
@@ -217,13 +222,13 @@ const ModalEmp = ({ emprendimientos }) => {
                                                 name: 'categoria',
                                             }}
                                         >
-                                            <option value={""}></option>
-                                            <option value={"Tecnologia"}>Tecnologia</option>
-                                            <option value={"Educacion"}>Educacion</option>
-                                            <option value={"Salud"}>Salud</option>
-                                            <option value={"Agroindustria"}>Agroindustria</option>
-                                            <option value={"Turismo"}>Turismo</option>
-                                            <option value={"Otro"}>Otro</option>
+                                           <option value={""}></option>
+                      <option value={"Alimentación"}>Alimentación</option>
+                      <option value={"Educacion"}>Educacion</option>
+                      <option value={"Tecnología"}>Tecnología</option>
+                      <option value={"Textil"}>Textil</option>
+                      <option value={"Hogar y Limpieza"}>Hogar y Limpieza</option>
+                      <option value={"Otro"}>Otros</option>
 
                                         </NativeSelect>
                                     </FormGroup>
@@ -261,7 +266,7 @@ const ModalEmp = ({ emprendimientos }) => {
                                             <option value={"Quito Norte"}>Quito Norte</option>
                                             <option value={"Cumbaya - Tumbaco"}>Cumbaya - Tumbaco</option>
                                             <option value={"Valle de los Chillos"}>Valle de los Chillos</option>
-                                            <option value={"Otro"}>Otro</option>
+                                            <option value={"Otros"}>Otros</option>
 
                                         </NativeSelect>
                                     </FormGroup>
@@ -348,8 +353,20 @@ const ModalEmp = ({ emprendimientos }) => {
                                     </FormGroup>
 
                                 </Col>
-                                <Row>
-                                    <Label for="descuento">Actualizar imagen</Label>
+                                
+
+
+                            </Row>
+
+
+                           {/* enviar datso actualizados al otro componente  */}
+                          
+                            <Button color="primary" onClick={onSubmit} >Guardar</Button>
+                            
+
+                            <Row>
+                                <hr   style={{color: 'black', backgroundColor: 'black', height: 1, marginTop: "12px"}}/>
+                                    <Label for="descuento">Solamente si es necesario actualizar la imagen</Label>
                                     <Col xs={12} md={8}>
                                         <FormGroup>
 
@@ -361,7 +378,7 @@ const ModalEmp = ({ emprendimientos }) => {
 
                                                 onChange={(e) => setImage(e.target.files[0])}
                                             />
-                                            <Button color="primary" onClick={handleUpload} >Actualizar</Button>
+                                            <Button color="primary" onClick={handleUpload} className="mt-3">Actualizar Imagen</Button> 
 
 
 
@@ -375,17 +392,6 @@ const ModalEmp = ({ emprendimientos }) => {
 
                                     </Col>
                                 </Row>
-
-
-                            </Row>
-
-
-                           {/* enviar datso actualizados al otro componente  */}
-                          
-                            <Button color="primary" onClick={onSubmit} >Guardar</Button>
-                            
-
-
 
 
 

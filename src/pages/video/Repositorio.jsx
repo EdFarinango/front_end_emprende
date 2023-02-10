@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Link from "@mui/material/Link";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState, useEffect } from "react";
 
@@ -16,28 +16,18 @@ import { Box } from "@mui/system";
 import "./style.css";
 import axios from "axios";
 
-import { Form, FormGroup, Label, Input } from "react-bootstrap";
+import { Form, FormGroup, Label, Input, Card } from "react-bootstrap";
 import FormInput from "../../components/templates/Inputs";
 
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import ModalVideo from "../../components/organisms/ModalEditVideo";
 import Loading from "../../components/atoms/Loading";
-import Buho from "../../components/assets/buho.png"
-import { Image } from "@mui/icons-material";
+import Buho from "../../components/assets/buho.png";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import Footer from "../../components/footer";
+
+import alert from "sweetalert"
 
 const theme = createTheme();
 const Repositorio = ({ video }) => {
@@ -58,10 +48,6 @@ const Repositorio = ({ video }) => {
     });
   };
 
-  const regrasarArriba = () => {
-    window.scrollTo(0, 0);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(form);
@@ -72,13 +58,18 @@ const Repositorio = ({ video }) => {
         { headers: { accept: "application/json", authorization: token } }
       )
       .then((response) => {
-   
         getData();
         alert({
           title: "Video agregado correctamente",
           icon: "success",
+          timer: 2000,
+        });
+        setForm({
+          nombre: "",
+          descripcion: "",
+          url: "",
+        });
 
-        })
       })
       .catch((error) => {
         console.log(error);
@@ -154,13 +145,9 @@ const Repositorio = ({ video }) => {
     getData();
   }, []);
 
-if (loading) {
-    return (
-      <Loading/>
-    );
-  } else
-
-  if (user) {
+  if (loading) {
+    return <Loading />;
+  } else if (user) {
     return (
       <>
         <ThemeProvider theme={theme}>
@@ -168,68 +155,77 @@ if (loading) {
           <main>
             {/* Hero unit */}
             <div>
-          <Container maxWidth="lg">
-            
+
+           
+            </div>
+              <Container maxWidth="lg" className="containerForm">
                 <Container maxWidth="sm">
-               
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-          
-            <Box sx={{ width: "100%" }}>
-              
-              <Form onSubmit={handleSubmit} className="form-control">
-              <h2>Formulario de Registro de videos</h2>
-                <FormGroup>
-                  {inputs.map((input) => (
-                    <FormInput
-                      key={input.id}
-                      {...input}
-                      value={form[input.name]}
-                      onChange={handleInputChange}
-                    />
-                  ))}
-                </FormGroup>
+                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <Box sx={{ width: "100%" }}>
+                      <Form
+                        onSubmit={handleSubmit}
+                        className="form-control w3-animate-zoom w3-padding"
+                      >
+                        <h2>Formulario de Registro de videos</h2>
+                        <FormGroup>
+                          {inputs.map((input) => (
+                            <FormInput
+                              key={input.id}
+                              {...input}
+                              value={form[input.name]}
+                              onChange={handleInputChange}
+                            />
+                          ))}
+                        </FormGroup>
 
-                <Button color="info" type="submit">
-                  Ingresar
-                </Button>
-              </Form>
-            </Box>
-          </Box>
-
+                        <Button color="info" type="submit">
+                          Guardar
+                        </Button>
+                      </Form>
+                    </Box>
+                  </Box>
                 </Container>
-              </Container>         
+              </Container>
 
+              <br />
+              <div className="w3-row-padding">
+              <div className="w3-col m12">
+                <div className="w3-card w3-round w3-white">
+                  <div className="w3-container w3-padding">
+                    
 
-             
-          
-          <br />
-
-       
+                  
               <Container
-                maxWidth="sm"
+                maxWidth="lg"
                 sx={{ mt: 4, mb: 2, display: "flex", flexDirection: "column" }}
+                className="d-flex justify-content-center w3-padding"
               >
+               
                 <Typography
-                  component="h1"
-                  variant="h2"
+                  component="h4"
+                  variant="h4"
                   align="center"
                   color="text.primary"
                   gutterBottom
                 >
-                 
-                  <img src = {Buho} alt = "logo" width = "150" height = "150" className="d-inline-block align-top imgAling" />
-                  Videos de la comisión Emprende-ESFOT
+                   <img
+                    src={Buho}
+                    alt="logo"
+                    width="150"
+                    height="150"
+                    className="d-inline-block align-top imgAling"
+                  />
+                  Videoconferencias organizadas por comisión Emprende-ESFOT
                 </Typography>
-                <Typography
-                  variant="h5"
-                  align="center"
-                  color="text.secondary"
-                  paragraph
-                >
-                  Aquí encontrarás los videos de la comisión Emprende-ESFOT
-                </Typography>
+                
+               
               </Container>
-
+                    
+                  </div>
+                </div>
+              </div>
+             
+            
               
             </div>
             <Container sx={{ py: 8 }} maxWidth="lg">
@@ -275,40 +271,19 @@ if (loading) {
                               type="button"
                               className="btn btn-primary"
                               id={item.id}
-                            
                             />
                           </Grid>
-                          
                         </Grid>
                       </Box>
                     </Box>
                   </Grid>
                 ))}
               </Grid>
-
-              
             </Container>
           </main>
           {/* Footer */}
           <footer>
-            <Typography variant="h6" align="center" gutterBottom>
-              Footer
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              align="center"
-              color="text.secondary"
-              component="p"
-            >
-              Something here to give the footer a purpose!
-            </Typography>
-            <Box sx={{ mt: 5 }}>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                align="center"
-              ></Typography>
-            </Box>
+            <Footer />
           </footer>
           {/* End footer */}
         </ThemeProvider>
@@ -322,7 +297,15 @@ if (loading) {
         <main>
           {/* Hero unit */}
           <div>
-            <Container maxWidth="sm">
+          <div className="w3-row-padding">
+              <div className="w3-col m12">
+                <div className="w3-card w3-round w3-white">
+                  <div className="w3-container w3-padding">
+    
+
+                    <div class="input-group rounded">
+
+ <Container maxWidth="sm">
               <Typography
                 component="h1"
                 variant="h2"
@@ -342,6 +325,17 @@ if (loading) {
                 realizados por Emprende.
               </Typography>
             </Container>
+
+
+
+                    </div>
+                    
+
+                  </div>
+                </div>
+              </div>
+            </div>
+           
           </div>
           <Container sx={{ py: 8 }} maxWidth="lg">
             <Grid container spacing={12}>
@@ -373,46 +367,21 @@ if (loading) {
                       >
                         {item.nombre}
                       </Typography>
-                      <Typography align="center">
-                        {item.descripcion}
-                      </Typography>
-                      
-
+                      <Typography align="center">{item.descripcion}</Typography>
                     </Box>
-                    
                   </Box>
                 </Grid>
               ))}
             </Grid>
-
           </Container>
         </main>
-        {/* Footer */}
+
         <footer>
-          <Typography variant="h6" align="center" gutterBottom>
-            Footer
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            align="center"
-            color="text.secondary"
-            component="p"
-          >
-            Something here to give the footer a purpose!
-          </Typography>
-          <Box sx={{ mt: 5 }}>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              align="center"
-            ></Typography>
-          </Box>
+          <Footer />
         </footer>
-        {/* End footer */}
       </ThemeProvider>
     );
   }
-
 };
 
 export default Repositorio;
