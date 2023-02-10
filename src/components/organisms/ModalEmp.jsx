@@ -97,14 +97,43 @@ const ModalEmp = ({ emprendimientos }) => {
         }
 
         ).then(response => {
-            const res = response.data;
-            console.log(res);
-            toggle();
+            setModal(!modal);
+
+        
+            alert({
+              title: "Emprende",
+              text: "La imagen se actualizó correctamente",
+              icon: "success",
+              button: false,
+              timer: 3000,
+            });
+            window.location.reload();
+            
 
         })
 
             .catch(error => {
                 console.log(error);
+                if (error.response.data.message === 'El campo image no debe ser mayor que 512 kilobytes.') {
+                    alert({
+                      title: "Emprende",
+                      text: "Peso máximo del archivo 512kb, por favor seleccione una imagen mas liviana",
+                      icon: "error",
+                      button: false,
+                    });
+                  }else 
+
+
+ 
+                  if (error.response.statusText === "Unprocessable Content") {
+                    alert({
+                      title: "Emprende",
+                      text: "Debe elejir una imagen para enviarla.",
+                      icon: "error",
+                      button: false,
+                    });
+                    //fotos
+                  }
             });
     }
 

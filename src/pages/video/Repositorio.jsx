@@ -145,8 +145,18 @@ const Repositorio = ({ video }) => {
     getData();
   }, []);
 
+
+
+
+
+
+
+
+
   if (loading) {
-    return <Loading />;
+    return (<div className="container-fluid contentLoading">
+    <Loading />
+  </div>);
   } else if (user) {
     return (
       <>

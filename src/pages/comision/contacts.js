@@ -32,6 +32,12 @@ const contacts = [
       imgUrl: "https://i1.rgstatic.net/ii/profile.image/1173016520212482-1656680340860_Q512/Aracely-Yandun.jpg",
       descripcion: "Docente",
       email: "aracely.yandun@epn.edu.ec"
+    },
+    {
+      name: "Elisa Vinueza",
+      imgUrl: "https://static.vecteezy.com/system/resources/previews/001/205/634/non_2x/owl-png.png",
+      descripcion: "Pasante",
+      email: "elisa.vinueza@epn.edu.ec"
     }
   ];
   
