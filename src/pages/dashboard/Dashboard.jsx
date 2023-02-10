@@ -19,6 +19,8 @@ import { Row} from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import ModalInfo from "../../components/organisms/ModalInfo";
+import ModalPswd from "../../components/organisms/ModalPswd";
+import ModalAvatar from "../../components/organisms/ModalAvatar";
 
 const useStyles = makeStyles({
   root: {
@@ -136,11 +138,16 @@ export const Dashboard = () => {
 
               <CardContent>
                 <ModalInfo
-                  title="Perfil de administrador"
-                  body="Podra visualizar sus datos actualizar su perfil y cambiar su contraseña."
-
+                  className="modal-info"
                />
-                <Typography gutterBottom variant="h5" component="h2">
+               <ModalPswd className = "modal-pswd"
+                    
+                  />
+                  <ModalAvatar className = "modal-avatar"
+                  
+                  />  
+                  
+                                <Typography gutterBottom variant="h5" component="h2">
                  Pefirl de administrador
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">

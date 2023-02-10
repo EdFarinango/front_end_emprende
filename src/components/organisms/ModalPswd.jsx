@@ -1,7 +1,7 @@
 // Cambio de ocntrase;a
 
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, ModalHeader } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Loading from "../templates/Loading";
@@ -134,8 +134,11 @@ const ModalPswd = () => {
 
   return (
     <>
-      <Button className="btn" onClick={() => setToggle(true)}>
-        Cambiar contraseña
+      <Button className="btnedit" onClick={toggle}>
+      <svg width="16" height="16" viewBox="0 0 292 292" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M200.586 0.197144C150.292 0.197144 109.474 41.0155 109.474 91.3096C109.474 97.1408 109.474 102.972 110.567 108.439L0.138916 218.867V291.757H109.474V218.867H182.364V182.422L183.457 181.329C188.924 182.422 194.755 182.422 200.586 182.422C250.88 182.422 291.699 141.604 291.699 91.3096C291.699 41.0155 250.88 0.197144 200.586 0.197144ZM218.809 36.6421C238.854 36.6421 255.254 53.0424 255.254 73.0871C255.254 93.1319 238.854 109.532 218.809 109.532C198.764 109.532 182.364 93.1319 182.364 73.0871C182.364 53.0424 198.764 36.6421 218.809 36.6421Z" fill="#CF3A2B"/>
+</svg>
+
       </Button>
       <Modal
         show={toggle}
@@ -143,9 +146,9 @@ const ModalPswd = () => {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Cambiar contraseña</Modal.Title>
-        </Modal.Header>
+        <ModalHeader closeButton>
+          Cambiar contraseña
+        </ModalHeader>
         <Modal.Body>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">

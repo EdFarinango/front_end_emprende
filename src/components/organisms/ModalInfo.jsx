@@ -53,7 +53,7 @@ const ModalInfo = () => {
 
   return (
     <div>
-      <Button className="btnedit" onClick={toggle}>
+       <Button className="btnedit" onClick={toggle}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -78,7 +78,7 @@ const ModalInfo = () => {
                   src={avatar}
                   alt="Avatar"
                   className="w3-left w3-circle w3-margin-right"
-                  style={{ width: "25px" }}
+                  style={{ width: "60px" }}
                 />
                 <span className="w3-right w3-opacity">
                   <svg
@@ -95,6 +95,7 @@ const ModalInfo = () => {
                   </svg>
                 </span>
                 
+                <br />
                 <br />
                 <hr className="w3-clear" />
 
@@ -122,41 +123,7 @@ const ModalInfo = () => {
 
                     
                    
-                     {/*<p className="w3-opacity">Descripcion</p>
-                    <p>{data.descripcion}</p>
-                    <p className="w3-opacity">Direccion</p>
-                    <p>{data.direccion}</p>
-                    <p className="w3-opacity">Telefono</p>
-                    <p>{data.telefono}</p>
-
-                    <p className="w3-opacity">Sitio Web</p>
-                    <p>{data.pagina_web}</p>
-                    <p className="w3-opacity">Facebook</p>
-                    <p>{data.facebook}</p>
-                    <p className="w3-opacity">Instagram</p>
-                    <p>{data.instagram}</p>
-                    <p className="w3-opacity">Whatsapp</p>
-                    <p>{data.whatsapp}</p>
-                    <p className="w3-opacity">Categoria</p>
-                    <p>{data.categoria}</p>
-                    <p className="w3-opacity">Cobertura</p>
-                    <p>{data.cobertura}</p>
-                    <p className="w3-opacity">Estado del emprendimiento</p>
-                    <p>
-                      {data.estado === 1 ? (
-                        <span className="badge bg-success">Activo</span>
-                      ) : (
-                        <span className="badge bg-danger">Inactivo</span>
-                      )}
-                    </p>
-                  </div>
-                  <div className="w3-half">
-                    <img
-                      src={data.image}
-                      style={{ width: "100%", height: "100%" }}
-                      alt="Northern Lights"
-                      className="w3-margin-bottom"
-                    />*/}
+                     
                   </div>
                 </div> 
               </div>

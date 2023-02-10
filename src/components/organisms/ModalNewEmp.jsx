@@ -114,6 +114,7 @@ const ModalNewEmp = () => {
               icon: "error",
               button: false,
             });
+            //fotos
           }
         });
         
@@ -162,8 +163,8 @@ const ModalNewEmp = () => {
     let errors = {};
 
     let regexNombre = /^[a-zA-ZÀ-ÿ\s]{3,255}$/; // Letras y espacios, pueden llevar acentos.
-    let regexTelefono = /^\d{9,10}$/; // 7 a 14 numeros.
-    let regexWeb =  /^[a-zA-ZÀ-ÿ\s]{1,28}$/; 
+    let regexTelefono = /^\d{10,10}$/; // 7 a 14 numeros.
+    //let regexWeb =  /^[a-zA-ZÀ-ÿ\s]{1,28}$/; 
     let regexDescuento = /^[0-9]{1,2}$/;
     let regexRol = /^[a-zA-ZÀ-ÿ\s]{1,18}$/;
     //let regexCobertura = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
@@ -208,9 +209,7 @@ const ModalNewEmp = () => {
     if (!form.pagina_web) {
       errors.pagina_web = "Obligatoria";
     } 
-    else if (!regexWeb.test(form.pagina_web)) {
-      errors.pagina_web = "La web ingresada no es valida";
-    }
+    
     else
 
     // facebook
