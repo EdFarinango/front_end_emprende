@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import {
-  Button,
+ 
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
 
 } from "reactstrap";
+import { Button } from "react-bootstrap";
 
 import axios from "axios";
 import { useEffect } from "react";
@@ -14,6 +15,8 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import { AuthContext } from "../../contexts/auth/AuthContext";
+
+import "./styles.css";
 
 
 
@@ -53,7 +56,7 @@ const ModalInfo = () => {
 
   return (
     <div>
-       <Button className="btnedit" onClick={toggle}>
+       <button className="primary-btn" onClick={toggle} title="Activar Solicitud">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -61,11 +64,13 @@ const ModalInfo = () => {
           fill="currentColor"
           class="bi bi-eye-fill"
           viewBox="0 0 16 16"
+        
+         
         >
           <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
           <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
         </svg>
-      </Button>
+      </button>
 
       <Modal isOpen={modal} toggle={toggle} size="ls">
         <ModalHeader toggle={toggle}>EmPreNde</ModalHeader>

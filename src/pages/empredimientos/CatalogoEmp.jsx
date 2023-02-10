@@ -197,7 +197,7 @@ export const CatalogoEmp = () => {
                               <dt>Web</dt>
                               <dd>
                                 <a
-                                  href={`https://api.whatsapp.com/send?phone=593${item.telefono}&text=Hola%20${item.nombre}`}
+                                  href={item.pagina_web}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                 >

@@ -163,13 +163,13 @@ const ModalNewEmp = () => {
   const validationsForm = (form) => {
     let errors = {};
 
-    let regexNombre = /^[a-zA-ZÀ-ÿ\s]{3,255}$/; // Letras y espacios, pueden llevar acentos.
+    let regexNombre = /^[a-zA-ZÀ-ÿ-&\s]{3,255}$/; // Letras y espacios, pueden llevar acentos.
     let regexTelefono = /^\d{10,10}$/; // 7 a 14 numeros.
     //let regexWeb =  /^[a-zA-ZÀ-ÿ\s]{1,28}$/; 
     let regexDescuento = /^[0-9]{1,2}$/;
     let regexRol = /^[a-zA-ZÀ-ÿ\s]{1,18}$/;
     //let regexCobertura = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-    let regexDescripcion =/^[a-zA-Z\s,-áéíóúÁÉÍÓÚñÑ]{3,128}$/u; // Letras y espacios, pueden llevar acentos.
+    let regexDescripcion =/^[a-zA-Z\s,-áéíóúÁÉÍÓÚñÑ]{3,255}$/u; // Letras y espacios, pueden llevar acentos.
     let regexDireccion = /^[a-zA-Z\s,-áéíóúÁÉÍÓÚñÑ]{3,128}$/u; // Letras y espacios, pueden llevar acentos.
     let regexCategoria = /^[a-zA-ZÀ-ÿ\s]{3,40}$/; // Letras y espacios, pueden llevar acentos.
     // Letras y espacios, pueden llevar acentos.

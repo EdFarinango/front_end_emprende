@@ -137,15 +137,16 @@ export const Dashboard = () => {
               
 
               <CardContent>
-                <ModalInfo
-                  className="modal-info"
-               />
-               <ModalPswd className = "modal-pswd"
+                
+               <ModalPswd
                     
                   />
-                  <ModalAvatar className = "modal-avatar"
+                  <ModalAvatar 
                   
                   />  
+                  <ModalInfo
+                  
+                  />
                   
                                 <Typography gutterBottom variant="h5" component="h2">
                  Pefirl de administrador
