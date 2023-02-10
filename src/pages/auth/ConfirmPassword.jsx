@@ -70,14 +70,15 @@ export const ConfirmPassword = () => {
         console.log(response);
         if (response.status === 200) {
           alert("Contraseña actualizada correctamente");
-        }
-      });
-      console.log( "hey1",response.data);
+          console.log( "hey1",response.data);
       setMensajeactivo(response.data.message);
       setactivo(true);
       setTimeout(() => {
         navigate("/login");
       }, 3000);
+        }
+      });
+      
     } catch (error) {
      
       
