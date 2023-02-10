@@ -30,14 +30,14 @@ const ModalInfo = () => {
     try {
       const response = await axios.get(
        
-        `https://backend-emprende.herokuapp.com/api/v1/admin/${user.id}`,
+        `https://backend-emprende.herokuapp.com/api/v1/profile`,
         { headers: { accept: "application/json", authorization: token } }
       );
 
       ///revisar  updateState(response.data.data.users)
-      console.log(user.id)
-      setAdmin(response.data.data.users);
-      console.log(response.data.data.users);
+
+        setAdmin(response.data.data.user);
+      console.log(response.data.data.avatar);
    
     } catch (error) {
       console.log(error);
@@ -73,7 +73,7 @@ const ModalInfo = () => {
               <div className="w3-container w3-card w3-white w3-round w3-margin">
                 <br />
                 <img
-                  src={admins.image}
+                  //src={admins.image}
                   alt="Avatar"
                   className="w3-left w3-circle w3-margin-right"
                   style={{ width: "60px" }}
