@@ -10,3 +10,7 @@
             /*background-color: #000;*/
             padding-top: 5%;
         }
+        
+        img .imgAling {
+            vertical-align: text-top;
+        }

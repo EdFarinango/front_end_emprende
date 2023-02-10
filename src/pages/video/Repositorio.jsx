@@ -22,6 +22,9 @@ import FormInput from "../../components/templates/Inputs";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/auth/AuthContext";
 import ModalVideo from "../../components/organisms/ModalEditVideo";
+import Loading from "../../components/atoms/Loading";
+import Buho from "../../components/assets/buho.png"
+import { Image } from "@mui/icons-material";
 
 function Copyright() {
   return (
@@ -41,6 +44,7 @@ const Repositorio = ({ video }) => {
   const [data, setData] = useState([]);
   const token = localStorage.getItem("token");
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     nombre: "",
     descripcion: "",
@@ -54,6 +58,10 @@ const Repositorio = ({ video }) => {
     });
   };
 
+  const regrasarArriba = () => {
+    window.scrollTo(0, 0);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(form);
@@ -64,7 +72,13 @@ const Repositorio = ({ video }) => {
         { headers: { accept: "application/json", authorization: token } }
       )
       .then((response) => {
-        console.log(response);
+   
+        getData();
+        alert({
+          title: "Video agregado correctamente",
+          icon: "success",
+
+        })
       })
       .catch((error) => {
         console.log(error);
@@ -72,6 +86,7 @@ const Repositorio = ({ video }) => {
   };
 
   const getData = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         `https://backend-emprende.herokuapp.com/api/v1/videoconferencia`,
@@ -84,6 +99,7 @@ const Repositorio = ({ video }) => {
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   };
 
   const inputs = [
@@ -104,7 +120,7 @@ const Repositorio = ({ video }) => {
       placeholder: "Descripción del video de la comisión Emprende-ESFOT",
       errorMessage: "Debe ingresar un apellido válido!",
       label: "Descripción del video",
-      //pattern: "^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$",
+      //pattern: "^{3,255}$",
       required: true,
     },
     {
@@ -138,15 +154,30 @@ const Repositorio = ({ video }) => {
     getData();
   }, []);
 
+if (loading) {
+    return (
+      <Loading/>
+    );
+  } else
+
   if (user) {
     return (
       <>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <h1>Formulario de Registro de videos</h1>
+          <main>
+            {/* Hero unit */}
+            <div>
+          <Container maxWidth="lg">
+            
+                <Container maxWidth="sm">
+               
           <Box sx={{ display: "flex", justifyContent: "center" }}>
+          
             <Box sx={{ width: "100%" }}>
+              
               <Form onSubmit={handleSubmit} className="form-control">
+              <h2>Formulario de Registro de videos</h2>
                 <FormGroup>
                   {inputs.map((input) => (
                     <FormInput
@@ -159,17 +190,25 @@ const Repositorio = ({ video }) => {
                 </FormGroup>
 
                 <Button color="info" type="submit">
-                  Crear
+                  Ingresar
                 </Button>
               </Form>
             </Box>
           </Box>
+
+                </Container>
+              </Container>         
+
+
+             
+          
           <br />
 
-          <main>
-            {/* Hero unit */}
-            <div>
-              <Container maxWidth="sm">
+       
+              <Container
+                maxWidth="sm"
+                sx={{ mt: 4, mb: 2, display: "flex", flexDirection: "column" }}
+              >
                 <Typography
                   component="h1"
                   variant="h2"
@@ -177,7 +216,9 @@ const Repositorio = ({ video }) => {
                   color="text.primary"
                   gutterBottom
                 >
-                  Repositorio
+                 
+                  <img src = {Buho} alt = "logo" width = "150" height = "150" className="d-inline-block align-top imgAling" />
+                  Videos de la comisión Emprende-ESFOT
                 </Typography>
                 <Typography
                   variant="h5"
@@ -185,24 +226,11 @@ const Repositorio = ({ video }) => {
                   color="text.secondary"
                   paragraph
                 >
-                  En esta sección encontrarás videos de conferencias y talleres
-                  realizados por Emprende.
+                  Aquí encontrarás los videos de la comisión Emprende-ESFOT
                 </Typography>
-                {/* <div>
-                <Grid container spacing={2} justifyContent="center">
-                  <Grid item>
-                    <Button variant="contained" color="primary">
-                      Ver más
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button variant="outlined" color="primary">
-                      Ver más
-                    </Button>
-                  </Grid>
-                </Grid>
-              </div> */}
               </Container>
+
+              
             </div>
             <Container sx={{ py: 8 }} maxWidth="lg">
               <Grid container spacing={12}>
@@ -250,11 +278,7 @@ const Repositorio = ({ video }) => {
                             
                             />
                           </Grid>
-                          <Grid item>
-                            <Button variant="outlined" color="primary">
-                              Ver más
-                            </Button>
-                          </Grid>
+                          
                         </Grid>
                       </Box>
                     </Box>
@@ -262,74 +286,7 @@ const Repositorio = ({ video }) => {
                 ))}
               </Grid>
 
-              {/* <Grid container spacing={4}>
-              {videos.map((video) => (
-                <main className="containerVideo my-5 my-md-0 vh-md-100 d-flex align-items-center justify-content-center" 
-                sx = {{backgroundColor: "#f5f5f5"}}
-                
-                >
-                  <article className="card overflow-hidden border-0 rounded-3 flex-md-row align-items-center">
-                    <div className="order-md-2 flex-md-grow-1 w-100 p-3 p-md-5">
-        
-                      <div className="embed-responsive embed-responsive-16by9 shadow-1-strong rounded mb-4"> 
-                        <iframe
-                          src={video.url}
-                          width="100%"
-                          height="200px"
-                          className="embed-responsive-item"
-                  
-                        
-                          allowFullScreen="true"
-                          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                        />
-                      </div>
-                     
-                    </div>
-                    <section className="order-md-1 flex-md-grow-1 w-100">
-                      <div className="card-body text-center text-md-start">
-                        <h1 className="card-title h2">{video.title}</h1>
-                        <p className="text-secondary"
-                          style={{
-                            fontSize: "1.2rem",
-                            fontWeight: "400",
-                            lineHeight: "1.5",
-                          }}
-                        >
-                          {video.description}
-                        </p>
-       
-
-                        <div>
-                          <a
-                            href="https://www.facebook.com/profile.php?id=100063704537871"
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            <p>
-                              <i className="fa fa-facebook w3-xxlarge" />
-                            </p>
-                          </a>
-                          <p className="text-uppercase text-secondary text-companies">
-                            EMPRENDE - ESFOT
-                          </p>
-                        </div>
-                      </div>
-                    </section>
-                  </article>
-   
-
-                  
-
-
-                 
-
-               
-                
-                 
-
-                </main>
-              ))}
-            </Grid> */}
+              
             </Container>
           </main>
           {/* Footer */}
@@ -416,21 +373,13 @@ const Repositorio = ({ video }) => {
                       >
                         {item.nombre}
                       </Typography>
+                      <Typography align="center">
+                        {item.descripcion}
+                      </Typography>
+                      
+
                     </Box>
-                    <Box sx={{ p: 2 }}>
-                      <Grid container spacing={2} justifyContent="center">
-                        <Grid item>
-                          <Button variant="contained" color="primary">
-                            Ver más
-                          </Button>
-                        </Grid>
-                        <Grid item>
-                          <Button variant="outlined" color="primary">
-                            Ver más
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </Box>
+                    
                   </Box>
                 </Grid>
               ))}
@@ -463,6 +412,7 @@ const Repositorio = ({ video }) => {
       </ThemeProvider>
     );
   }
+
 };
 
 export default Repositorio;

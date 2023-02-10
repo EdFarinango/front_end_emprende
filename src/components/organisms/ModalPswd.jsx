@@ -54,13 +54,13 @@ const ModalPswd = () => {
             buttons: ["Aceptar"],
             timer: 2500,
           }).then(() => {
-            Logout();
+            window.location.href = "/";
           });
         });
 
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.log(error + "error");
       if (error.response.data.errors.password) {
         if (error.response.data.errors.password.length === 4) {
           alert({

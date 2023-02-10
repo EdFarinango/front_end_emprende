@@ -73,13 +73,15 @@ const SearchComponent = () => {
     
   };
 
-  const deleteEmprendimiento = async (id) => {
+  const deleteEmprendimiento = async (id, estado) => {
+    if (estado === 1) {
+     
 
     try {
       console.warn(id);
 
      alert ({
-        title: "¿Estas seguro?",
+        title: "¿Estas seguro, se desactivara el empredimiento y no se visualizara en el catálogo?",
 
         icon: "warning",
         buttons: true,
@@ -93,7 +95,7 @@ const SearchComponent = () => {
             { headers: { 'accept': 'application/json', 'authorization': token } }
           );
        await getData();
-          alert("Se ha eliminado el emprendimiento", {
+          alert("Se ha desactivado el emprendimiento", {
             icon: "success",
           });
         } else {
@@ -103,6 +105,37 @@ const SearchComponent = () => {
     } catch (error) {
       console.log(error);
     }
+  }else{
+    try {
+      console.warn(id);
+
+     alert ({
+        title: "¿Estas seguro, el emprendimiento va a ser activado y se  visualizara en el catálogo?",
+
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then(async (willDelete) => {
+        if (willDelete) {
+
+           await axios.get(
+            `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${id}/destroy`,
+            { headers: { 'accept': 'application/json', 'authorization': token } }
+          );
+       await getData();
+          alert("Se ha activado correctamente el emprendimiento", {
+            icon: "success",
+          });
+        } else {
+          alert("Se ha cancelado la activación");
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   };
 
           
@@ -434,7 +467,7 @@ const SearchComponent = () => {
                                         <button
                                           className="btndesactivar"
                                           onClick={() =>
-                                            deleteEmprendimiento(item.id) 
+                                            deleteEmprendimiento(item.id, item.estado) 
                                           }
                                        
                                           title="Desactivar"

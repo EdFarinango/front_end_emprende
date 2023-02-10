@@ -9,3 +9,9 @@
             .App button:focus {
                 outline: 0;
             }
+            
+            .root {
+                display: 'flex';
+                flexDirection: 'column';
+                minHeight: '100vh';
+            }

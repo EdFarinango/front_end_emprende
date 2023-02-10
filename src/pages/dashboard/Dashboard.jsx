@@ -18,6 +18,8 @@ import Typography from "@material-ui/core/Typography";
 import { Row} from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+import ModalInfo from "../../components/organisms/ModalInfo";
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -35,18 +37,11 @@ export const Dashboard = () => {
   const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
 
-  const getData = async () => {
-    try {
-      const response = await axios.get(
-        `https://backend-emprende.herokuapp.com/api/v1/emprendimiento`,
-        { headers: { accept: "application/json", authorization: token } }
-      );
+  useState(() => {
+    console.log(user.id);
+  }, []);
 
-      setData(response.data.data.emprendimientos);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   return (
     <>
@@ -124,6 +119,32 @@ export const Dashboard = () => {
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
                   Módulo de administración, se podra crear, editar y desactivar emprendimientos.
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+          
+          <Card className={classes.root}>
+            <CardActionArea>
+           
+                <CardMedia
+                  className={classes.media}
+                  image="https://cdn-icons-png.flaticon.com/512/1705/1705768.png"
+                  title="emprendimiento"
+                />
+              
+
+              <CardContent>
+                <ModalInfo
+                  title="Perfil de administrador"
+                  body="Podra visualizar sus datos actualizar su perfil y cambiar su contraseña."
+
+               />
+                <Typography gutterBottom variant="h5" component="h2">
+                 Pefirl de administrador
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Podra visualizar sus datos actualizar su perfil y cambiar su contraseña.
                 </Typography>
               </CardContent>
             </CardActionArea>
