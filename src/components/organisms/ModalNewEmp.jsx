@@ -163,18 +163,18 @@ const ModalNewEmp = () => {
 
     let regexNombre = /^[a-zA-ZÀ-ÿ\s]{3,255}$/; // Letras y espacios, pueden llevar acentos.
     let regexTelefono = /^\d{9,10}$/; // 7 a 14 numeros.
-    //let regexWeb =  /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/; //  ;
+    let regexWeb =  /^[a-zA-ZÀ-ÿ\s]{1,28}$/; 
     let regexDescuento = /^[0-9]{1,2}$/;
     let regexRol = /^[a-zA-ZÀ-ÿ\s]{1,18}$/;
     //let regexCobertura = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-    let regexDescripcion = /^[a-zA-ZÀ-ÿ\s]{3,255}$/; // Letras y espacios, pueden llevar acentos.
-    let regexDireccion = /^[a-zA-ZÀ-ÿ\s]{3,128}$/; // Letras y espacios, pueden llevar acentos.
+    let regexDescripcion =/^[a-zA-Z\s,-áéíóúÁÉÍÓÚñÑ]{3,128}$/u; // Letras y espacios, pueden llevar acentos.
+    let regexDireccion = /^[a-zA-Z\s,-áéíóúÁÉÍÓÚñÑ]{3,128}$/u; // Letras y espacios, pueden llevar acentos.
     let regexCategoria = /^[a-zA-ZÀ-ÿ\s]{3,40}$/; // Letras y espacios, pueden llevar acentos.
     // Letras y espacios, pueden llevar acentos.
     let regexWhatsapp = /^\d{7,14}$/; // 7 a 14 numeros.
-    let regexFacebook =
-      /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
-    let regexInstagram = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; ///^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
+    //let regexFacebook = /^(https?:\/\/)?([\da-z.-]+)\.([a-zA-ZÀ-ÿ\s.]{2,6})([/\w .-]*)*\/?$/;
+
+    //let regexInstagram = /^[a-zA-ZÀ-ÿ\s]{1,28}$/; ///^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
     let regexFoto = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
 
     if (!form.rol_esfot) {
@@ -208,14 +208,16 @@ const ModalNewEmp = () => {
     if (!form.pagina_web) {
       errors.pagina_web = "Obligatoria";
     } 
+    else if (!regexWeb.test(form.pagina_web)) {
+      errors.pagina_web = "La web ingresada no es valida";
+    }
     else
 
     // facebook
     if (!form.facebook) {
       errors.facebook = "Obligatorio";
-      console.log("facebook obligatorio");
-    } else if (!regexFacebook.test(form.facebook)) {
-      errors.facebook = "El facebook ingresado no es valido";
+      
+    
     }else
 
     //Nombre
@@ -244,9 +246,7 @@ const ModalNewEmp = () => {
     //instagram
     if (!form.instagram) {
       errors.instagram = "Obligatorio";
-    } else if (!regexInstagram.test(form.instagram)) {
-      errors.instagram = "El instagram ingresado no es valido";
-    }else
+    } else
     //descripcion
 
     if (!form.descripcion) {
@@ -278,7 +278,7 @@ const ModalNewEmp = () => {
     if (!form.descuento) {
       errors.descuento = "Obligatorio";
     } else if (!regexDescuento.test(form.descuento)) {
-      errors.descuento = "El descuento ingresado no es valido";
+      errors.descuento = "Solo se aceptan números";
     }else
 
     //imagen
@@ -293,6 +293,7 @@ const ModalNewEmp = () => {
     return errors;
   
   };
+
 
 
  

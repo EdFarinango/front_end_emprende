@@ -110,8 +110,9 @@ const ModalInfo = () => {
                     <p className="w3-opacity">Telefono</p>
                     <p>{admins.Teléfono}</p>
                     <p className="w3-opacity">LinkedIn</p>
+
                     <p>{admins.LinkedIn}</p>
-                    <p>
+                                       <p>
                       {admins.state === 1 ? (
                         <span className="badge bg-success">Activo</span>
                       ) : (
