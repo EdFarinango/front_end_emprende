@@ -385,12 +385,12 @@ const ModalNewEmp = () => {
                       }}
                     >
                       <option value={""}></option>
-                      <option value={"Tecnologia"}>Tecnologia</option>
+                      <option value={"Tecnologia"}>Alimentación</option>
                       <option value={"Educacion"}>Educacion</option>
                       <option value={"Salud"}>Salud</option>
-                      <option value={"Agroindustria"}>Agroindustria</option>
-                      <option value={"Turismo"}>Turismo</option>
-                      <option value={"Otro"}>Otro</option>
+                      <option value={"Agroindustria"}>Textil</option>
+                      <option value={"Turismo"}>Hogar y Limpieza</option>
+                      <option value={"Otro"}>Otros</option>
                     </NativeSelect>
                   </FormGroup>
                   <p className="error">{errors.categoria}</p>

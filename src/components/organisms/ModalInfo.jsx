@@ -24,6 +24,7 @@ const ModalInfo = () => {
   const toggle = () => setModal(!modal);
   const [admins , setAdmin] = useState([]);
   const { user } = useContext(AuthContext);
+  const[avatar , setAvatar] = useState([]);
 
   const getAdmin = async () => {
   
@@ -37,6 +38,7 @@ const ModalInfo = () => {
       ///revisar  updateState(response.data.data.users)
 
         setAdmin(response.data.data.user);
+        setAvatar(response.data.data.avatar);
       console.log(response.data.data.avatar);
    
     } catch (error) {
@@ -73,10 +75,10 @@ const ModalInfo = () => {
               <div className="w3-container w3-card w3-white w3-round w3-margin">
                 <br />
                 <img
-                  //src={admins.image}
+                  src={avatar}
                   alt="Avatar"
                   className="w3-left w3-circle w3-margin-right"
-                  style={{ width: "60px" }}
+                  style={{ width: "25px" }}
                 />
                 <span className="w3-right w3-opacity">
                   <svg
@@ -96,9 +98,37 @@ const ModalInfo = () => {
                 <br />
                 <hr className="w3-clear" />
 
-                {/* <div className="w3-row-padding" style={{ margin: "0 -16px" }}>
+                <div className="w3-row-padding" style={{ margin: "0 -16px" }}>
                   <div className="w3-half">
-                    <p className="w3-opacity">Descripcion</p>
+
+                    <p className="w3-opacity">Nombre</p>
+                    <p>{admins.first_name}</p>
+                    <p className="w3-opacity">Apellido</p>
+                    <p>{admins.last_name}</p>
+                    <p className="w3-opacity">Email</p>
+                    <p>{admins.email}</p>
+                    <p className="w3-opacity">Telefono</p>
+                    <p>{admins.Teléfono}</p>
+                    <p className="w3-opacity">LinkedIn</p>
+                    <p>{admins.LinkedIn}</p>
+                    <p>
+                      {admins.state === 1 ? (
+                        <span className="badge bg-success">Activo</span>
+                      ) : (
+                        <span className="badge bg-danger">Inactivo</span>
+                      )}
+                    </p>
+
+                    <div className="w3-half">
+                    <img
+                      src={avatar}
+                      style={{ width: "100%", height: "100%" }}
+                      alt="Northern Lights"
+                      className="w3-margin-bottom"
+                    />
+                    </div>
+                   
+                     {/*<p className="w3-opacity">Descripcion</p>
                     <p>{data.descripcion}</p>
                     <p className="w3-opacity">Direccion</p>
                     <p>{data.direccion}</p>
@@ -132,11 +162,12 @@ const ModalInfo = () => {
                       style={{ width: "100%", height: "100%" }}
                       alt="Northern Lights"
                       className="w3-margin-bottom"
-                    />
+                    />*/}
                   </div>
-                </div> */}
+                </div> 
               </div>
             </div>
+            
           </Container>
         </ModalBody>
         <ModalFooter>
