@@ -29,12 +29,13 @@ const ModalInfo = () => {
   
     try {
       const response = await axios.get(
+       
         `https://backend-emprende.herokuapp.com/api/v1/admin/${user.id}`,
         { headers: { accept: "application/json", authorization: token } }
       );
 
       ///revisar  updateState(response.data.data.users)
-
+      console.log(user.id)
       setAdmin(response.data.data.users);
       console.log(response.data.data.users);
    

@@ -143,33 +143,7 @@ const ModalNewEmp = () => {
       console.log(error);
     }
   };
-  // const handleUpload = (e) => {
-  //   e.preventDefault();
-
-  //   const formData = new FormData();
-  //   formData.append("image", image);
-
-  //   axios
-  //     .post(
-  //       `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${data.id}/logo`,
-  //       formData,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       }
-  //     )
-  //     .then((response) => {
-  //       const res = response.data;
-  //       console.log(res);
-  //       toggle();
-  //     })
-
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  
 
   useEffect(() => {
     getData();
@@ -189,14 +163,14 @@ const ModalNewEmp = () => {
   const validationsForm = (form) => {
     let errors = {};
 
-    let regexNombre = /^[a-zA-ZÀ-ÿ\s]{3,16}$/; // Letras y espacios, pueden llevar acentos.
+    let regexNombre = /^[a-zA-ZÀ-ÿ\s]{3,255}$/; // Letras y espacios, pueden llevar acentos.
     let regexTelefono = /^\d{9,10}$/; // 7 a 14 numeros.
-    let regexWeb = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; //  ;
+    let regexWeb =  /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/; //  ;
     let regexDescuento = /^[0-9]{1,2}$/;
     let regexRol = /^[a-zA-ZÀ-ÿ\s]{1,18}$/;
-    let regexCobertura = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-    let regexDescripcion = /^[a-zA-ZÀ-ÿ\s]{3,80}$/; // Letras y espacios, pueden llevar acentos.
-    let regexDireccion = /^[a-zA-ZÀ-ÿ\s]{3,40}$/; // Letras y espacios, pueden llevar acentos.
+    //let regexCobertura = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+    let regexDescripcion = /^[a-zA-ZÀ-ÿ\s]{3,255}$/; // Letras y espacios, pueden llevar acentos.
+    let regexDireccion = /^[a-zA-ZÀ-ÿ\s]{3,128}$/; // Letras y espacios, pueden llevar acentos.
     let regexCategoria = /^[a-zA-ZÀ-ÿ\s]{3,40}$/; // Letras y espacios, pueden llevar acentos.
     // Letras y espacios, pueden llevar acentos.
     let regexWhatsapp = /^\d{7,14}$/; // 7 a 14 numeros.
@@ -205,26 +179,32 @@ const ModalNewEmp = () => {
     let regexInstagram = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; ///^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
     let regexFoto = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
 
-    if (!form.nombre) {
-      errors.nombre = "Obligatorio";
-      console.log("hola");
-    } else if (!regexNombre.test(form.nombre)) {
-      errors.nombre = "El nombre ingresado no es valido";
-    }else
-
     if (!form.rol_esfot) {
       errors.rol_esfot = "Obligatorio";
       console.log("rol obligatorio");
     } else if (!regexRol.test(form.rol_esfot)) {
       errors.rol_esfot = "El rol ingresado no es valido";
     } else
-
-    //categoria
     if (!form.categoria) {
       errors.categoria = "Obligatoria";
     } else if (!regexCategoria.test(form.categoria)) {
       errors.categoria = "La categoria ingresado no es valida";
     }else
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+    //categoria
+    
     //web
 
     if (!form.pagina_web) {
@@ -242,6 +222,12 @@ const ModalNewEmp = () => {
     }else
 
     //Nombre
+    if (!form.nombre) {
+      errors.nombre = "Obligatorio";
+     
+    } else if (!regexNombre.test(form.nombre)) {
+      errors.nombre = "El nombre ingresado no es valido";
+    }else
 
     // Dirección
 
@@ -276,9 +262,7 @@ const ModalNewEmp = () => {
 
     if (!form.cobertura) {
       errors.cobertura = "Obligatoria";
-    } else if (!regexCobertura.test(form.cobertura)) {
-      errors.cobertura = "La cobertura ingresado no es valida";
-    }else
+    } else 
 
     //Whatsapp
 

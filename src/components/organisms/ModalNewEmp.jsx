@@ -141,33 +141,7 @@ const ModalNewEmp = () => {
       console.log(error);
     }
   };
-  // const handleUpload = (e) => {
-  //   e.preventDefault();
-
-  //   const formData = new FormData();
-  //   formData.append("image", image);
-
-  //   axios
-  //     .post(
-  //       `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${data.id}/logo`,
-  //       formData,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       }
-  //     )
-  //     .then((response) => {
-  //       const res = response.data;
-  //       console.log(res);
-  //       toggle();
-  //     })
-
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  
 
   useEffect(() => {
     getData();
@@ -187,14 +161,14 @@ const ModalNewEmp = () => {
   const validationsForm = (form) => {
     let errors = {};
 
-    let regexNombre = /^[a-zA-ZÀ-ÿ\s]{3,16}$/; // Letras y espacios, pueden llevar acentos.
+    let regexNombre = /^[a-zA-ZÀ-ÿ\s]{3,255}$/; // Letras y espacios, pueden llevar acentos.
     let regexTelefono = /^\d{9,10}$/; // 7 a 14 numeros.
-    let regexWeb = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; //  ;
+    let regexWeb =  /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/; //  ;
     let regexDescuento = /^[0-9]{1,2}$/;
     let regexRol = /^[a-zA-ZÀ-ÿ\s]{1,18}$/;
-    let regexCobertura = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-    let regexDescripcion = /^[a-zA-ZÀ-ÿ\s]{3,80}$/; // Letras y espacios, pueden llevar acentos.
-    let regexDireccion = /^[a-zA-ZÀ-ÿ\s]{3,40}$/; // Letras y espacios, pueden llevar acentos.
+    //let regexCobertura = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+    let regexDescripcion = /^[a-zA-ZÀ-ÿ\s]{3,255}$/; // Letras y espacios, pueden llevar acentos.
+    let regexDireccion = /^[a-zA-ZÀ-ÿ\s]{3,128}$/; // Letras y espacios, pueden llevar acentos.
     let regexCategoria = /^[a-zA-ZÀ-ÿ\s]{3,40}$/; // Letras y espacios, pueden llevar acentos.
     // Letras y espacios, pueden llevar acentos.
     let regexWhatsapp = /^\d{7,14}$/; // 7 a 14 numeros.
@@ -203,111 +177,122 @@ const ModalNewEmp = () => {
     let regexInstagram = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; ///^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
     let regexFoto = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
 
-    if (!form.nombre) {
-      errors.nombre = "El nombre es obligatorio";
-      console.log("hola");
-    } else if (!regexNombre.test(form.nombre)) {
-      errors.nombre = "El nombre no es valido";
-    }
-
     if (!form.rol_esfot) {
-      errors.rol_esfot = "El rol es obligatorio";
+      errors.rol_esfot = "Obligatorio";
       console.log("rol obligatorio");
     } else if (!regexRol.test(form.rol_esfot)) {
-      errors.rol_esfot = "El rol no es valido";
-    }
+      errors.rol_esfot = "El rol ingresado no es valido";
+    } else
+    if (!form.categoria) {
+      errors.categoria = "Obligatoria";
+    } else if (!regexCategoria.test(form.categoria)) {
+      errors.categoria = "La categoria ingresado no es valida";
+    }else
+
+
+
+
+
+
+
+
+
+    
+
+    
 
     //categoria
-    if (!form.categoria) {
-      errors.categoria = "La categoria es obligatoria";
-    } else if (!regexCategoria.test(form.categoria)) {
-      errors.categoria = "La categoria no es valida";
-    }
+    
     //web
 
     if (!form.pagina_web) {
-      errors.pagina_web = "La pagina web es obligatoria";
+      errors.pagina_web = "Obligatoria";
     } else if (!regexWeb.test(form.pagina_web)) {
-      errors.pagina_web = "La pagina web no es valida";
-    }
+      errors.pagina_web = "La pagina web ingresado no es valida";
+    }else
 
     // facebook
     if (!form.facebook) {
-      errors.facebook = "El facebook es obligatorio";
+      errors.facebook = "Obligatorio";
       console.log("facebook obligatorio");
     } else if (!regexFacebook.test(form.facebook)) {
-      errors.facebook = "El facebook no es valido";
-    }
+      errors.facebook = "El facebook ingresado no es valido";
+    }else
 
     //Nombre
+    if (!form.nombre) {
+      errors.nombre = "Obligatorio";
+     
+    } else if (!regexNombre.test(form.nombre)) {
+      errors.nombre = "El nombre ingresado no es valido";
+    }else
 
     // Dirección
 
     if (!form.direccion) {
-      errors.direccion = "La direccion es obligatoria";
+      errors.direccion = "Obligatoria";
     } else if (!regexDireccion.test(form.direccion)) {
-      errors.direccion = "La direccion no es valida";
-    }
+      errors.direccion = "La direccion ingresado no es valida";
+    }else
     //telefono
 
     if (!form.telefono) {
-      errors.telefono = "El telefono es obligatorio";
+      errors.telefono = "Obligatorio";
     } else if (!regexTelefono.test(form.telefono)) {
-      errors.telefono = "El telefono no es valido";
-    }
+      errors.telefono = "El telefono ingresado no es valido";
+    }else
 
     //instagram
     if (!form.instagram) {
-      errors.instagram = "El instagram es obligatorio";
+      errors.instagram = "Obligatorio";
     } else if (!regexInstagram.test(form.instagram)) {
-      errors.instagram = "El instagram no es valido";
-    }
+      errors.instagram = "El instagram ingresado no es valido";
+    }else
     //descripcion
 
     if (!form.descripcion) {
-      errors.descripcion = "La descripcion es obligatoria";
+      errors.descripcion = "Obligatoria";
     } else if (!regexDescripcion.test(form.descripcion)) {
-      errors.descripcion = "La descripcion no es valida";
-    }
+      errors.descripcion = "La descripcion ingresado no es valida";
+    }else
 
     //Cobertura
 
     if (!form.cobertura) {
-      errors.cobertura = "La cobertura es obligatoria";
-    } else if (!regexCobertura.test(form.cobertura)) {
-      errors.cobertura = "La cobertura no es valida";
-    }
+      errors.cobertura = "Obligatoria";
+    } else 
 
     //Whatsapp
 
     if (!form.whatsapp) {
-      errors.whatsapp = "El whatsapp es obligatorio";
+      errors.whatsapp = "Obligatorio";
     } else if (!regexWhatsapp.test(form.whatsapp)) {
-      errors.whatsapp = "El whatsapp no es valido";
+      errors.whatsapp = "El whatsapp ingresado no es valido";
     } else if (form.whatsapp.length > 10) {
       errors.whatsapp = "El whatsapp no puede tener mas de 10 caracteres";
     } else if (form.whatsapp.length < 10) {
       errors.whatsapp = "El whatsapp no puede tener menos de 10 caracteres";
-    }
+    }else
 
     //descuento
 
     if (!form.descuento) {
-      errors.descuento = "El descuento es obligatorio";
+      errors.descuento = "Obligatorio";
     } else if (!regexDescuento.test(form.descuento)) {
-      errors.descuento = "El descuento no es valido";
-    }
+      errors.descuento = "El descuento ingresado no es valido";
+    }else
 
     //imagen
 
     if (!image) {
-      errors.image = "La imagen es obligatoria";
+      errors.image = "Obligatoria";
     } else if (!regexFoto.test(image.name)) {
       console.log(image);
-      errors.image = "La imagen no es valida";
+      errors.image = "La imagen ingresado no es valida";
     }
 
     return errors;
+  
   };
 
 
