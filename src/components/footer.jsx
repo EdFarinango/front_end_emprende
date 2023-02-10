@@ -134,7 +134,7 @@ function Footer() {
               
               <li className="list-inline-item px-0 px-xl-2 ">
                 <Card.Link
-                  href="https://themesberg.com/contact"
+                  href="https://www.youtube.com/@esfot_epn3790"
                   target="_blank"
                   className="linktext"
                 >
