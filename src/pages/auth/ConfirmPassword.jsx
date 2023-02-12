@@ -76,7 +76,7 @@ export const ConfirmPassword = () => {
      
       
 
-      console.log(error.response.data);
+      console.log(error.response);
 
     
         if (error.response.data.errors.password)
