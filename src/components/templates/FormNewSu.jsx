@@ -33,7 +33,7 @@ const EditFormNew = () => {
       type: "text",
       placeholder: "Ingrese el nombre",
       errorMessage: "Debe ingresar un nombre válido!",
-      label: "Username",
+      label: "Nombre",
       pattern: "^[A-Za-z]{3,16}$",
       required: true,
     
@@ -55,7 +55,7 @@ const EditFormNew = () => {
       type: "email",
       placeholder: "Email",
       errorMessage: "Email no válido!",
-      label: "Email",
+      label: "Correo Electrónico",
       pattern: "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$",
       required: true,
      
