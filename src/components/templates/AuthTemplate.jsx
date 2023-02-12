@@ -13,20 +13,25 @@ import {
 
 import "../../components/templates/style.css";
 
+import IMG from "../assets/login.png" ;
+
 export const AuthTemplate = () => {
   return (
     <>
-      <MDBContainer fluid className="p-3 my-5 h-custom">
-        <MDBRow>
-          <MDBCol col="10" md="6">
+      <MDBContainer fluid className="p-3 my-5 h-custom ">
+        <MDBRow  className="align-items-center justify-content-center">
+          <MDBCol col="10" md="4"  className="align-items-center justify-content-center">
             <img
-              src="https://www.espaciodelemprendedor.cl/img/ede/home-01.png"
-              class="img-fluid"
-              alt="Sample image"
+              src={IMG}
+              className="img-fluid"
+              width={600}
+              height={500}
+              
+              alt="login"
             />
           </MDBCol>
 
-          <MDBCol col="10" md="4">
+          <MDBCol col="10" md="5 " className="align-items-center justify-content-left">
             <Outlet />
           </MDBCol>
         </MDBRow>

@@ -30,7 +30,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link href="#" textDecoration="none">
-        2022 - Emprende
+        2019 - Emprende
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -42,7 +42,6 @@ const theme = createTheme();
 export const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -57,9 +56,8 @@ export const Login = () => {
     setErrors(validationsForm(form));
 
     if (Object.keys(errors).length === 0) {
-
       setLoading(true);
-  
+
       try {
         await axios
           .post("https://backend-emprende.herokuapp.com/api/v1/login", {
@@ -67,7 +65,7 @@ export const Login = () => {
           })
           .then((response) => {
             const { access_token, token_type, user } = response.data.data;
-      
+
             setLoading(false);
             setResponse(true);
             setTimeout(() => {
@@ -76,7 +74,6 @@ export const Login = () => {
             login(user, `${token_type} ${access_token}`);
             // eslint-disable-next-line no-lone-blocks
             {
-              
               console.log("Ingreso exitoso");
               alert &&
                 alert({
@@ -87,17 +84,8 @@ export const Login = () => {
                   timer: "2000",
                 }).then(() => {
                   window.location.href = "/administracion";
-                  // navigate("/administracion");
-                  //window.location.reload();
                 });
-                //navigate("/administracion");
-                
-                
-
-             
-             
             }
-           
           })
           .catch((error) => {
             console.log(error.response.data.message);
@@ -249,7 +237,6 @@ export const Login = () => {
               onBlur={handleBlur}
               value={form.email}
             />
-       
 
             <TextField
               margin="normal"

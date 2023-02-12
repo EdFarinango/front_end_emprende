@@ -2,17 +2,10 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Label } from '../../components';
+
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Button from "@mui/material/Button";
-import  { useContext } from "react";
-
-
-import { AuthContext } from "../../contexts";
-import { Link } from "react-router-dom";
-
-import { FaNetworkWired } from "react-icons/fa";
 
 
 import CssBaseline from "@mui/material/CssBaseline";
@@ -25,7 +18,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import ModalPswd from "./ModalPswd";
+
 import alert from "sweetalert";
 
 export const ConfirmPassword = () => {
@@ -83,7 +76,7 @@ export const ConfirmPassword = () => {
      
       
 
-      //console.log(error.response.data.errors.password[0]);
+      console.log(error.response.data.errors);
 
     
         if (error.response.data.errors.password)

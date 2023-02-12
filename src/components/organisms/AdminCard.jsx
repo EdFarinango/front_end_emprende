@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+
 
 import { Button } from "react-bootstrap";
 
@@ -21,7 +21,7 @@ const AdminCard = () => {
   const [admins, setAdmin] = useState([]);
 
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
+
 
   const token = localStorage.getItem("token");
 

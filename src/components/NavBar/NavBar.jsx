@@ -23,11 +23,6 @@ import axios from 'axios';
 import Logo from '../assets/logo.png';
 
 
-
-
-
-
-
 function NavBar() {
   const { user, logout } = useContext(AuthContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
