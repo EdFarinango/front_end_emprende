@@ -113,7 +113,7 @@ export const ConfirmPassword = () => {
           }if(error.response.data.errors.password[0] ==='validation.required'){
             alert ({
               title: "Error",
-              text: "No se puede enviar un formulario vacío ",
+              text: "Las contraseñas no coinciden, inytente nuevamente ",
               icon: "error",
               button: false,
               timer: 2000,
@@ -125,7 +125,7 @@ export const ConfirmPassword = () => {
           else if(error.response.data.errors.password.length === 1){
             alert ({
               title: "Error",
-              text: "Las contraseñas no coinciden, intente nuevamente",
+              text: "El campo contraseña es obligatorio",
               icon: "error",
               button: false,
               timer: 2000,
