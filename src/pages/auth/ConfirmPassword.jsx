@@ -110,7 +110,7 @@ export const ConfirmPassword = () => {
             })
   
             
-          }if(error.response.data.errors.password[0] ==='validation.required'){
+          }if(error.response.data.errors.password[0] ==='La confirmación de contraseña no coincide.'){
             alert ({
               title: "Error",
               text: "Las contraseñas no coinciden, inytente nuevamente ",
