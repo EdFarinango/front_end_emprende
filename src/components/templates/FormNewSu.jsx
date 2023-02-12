@@ -67,9 +67,9 @@ const EditFormNew = () => {
       name: "personal_phone",
       type: "text",
       placeholder: "Teléfono",
-      errorMessage: "Solamente se aceptan números de 9 a 10 dígitos",
+      errorMessage: "Solamente se aceptan números de hasta 10 dígitos",
       label: "Teléfono personal",
-      pattern: "^[0-9]{9,10}$",
+      pattern: "^[0-9]{10}$",
   
       required: true,
     },
