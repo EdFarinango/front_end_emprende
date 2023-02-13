@@ -27,7 +27,7 @@ import Buho from "../../components/assets/buho.png";
 
 import Footer from "../../components/footer";
 
-import alert from "sweetalert"
+import alert from "sweetalert";
 
 const theme = createTheme();
 const Repositorio = ({ video }) => {
@@ -69,7 +69,6 @@ const Repositorio = ({ video }) => {
           descripcion: "",
           url: "",
         });
-
       })
       .catch((error) => {
         console.log(error);
@@ -145,18 +144,12 @@ const Repositorio = ({ video }) => {
     getData();
   }, []);
 
-
-
-
-
-
-
-
-
   if (loading) {
-    return (<div className="container-fluid contentLoading">
-    <Loading />
-  </div>);
+    return (
+      <div className="container-fluid contentLoading">
+        <Loading />
+      </div>
+    );
   } else if (user) {
     return (
       <>
@@ -164,79 +157,72 @@ const Repositorio = ({ video }) => {
           <CssBaseline />
           <main>
             {/* Hero unit */}
-            <div>
+            <div></div>
+            <Container maxWidth="lg" className="containerForm">
+              <Container maxWidth="sm">
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                  <Box sx={{ width: "100%" }}>
+                    <Form
+                      onSubmit={handleSubmit}
+                      className="form-control w3-animate-zoom w3-padding"
+                    >
+                      <h2>Formulario de Registro de videos</h2>
+                      <FormGroup>
+                        {inputs.map((input) => (
+                          <FormInput
+                            key={input.id}
+                            {...input}
+                            value={form[input.name]}
+                            onChange={handleInputChange}
+                          />
+                        ))}
+                      </FormGroup>
 
-           
-            </div>
-              <Container maxWidth="lg" className="containerForm">
-                <Container maxWidth="sm">
-                  <Box sx={{ display: "flex", justifyContent: "center" }}>
-                    <Box sx={{ width: "100%" }}>
-                      <Form
-                        onSubmit={handleSubmit}
-                        className="form-control w3-animate-zoom w3-padding"
-                      >
-                        <h2>Formulario de Registro de videos</h2>
-                        <FormGroup>
-                          {inputs.map((input) => (
-                            <FormInput
-                              key={input.id}
-                              {...input}
-                              value={form[input.name]}
-                              onChange={handleInputChange}
-                            />
-                          ))}
-                        </FormGroup>
-
-                        <Button color="info" type="submit">
-                          Guardar
-                        </Button>
-                      </Form>
-                    </Box>
+                      <Button color="info" type="submit">
+                        Guardar
+                      </Button>
+                    </Form>
                   </Box>
-                </Container>
+                </Box>
               </Container>
+            </Container>
 
-              <br />
-              <div className="w3-row-padding">
+            <br />
+            <div className="w3-row-padding">
               <div className="w3-col m12">
                 <div className="w3-card w3-round w3-white">
                   <div className="w3-container w3-padding">
-                    
-
-                  
-              <Container
-                maxWidth="lg"
-                sx={{ mt: 4, mb: 2, display: "flex", flexDirection: "column" }}
-                className="d-flex justify-content-center w3-padding"
-              >
-               
-                <Typography
-                  component="h4"
-                  variant="h4"
-                  align="center"
-                  color="text.primary"
-                  gutterBottom
-                >
-                   <img
-                    src={Buho}
-                    alt="logo"
-                    width="150"
-                    height="150"
-                    className="d-inline-block align-top imgAling"
-                  />
-                  Videoconferencias organizadas por comisión Emprende-ESFOT
-                </Typography>
-                
-               
-              </Container>
-                    
+                    <Container
+                      maxWidth="lg"
+                      sx={{
+                        mt: 4,
+                        mb: 2,
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                      className="d-flex justify-content-center w3-padding"
+                    >
+                      <Typography
+                        component="h4"
+                        variant="h4"
+                        align="center"
+                        color="text.primary"
+                        gutterBottom
+                      >
+                        <img
+                          src={Buho}
+                          alt="logo"
+                          width="150"
+                          height="150"
+                          className="d-inline-block align-top imgAling"
+                        />
+                        Videoconferencias organizadas por comisión
+                        Emprende-ESFOT
+                      </Typography>
+                    </Container>
                   </div>
                 </div>
               </div>
-             
-            
-              
             </div>
             <Container sx={{ py: 8 }} maxWidth="lg">
               <Grid container spacing={12}>
@@ -257,6 +243,7 @@ const Repositorio = ({ video }) => {
                           className="embed-responsive-item"
                           allowFullScreen="true"
                           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                          titulo = 'video'
                         />
                       </div>
                       <Box sx={{ flexGrow: 0 }}>
@@ -307,45 +294,36 @@ const Repositorio = ({ video }) => {
         <main>
           {/* Hero unit */}
           <div>
-          <div className="w3-row-padding">
+            <div className="w3-row-padding">
               <div className="w3-col m12">
                 <div className="w3-card w3-round w3-white">
                   <div className="w3-container w3-padding">
-    
-
                     <div class="input-group rounded">
-
- <Container maxWidth="sm">
-              <Typography
-                component="h1"
-                variant="h2"
-                align="center"
-                color="text.primary"
-                gutterBottom
-              >
-                Repositorio
-              </Typography>
-              <Typography
-                variant="h5"
-                align="center"
-                color="text.secondary"
-                paragraph
-              >
-                En esta sección encontrarás videos de conferencias y talleres
-                realizados por Emprende.
-              </Typography>
-            </Container>
-
-
-
+                      <Container maxWidth="sm">
+                        <Typography
+                          component="h1"
+                          variant="h2"
+                          align="center"
+                          color="text.primary"
+                          gutterBottom
+                        >
+                          Repositorio
+                        </Typography>
+                        <Typography
+                          variant="h5"
+                          align="center"
+                          color="text.secondary"
+                          paragraph
+                        >
+                          En esta sección encontrarás videos de conferencias y
+                          talleres realizados por Emprende.
+                        </Typography>
+                      </Container>
                     </div>
-                    
-
                   </div>
                 </div>
               </div>
             </div>
-           
           </div>
           <Container sx={{ py: 8 }} maxWidth="lg">
             <Grid container spacing={12}>

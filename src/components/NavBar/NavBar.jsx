@@ -418,30 +418,7 @@ function NavBar() {
 
               
               
-              
-              {/* <MenuItem>
-             
-                {user  ? <a onClick={handleLogout} className="nav-link li "
-                >Cerrar Sesión</a> : <a href="/login" className="nav-link li"
-                  onClick={handleCloseUserMenu} sx={{ display: 'block' }}>
-                  Iniciar Sesión</a>
-                }
-
-
-              </MenuItem>
-              <MenuItem>
-    
             
-              
-
-            
-         
-                  <a onClick={handleCloseUserMenu} className="nav-link"
-                    href= "/administracion"
-
-                     > Administración </a>
-                  
-              </MenuItem> */}
 
 
 

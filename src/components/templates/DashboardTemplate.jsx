@@ -37,7 +37,7 @@ export const DashboardTemplate = () => {
           </div>
         </div>
         <footer>
-      <Footer />
+      {/* <Footer /> */}
       </footer>
       </div>
 

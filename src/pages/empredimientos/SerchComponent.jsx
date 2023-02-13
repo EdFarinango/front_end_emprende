@@ -39,14 +39,14 @@ const SearchComponent = () => {
           headers: { accept: "application/json", authorization: token },
         }
       );
-      let pend = 0;
+      let peticionesPendientes = 0;
       setData(response.data.data.emprendimientos);
       for (let i = 0; i < response.data.data.emprendimientos.length; i++) {
         if (response.data.data.emprendimientos[i].estado1 === 0) {
-          pend = pend + 1;
+          peticionesPendientes = peticionesPendientes + 1;
         }
       }
-      setPendientes(pend);
+      setPendientes(peticionesPendientes);
       setLoading(true);
     } catch (error) {
       console.log(error);

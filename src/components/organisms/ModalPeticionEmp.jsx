@@ -32,6 +32,7 @@ const ModalNewEmp = () => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const [data, setData] = useState([]);
 
@@ -57,6 +58,8 @@ const ModalNewEmp = () => {
     image: "",
     state : "0",
     segundo_estado: "0",
+   
+
   });
 
   const handleSubmit = async (e) => {
@@ -80,6 +83,7 @@ const ModalNewEmp = () => {
       formData.append("image", image);
         formData.append("segundo_estado", form.segundo_estado);
         formData.append("state", form.state);
+ 
 
       await axios
         .post(
@@ -105,6 +109,8 @@ const ModalNewEmp = () => {
             window.location.reload();
         })
         .catch((error) => {
+
+          console.log(error.response);
           if (error.response.data.message === 'El campo image no debe ser mayor que 512 kilobytes.') {
             alert({
               title: "Emprende",

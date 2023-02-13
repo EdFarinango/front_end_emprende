@@ -27,7 +27,6 @@ import "swiper/css/pagination";
 
 import Loading from "../../components/atoms/Loading";
 
-
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 
 export const CatalogoEmp = () => {
@@ -70,112 +69,96 @@ export const CatalogoEmp = () => {
   }, []);
 
   if (!loading) {
-    return (<div className="container-fluid contentLoading">
-    <Loading />
-  </div>);
+    return (
+      <div className="container-fluid contentLoading">
+        <Loading />
+      </div>
+    );
   }
 
   return (
     <>
- <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
-              <div className="w3-col m12">
-                <div className="w3-card w3-round w3-white">
-                  <div className="w3-container w3-padding">
-                    <h2 className="w3-opacity center">Emprendimientos a tu servicio</h2>
-                    <div className="col-12">
-                        <div className="float-right">
-                          <div className="input-group mb-3">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="Buscar"
-                              aria-label="Buscar"
-                              aria-describedby="basic-addon2"
-                              value={search}
-                              onChange={searcher}
-                              onBlur={del}
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                    <div class="input-group rounded">
-
-                
-        <Swiper
-          cssMode={true}
-          navigation={true}
-          pagination={true}
-          mousewheel={true}
-          keyboard={true}
-          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-        >
-          {dato.map((item) =>
-            item.estado === 1 && item.estado1 === 1 ? (
-              <SwiperSlide>
-                <div
-                  className="card"
-                  style={{
-                    height: "450x",
-                    width: "auto",
-                    margin: "auto",
-                    borderRadius: "10px",
-                  }}
-                >
-                  
-                  <img
-                    src={item.image}
-                    className="card-img-bottom"
-                    alt="imgEmprendimiento"
-                    style={{ height: "300px" , borderRadius: "10px"}}
-                  />
-                  
-                  <div className="card-body">
-                    <h5 className="card-title">{item.nombre}</h5>
-                    <p className="card-text">{item.descripcion}
-                    
-                    
-                    
-                    </p>
-                    
-                  </div>
-                </div>
-              </SwiperSlide>
-            ) : item.length > 1 ? (
-              <h1>No hay emprendimientos</h1>
-            ) : null
-          )}
-        </Swiper>
-      </div>
-
-
-
-
-                    </div>
-                   
-
+      <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
+        <div className="w3-col m12">
+          <div className="w3-card w3-round w3-white">
+            <div className="w3-container w3-padding">
+              <h2 className="w3-opacity center">
+                Emprendimientos a tu servicio
+              </h2>
+              <div className="col-12">
+                <div className="float-right">
+                  <div className="input-group mb-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Buscar"
+                      aria-label="Buscar"
+                      aria-describedby="basic-addon2"
+                      value={search}
+                      onChange={searcher}
+                      onBlur={del}
+                    />
                   </div>
                 </div>
               </div>
-        
-      
+
+              <div class="input-group rounded">
+                <Swiper
+                  cssMode={true}
+                  navigation={true}
+                  pagination={true}
+                  mousewheel={true}
+                  keyboard={true}
+                  modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+                >
+                  {dato.map((item) =>
+                    item.estado === 1 && item.estado1 === 1 ? (
+                      <SwiperSlide>
+                        <div
+                          className="card"
+                          style={{
+                            height: "450x",
+                            width: "auto",
+                            margin: "auto",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          <img
+                            src={item.image}
+                            className="card-img-bottom"
+                            alt="imgEmprendimiento"
+                            style={{ height: "300px", borderRadius: "10px" }}
+                          />
+
+                          <div className="card-body">
+                            <h5 className="card-title">{item.nombre}</h5>
+                            <p className="card-text">{item.descripcion}</p>
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                    ) : item.length > 1 ? (
+                      <h1>No hay emprendimientos</h1>
+                    ) : null
+                  )}
+                </Swiper>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* catalodo de emprendimientos */}
-     
+
       <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
-        
         <div className="w3-col">
           <div className="w3-row-padding">
             <div className="w3-col m12">
-              <div className="w3-card w3-round w3-white">
-          
-                     
-                   
-              </div>
+              <div className="w3-card w3-round w3-white"></div>
             </div>
           </div>
 
           {dato.map((item) =>
-            item.estado === 1 && item.estado1 ===1 ? (
+            item.estado === 1 && item.estado1 === 1 ? (
               <div>
                 <div
                   className="w3-container w3-card w3-white w3-round w3-margin"
@@ -923,33 +906,14 @@ export const CatalogoEmp = () => {
                             </svg>
 
                             <div className="card-body">
-                            <span className="badge badge-pill badge-danger spanDesc">
-                              {item.descuento} %
+                              <span className="badge badge-pill badge-danger spanDesc">
+                                {item.descuento} %
                               </span>
-                              </div>
+                            </div>
                           </div>
-
-                          
                         </div>
                       </div>
 
-                      {/* <div className="containerCup d-flex justify-content-center">
-                          <div className="cupon-card">
-                            <h3>
-                              {item.descuento} % de descuento promocionado por
-                              la comisión de emprendimiento ESFOT
-                            </h3>
-                            <div className="cupon-row"></div>
-                            <p>
-                              <i className="fa fa-calendar" /> 1 de enero al 31
-                              de diciembre
-                            </p>
-                            <div className="circulo1"></div>
-                            <div className="circulo2"></div>
-                            <div className="circulo3"></div>
-                            <div className="circulo4"></div>
-                          </div>
-                        </div> */}
                     </div>
                   </div>
                   <button
@@ -1000,8 +964,6 @@ export const CatalogoEmp = () => {
             <div></div>
           )}
         </div>
-
-       
 
         <br />
 

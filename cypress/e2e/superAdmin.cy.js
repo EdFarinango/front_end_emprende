@@ -21,10 +21,15 @@ describe('template spec', () => {
     cy.get('input[name="email"]').type("superadmin@gmail.com");
     cy.get('input[name="password"]').type("secret");
     cy.get('button[type="submit"]').click();
-    cy.time = 1000;
+
+    cy.timeout(10000);
 
 
-    cy.get("button").contains("s").click();
+
+    cy.get( '@btn').click({ multiple: true });
+
+    cy.get("button[class='btnedit btn-secondary btn btn-primary']").click({ multiple: true });
+
 
 
     

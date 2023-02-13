@@ -40,6 +40,9 @@ const AdminCard = () => {
       ///revisar  updateState(response.data.data.users)
 
       setAdmin(response.data.data.users);
+      //console.log(response.data.data.users);
+      // const user = JSON.parse(localStorage.getItem("user"));
+      // console.log(user.id);
     } catch (error) {
       console.log(error);
     }
