@@ -921,7 +921,7 @@ export const CatalogoEmp = () => {
                     className="w3-button w3-theme-d1 w3-margin-bottom"
                   >
                     <a
-                      href={item.facebook}
+                      href= "https://www.facebook.com/people/ESFOT-EPN-UIO/100063704537871/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

@@ -37,10 +37,7 @@ export const Dashboard = () => {
   const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
 
-  useState(() => {
-    console.log(user.id);
-  }, []);
-
+ 
   return (
     <>
       <div className="container">
