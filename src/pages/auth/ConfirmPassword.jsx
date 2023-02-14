@@ -36,7 +36,7 @@ export const ConfirmPassword = () => {
   const [password_confirmation, setpassword_confirmation] = useState("");
   const [shown, setShown] = React.useState(false);
   const theme = createTheme();
-  const switchShown = () => setShown(!shown);
+
  
     
 
@@ -300,14 +300,32 @@ export const ConfirmPassword = () => {
             })
           }
         }else 
-         if (error.response.data.errors.email === "passwords.token")
+         if (error.response.data.errors.email === "El token de restablecimiento de contraseña es inválido.")
         {
-          alert ({
-            title: "Error",
-            text: "El tiempo de espera para cambiar la contraseña ha expirado, realize el proceso nuevamente",
-            icon: "error",
-            button: false,
+       
+          Alerta.fire({
+            title: <p>Atención!</p>,
+            text:"El tiempo de espera para cambiar la contraseña ha expirado, realize el proceso nuevamente",
+            //imagen con tamaño 100x100
+            imageUrl: X ,
+            imageHeight: 100,
+            imageWidth: "auto",
+            imageAlt: 'alertaEPN',
+            //boton desactivado
+            showConfirmButton: false,
+            //tiempo de desaparicion
             timer: 3000,
+            //color de fondo
+            background: '#fff',
+            //color de texto
+            customClass: {
+              title: 'text-dark',
+              text: 'text-dark',
+              popup: 'bg-light',
+              icon: 'bg-light'
+            }
+            
+      
           })
           setTimeout(() => {
             navigate("/login");
