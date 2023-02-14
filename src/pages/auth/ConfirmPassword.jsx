@@ -68,7 +68,7 @@ export const ConfirmPassword = () => {
      
 
   const handleSubmit = async (e) => {
-    console.log("asdas",token)
+
     e.preventDefault();
     const data = {
       token: token,
@@ -81,7 +81,7 @@ export const ConfirmPassword = () => {
         "https://backend-emprende.herokuapp.com/api/v1/reset-password",
         data
       ).then((response) => {
-        console.log(response);
+       
         if (response.status === 200) {
           Alerta.fire({
             title: <p>Atención!</p>,
