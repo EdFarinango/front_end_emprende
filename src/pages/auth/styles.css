@@ -1,4 +1,4 @@
-p {
+pPswd {
     font-size: 1.2rem;
     font-family: "Montserrat";
     cursor: pointer;
@@ -13,6 +13,7 @@ p {
 
 .error {
     color: red;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-family: "Montserrat";
+    font-weight: bolder;
 }

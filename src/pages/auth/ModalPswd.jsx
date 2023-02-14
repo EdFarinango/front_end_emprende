@@ -6,10 +6,15 @@ import { Modal, ModalHeader, ModalBody, Button, Label } from "reactstrap";
 
 import Container from 'react-bootstrap/Container';
 import axios from 'axios';
-
+import withReactContent from 'sweetalert2-react-content';
 import './styles.css';
+import alert from "sweetalert2";
+import  X  from "../../components/assets/logo_esfot_buho.png"
+   const Alerta = withReactContent(alert)
+
 
 const ModalPswd = () => {
+ 
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
@@ -48,7 +53,9 @@ const ModalPswd = () => {
                 { email },
                 { headers: { 'accept': 'application/json' } }
             )
-            console.log("Se ha enviado a tu correo");
+                // loading mienstras se procesa la peticion 
+           
+
 
             
            
@@ -57,10 +64,22 @@ const ModalPswd = () => {
             setActivo(true);
             setActivo2(false);
 
-            setTimeout(() => {
-                setModal(false);
-            }
-                , 3000);
+            Alerta.fire({
+                icon: 'success',
+                title: <h2>Mesaje enviado con EXITO!!</h2>,
+                html: <p>Revice su bandeja de entrada</p>,
+               
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                      setActivo(false);
+                      setTimeout(() => {
+                        setModal(false);
+                    }
+                        , 200);
+
+                    }
+                  })
+                
 
           
 
@@ -68,21 +87,77 @@ const ModalPswd = () => {
 
                
             
-           
+           //.data.errors.email 
       
         } catch (error) {
-            console.log(error.response.data.message);
+           // console.log("sdsd",error.response.data.message);
            
             setEmail('');   
             setActivo2(true);
             setActivo(false);
-
-            alert.fire({
-                icon: 'success',
-                title: <h2>Mesaje enviado con EXITO!!</h2>,
-                html: <p>Respondere lo mas pronto posible</p>,
-                timer: 7000,
-              })
+            if (error.response.data.message === 'El campo correo electrónico es obligatorio.') {
+                Alerta.fire({
+               
+                    title: <h2>Atención!</h2>,
+                    html: <div><p>El campo correo electrónico es obligatorio.</p>
+                        <p>Por favor ingrese su correo electrónico</p>
+                    </div>,
+                    timer: 5000,
+                    })
+                }
+                    
+            if (error.response.data.errors.email === 'No encontramos ningún usuario con ese correo electrónico.') {
+                Alerta.fire({
+                    title: <p>Atención!</p>,
+                    text: "No encontramos ningún usuario asociado con ese correo electrónico.",
+                    //imagen con tamaño 100x100
+                    imageUrl: X ,
+                    imageHeight: 100,
+                    imageWidth: "auto",
+                    imageAlt: 'alertaEPN',
+                    //boton desactivado
+                    showConfirmButton: false,
+                    //tiempo de desaparicion
+                    timer: 3000,
+                    //color de fondo
+                    background: '#fff',
+                    //color de texto
+                    customClass: {
+                      title: 'text-dark',
+                      text: 'text-dark',
+                      popup: 'bg-light',
+                      icon: 'bg-light'
+                    }
+                    
+              
+                  })
+            } else if (error.response.data.errors.email === 'Por favor espere antes de intentar de nuevo.') {
+                Alerta.fire({
+                    title: <p>Atención!</p>,
+                    text: "Tiene una solicitud pendiente, por favor espere de 2 a 5  minutos antes de intentar de nuevo",
+                    //imagen con tamaño 100x100
+                    imageUrl: X ,
+                    imageHeight: 100,
+                    imageWidth: "auto",
+                    imageAlt: 'alertaEPN',
+                    //boton desactivado
+                    showConfirmButton: false,
+                    //tiempo de desaparicion
+                    timer: 3000,
+                    //color de fondo
+                    background: '#fff',
+                    //color de texto
+                    customClass: {
+                      title: 'text-dark',
+                      text: 'text-dark',
+                      popup: 'bg-light',
+                      icon: 'bg-light'
+                    }
+                    
+              
+                  })
+            }
+            
 
         }
     }
@@ -93,13 +168,13 @@ const ModalPswd = () => {
         <>
           <div>
             <div className='li'>
-     <p onClick={toggle}>Recuperar Contraseña </p>
+     <p clasName ="pPswd" onClick={toggle}>Recuperar Contraseña </p>
 
      </div>
 
 
 
-<Modal isOpen={modal} toggle={toggle} size="sm">
+<Modal isOpen={modal} toggle={toggle} size="sx">
 <ModalHeader toggle={toggle}>EmPreNde</ModalHeader>
     <ModalBody className="show-grid">
         
@@ -118,10 +193,12 @@ const ModalPswd = () => {
                         value={email}
                         placeholder='Ingresa tu correo'
                         maxLength="35"
-                        required
+                        pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+                  
                         autoFocus
                         onChange={e => setEmail(e.target.value)}
                     />
+                   
 
                 </div>
                 <div className='pt-4 flex justify-center'>
@@ -135,35 +212,10 @@ const ModalPswd = () => {
 
         </Container>
     </ModalBody>
-  {activo && <div  className='alert alert-success' role='alert'>
-                    Se ha enviado un correo a tu cuenta
+  
+                     
                    
-                    {
-                        setTimeout(() => {
-                            setActivo(false);
-                        }
-                        , 3000)
-                    }
-
-
-
-                    </div>}
-                    {activo2 && <div className='alert alert-danger' role='alert'
-                    
-                    
-                    >
-                    No se ha podido enviar el correo, intente de nuevo
-               
-                    {setTimeout(() => {
-                        setActivo2(false);
-
-                    }, 3000)
-
-                    
-                    }
-                    </div>
-                    
-                    }
+                          
 
     </Modal>
     </div>

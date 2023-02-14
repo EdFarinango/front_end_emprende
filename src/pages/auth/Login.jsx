@@ -18,7 +18,10 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import ModalPswd from "./ModalPswd";
-import alert from "sweetalert";
+import alert from "sweetalert2";
+
+import withReactContent from 'sweetalert2-react-content';
+import  X  from "../../components/assets/logo_esfot_buho.png"
 
 function Copyright(props) {
   return (
@@ -40,6 +43,9 @@ function Copyright(props) {
 const theme = createTheme();
 
 export const Login = () => {
+
+
+  const Alerta = withReactContent(alert)
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -75,37 +81,124 @@ export const Login = () => {
             // eslint-disable-next-line no-lone-blocks
             {
               console.log("Ingreso exitoso");
-              alert &&
-                alert({
-                  title: ["Bienvenido"],
-                  text: "Ingreso exitoso",
-                  iconColor: "success",
-                  button: false,
-                  timer: "2000",
+         
+                // alert({
+                //   title: ["Bienvenido"],
+                //   text: "Ingreso exitoso",
+                //   iconColor: "success",
+                //   button: false,
+                //   timer: "2000",
+                // }).then(() => {
+                //   window.location.href = "/administracion";
+                // });
+                Alerta.fire({
+                  title: <p>EMPRENDE</p>,
+                  text: "Bienvenido",
+                  //imagen con tamaño 100x100
+                  imageUrl: X ,
+                  imageHeight: 100,
+                  imageWidth: "auto",
+                  imageAlt: 'alertaEPN',
+                  //boton desactivado
+                  showConfirmButton: false,
+                  //tiempo de desaparicion
+                  timer: 3000,
+                  //color de fondo
+                  background: '#fff',
+                  //color de texto
+                  customClass: {
+                    title: 'text-dark',
+                    text: 'text-dark',
+                    popup: 'bg-light',
+                    icon: 'bg-light'
+                  }
+                  
+            
                 }).then(() => {
                   window.location.href = "/administracion";
                 });
+
+                
             }
           })
           .catch((error) => {
-            console.log(error.response.data.message);
-
+            console.log(error.response);
+            Alerta.fire({
+              title: <p>Atención!</p>,
+              text: "La contraseña es obligatoria, ingrese una contraseña válida",
+              //imagen con tamaño 100x100
+              imageUrl: X ,
+              imageHeight: 100,
+              imageWidth: "auto",
+              imageAlt: 'alertaEPN',
+              //boton desactivado
+              showConfirmButton: false,
+              //tiempo de desaparicion
+              timer: 3000,
+              //color de fondo
+              background: '#fff',
+              //color de texto
+              customClass: {
+                title: 'text-dark',
+                text: 'text-dark',
+                popup: 'bg-light',
+                icon: 'bg-light'
+              }
+              
+        
+            })
             if (error.response.data.errors.email) {
-              alert({
-                title: "Error",
-                text: "Debe ingresar datos al formulario",
-                icon: "error",
-                button: false,
-                timer: "1500",
-              });
+
+              Alerta.fire({
+                title: <p>Atención!</p>,
+                text: "Debe proporcionar una dirección de correo electrónico y una contraseña válidas",
+                //imagen con tamaño 100x100
+                imageUrl: X ,
+                imageHeight: 100,
+                imageWidth: "auto",
+                imageAlt: 'alertaEPN',
+                //boton desactivado
+                showConfirmButton: false,
+                //tiempo de desaparicion
+                timer: 3000,
+                //color de fondo
+                background: '#fff',
+                //color de texto
+                customClass: {
+                  title: 'text-dark',
+                  text: 'text-dark',
+                  popup: 'bg-light',
+                  icon: 'bg-light'
+                }
+                
+          
+              })
+              
             } else if (error.response.data.errors.password) {
-              alert({
-                title: "Error",
+                Alerta.fire({
+                title: <p>Atención!</p>,
                 text: "Debe ingresar una contraseña válida",
-                icon: "error",
-                button: false,
-                timer: "1500",
-              });
+                //imagen con tamaño 100x100
+                imageUrl: X ,
+                imageHeight: 100,
+                imageWidth: "auto",
+                imageAlt: 'alertaEPN',
+                //boton desactivado
+                showConfirmButton: false,
+                //tiempo de desaparicion
+                timer: 3000,
+                //color de fondo
+                background: '#fff',
+                //color de texto
+                customClass: {
+                  title: 'text-dark',
+                  text: 'text-dark',
+                  popup: 'bg-light',
+                  icon: 'bg-light'
+                }
+                
+          
+              })
             }
           });
         setLoading(false);
@@ -116,34 +209,85 @@ export const Login = () => {
         if (!FaNetworkWired) {
           console.log(error);
         } else {
-          alert({
-            title: "Error",
-            text: "Credenciales incorrectas ",
-            icon: "error",
-            button: false,
-            //timer: "1500",
-          });
+          Alerta.fire({
+            title: <p>Atención!</p>,
+            text: "Las credenciales proporcionadas no coinciden con nuestros registros",
+            //imagen con tamaño 100x100
+            imageUrl: X ,
+            imageHeight: 100,
+            imageWidth: "auto",
+            imageAlt: 'alertaEPN',
+            //boton desactivado
+            showConfirmButton: false,
+            //tiempo de desaparicion
+            timer: 3000,
+            //color de fondo
+            background: '#fff',
+            //color de texto
+            customClass: {
+              title: 'text-dark',
+              text: 'text-dark',
+              popup: 'bg-light',
+              icon: 'bg-light'
+            }
+            
+      
+          })
         }
       }
     } else {
       if (errors.email) {
-        alert({
-          title: "Error",
+        Alerta.fire({
+          title: <p>Atención!</p>,
           text: "La dirección de correo electrónico es obligatoria, ingrese un correo válido",
-
-          iconColor: "blue",
-          icon: "error",
-          button: false,
-          //timer: "1500",
-        });
+          //imagen con tamaño 100x100
+          imageUrl: X ,
+          
+          imageHeight: 100,
+          imageWidth: "auto",
+          imageAlt: 'alertaEPN',
+          //boton desactivado
+          showConfirmButton: false,
+          //tiempo de desaparicion
+          timer: 3000,
+          //color de fondo
+          background: '#fff',
+          //color de texto
+          customClass: {
+            title: 'text-dark',
+            text: 'text-dark',
+            popup: 'bg-light',
+            icon: 'bg-light'
+          }
+          
+    
+        })
+      
       } else if (errors.password) {
-        alert({
-          title: "Error",
-          text: "Por favor revise sus credenciales, ingrese una contraseña válida",
-          icon: "error",
-          button: false,
-          //timer: "1500",
-        });
+        Alerta.fire({
+          title: <p>Atención!</p>,
+          text: "La contraseña es obligatoria, ingrese una contraseña válida",
+          //imagen con tamaño 100x100
+          imageUrl: X ,
+          imageHeight: 100,
+          imageWidth: "auto",
+          imageAlt: 'alertaEPN',
+          //boton desactivado
+          showConfirmButton: false,
+          //tiempo de desaparicion
+          timer: 3000,
+          //color de fondo
+          background: '#fff',
+          //color de texto
+          customClass: {
+            title: 'text-dark',
+            text: 'text-dark',
+            popup: 'bg-light',
+            icon: 'bg-light'
+          }
+          
+    
+        })
       }
     }
   };
@@ -173,6 +317,8 @@ export const Login = () => {
         "La dirección de correo electrónico es obligatoria, ingrese un correo válido";
     } else if (!regexEmail.test(form.email)) {
       errors.email = "El correo electrónico ingresado no es válido";
+    } else if (!form.password) {
+      errors.password = "Por favor ingrese una contraseña";
     }
 
     // }else if (!form.password) {
@@ -237,6 +383,9 @@ export const Login = () => {
               onBlur={handleBlur}
               value={form.email}
             />
+            {errors.email && ( // Si hay errores, se muestran
+              <div className="error">{errors.email}</div>
+            )}
 
             <TextField
               margin="normal"
@@ -251,9 +400,13 @@ export const Login = () => {
               value={form.password}
               autoComplete="current-password"
             />
+            {errors.password && ( // Si hay errores, se muestran
+              <div className="error">{errors.password}</div>
+            )}
 
             <Grid container>
               {/* Desactivar boton */}
+              {loading ? (
 
               <Button
                 type="submit"
@@ -263,6 +416,17 @@ export const Login = () => {
               >
                 Iniciar sesión
               </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2, bgcolor: "#15A0A0" }}
+                >
+                  Iniciar sesión
+                </Button>
+              )}
+
             </Grid>
           </Box>
           <ModalPswd variant="body2" />

@@ -19,9 +19,14 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 
-import alert from "sweetalert";
 
+import alert from "sweetalert2";
+import  X  from "../../components/assets/logo_esfot_buho.png"
+import withReactContent from 'sweetalert2-react-content';
+
+   
 export const ConfirmPassword = () => {
+  const Alerta = withReactContent(alert)
   const navigate = useNavigate();
   const [token, settoken] = useState("");
   const [activo, setactivo] = useState(false);
@@ -32,22 +37,38 @@ export const ConfirmPassword = () => {
   const [shown, setShown] = React.useState(false);
   const theme = createTheme();
   const switchShown = () => setShown(!shown);
+ 
+    
 
-    useEffect(() => {
-      let cadenatoken1 = window.location.href.split("token=")[1];
+      useEffect(() => {
+       if (window.location.href === "https://emprende-esfot.vercel.app/emprende/reseteo-contraseña") {
+        navigate("/login");
+      }
+
+
+      if (token === "") {
+       let cadenatoken1 = window.location.href.split("token=")[1];
       cadenatoken1.split("&");
       settoken(cadenatoken1.split("&")[0]);
-      setEmail(window.location.href.split("email=")[1]);
+     setEmail(window.location.href.split("email=")[1]);   
+      
+       }
+       window.history.replaceState({}, document.title, "/emprende/" + "reseteo-contraseña");
 
-      console.log("token", token);
-      console.log("email", cadenatoken1);
 
-
-       
-
+  
      }, []);
 
+    
+
+   
+
+  
+   
+     
+
   const handleSubmit = async (e) => {
+    console.log("asdas",token)
     e.preventDefault();
     const data = {
       token: token,
@@ -62,7 +83,32 @@ export const ConfirmPassword = () => {
       ).then((response) => {
         console.log(response);
         if (response.status === 200) {
-          alert("Contraseña actualizada correctamente");
+          Alerta.fire({
+            title: <p>Atención!</p>,
+            html:<div> 
+            <p>La contraseña ha sido cambiada, sera redirigido al inicio de sesión</p>
+            </div>,
+            //imagen con tamaño 100x100
+            imageUrl: X ,
+            imageHeight: 100,
+            imageWidth: "auto",
+            imageAlt: 'alertaEPN',
+            //boton desactivado
+          
+            //tiempo de desaparicion
+            timer: 6000,
+            //color de fondo
+            background: '#fff',
+            //color de texto
+            customClass: {
+              title: 'text-dark',
+              text: 'text-dark',
+              popup: 'bg-light',
+              icon: 'bg-light'
+            }
+            
+      
+          })
           console.log( "hey1",response.data);
       setMensajeactivo(response.data.message);
       setactivo(true);
@@ -82,53 +128,175 @@ export const ConfirmPassword = () => {
         if (error.response.data.errors.password)
         {
           if (error.response.data.errors.password.length === 4) {
-            alert({
-              title: "Error",
-              text: "Ingrese una contraseña valida",
-              icon: "error",
-              button: false,
-              timer: 2000,
-            });
+            Alerta.fire({
+              title: <p>Atención!</p>,
+              html:<div> 
+              <p>* Debe ingresar ina contraseña valida.</p>
+              </div>,
+              //imagen con tamaño 100x100
+              imageUrl: X ,
+              imageHeight: 100,
+              imageWidth: "auto",
+              imageAlt: 'alertaEPN',
+              //boton desactivado
+            
+              //tiempo de desaparicion
+              timer: 6000,
+              //color de fondo
+              background: '#fff',
+              //color de texto
+              customClass: {
+                title: 'text-dark',
+                text: 'text-dark',
+                popup: 'bg-light',
+                icon: 'bg-light'
+              }
+              
+        
+            })
   
           }
           if (error.response.data.errors.password.length === 3) {
-            alert({
-              title: "Error",
-              text: "La contraseña debe contener al menos una mayúscula y una minúscula, La contraseña debe contener al menos 8 caracteres",
-              icon: "error",
-              button: false,
-              timer: 2000,
-            });
+              Alerta.fire({
+              title: <p>Atención!</p>,
+              html:<div> 
+              <p>La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula y un número.</p>
+              </div>,
+              //imagen con tamaño 100x100
+              imageUrl: X ,
+              imageHeight: 100,
+              imageWidth: "auto",
+              imageAlt: 'alertaEPN',
+              //boton desactivado
+            
+              //tiempo de desaparicion
+              timer: 6000,
+              //color de fondo
+              background: '#fff',
+              //color de texto
+              customClass: {
+                title: 'text-dark',
+                text: 'text-dark',
+                popup: 'bg-light',
+                icon: 'bg-light'
+              }
+              
+        
+            })
+            
   
-          }else if(error.response.data.errors.password.length === 2){
-            alert ({
-              title: "Error",
-              text: "La contraseña debe contener al menos una mayúscula y una minúscula",
-              icon: "error",
-              button: false,
-              timer: 2000,
+          }else if(error.response.data.errors.password.length === 2 || error.response.data.errors.password[0] === 'The contraseña must contain at least one number.'){
+            Alerta.fire({
+              title: <p>Atención!</p>,
+              html:<div> 
+              <p>La contraseña debe contener al menos un número.</p>
+              </div>,
+              //imagen con tamaño 100x100
+              imageUrl: X ,
+              imageHeight: 100,
+              imageWidth: "auto",
+              imageAlt: 'alertaEPN',
+              //boton desactivado
+            
+              //tiempo de desaparicion
+              timer: 6000,
+              //color de fondo
+              background: '#fff',
+              //color de texto
+              customClass: {
+                title: 'text-dark',
+                text: 'text-dark',
+                popup: 'bg-light',
+                icon: 'bg-light'
+              }
+              
+        
             })
   
             
-          }if(error.response.data.errors.password[0] ==='La confirmación de contraseña no coincide.'){
-            alert ({
-              title: "Error",
-              text: "Las contraseñas no coinciden, inytente nuevamente ",
-              icon: "error",
-              button: false,
-              timer: 2000,
+          }else if(error.response.data.errors.password[0] ==='La confirmación de contraseña no coincide.'){
+            Alerta.fire({
+              title: <p>Atención!</p>,
+              html:<div> 
+              <p>Las contraseñas ingresadas no coinciden.</p>
+              </div>,
+              //imagen con tamaño 100x100
+              imageUrl: X ,
+              imageHeight: 100,
+              imageWidth: "auto",
+              imageAlt: 'alertaEPN',
+              //boton desactivado
+            
+              //tiempo de desaparicion
+              timer: 6000,
+              //color de fondo
+              background: '#fff',
+              //color de texto
+              customClass: {
+                title: 'text-dark',
+                text: 'text-dark',
+                popup: 'bg-light',
+                icon: 'bg-light'
+              }
+              
+        
+            })
+  
+          }else if(error.response.data.errors.password[0] === 'The contraseña must contain at least one uppercase and one lowercase letter.'){
+            Alerta.fire({
+              title: <p>Atención!</p>,
+              html:<div> 
+              <p>Las contraseñas debe contener al menos una mayúscula y una minúscula.</p>
+              </div>,
+              //imagen con tamaño 100x100
+              imageUrl: X ,
+              imageHeight: 100,
+              imageWidth: "auto",
+              imageAlt: 'alertaEPN',
+              //boton desactivado
+            
+              //tiempo de desaparicion
+              timer: 6000,
+              //color de fondo
+              background: '#fff',
+              //color de texto
+              customClass: {
+                title: 'text-dark',
+                text: 'text-dark',
+                popup: 'bg-light',
+                icon: 'bg-light'
+              }
+              
+        
             })
           }
           
           
           
-          else if(error.response.data.errors.password.length === 1){
-            alert ({
-              title: "Error",
-              text: "El campo contraseña es obligatorio",
-              icon: "error",
-              button: false,
-              timer: 2000,
+          else if(error.response.data.errors.password[0]=== 'El campo contraseña es obligatorio.'){
+            Alerta.fire({
+              title: <p>Atención!</p>,
+              text: "Debe ingresar una contraseña, todos los campos son obligatorios",
+              //imagen con tamaño 100x100
+              imageUrl: X ,
+              imageHeight: 100,
+              imageWidth: "auto",
+              imageAlt: 'alertaEPN',
+              //boton desactivado
+              showConfirmButton: false,
+              //tiempo de desaparicion
+              timer: 3000,
+              //color de fondo
+              background: '#fff',
+              //color de texto
+              customClass: {
+                title: 'text-dark',
+                text: 'text-dark',
+                popup: 'bg-light',
+                icon: 'bg-light'
+              }
+              
+        
             })
           }
         }else 
@@ -253,8 +421,8 @@ export const ConfirmPassword = () => {
                     
                     <Grid container>
                     <Grid item xs>
-                        <Typography variant="body2" color="text.secondary" sx={{ mt: 2, mb: 2, fontFamily: "Montserrat", fontSize: "0.8rem", fontWeight: "bold" }}>
-                            La contraseña debe contener al menos una mayúscula y una minúscula, La contraseña debe contener al menos 8 caracteres
+                        <Typography variant="body2"  sx={{ mt: 2, mb: 2, fontFamily: "Montserrat", fontSize: "0.8rem", fontWeight: "bolder" }}>
+                            * La contraseña debe contener al menos una mayúscula y una minúscula, La contraseña debe contener al menos 8 caracteres
                         </Typography>
                     </Grid>
                 </Grid>

@@ -43,6 +43,8 @@
         "reactstrap": "^9.1.5",
         "styled-components": "^5.3.6",
         "sweetalert": "^2.1.2",
+        "sweetalert2": "^11.7.1",
+        "sweetalert2-react-content": "^5.0.7",
         "swiper": "^8.4.6",
         "tachyons-components": "^1.0.1",
         "web-vitals": "^2.1.4",
