@@ -305,7 +305,7 @@ export const ConfirmPassword = () => {
        
           Alerta.fire({
             title: <p>Atención!</p>,
-            text:"El tiempo de espera para cambiar la contraseña ha expirado, realize el proceso nuevamente",
+            text:"El tiempo de espera para cambiar la contraseña ha expirado, inicia el proceso nuevamente",
             //imagen con tamaño 100x100
             imageUrl: X ,
             imageHeight: 100,
