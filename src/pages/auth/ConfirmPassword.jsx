@@ -314,7 +314,7 @@ export const ConfirmPassword = () => {
             //boton desactivado
             showConfirmButton: false,
             //tiempo de desaparicion
-            timer: 3000,
+            timer: 6000,
             //color de fondo
             background: '#fff',
             //color de texto
