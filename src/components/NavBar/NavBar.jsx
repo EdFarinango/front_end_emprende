@@ -21,6 +21,7 @@ import { AuthContext } from '../../contexts';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Logo from '../assets/logo.png';
+import './style.css';
 
 
 function NavBar() {
@@ -114,131 +115,6 @@ function NavBar() {
  
 
 
-// if (user) {
-//   return (
- 
-
-//     <AppBar position="static" color='transparent' style={{ background: '#15A0A0' }} >
-
-//       <Container maxWidth="xl" >
-//         <Toolbar disableGutters >
-//           <Box sx={{ flexGrow: 12, display: { xs: 'none', md: 'flex' } }}>
-//             <Link to="/">
-//             <img src={Logo} alt="Logo" style={{ width: '150px', height: 'auto' }} />
-//             </Link>
-//               </Box>
-
-//           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-//             <IconButton
-//               size="large"
-//               edge="start"
-//               color="inherit"
-//               aria-label="menu"
-//               aria-controls="menu-appbar"
-//               aria-haspopup="true"
-//               onClick={handleOpenNavMenu}
-//             >
-//               <MenuIcon />
-//             </IconButton>
-//             <Menu
-//               // id="menu-appbar"
-//               // anchorEl={anchorElNav}
-//               // anchorOrigin={{
-//               //   vertical: 'top',
-//               //   horizontal: 'right',
-//               // }}
-//               // keepMounted
-//               // transformOrigin={{
-//               //   vertical: 'top',
-//               //   horizontal: 'right',
-//               // }}
-//               // open={Boolean(anchorElNav)}
-//               // onClose={handleCloseNavMenu}
-//               sx={{ mt: '45px', width: '100%' }}
-//               id="menu-appbar"
-//               anchorEl={anchorElNav}
-//               anchorOrigin={{
-//                 vertical: 'top',
-//                 horizontal: 'right',
-//               }}
-//               keepMounted
-//               transformOrigin={{
-//                 vertical: 'top',
-//                 horizontal: 'right',
-
-//               }}
-//               open={Boolean(anchorElNav)}
-//               onClose={handleCloseUserMenu}
-//             >
-//               {user && user.full_name ? (
-                
-
-//                 <Link to="/administracion" style={{ textDecoration: 'none', color: 'black' }}>
-             
-//                   <MenuItem onClick={handleCloseNavMenu}>Panel</MenuItem>
-
-//                 </Link>
-//               ) : (
-//                 <Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>
-//                   <MenuItem onClick={handleCloseNavMenu}>Iniciar Sesión</MenuItem>
-//                 </Link>
-//               )}
-
-//               <Link to="/nosotros" style={{ textDecoration: 'none', color: 'black' }}>
-//                 <MenuItem onClick={handleCloseNavMenu}>Nosotros</MenuItem>
-//               </Link>
-//               <Link to="/contacto" style={{ textDecoration: 'none', color: 'black' }}>
-//                 <MenuItem onClick={handleCloseNavMenu}>Contacto</MenuItem>
-//               </Link>
-//               <Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>
-//                 <MenuItem onClick={handleCloseNavMenu}>Iniciar Sesión</MenuItem>
-//               </Link>
-//             </Menu>
-            
-            
-            
-//           </Box>
-
-//           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-//             <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
-//               <Button color="inherit">Inicio</Button>
-//             </Link>
-//             <Link to="/nosotros" style={{ textDecoration: 'none', color: 'black' }}>
-//               <Button color="inherit">Nosotros</Button>
-//             </Link>
-//             <Link to="/contacto" style={{ textDecoration: 'none', color: 'black' }}>
-
-//               <Button color="inherit">Contacto</Button>
-//             </Link>
-//             <Link to="/login" style={{ textDecoration: 'none', color: 'black' }}>
-//               <Button color="inherit">Iniciar Sesión</Button>
-//             </Link>
-//             <Link to="/registro" style={{ textDecoration: 'none', color: 'black' }}>
-//               <Button color="inherit">Registrarse</Button>
-//             </Link>
-
-
-
-//             </Box>
-//           <Box sx={{ flexGrow: 2, display: { xs: 'none', md: 'flex' } }}>
-//             <IconButton
-//               size="large"
-//               edge="start"
-//               color="inherit"
-//               aria-label="menu"
-//               aria-controls="menu-appbar"
-//               aria-haspopup="true"
-//               onClick={handleOpenNavMenu}
-//             >
-//              <Avatar
-//                 alt="Eduardo"
-//                 src="/static/images/avatar/1.jpg" 
-//                 sx={{ width: 32, height: 32 }}
-//               />
-        
-//             </IconButton>
-            
-//           </Box>
 
 
 
@@ -259,16 +135,6 @@ function NavBar() {
 
 
 
-//               </Toolbar>
-//               </Container>
-//               </AppBar>
-
-
-
-
-
-//   );
-// }
 
 
   return (
@@ -285,15 +151,16 @@ function NavBar() {
           
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
+           
+            <IconButton className="menuButton"
               size="large"
            
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+        
             >
-              <MenuIcon />
+              <MenuIcon className='menuButton'/>
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -313,31 +180,48 @@ function NavBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
+              <MenuItem component={Link} to="/comision" onClick={handleCloseNavMenu}>
+                Comisión Emprende
+              </MenuItem>
+              <MenuItem component={Link} to="/catalogo" onClick={handleCloseNavMenu}>
+                Catálogo
+              </MenuItem>
+              <MenuItem component={Link} to="/repositorio" onClick={handleCloseNavMenu}>
+                Repositorio
+              </MenuItem>
+             
+
               
             </Menu> 
-            
-          </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-
-          {/* <Typography
+            <Typography
+            className="emprende"
             variant="h5"
 
             component="a"
             href="/"
             sx={{
-              fontWeight: 'bold',
-              flexGrow: 12,
-              fontFamily: 'Montserrat',
-
-
-
-              color: 'White',
-
+              marginBlockStart: '0.3em',
+              marginBlockEnd: '0.3em',
+              marginInlineStart: '0.3em',
+              marginInlineEnd: '0.3em',
+            
+              color: 'white',
+          
+              fontFamily: 'Roboto',
+              fontSize: '1.5rem',
+              lineHeight: 1.6,
+              letterSpacing: '0.01em',
               textDecoration: 'none',
+             
             }}
           >
             Emprende
-          </Typography> */}
+          </Typography>
+            
+          </Box>
+      
+
+           
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 
@@ -345,13 +229,14 @@ function NavBar() {
               component={Link} to="/comision"
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
+              className="linkEmprende"
             >
               Comisión Emprende
             </Button>
-            <Button component={Link} to="/catalogo" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+            <Button component={Link} to="/catalogo" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }} className="linkEmprende">
               Catálogo
             </Button>
-            <Button component={Link} to="/repositorio" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
+            <Button component={Link} to="/repositorio" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block'  }} className="linkEmprende">
               Conferencias y Talleres
             </Button>
           </Box>
