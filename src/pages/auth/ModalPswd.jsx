@@ -67,7 +67,7 @@ const ModalPswd = () => {
             Alerta.fire({
                 icon: 'success',
                 title: <h2>Mesaje enviado con EXITO!!</h2>,
-                html: <p>Revice su bandeja de entrada</p>,
+                html: <p>Revise su bandeja de entrada</p>,
                
                 }).then((result) => {
                     if (result.isConfirmed) {

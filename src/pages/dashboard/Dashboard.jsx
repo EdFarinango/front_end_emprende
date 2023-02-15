@@ -15,7 +15,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 
 import { Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import ModalInfo from "../../components/organisms/ModalInfo";
 import ModalPswd from "../../components/organisms/ModalPswd";
@@ -36,6 +36,28 @@ export const Dashboard = () => {
   const { user } = useContext(AuthContext);
   const token = localStorage.getItem("token");
   const [data, setData] = useState([]);
+
+
+  useState(() => {
+    if (user) {
+      axios
+        .get(
+          `https://backend-emprende.herokuapp.com/api/v1/users/${user.id}`,
+          {
+            headers: {
+              "accept": "application/json",
+              "authorization": token,
+            },
+          }
+        )
+        .then((response) => {
+          setData(response.data.data);
+        });
+    }else {
+      Navigate('/');
+    }
+
+  }, [user]);
 
  
   return (

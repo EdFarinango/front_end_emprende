@@ -80,17 +80,9 @@ export const Login = () => {
             login(user, `${token_type} ${access_token}`);
             // eslint-disable-next-line no-lone-blocks
             {
-              console.log("Ingreso exitoso");
+              
          
-                // alert({
-                //   title: ["Bienvenido"],
-                //   text: "Ingreso exitoso",
-                //   iconColor: "success",
-                //   button: false,
-                //   timer: "2000",
-                // }).then(() => {
-                //   window.location.href = "/administracion";
-                // });
+                
                 Alerta.fire({
                   title: <p>EMPRENDE</p>,
                   text: "Bienvenido",
@@ -291,6 +283,9 @@ export const Login = () => {
       }
     }
   };
+  //controlar que solo un usuario pueda iniciar sesion
+
+
 
   const handleChange = (e) => {
     setForm({

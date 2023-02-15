@@ -13,8 +13,14 @@ export const AuthProvider = ({ children }) =>
         }
     }
     const [authState, dispatch] = useReducer(authReducer,{}, initialization)
+// verificar que el usuario este logueado
+
+    
+    
+
     const login = async (user, token) => 
     {
+        
         const action = { type: types.login, payload: user }
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('token', token);
