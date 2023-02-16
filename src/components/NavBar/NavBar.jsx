@@ -31,9 +31,9 @@ function NavBar() {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
   const [imagen, setImagen] = useState(null);
-  const [lista, setLista] =  useState([]);
+  const [lista, setLista] = useState([]);
 
-  const [descripcion, setDescripcion] = useState('');  
+  const [descripcion, setDescripcion] = useState('');
   const [admin, setAdmin] = useState('');
   const [admins, setAdmins] = useState('');
 
@@ -46,9 +46,9 @@ function NavBar() {
       );
       navigate('/', { replace: true });
       logout();
-      console.log('logout');
+
     } catch (error) {
-      //console.log(error);
+      ////console.log(error);
     }
 
 
@@ -78,17 +78,17 @@ function NavBar() {
         { headers: { accept: "application/json", authorization: token } }
       );
 
-      
+
       setLista(response.data.data.users);
 
-      ///revisar  updateState(response.data.data.users)
+
 
       setAdmin(response.data.data.users);
-   
+
     } catch (error) {
-      console.log(error);
+      ////console.log(error);
     }
- 
+
   };
 
   const getAdmins = async () => {
@@ -103,16 +103,16 @@ function NavBar() {
       user.admin = response.data.data.users;
       setAdmins(response.data.data.users);
       console.log(response.data.data.users);
-   
+
     } catch (error) {
-      console.log(error);
+      ////console.log(error);
     }
- 
+
   };
 
- 
 
- 
+
+
 
 
 
@@ -144,23 +144,23 @@ function NavBar() {
         <Toolbar disableGutters >
           <Box sx={{ flexGrow: 12, display: { xs: 'none', md: 'flex' } }}>
             <Link to="/">
-            <img src={Logo} alt="Logo" style={{ width: '150px', height: 'auto' }} />
+              <img src={Logo} alt="Logo" style={{ width: '150px', height: 'auto' }} />
             </Link>
-              </Box>
-         
-          
+          </Box>
+
+
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-           
+
             <IconButton className="menuButton"
               size="large"
-           
+
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-        
+
             >
-              <MenuIcon className='menuButton'/>
+              <MenuIcon className='menuButton' />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -189,39 +189,39 @@ function NavBar() {
               <MenuItem component={Link} to="/repositorio" onClick={handleCloseNavMenu}>
                 Repositorio
               </MenuItem>
-             
 
-              
-            </Menu> 
+
+
+            </Menu>
             <Typography
-            className="emprende"
-            variant="h5"
+              className="emprende"
+              variant="h5"
 
-            component="a"
-            href="/"
-            sx={{
-              marginBlockStart: '0.3em',
-              marginBlockEnd: '0.3em',
-              marginInlineStart: '0.3em',
-              marginInlineEnd: '0.3em',
-            
-              color: 'white',
-          
-              fontFamily: 'Roboto',
-              fontSize: '1.5rem',
-              lineHeight: 1.6,
-              letterSpacing: '0.01em',
-              textDecoration: 'none',
-             
-            }}
-          >
-            Emprende
-          </Typography>
-            
+              component="a"
+              href="/"
+              sx={{
+                marginBlockStart: '0.3em',
+                marginBlockEnd: '0.3em',
+                marginInlineStart: '0.3em',
+                marginInlineEnd: '0.3em',
+
+                color: 'white',
+
+                fontFamily: 'Roboto',
+                fontSize: '1.5rem',
+                lineHeight: 1.6,
+                letterSpacing: '0.01em',
+                textDecoration: 'none',
+
+              }}
+            >
+              Emprende
+            </Typography>
+
           </Box>
-      
 
-           
+
+
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 
@@ -236,7 +236,7 @@ function NavBar() {
             <Button component={Link} to="/catalogo" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }} className="linkEmprende">
               Catálogo
             </Button>
-            <Button component={Link} to="/repositorio" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block'  }} className="linkEmprende">
+            <Button component={Link} to="/repositorio" onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }} className="linkEmprende">
               Conferencias y Talleres
             </Button>
           </Box>
@@ -280,7 +280,7 @@ function NavBar() {
               onClose={handleCloseUserMenu}
             >
 
-             {user ? <MenuItem>
+              {user ? <MenuItem>
                 <a onClick={handleLogout} className="nav-link li "
                 >Cerrar Sesión</a>
               </MenuItem> : <MenuItem>
@@ -288,22 +288,22 @@ function NavBar() {
                   onClick={handleCloseUserMenu} sx={{ display: 'block' }} >
                   Iniciar Sesión</a>
               </MenuItem>}
-          
-              {
-                user  ? 
-                <MenuItem>
-                <a onClick={handleCloseUserMenu} className="nav-link"
-                  href="/administracion"
 
-                > Administración </a>
-              </MenuItem>
-              : null
+              {
+                user ?
+                  <MenuItem>
+                    <a onClick={handleCloseUserMenu} className="nav-link"
+                      href="/administracion"
+
+                    > Administración </a>
+                  </MenuItem>
+                  : null
               }
 
 
-              
-              
-            
+
+
+
 
 
 

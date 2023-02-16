@@ -35,29 +35,10 @@ export const Dashboard = () => {
   const classes = useStyles();
   const { user } = useContext(AuthContext);
   const token = localStorage.getItem("token");
-  const [data, setData] = useState([]);
+ 
 
-
-  useState(() => {
-    if (user) {
-      axios
-        .get(
-          `https://backend-emprende.herokuapp.com/api/v1/users/${user.id}`,
-          {
-            headers: {
-              "accept": "application/json",
-              "authorization": token,
-            },
-          }
-        )
-        .then((response) => {
-          setData(response.data.data);
-        });
-    }else {
-      Navigate('/');
-    }
-
-  }, [user]);
+ 
+  
 
  
   return (

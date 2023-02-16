@@ -42,7 +42,7 @@ const ModalEmp = ({ emprendimientos }) => {
 
     });
 
- 
+
 
 
 
@@ -79,13 +79,13 @@ const ModalEmp = ({ emprendimientos }) => {
                 toggle();
             });
 
-        }	catch (error) {
-            console.log(error);
+        } catch (error) {
+            //console.log(error);
         }
     };
-        
 
-  
+
+
     const handleUpload = (e) => {
         e.preventDefault();
 
@@ -99,41 +99,41 @@ const ModalEmp = ({ emprendimientos }) => {
         ).then(response => {
             setModal(!modal);
 
-        
+
             alert({
-              title: "Emprende",
-              text: "La imagen se actualizó correctamente",
-              icon: "success",
-              button: false,
-              timer: 3000,
+                title: "Emprende",
+                text: "La imagen se actualizó correctamente",
+                icon: "success",
+                button: false,
+                timer: 3000,
             });
             window.location.reload();
-            
+
 
         })
 
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 if (error.response.data.message === 'El campo image no debe ser mayor que 512 kilobytes.') {
                     alert({
-                      title: "Emprende",
-                      text: "Peso máximo del archivo 512kb, por favor seleccione una imagen mas liviana",
-                      icon: "error",
-                      button: false,
+                        title: "Emprende",
+                        text: "Peso máximo del archivo 512kb, por favor seleccione una imagen mas liviana",
+                        icon: "error",
+                        button: false,
                     });
-                  }else 
+                } else
 
 
- 
-                  if (error.response.statusText === "Unprocessable Content") {
-                    alert({
-                      title: "Emprende",
-                      text: "Debe elejir una imagen para enviarla.",
-                      icon: "error",
-                      button: false,
-                    });
-                    //fotos
-                  }
+
+                    if (error.response.statusText === "Unprocessable Content") {
+                        alert({
+                            title: "Emprende",
+                            text: "Debe elejir una imagen para enviarla.",
+                            icon: "error",
+                            button: false,
+                        });
+                        //fotos
+                    }
             });
     }
 
@@ -151,7 +151,7 @@ const ModalEmp = ({ emprendimientos }) => {
             setData(response.data.data.emprendimientos)
 
         } catch (error) {
-            console.log(error);
+            //console.log(error);
         }
 
     }
@@ -251,13 +251,13 @@ const ModalEmp = ({ emprendimientos }) => {
                                                 name: 'categoria',
                                             }}
                                         >
-                                           <option value={""}></option>
-                      <option value={"Alimentación"}>Alimentación</option>
-                      <option value={"Educacion"}>Educacion</option>
-                      <option value={"Tecnología"}>Tecnología</option>
-                      <option value={"Textil"}>Textil</option>
-                      <option value={"Hogar y Limpieza"}>Hogar y Limpieza</option>
-                      <option value={"Otro"}>Otros</option>
+                                            <option value={""}></option>
+                                            <option value={"Alimentación"}>Alimentación</option>
+                                            <option value={"Educacion"}>Educacion</option>
+                                            <option value={"Tecnología"}>Tecnología</option>
+                                            <option value={"Textil"}>Textil</option>
+                                            <option value={"Hogar y Limpieza"}>Hogar y Limpieza</option>
+                                            <option value={"Otro"}>Otros</option>
 
                                         </NativeSelect>
                                     </FormGroup>
@@ -382,45 +382,45 @@ const ModalEmp = ({ emprendimientos }) => {
                                     </FormGroup>
 
                                 </Col>
-                                
+
 
 
                             </Row>
 
 
-                           {/* enviar datso actualizados al otro componente  */}
-                          
+                            {/* enviar datso actualizados al otro componente  */}
+
                             <Button color="primary" onClick={onSubmit} >Guardar</Button>
-                            
+
 
                             <Row>
-                                <hr   style={{color: 'black', backgroundColor: 'black', height: 1, marginTop: "12px"}}/>
-                                    <Label for="descuento">Solamente si es necesario actualizar la imagen</Label>
-                                    <Col xs={12} md={8}>
-                                        <FormGroup>
+                                <hr style={{ color: 'black', backgroundColor: 'black', height: 1, marginTop: "12px" }} />
+                                <Label for="descuento">Solamente si es necesario actualizar la imagen</Label>
+                                <Col xs={12} md={8}>
+                                    <FormGroup>
 
-                                            <Input
-                                                type="file"
-                                                name="image"
-                                                id="image"
-                                                placeholder="Imagen"
+                                        <Input
+                                            type="file"
+                                            name="image"
+                                            id="image"
+                                            placeholder="Imagen"
 
-                                                onChange={(e) => setImage(e.target.files[0])}
-                                            />
-                                            <Button color="primary" onClick={handleUpload} className="mt-3">Actualizar Imagen</Button> 
-
-
+                                            onChange={(e) => setImage(e.target.files[0])}
+                                        />
+                                        <Button color="primary" onClick={handleUpload} className="mt-3">Actualizar Imagen</Button>
 
 
 
 
 
 
-                                        </FormGroup>
 
 
-                                    </Col>
-                                </Row>
+                                    </FormGroup>
+
+
+                                </Col>
+                            </Row>
 
 
 

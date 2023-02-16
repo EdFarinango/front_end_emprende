@@ -47,10 +47,10 @@ export const CatalogoEmp = () => {
         `https://backend-emprende.herokuapp.com/api/v1/emprendimiento`,
         { headers: { accept: "application/json", authorization: token } }
       );
-      console.log(response.data.data.emprendimientos);
+      //console.log(response.data.data.emprendimientos);
       setData(response.data.data.emprendimientos);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
     setLoading(true);
   };
@@ -61,8 +61,8 @@ export const CatalogoEmp = () => {
   const dato = !search
     ? data
     : data.filter((dato) =>
-        dato.categoria.toLowerCase().includes(search.toLocaleLowerCase())
-      );
+      dato.categoria.toLowerCase().includes(search.toLocaleLowerCase())
+    );
 
   useEffect(() => {
     getData();
@@ -921,7 +921,7 @@ export const CatalogoEmp = () => {
                     className="w3-button w3-theme-d1 w3-margin-bottom"
                   >
                     <a
-                      href= "https://www.facebook.com/people/ESFOT-EPN-UIO/100063704537871/"
+                      href="https://www.facebook.com/people/ESFOT-EPN-UIO/100063704537871/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

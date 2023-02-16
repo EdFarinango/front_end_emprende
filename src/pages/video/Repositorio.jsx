@@ -50,7 +50,7 @@ const Repositorio = ({ video }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(form);
+    //console.log(form);
     axios
       .post(
         `https://backend-emprende.herokuapp.com/api/v1/videoconferencia/create`,
@@ -71,7 +71,7 @@ const Repositorio = ({ video }) => {
         });
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
       });
   };
 
@@ -85,9 +85,9 @@ const Repositorio = ({ video }) => {
         }
       );
       setData(response.data.data.video_conferencias);
-      console.log(response.data.data.video_conferencias);
+      //console.log(response.data.data.video_conferencias);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
     setLoading(false);
   };
@@ -136,7 +136,7 @@ const Repositorio = ({ video }) => {
 
       //console.log(response.data)
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -243,7 +243,7 @@ const Repositorio = ({ video }) => {
                           className="embed-responsive-item"
                           allowFullScreen="true"
                           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                          titulo = 'video'
+                          titulo='video'
                         />
                       </div>
                       <Box sx={{ flexGrow: 0 }}>

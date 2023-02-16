@@ -12,7 +12,7 @@ const EditFormEmp = ({ emprendimientos }) => {
 
   const [image, setImage] = useState([]);
   const [form, setForm] = useState({
-  
+
     rol_esfot: emprendimientos.rol_esfot ?? "",
     nombre: emprendimientos.nombre ?? "",
     descripcion: emprendimientos.descripcion ?? "",
@@ -26,7 +26,7 @@ const EditFormEmp = ({ emprendimientos }) => {
     instagram: emprendimientos.instagram ?? "",
     descuento: emprendimientos.descuento ?? "",
 
-    
+
   });
 
 
@@ -37,15 +37,15 @@ const EditFormEmp = ({ emprendimientos }) => {
 
   const toggle = () => setModal(!modal);
 
-  
- const handleChange = (e) => {
+
+  const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
 
 
     });
-   
+
   };
 
   const handleSubmit = async (e) => {
@@ -68,9 +68,9 @@ const EditFormEmp = ({ emprendimientos }) => {
           { headers: { accept: "application/json", authorization: token } }
         );
       }
-        
+
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -79,27 +79,27 @@ const EditFormEmp = ({ emprendimientos }) => {
     e.preventDefault();
 
 
-    
+
 
 
 
 
     const formData = new FormData();
     formData.append('image', image);
-    
-   
+
+
 
     axios.post(`https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${emprendimientos.id}/logo`, formData, {
-        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' },
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' },
     }
 
     ).then(response => {
-        console.log(response);
+      //console.log(response);
     })
-        .catch(error => {
-            console.log(error);
-        });
-}
+      .catch(error => {
+        //console.log(error);
+      });
+  }
 
 
 
@@ -110,11 +110,11 @@ const EditFormEmp = ({ emprendimientos }) => {
 
   return (
     <>
-    
 
 
 
-    <Button color="primary" onClick={toggle}>
+
+      <Button color="primary" onClick={toggle}>
 
         Actualizar Imagen
       </Button>
@@ -128,9 +128,9 @@ const EditFormEmp = ({ emprendimientos }) => {
                 type="file"
                 name="file"
                 id="exampleFile"
-                onChange= {(e) => setImage(e.target.files[0])}
+                onChange={(e) => setImage(e.target.files[0])}
               />
-             
+
             </FormGroup>
             <Button type="submit" color="primary" onClick={handleUpload}>
               Guardar
@@ -139,7 +139,7 @@ const EditFormEmp = ({ emprendimientos }) => {
         </ModalBody>
       </Modal>
 
-    
+
 
     </>
 

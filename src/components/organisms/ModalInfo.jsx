@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
- 
+
   Modal,
   ModalHeader,
   ModalBody,
@@ -25,29 +25,29 @@ const ModalInfo = () => {
 
   const token = localStorage.getItem("token");
   const toggle = () => setModal(!modal);
-  const [admins , setAdmin] = useState([]);
+  const [admins, setAdmin] = useState([]);
   const { user } = useContext(AuthContext);
-  const[avatar , setAvatar] = useState([]);
+  const [avatar, setAvatar] = useState([]);
 
   const getAdmin = async () => {
-  
+
     try {
       const response = await axios.get(
-       
+
         `https://backend-emprende.herokuapp.com/api/v1/profile`,
         { headers: { accept: "application/json", authorization: token } }
       );
 
       ///revisar  updateState(response.data.data.users)
 
-        setAdmin(response.data.data.user);
-        setAvatar(response.data.data.avatar);
+      setAdmin(response.data.data.user);
+      setAvatar(response.data.data.avatar);
       console.log(response.data.data.avatar);
-   
+
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
-    
+
   };
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const ModalInfo = () => {
 
   return (
     <div>
-       <button className="primary-btn" onClick={toggle} title="Ver información del usuario">
+      <button className="primary-btn" onClick={toggle} title="Ver información del usuario">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -64,8 +64,8 @@ const ModalInfo = () => {
           fill="currentColor"
           class="bi bi-eye-fill"
           viewBox="0 0 16 16"
-        
-         
+
+
         >
           <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" fill="#686868" />
           <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" fill="#686868" />
@@ -99,7 +99,7 @@ const ModalInfo = () => {
                     <path d="M2 7v5a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7H2z" />
                   </svg>
                 </span>
-                
+
                 <br />
                 <br />
                 <hr className="w3-clear" />
@@ -118,7 +118,7 @@ const ModalInfo = () => {
                     <p className="w3-opacity">LinkedIn</p>
 
                     <p>{admins.LinkedIn}</p>
-                                       <p>
+                    <p>
                       {admins.state === 1 ? (
                         <span className="badge bg-success">Activo</span>
                       ) : (
@@ -126,14 +126,14 @@ const ModalInfo = () => {
                       )}
                     </p>
 
-                    
-                   
-                     
+
+
+
                   </div>
-                </div> 
+                </div>
               </div>
             </div>
-            
+
           </Container>
         </ModalBody>
         <ModalFooter>

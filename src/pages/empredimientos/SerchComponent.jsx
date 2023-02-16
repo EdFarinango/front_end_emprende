@@ -38,7 +38,10 @@ const SearchComponent = () => {
         {
           headers: { accept: "application/json", authorization: token },
         }
+
+
       );
+      //console.log("ss", response);
       let peticionesPendientes = 0;
       setData(response.data.data.emprendimientos);
       for (let i = 0; i < response.data.data.emprendimientos.length; i++) {
@@ -49,7 +52,7 @@ const SearchComponent = () => {
       setPendientes(peticionesPendientes);
       setLoading(true);
     } catch (error) {
-      console.log(error);
+      //console.log("gagagaga",error);
     }
   };
 
@@ -80,7 +83,7 @@ const SearchComponent = () => {
           }
         });
       } catch (error) {
-        console.log(error);
+        //console.log("este",error);
       }
     } else {
       try {
@@ -108,7 +111,7 @@ const SearchComponent = () => {
           }
         });
       } catch (error) {
-        console.log(error);
+        //console.log("sssdfcxx",error);
       }
     }
   };
@@ -139,7 +142,7 @@ const SearchComponent = () => {
         }
       });
     } catch (error) {
-      console.log(error);
+      //
     }
   };
 
@@ -160,11 +163,18 @@ const SearchComponent = () => {
   const dato = !search
     ? data
     : data.filter((dato) =>
-        dato.nombre.toLowerCase().includes(search.toLocaleLowerCase())
-      );
+      dato.nombre.toLowerCase().includes(search.toLocaleLowerCase())
+    );
 
   useEffect(() => {
-    getData();
+
+    //virificar si tiene un token activo 
+    if (!token) {
+      window.location.href = "/login";
+    } else if (token) {
+
+      getData();
+    }
   }, []);
 
   if (!loading) {
@@ -289,10 +299,10 @@ const SearchComponent = () => {
                         <table className="table table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
-                            <th>Categoria</th>
+                              <th>Categoria</th>
                               <th>Nombre</th>
                               <th>Descripcion</th>
-                            
+
                               <th>Imagen</th>
                               <th>Acciones</th>
                             </tr>
@@ -305,7 +315,7 @@ const SearchComponent = () => {
                                     <td>{item.categoria}</td>
                                     <td>{item.nombre}</td>
                                     <td>{item.descripcion}</td>
-                                    
+
                                     <td>
                                       <img
                                         src={item.image}
@@ -352,10 +362,10 @@ const SearchComponent = () => {
                         <table className="table table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
-                            <th>Categoria</th>
+                              <th>Categoria</th>
                               <th>Nombre</th>
                               <th>Descripcion</th>
-                              
+
                               <th>Imagen</th>
                               <th>Acciones</th>
                             </tr>
@@ -368,7 +378,7 @@ const SearchComponent = () => {
                                     <td>{item.categoria}</td>
                                     <td>{item.nombre}</td>
                                     <td>{item.descripcion}</td>
-                                
+
                                     <td>
                                       <img
                                         src={item.image}
@@ -444,7 +454,7 @@ const SearchComponent = () => {
         </div>
       </div>
 
-     </div>
+    </div>
   );
 };
 export default SearchComponent;

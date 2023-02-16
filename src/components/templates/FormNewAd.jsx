@@ -1,4 +1,4 @@
-import React, { useState  } from "react";
+import React, { useState } from "react";
 
 import { Button, Form, FormGroup, Label, Input } from "react-bootstrap";
 import axios from "axios";
@@ -36,7 +36,7 @@ const EditFormNew = () => {
       label: "Username",
       pattern: "^[A-Za-z]{3,16}$",
       required: true,
-    
+
     },
     {
       id: 2,
@@ -47,7 +47,7 @@ const EditFormNew = () => {
       label: "Apellido",
       pattern: "^[ A-Za-z]{3,16}$",
       required: true,
-  
+
     },
     {
       id: 3,
@@ -58,10 +58,10 @@ const EditFormNew = () => {
       label: "Email",
       pattern: "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$",
       required: true,
-     
+
     },
 
-    
+
     {
       id: 4,
       name: "personal_phone",
@@ -70,7 +70,7 @@ const EditFormNew = () => {
       errorMessage: "Solamente se aceptan números de 9 a 10 dígitos",
       label: "Teléfono personal",
       pattern: "^[0-9]{9,10}$",
-  
+
       required: true,
     },
 
@@ -112,7 +112,7 @@ const EditFormNew = () => {
           }, 1000);
         })
         .catch((err) => {
-          console.log(err.response.data.errors);
+          //console.log(err.response.data.errors);
           if (err.response.data.errors.email) {
             alert({
               title: "Error al registar usuario",
@@ -124,7 +124,7 @@ const EditFormNew = () => {
           }
         });
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
@@ -157,11 +157,11 @@ const EditFormNew = () => {
         </FormGroup>
 
         <Button color="info" type="submit">
-         
+
           Crear
         </Button>
         <Button color="danger" onClick={reset}>
-        
+
           Limpiar
         </Button>
       </Form>

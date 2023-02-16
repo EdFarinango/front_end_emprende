@@ -42,14 +42,14 @@ const EditForm = (props) => {
         facebook: '',
         instagram: '',
         descuento: '',
-            
-     
+
+
     });
-   
-    
+
+
 
     const handleChange = (e) => {
-       setForm({
+        setForm({
             ...form,
             [e.target.name]: e.target.value,
         });
@@ -60,30 +60,30 @@ const EditForm = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-         console.log(form);
-       
-       await axios.post(`https://backend-emprende.herokuapp.com/api/v1/emprendimiento/create`,  { ...form }, 
-       { headers: { 'accept': 'application/json', 'authorization': token } }
-                
-            ).then (response => {
-                const res = response.data;
-                console.log(res);
-                toggle();
-               
-             
-            })
+        //console.log(form);
+
+        await axios.post(`https://backend-emprende.herokuapp.com/api/v1/emprendimiento/create`, { ...form },
+            { headers: { 'accept': 'application/json', 'authorization': token } }
+
+        ).then(response => {
+            const res = response.data;
+            //console.log(res);
+            toggle();
+
+
+        })
             .catch(error => {
-                
-                console.log(error);
-                console.log(error.response);
-                
+
+                //console.log(error);
+                //console.log(error.response);
+
             });
-           
-           
-        
+
+
+
     };
 
-    
+
 
     const getData = async () => {
         try {
@@ -95,7 +95,7 @@ const EditForm = (props) => {
             setData(response.data.data.emprendimientos)
 
         } catch (error) {
-            console.log(error);
+            //console.log(error);
         }
 
     }
@@ -112,18 +112,18 @@ const EditForm = (props) => {
 
         ).then(response => {
             const res = response.data;
-            console.log(res);
+            //console.log(res);
             toggle();
 
         })
 
             .catch(error => {
-                console.log(error);
+                //console.log(error);
             });
     }
-    
 
-   
+
+
 
 
     return (
@@ -138,70 +138,70 @@ const EditForm = (props) => {
 
 
 </div> */}
-<form className="row g-3 needs-validation" noValidate>
-  <div className="col-md-4">
-    <label htmlFor="validationCustom01" className="form-label">Nombre</label>
-    <input type="text" className="form-control" id="validationCustom01" defaultValue="Mark" required />
-    <div className="valid-feedback">
-      ¡Se ve bien!
-    </div>
-  </div>
-  <div className="col-md-4">
-    <label htmlFor="validationCustom02" className="form-label">Apellido</label>
-    <input type="text" className="form-control" id="validationCustom02" defaultValue="Otto" required />
-    <div className="valid-feedback">
-      ¡Se ve bien!
-    </div>
-  </div>
-  <div className="col-md-4">
-    <label htmlFor="validationCustomUsername" className="form-label">Nombre de usuario</label>
-    <div className="input-group has-validation">
-      <span className="input-group-text" id="inputGroupPrepend">@</span>
-      <input type="text" className="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required />
-      <div className="invalid-feedback">
-        Por favor, elije un nombre de usuario.
-      </div>
-    </div>
-  </div>
-  <div className="col-md-6">
-    <label htmlFor="validationCustom03" className="form-label">Ciudad</label>
-    <input type="text" className="form-control" id="validationCustom03" required />
-    <div className="invalid-feedback">
-      Proporciona una ciudad válida.
-    </div>
-  </div>
-  <div className="col-md-3">
-    <label htmlFor="validationCustom04" className="form-label">Estado</label>
-    <select className="form-select" id="validationCustom04" required>
-      <option selected disabled value>Elige...</option>
-      <option>...</option>
-    </select>
-    <div className="invalid-feedback">
-      Selecciona un estado válido.
-    </div>
-  </div>
-  <div className="col-md-3">
-    <label htmlFor="validationCustom05" className="form-label">Código postal</label>
-    <input type="text" className="form-control" id="validationCustom05" required />
-    <div className="invalid-feedback">
-      Proporciona un código postal válido.
-    </div>
-  </div>
-  <div className="col-12">
-    <div className="form-check">
-      <input className="form-check-input" type="checkbox" defaultValue id="invalidCheck" required />
-      <label className="form-check-label" htmlFor="invalidCheck">
-        Acepta los términos y condiciones
-      </label>
-      <div className="invalid-feedback">
-        Debe estar de acuerdo antes de enviar.
-      </div>
-    </div>
-  </div>
-  <div className="col-12">
-    <button className="btn btn-primary" type="submit">Enviar formulario</button>
-  </div>
-</form>
+            <form className="row g-3 needs-validation" noValidate>
+                <div className="col-md-4">
+                    <label htmlFor="validationCustom01" className="form-label">Nombre</label>
+                    <input type="text" className="form-control" id="validationCustom01" defaultValue="Mark" required />
+                    <div className="valid-feedback">
+                        ¡Se ve bien!
+                    </div>
+                </div>
+                <div className="col-md-4">
+                    <label htmlFor="validationCustom02" className="form-label">Apellido</label>
+                    <input type="text" className="form-control" id="validationCustom02" defaultValue="Otto" required />
+                    <div className="valid-feedback">
+                        ¡Se ve bien!
+                    </div>
+                </div>
+                <div className="col-md-4">
+                    <label htmlFor="validationCustomUsername" className="form-label">Nombre de usuario</label>
+                    <div className="input-group has-validation">
+                        <span className="input-group-text" id="inputGroupPrepend">@</span>
+                        <input type="text" className="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required />
+                        <div className="invalid-feedback">
+                            Por favor, elije un nombre de usuario.
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-6">
+                    <label htmlFor="validationCustom03" className="form-label">Ciudad</label>
+                    <input type="text" className="form-control" id="validationCustom03" required />
+                    <div className="invalid-feedback">
+                        Proporciona una ciudad válida.
+                    </div>
+                </div>
+                <div className="col-md-3">
+                    <label htmlFor="validationCustom04" className="form-label">Estado</label>
+                    <select className="form-select" id="validationCustom04" required>
+                        <option selected disabled value>Elige...</option>
+                        <option>...</option>
+                    </select>
+                    <div className="invalid-feedback">
+                        Selecciona un estado válido.
+                    </div>
+                </div>
+                <div className="col-md-3">
+                    <label htmlFor="validationCustom05" className="form-label">Código postal</label>
+                    <input type="text" className="form-control" id="validationCustom05" required />
+                    <div className="invalid-feedback">
+                        Proporciona un código postal válido.
+                    </div>
+                </div>
+                <div className="col-12">
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" defaultValue id="invalidCheck" required />
+                        <label className="form-check-label" htmlFor="invalidCheck">
+                            Acepta los términos y condiciones
+                        </label>
+                        <div className="invalid-feedback">
+                            Debe estar de acuerdo antes de enviar.
+                        </div>
+                    </div>
+                </div>
+                <div className="col-12">
+                    <button className="btn btn-primary" type="submit">Enviar formulario</button>
+                </div>
+            </form>
 
 
             <Form onSubmit={handleSubmit} class="row g-3 needs-validation" novalidate>
@@ -250,7 +250,7 @@ const EditForm = (props) => {
                 <FormGroup>
                     <Label for="descripcion" class="form-label">Descripción</Label>
                     <Input class="form-control"
-                                           requiere
+                        requiere
                         type="text"
                         name="descripcion"
                         id="descripcion"
@@ -386,19 +386,19 @@ const EditForm = (props) => {
                     />
                 </FormGroup>
 
-              
-                    <Label for="image">Imagen</Label>
-                    <Input
-                        type="file"
-                        name="image"
-                        id="image"
-                        placeholder="Imagen"
 
-                        onChange= {(e) => setImage(e.target.files[0])}
+                <Label for="image">Imagen</Label>
+                <Input
+                    type="file"
+                    name="image"
+                    id="image"
+                    placeholder="Imagen"
 
-                    />
-                     <Button color="primary" onClick={handleUpload}>Actualizar</Button>
-             
+                    onChange={(e) => setImage(e.target.files[0])}
+
+                />
+                <Button color="primary" onClick={handleUpload}>Actualizar</Button>
+
 
 
 

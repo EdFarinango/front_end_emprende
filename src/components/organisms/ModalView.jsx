@@ -28,11 +28,19 @@ const ModalViewEmp = ({ emprendimientos }) => {
         `https://backend-emprende.herokuapp.com/api/v1/emprendimiento/${emprendimientos.id}`,
         { headers: { accept: "application/json", authorization: token } }
       );
+      //console.log(response);
 
       setData(response.data.data.emprendimiento);
       //console.log(response.data.data.emprendimiento);
     } catch (error) {
-      console.log(error);
+      //console.log("asdasdasdas", error);
+      if (error.response.status === 401) {
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location.href = "/login";
+
+      }
     }
   };
 
