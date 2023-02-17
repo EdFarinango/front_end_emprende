@@ -450,3 +450,7 @@ dd {
     position: relative;
     display: inline-block;
 }
+
+.pointer {
+    cursor: pointer;
+}

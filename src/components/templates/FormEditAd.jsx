@@ -67,7 +67,7 @@ const EditForm = (props) => {
         { ...form }, { headers: { 'accept': 'application/json', 'authorization': token } }
       ).then(response => {
         alert({
-          title: "Usuario actualizado!",
+          title: "Información del usuario actualizada!",
           icon: "success",
           timer: 2000,
           button: false,
@@ -159,7 +159,7 @@ const EditForm = (props) => {
       placeholder: "Ingrese el nombre",
       errorMessage: "Debe ingresar un nombre válido!",
       label: "Username",
-      pattern: "^[A-Za-zÀ-ÿ]{3,16}$",
+      pattern:  "^[a-zA-ZÀ \s,-áéíóúÁÉÍÓÚñÑ]{3,255}$",
       required: true,
 
     },
@@ -170,7 +170,7 @@ const EditForm = (props) => {
       placeholder: "Ingrese el apellido",
       errorMessage: "Debe ingresar un apellido válido!",
       label: "Apellido",
-      pattern: "^[A-Za-zÀ-ÿ]{3,16}$",
+      pattern: "^[a-zA-ZÀ \s,-áéíóúÁÉÍÓÚñÑ]{3,255}$",
       required: true,
 
     },
@@ -226,7 +226,7 @@ const EditForm = (props) => {
     }
   ]
 
-
+ 
   const getAdmin = async () => {
 
     try {

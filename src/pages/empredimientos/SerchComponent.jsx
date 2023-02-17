@@ -36,7 +36,7 @@ const SearchComponent = () => {
       const response = await axios.get(
         `https://backend-emprende.herokuapp.com/api/v1/emprendimiento`,
         {
-          headers: { accept: "application/json", authorization: token },
+          headers: { Authorization: `Bearer ${token}`  },
         }
 
 
@@ -59,7 +59,7 @@ const SearchComponent = () => {
   const deleteEmprendimiento = async (id, estado) => {
     if (estado === 1) {
       try {
-        console.warn(id);
+        //console.warn(id);
 
         alert({
           title:
@@ -191,7 +191,7 @@ const SearchComponent = () => {
         <div className="nav nav-tabs" id="nav-tab" role="tablist">
           {verEstado ? (
             <div
-              className="nav-item nav-link"
+              className="nav-item nav-link pointer"
               id="nav-home-tab"
               data-toggle="tab"
               role="tab"
@@ -215,7 +215,7 @@ const SearchComponent = () => {
           )}
           {verEstado ? (
             <div
-              className="nav-item nav-link active"
+              className="nav-item nav-link active "
               id="nav-profile-tab"
               data-toggle="tab"
               role="tab"
@@ -237,7 +237,7 @@ const SearchComponent = () => {
             </div>
           ) : (
             <div
-              className="nav-item nav-link"
+              className="nav-item nav-link pointer"
               id="nav-profile-tab"
               data-toggle="tab"
               role="tab"
@@ -318,10 +318,17 @@ const SearchComponent = () => {
 
                                     <td>
                                       <img
-                                        src={item.image}
-                                        alt=""
+                                      
+                                       
+                                        src={item.imagen}
+                                        alt="imagen"
+                                        className="img-fluid"
                                         width="100px"
                                       />
+
+                                      
+
+                                    
                                     </td>
                                     <td>
                                       <button

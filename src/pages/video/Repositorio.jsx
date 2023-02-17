@@ -118,7 +118,7 @@ const Repositorio = ({ video }) => {
       name: "url",
       type: "text",
       placeholder: "Ingrese la dirección del video",
-      errorMessage: "Debe ingresar un apellido válido!",
+      errorMessage: "Debe ingresar una Url válida!",
       label: "Dirección del video",
       pattern: "^https?://[w-]+(.[w-]+)+[/#?]?.*$",
       required: true,
@@ -235,7 +235,8 @@ const Repositorio = ({ video }) => {
                         flexDirection: "column",
                       }}
                     >
-                      <div className="embed-responsive embed-responsive-16by9 shadow-1-strong rounded mb-4">
+                      <div className="container shadow">
+                      <div className="embed-responsive embed-responsive-16by9 ">
                         <iframe
                           src={item.url}
                           width="100%"
@@ -272,6 +273,7 @@ const Repositorio = ({ video }) => {
                           </Grid>
                         </Grid>
                       </Box>
+                      </div>
                     </Box>
                   </Grid>
                 ))}
@@ -326,17 +328,18 @@ const Repositorio = ({ video }) => {
             </div>
           </div>
           <Container sx={{ py: 8 }} maxWidth="lg">
-            <Grid container spacing={12}>
+            <Grid container spacing={12} >
               {data.map((item) => (
-                <Grid item key={item.id} sm={6} md={4}>
-                  <Box
+                <Grid item key={item.id} sm={6} md={4}  >
+                  <Box 
                     sx={{
                       height: "400px",
                       display: "flex",
                       flexDirection: "column",
                     }}
                   >
-                    <div className="embed-responsive embed-responsive-16by9 shadow-1-strong rounded mb-4">
+                    <div className="container shadow">
+                    <div className="embed-responsive embed-responsive-16by9">
                       <iframe
                         src={item.url}
                         width="100%"
@@ -357,6 +360,7 @@ const Repositorio = ({ video }) => {
                       </Typography>
                       <Typography align="center">{item.descripcion}</Typography>
                     </Box>
+                    </div>
                   </Box>
                 </Grid>
               ))}

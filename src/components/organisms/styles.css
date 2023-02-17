@@ -162,6 +162,16 @@
 }
 
 .btneditEmp {
+    background: #15a0a086;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btneditEmp:hover {
     background: #f5f5f5;
     padding: 10px 20px;
     border: 1px solid #ccc;
@@ -200,21 +210,42 @@
 }
 
 .primary-btn {
-    background: #f5f5f5;
-    padding: 10px 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #FFFFFF;
     border-radius: 5px;
-    color: #000;
     font-size: 16px;
     cursor: pointer;
     display: inline-block;
     padding: 10px 30px;
-    color: #fff;
     font-weight: 500;
     transition: all 0.3s ease 0s;
-    margin-right: 25px;
+    stroke: #000000 !important;
+    stroke-width: 1.6 !important;
+    background-color: #15a0a08f;
 }
 
-.btneditEmp :hover {
-    background: #ccc;
+.primary-btn:hover {
+    background: #15a0a07e;
+    stroke: #ffffff !important;
+}
+
+.subir {
+    margin-top: 10px;
+    background-color: #15A0A0 !important;
+    border-color: #fff !important;
+}
+
+.subir:hover {
+    background-color: #cf3a2b !important;
+}
+
+.colorRed {
+    color: #CF3A2B;
+}
+
+.colorAzul {
+    color: #15A0A0;
+}
+
+.colorAvatar {
+    color: #15A0A0 !important;
 }

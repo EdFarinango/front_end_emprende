@@ -43,7 +43,21 @@ const EditForm = (props) => {
 
     }
   );
+  const handleLogout = async () => {
 
+    try {
+      await axios.post(
+        'https://backend-emprende.herokuapp.com/api/v1/logout',
+        {}, { headers: { 'accept': 'application/json', 'authorization': token } }
+      );
+     
+
+    } catch (error) {
+    }
+      
+
+
+  };
   const Logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -79,7 +93,9 @@ const EditForm = (props) => {
             buttons: ["Aceptar"],
             timer: 2500,
           }).then(() => {
+            handleLogout();
             Logout();
+            window.location.reload();
           });
         } else {
           alert({
@@ -191,7 +207,7 @@ const EditForm = (props) => {
       placeholder: "Ingrese el nombre",
       errorMessage: "Debe ingresar un nombre válido!",
       label: "Username",
-      pattern: "^[A-Za-zÀ-ÿ]{3,16}$",
+      pattern: "^[a-zA-ZÀ \s,-áéíóúÁÉÍÓÚñÑ]{3,255}$",
       required: true,
 
     },
@@ -202,7 +218,7 @@ const EditForm = (props) => {
       placeholder: "Ingrese el apellido",
       errorMessage: "Debe ingresar un apellido válido!",
       label: "Apellido",
-      pattern: "^[A-Za-zÀ-ÿ]{3,16}$",
+      pattern: "^[a-zA-ZÀ \s,-áéíóúÁÉÍÓÚñÑ]{3,255}$",
       required: true,
 
     },

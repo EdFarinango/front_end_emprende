@@ -62,7 +62,6 @@ const ModalNewEmp = () => {
     e.preventDefault();
 
     if (Object.keys(errors).length === 0) {
-
       const formData = new FormData();
       formData.append("rol_esfot", form.rol_esfot);
       formData.append("nombre", form.nombre);
@@ -93,43 +92,36 @@ const ModalNewEmp = () => {
         .then((response) => {
           setModal(!modal);
 
-
           alert({
             title: "Emprende",
-            text: "El emprendimiento se ha creado correctamente",
+            text: "La peticion se enviado correctamente",
             icon: "success",
             button: false,
             timer: 3000,
           });
           window.location.reload();
-
         })
         .catch((error) => {
-
-
-          if (error.response.data.message === 'El campo image no debe ser mayor que 512 kilobytes.') {
+          if (
+            error.response.data.message ===
+            "El campo image no debe ser mayor que 512 kilobytes."
+          ) {
             alert({
               title: "Emprende",
               text: "Peso máximo del archivo 512kb, por favor seleccione una imagen mas liviana",
               icon: "error",
               button: false,
             });
-          } else
-
-
-
-            if (error.response.statusText === "Unprocessable Content") {
-              alert({
-                title: "Emprende",
-                text: "No se puede enviar un formulario vacio.",
-                icon: "error",
-                button: false,
-              });
-              //fotos
-            }
+          } else if (error.response.statusText === "Unprocessable Content") {
+            alert({
+              title: "Emprende",
+              text: "No se puede enviar un formulario vacio.",
+              icon: "error",
+              button: false,
+            });
+            //fotos
+          }
         });
-
-
     } else {
       alert({
         title: "Emprende",
@@ -154,7 +146,6 @@ const ModalNewEmp = () => {
     }
   };
 
-
   useEffect(() => {
     getData();
   }, []);
@@ -175,7 +166,7 @@ const ModalNewEmp = () => {
 
     let regexNombre = /^[a-zA-ZÀ-ÿ-&\s]{3,255}$/; // Letras y espacios, pueden llevar acentos.
     let regexTelefono = /^\d{10,10}$/; // 7 a 14 numeros.
-    //let regexWeb =  /^[a-zA-ZÀ-ÿ\s]{1,28}$/; 
+    //let regexWeb =  /^[a-zA-ZÀ-ÿ\s]{1,28}$/;
     let regexDescuento = /^[0-9]{1,2}$/;
     let regexRol = /^[a-zA-ZÀ-ÿ\s]{1,18}$/;
     //let regexCobertura = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
@@ -194,124 +185,92 @@ const ModalNewEmp = () => {
       console.log("rol obligatorio");
     } else if (!regexRol.test(form.rol_esfot)) {
       errors.rol_esfot = "El rol ingresado no es valido";
-    } else
-      if (!form.categoria) {
-        errors.categoria = "Obligatoria";
-      } else if (!regexCategoria.test(form.categoria)) {
-        errors.categoria = "La categoria ingresado no es valida";
-      } else
+    } else if (!form.categoria) {
+      errors.categoria = "Obligatoria";
+    } else if (!regexCategoria.test(form.categoria)) {
+      errors.categoria = "La categoria ingresado no es valida";
+    }
 
+    //categoria
 
+    //web
+    else if (!form.pagina_web) {
+      errors.pagina_web = "Obligatoria";
+    }
 
+    // facebook
+    else if (!form.facebook) {
+      errors.facebook = "Obligatorio";
+    }
 
+    //Nombre
+    else if (!form.nombre) {
+      errors.nombre = "Obligatorio";
+    } else if (!regexNombre.test(form.nombre)) {
+      errors.nombre = "El nombre ingresado no es valido";
+    }
 
+    // Dirección
+    else if (!form.direccion) {
+      errors.direccion = "Obligatoria";
+    } else if (!regexDireccion.test(form.direccion)) {
+      errors.direccion = "La direccion ingresado no es valida";
+    }
+    //telefono
+    else if (!form.telefono) {
+      errors.telefono = "Obligatorio";
+    } else if (!regexTelefono.test(form.telefono)) {
+      errors.telefono = "El telefono ingresado no es valido";
+    }
 
+    //instagram
+    else if (!form.instagram) {
+      errors.instagram = "Obligatorio";
+    }
+    //descripcion
+    else if (!form.descripcion) {
+      errors.descripcion = "Obligatoria";
+    } else if (!regexDescripcion.test(form.descripcion)) {
+      errors.descripcion = "La descripcion ingresado no es valida";
+    }
 
+    //Cobertura
+    else if (!form.cobertura) {
+      errors.cobertura = "Obligatoria";
+    }
 
+    //Whatsapp
+    else if (!form.whatsapp) {
+      errors.whatsapp = "Obligatorio";
+    } else if (!regexWhatsapp.test(form.whatsapp)) {
+      errors.whatsapp = "El whatsapp ingresado no es valido";
+    } else if (form.whatsapp.length > 10) {
+      errors.whatsapp = "El whatsapp no puede tener mas de 10 caracteres";
+    } else if (form.whatsapp.length < 10) {
+      errors.whatsapp = "El whatsapp no puede tener menos de 10 caracteres";
+    }
 
+    //descuento
+    else if (!form.descuento) {
+      errors.descuento = "Obligatorio";
+    } else if (!regexDescuento.test(form.descuento)) {
+      errors.descuento = "Solo se aceptan números de hasta 2 dígitos";
+    }
 
-
-
-
-        //categoria
-
-        //web
-
-        if (!form.pagina_web) {
-          errors.pagina_web = "Obligatoria";
-        }
-
-        else
-
-          // facebook
-          if (!form.facebook) {
-            errors.facebook = "Obligatorio";
-
-
-          } else
-
-            //Nombre
-            if (!form.nombre) {
-              errors.nombre = "Obligatorio";
-
-            } else if (!regexNombre.test(form.nombre)) {
-              errors.nombre = "El nombre ingresado no es valido";
-            } else
-
-              // Dirección
-
-              if (!form.direccion) {
-                errors.direccion = "Obligatoria";
-              } else if (!regexDireccion.test(form.direccion)) {
-                errors.direccion = "La direccion ingresado no es valida";
-              } else
-                //telefono
-
-                if (!form.telefono) {
-                  errors.telefono = "Obligatorio";
-                } else if (!regexTelefono.test(form.telefono)) {
-                  errors.telefono = "El telefono ingresado no es valido";
-                } else
-
-                  //instagram
-                  if (!form.instagram) {
-                    errors.instagram = "Obligatorio";
-                  } else
-                    //descripcion
-
-                    if (!form.descripcion) {
-                      errors.descripcion = "Obligatoria";
-                    } else if (!regexDescripcion.test(form.descripcion)) {
-                      errors.descripcion = "La descripcion ingresado no es valida";
-                    } else
-
-                      //Cobertura
-
-                      if (!form.cobertura) {
-                        errors.cobertura = "Obligatoria";
-                      } else
-
-                        //Whatsapp
-
-                        if (!form.whatsapp) {
-                          errors.whatsapp = "Obligatorio";
-                        } else if (!regexWhatsapp.test(form.whatsapp)) {
-                          errors.whatsapp = "El whatsapp ingresado no es valido";
-                        } else if (form.whatsapp.length > 10) {
-                          errors.whatsapp = "El whatsapp no puede tener mas de 10 caracteres";
-                        } else if (form.whatsapp.length < 10) {
-                          errors.whatsapp = "El whatsapp no puede tener menos de 10 caracteres";
-                        } else
-
-                          //descuento
-
-                          if (!form.descuento) {
-                            errors.descuento = "Obligatorio";
-                          } else if (!regexDescuento.test(form.descuento)) {
-                            errors.descuento = "Solo se aceptan números";
-                          } else
-
-                            //imagen
-
-                            if (!image) {
-                              errors.image = "Obligatoria";
-                            } else if (!regexFoto.test(image.name)) {
-                              console.log(image);
-                              errors.image = "La imagen ingresado no es valida";
-                            }
+    //imagen
+    else if (!image) {
+      errors.image = "Obligatoria";
+    } else if (!regexFoto.test(image.name)) {
+      console.log(image);
+      errors.image = "La imagen ingresado no es valida";
+    }
 
     return errors;
-
   };
-
-
-
-
-
 
   return (
     <div>
-      <Button color="primary" onClick={toggle}>
+      <Button className="subir" onClick={toggle}>
         Crear emprendimientos
       </Button>
 
@@ -399,7 +358,9 @@ const ModalNewEmp = () => {
                       <option value={"Educacion"}>Educacion</option>
                       <option value={"Tecnología"}>Tecnología</option>
                       <option value={"Textil"}>Textil</option>
-                      <option value={"Hogar y Limpieza"}>Hogar y Limpieza</option>
+                      <option value={"Hogar y Limpieza"}>
+                        Hogar y Limpieza
+                      </option>
                       <option value={"Otro"}>Otros</option>
                     </NativeSelect>
                   </FormGroup>

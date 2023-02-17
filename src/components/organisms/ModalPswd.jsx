@@ -1,25 +1,31 @@
 // Cambio de ocntrase;a
 
 import React, { useState } from "react";
-import { Modal, Button, ModalHeader } from "react-bootstrap";
+import { Modal,  ModalHeader } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import Loading from "../templates/Loading";
+
 
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/auth/AuthContext";
-import { Navigate } from "react-router-dom";
+
 import { Grid, Typography } from "@mui/material";
 import "./styles.css"
 import alert from "sweetalert2";
 import X from "../../components/assets/logo_esfot_buho.png"
 import withReactContent from 'sweetalert2-react-content';
+import { Button } from "reactstrap";
+
+
 const ModalPswd = () => {
   const Alerta = withReactContent(alert)
   const { register, handleSubmit, errors } = useForm();
   const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
   const token = localStorage.getItem("token");
+  const [tokeSesion, setTokenSesion] = useState([]);
+  const { logout } = useContext(AuthContext);
+
 
   const [toggle, setToggle] = useState(false);
 
@@ -28,6 +34,23 @@ const ModalPswd = () => {
     password: "",
     password_confirmation: "",
   });
+
+  const handleLogout = async () => {
+
+    try {
+      await axios.post(
+        'https://backend-emprende.herokuapp.com/api/v1/logout',
+        {}, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}`  } }
+      );
+   
+      logout();
+    } catch (error) {
+      logout();
+
+    }
+
+
+  };
 
   const handleChange = (e) => {
     setForm({
@@ -39,7 +62,8 @@ const ModalPswd = () => {
   const Logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    window.location.href = "/";
+   // window.location.href = "/";
+
   };
 
   const onSubmit = async (data) => {
@@ -60,21 +84,13 @@ const ModalPswd = () => {
             buttons: ["Aceptar"],
             timer: 2500,
           }).then(() => {
-            Logout();
+            handleLogout();
+            logout();
           }
           );
         }).catch((error) => {
-          //console.log(error.response.data.errors.password[0]);
-          // if (error.response.data.message==="El campo contraseña es obligatorio."){
-          //   Alerta.fire({
-          //     title: <p>Atención!</p>,
-          //     text: "El campo contraseña es obligatorio.",
 
-          //     buttons: ["Aceptar"],
-          //     timer: 2500,
-          //   })
 
-          // }
 
           if (error.response.data.errors.password) {
             if (error.response.data.errors.password.length === 4) {
@@ -274,9 +290,12 @@ const ModalPswd = () => {
   return (
     <>
 
-      <Button className='btnedit btn-secondary' title="Cambiar contraseña" onClick={() => setToggle(true)}><svg width="16" height="16" viewBox="0 0 292 292" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M200.586 0.197144C150.292 0.197144 109.474 41.0155 109.474 91.3096C109.474 97.1408 109.474 102.972 110.567 108.439L0.138916 218.867V291.757H109.474V218.867H182.364V182.422L183.457 181.329C188.924 182.422 194.755 182.422 200.586 182.422C250.88 182.422 291.699 141.604 291.699 91.3096C291.699 41.0155 250.88 0.197144 200.586 0.197144ZM218.809 36.6421C238.854 36.6421 255.254 53.0424 255.254 73.0871C255.254 93.1319 238.854 109.532 218.809 109.532C198.764 109.532 182.364 93.1319 182.364 73.0871C182.364 53.0424 198.764 36.6421 218.809 36.6421Z" fill="#17b3bb" />
-      </svg></Button>
+      <button className='primary-btn' title="Cambiar contraseña" onClick={() => setToggle(true)}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.88966 17.49L9.18966 19.79M19.7897 14.93C18.8131 15.9041 17.5892 16.5931 16.2499 16.9226C14.9106 17.2521 13.5067 17.2098 12.1897 16.8L7.47966 21.5C7.13966 21.85 6.46966 22.06 5.98966 21.99L3.80966 21.69C3.08966 21.59 2.41966 20.91 2.30966 20.19L2.00966 18.01C1.93966 17.53 2.16966 16.86 2.49966 16.52L7.19966 11.82C6.39966 9.22001 7.01966 6.27001 9.07966 4.22001C12.0297 1.27001 16.8197 1.27001 19.7797 4.22001C22.7397 7.17001 22.7397 11.98 19.7897 14.93Z" />
+<path d="M14.5 11C14.8978 11 15.2794 10.842 15.5607 10.5607C15.842 10.2794 16 9.89782 16 9.5C16 9.10218 15.842 8.72064 15.5607 8.43934C15.2794 8.15804 14.8978 8 14.5 8C14.1022 8 13.7206 8.15804 13.4393 8.43934C13.158 8.72064 13 9.10218 13 9.5C13 9.89782 13.158 10.2794 13.4393 10.5607C13.7206 10.842 14.1022 11 14.5 11Z" />
+</svg>
+</button>
       <Modal
         show={toggle}
         onHide={() => setToggle(false)}
@@ -310,9 +329,9 @@ const ModalPswd = () => {
             </div>
 
             <div className="d-flex justify-content-end padding-top-1x mt-2">
-              <button type="submit" className="btn btn-primary">
+              <Button type="submit"  className="subir">
                 Actualizar
-              </button>
+              </Button>
             </div>
 
           </form>

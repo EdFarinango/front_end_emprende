@@ -25,10 +25,14 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 345,
     display: "flex",
+    margin: "0 10px",
+
+
   },
   media: {
     height: 345,
   },
+
 });
 
 export const Dashboard = () => {
@@ -43,9 +47,10 @@ export const Dashboard = () => {
  
   return (
     <>
-      <div className="container">
-        <Row className="mt-2 d-flex justify-content-between">
+      <div className="container  ">
+    
           {user && user.rol === "superadmin" && (
+                <Row className="mt-2 d-flex justify-content-between">
             <Card className={classes.root}>
               <CardActionArea>
                 <Link to="/administracion/super">
@@ -71,9 +76,8 @@ export const Dashboard = () => {
                 </CardContent>
               </CardActionArea>
             </Card>
-          )}
+     
 
-          {user && user.rol === "superadmin" && (
             <Card className={classes.root}>
               <CardActionArea>
                 <Link to="/administracion/admin">
@@ -99,10 +103,7 @@ export const Dashboard = () => {
                 </CardContent>
               </CardActionArea>
             </Card>
-          )}
 
-
-            
             <Card className={classes.root}>
             <CardActionArea>
               <Link to="/users/emprendimientos">
@@ -124,18 +125,29 @@ export const Dashboard = () => {
               </CardContent>
             </CardActionArea>
           </Card>
+
+
+
+          </Row>
+          )}
+
+
+            
+            
         
 
           {user && user.rol === "admin" && (
+                  <Row className="mt-2 d-flex justify-content-center">
 
-          <Card className={classes.root}>
+          <Card className={classes.root} >
             <CardActionArea>
               <CardMedia
                 className={classes.media}
                 image="https://cdn-icons-png.flaticon.com/512/1705/1705768.png"
-                title="emprendimiento"
+                title="Usuario administrador"
+                alt = "Usuario administrador"
               />
-              <div className="d-flex justify-content-center w3-padding">
+              <div className="d-flex justify-content-between mt-2">
                 <ModalPswd />
                 <ModalAvatar />
                 <ModalInfo />
@@ -151,10 +163,38 @@ export const Dashboard = () => {
               </CardContent>
             </CardActionArea>
           </Card>
+
+          <Card className={classes.root}>
+            <CardActionArea>
+              <Link to="/users/emprendimientos">
+                <CardMedia
+                  className={classes.media}
+                  image="https://cdn-icons-png.flaticon.com/512/2103/2103716.png"
+                  title="Administrar Esmprendimiento"
+                  alt="Administrar Esmprendimiento"
+                />
+              </Link>
+
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  Emprendimientos
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Módulo de administración, se podra crear, editar y desactivar
+                  emprendimientos.
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+
+
+
+
+          </Row>
           )}
 
           
-        </Row>
+     
       </div>
     </>
   );

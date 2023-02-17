@@ -22,7 +22,7 @@ axiosClient.interceptors.response.use((response) => {
     window.location.href = '/404'
     alert('404: contactese con el administrador')
 
-  
+
   }
 
   throw error;

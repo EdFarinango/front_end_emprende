@@ -129,15 +129,7 @@ const EditForm = (props) => {
     return (
         <>
 
-            {/* <div >
-<input type="file" name = "files"  onChange={(e)=>setImage(e.target.files[0])} />
-
-<br/>
-<br/>
-<button className="btn btn-primary" onClick={handleSubmitAv}>Enviar</button>
-
-
-</div> */}
+       
             <form className="row g-3 needs-validation" noValidate>
                 <div className="col-md-4">
                     <label htmlFor="validationCustom01" className="form-label">Nombre</label>

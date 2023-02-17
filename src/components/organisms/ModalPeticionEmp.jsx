@@ -110,7 +110,7 @@ const ModalNewEmp = () => {
         })
         .catch((error) => {
 
-          //console.log(error.response);
+          console.log(error.response);
           if (error.response.data.message === 'El campo image no debe ser mayor que 512 kilobytes.') {
             alert({
               title: "Emprende",
@@ -298,7 +298,7 @@ const ModalNewEmp = () => {
                           if (!form.descuento) {
                             errors.descuento = "Obligatorio";
                           } else if (!regexDescuento.test(form.descuento)) {
-                            errors.descuento = "Solo se aceptan números";
+                            errors.descuento = "Solo se aceptan números de hasta 2 dígitos";
                           } else
 
                             //imagen

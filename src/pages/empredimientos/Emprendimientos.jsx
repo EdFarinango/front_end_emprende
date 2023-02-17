@@ -78,7 +78,7 @@ export const Emprendimientos = ({ emprendimientos }) => {
       >
         <div className=" w3-round w3-white w3-padding-32 w3-center">
           <div className="container-fluid containerEmp">
-            <h4 className="card-title">Catalogo de Emprendimientos</h4>
+            <h4 className="card-title">Catálogo de Emprendimientos</h4>
 
             <ModalNewEmp item={data} updateState={updateState} data={data} />
             <hr className="sep" />

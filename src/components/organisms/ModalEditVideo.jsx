@@ -13,7 +13,7 @@ import './styles.css';
 import alert from "sweetalert";
 import FormInput from "../../components/templates/Inputs";
 
-const ModalVideo = ({video}) => {
+const ModalVideo = ({ video }) => {
 
     const [modal, setModal] = useState(false);
     const token = localStorage.getItem("token");
@@ -21,7 +21,7 @@ const ModalVideo = ({video}) => {
         nombre: "",
         descripcion: "",
         url: ""
-        
+
     });
 
     const toggle = () => setModal(!modal);
@@ -48,7 +48,7 @@ const ModalVideo = ({video}) => {
             label: "Url",
             placeholder: "Url del video",
         },
-      
+
 
     ];
 
@@ -61,7 +61,7 @@ const ModalVideo = ({video}) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-    
+
         await axios.post(
             `https://backend-emprende.herokuapp.com/api/v1/videoconferencia/${video.id}/update`,
             {
@@ -71,11 +71,11 @@ const ModalVideo = ({video}) => {
         );
         alert("El video ha actualizado correctamente").then(() => {
 
-       
 
-        
+
+
         });
-     
+
     };
 
 
@@ -84,7 +84,7 @@ const ModalVideo = ({video}) => {
             nombre: video.nombre,
             descripcion: video.descripcion,
             url: video.url,
-           
+
         });
     }, [video]
 
@@ -93,7 +93,7 @@ const ModalVideo = ({video}) => {
 
 
 
-    
+
     );
 
     return (
@@ -106,25 +106,25 @@ const ModalVideo = ({video}) => {
                 <ModalHeader toggle={toggle}>Editar video del repositorio</ModalHeader>
                 <ModalBody className="show-grid">
                     <Container>
-                        
-                    <Form onSubmit={onSubmit} className="form-control">
-        <FormGroup>
-          {inputs.map((input) => (
-            <FormInput
-              key={input.id}
-              {...input}
-              value={form[input.name]}
-              onChange={handleChange}
-            />
-          ))}
-        </FormGroup>
 
-        <Button color="info" type="submit">
-         
-          Enviar
-        </Button>
-        
-      </Form>
+                        <Form onSubmit={onSubmit} className="form-control">
+                            <FormGroup>
+                                {inputs.map((input) => (
+                                    <FormInput
+                                        key={input.id}
+                                        {...input}
+                                        value={form[input.name]}
+                                        onChange={handleChange}
+                                    />
+                                ))}
+                            </FormGroup>
+
+                            <Button color="info" type="submit">
+
+                                Enviar
+                            </Button>
+
+                        </Form>
 
                     </Container>
 

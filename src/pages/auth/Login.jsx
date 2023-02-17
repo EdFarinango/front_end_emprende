@@ -21,7 +21,10 @@ import ModalPswd from "./ModalPswd";
 import alert from "sweetalert2";
 
 import withReactContent from 'sweetalert2-react-content';
-import X from "../../components/assets/logo_esfot_buho.png"
+import X from "../../components/assets/logo_esfot_buho.png";
+import FormInput from "../../components/templates/Inputs";
+import { text } from "@fortawesome/fontawesome-svg-core";
+import { InputLabel } from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -43,6 +46,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export const Login = () => {
+  const [focused, setFocused] = useState(false);
 
 
   const Alerta = withReactContent(alert)
@@ -83,6 +87,13 @@ export const Login = () => {
 
     }
 
+
+  };
+
+  const handleFocus = (e) => {
+    setFocused(true);
+    handleChange(e);
+    setErrors(validationsForm(form));
 
   };
   const onLogin = async (e) => {
@@ -151,6 +162,7 @@ export const Login = () => {
           ).catch((error) => {
 
 
+            //console.log(error.response);
 
             localStorage.setItem("token", error.response.data.data.access_token);
 
@@ -327,179 +339,7 @@ export const Login = () => {
 
 
     }
-    // Alerta.fire({
-    //   title: <p>Atención!</p>,
-    //   text: "La contraseña es obligatoria, ingrese una contraseña válida",
-    //   //imagen con tamaño 100x100
-    //   imageUrl: X,
-    //   imageHeight: 100,
-    //   imageWidth: "auto",
-    //   imageAlt: 'alertaEPN',
-    //   //boton desactivado
-    //   showConfirmButton: false,
-    //   //tiempo de desaparicion
-    //   timer: 3000,
-    //   //color de fondo
-    //   background: '#fff',
-    //   //color de texto
-    //   customClass: {
-    //     title: 'text-dark',
-    //     text: 'text-dark',
-    //     popup: 'bg-light',
-    //     icon: 'bg-light'
-    //   }
-
-
-    // });
-    //     console.log(error.response.data.message);
-
-    //     if (error.response.data.message === "Usuario ya tiene una sesión iniciada") {
-
-    //       setTokenSesion(error.response.data.data.access_token);
-    //       Alerta.fire({
-    //         title: "Emprende",
-    //         html: 
-    //           <div>
-    //             <p>Este usuario ya tiene una sesión activa</p>
-    //             <p>¿Desea cerrar la sesión activa?</p>
-    //           </div>
-    //         ,
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonText: "Sí, cerra sesión",
-    //         cancelButtonText: "Cancelar",
-    //       }).then((resultado) => {
-    //         if (resultado.value) {
-
-    //           handleLogout();
-    //           setForm({
-    //             email: "",
-    //             password: "",
-    //           });
-    //           console.log("se cerro la sesión");
-    //           handleLogout();
-    //         } else {
-    //           // Dijeron que no
-    //           Alerta.fire("Cancelado", "No se cerró la sesión");
-    //         }
-    //       });
-    //     }
-
-
-
-
-
-
-
-
-    //       Alerta.fire({
-    //         title: <p>Atención!</p>,
-    //         text: "Debe ingresar una contraseña válida",
-    //         //imagen con tamaño 100x100
-    //         imageUrl: X,
-    //         imageHeight: 100,
-    //         imageWidth: "auto",
-    //         imageAlt: 'alertaEPN',
-    //         //boton desactivado
-    //         showConfirmButton: false,
-    //         //tiempo de desaparicion
-    //         timer: 3000,
-    //         //color de fondo
-    //         background: '#fff',
-    //         //color de texto
-    //         customClass: {
-    //           title: 'text-dark',
-    //           text: 'text-dark',
-    //           popup: 'bg-light',
-    //           icon: 'bg-light'
-    //         }
-
-
-    //       })
-
-
-
-    //       Alerta.fire({
-    //         title: <p>Atención!</p>,
-    //         text: "Las credenciales proporcionadas no coinciden con nuestros registros",
-    //         //imagen con tamaño 100x100
-    //         imageUrl: X,
-    //         imageHeight: 100,
-    //         imageWidth: "auto",
-    //         imageAlt: 'alertaEPN',
-    //         //boton desactivado
-    //         showConfirmButton: false,
-    //         //tiempo de desaparicion
-    //         timer: 3000,
-    //         //color de fondo
-    //         background: '#fff',
-    //         //color de texto
-    //         customClass: {
-    //           title: 'text-dark',
-    //           text: 'text-dark',
-    //           popup: 'bg-light',
-    //           icon: 'bg-light'
-    //         }
-
-
-    //       })
-    //     }
-
-
-
-    //     Alerta.fire({
-    //       title: <p>Atención!</p>,
-    //       text: "La dirección de correo electrónico es obligatoria, ingrese un correo válido",
-    //       //imagen con tamaño 100x100
-    //       imageUrl: X,
-
-    //       imageHeight: 100,
-    //       imageWidth: "auto",
-    //       imageAlt: 'alertaEPN',
-    //       //boton desactivado
-    //       showConfirmButton: false,
-    //       //tiempo de desaparicion
-    //       timer: 3000,
-    //       //color de fondo
-    //       background: '#fff',
-    //       //color de texto
-    //       customClass: {
-    //         title: 'text-dark',
-    //         text: 'text-dark',
-    //         popup: 'bg-light',
-    //         icon: 'bg-light'
-    //       }
-
-
-    //     })
-
-
-    //     Alerta.fire({
-    //       title: <p>Atención!</p>,
-    //       text: "La contraseña es obligatoria, ingrese una contraseña válida",
-    //       //imagen con tamaño 100x100
-    //       imageUrl: X,
-    //       imageHeight: 100,
-    //       imageWidth: "auto",
-    //       imageAlt: 'alertaEPN',
-    //       //boton desactivado
-    //       showConfirmButton: false,
-    //       //tiempo de desaparicion
-    //       timer: 3000,
-    //       //color de fondo
-    //       background: '#fff',
-    //       //color de texto
-    //       customClass: {
-    //         title: 'text-dark',
-    //         text: 'text-dark',
-    //         popup: 'bg-light',
-    //         icon: 'bg-light'
-    //       }
-
-
-    //     })
-
-    // }
+    
   };
 
   const handleChange = (e) => {
@@ -509,33 +349,31 @@ export const Login = () => {
     });
   };
 
-  const handleBlur = (e) => {
-    handleChange(e);
-    setErrors(validationsForm(form));
-  };
+  
 
   const validationsForm = (form) => {
     let errors = {};
     //let regexName = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; // Letras y espacios, pueden llevar acentos.
     let regexEmail =
       /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/; // Letras, numeros, guion y guion_bajo
-    let regexPassword = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{2,4}$/; ///^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/; // 4 a 12 digitos.
+    let regexPassword = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,}$/; // 4 a 12 digitos.
     //let regexPhone = /^\d{7,10}$/; // 7 a 14 numeros.
 
     if (!form.email) {
       errors.email =
-        "La dirección de correo electrónico es obligatoria, ingrese un correo válido";
+        "*La dirección de correo electrónico es obligatoria";
     } else if (!regexEmail.test(form.email)) {
       errors.email = "El correo electrónico ingresado no es válido";
     } else if (!form.password) {
-      errors.password = "Por favor ingrese una contraseña";
+      errors.password = "*Por favor ingrese una contraseña";
+    } else if (!regexPassword.test(form.password)) {
+      errors.password = "La contraseña no es válida";
     }
 
-    // }else if (!form.password) {
-    //     errors.password = "Por favor ingrese una contraseña";
-    // } else if (!regexPassword.test(form.password)) {
-    //     errors.password = "La contraseña no es válida";
-    // }
+     
+    //else if (!regexPassword.test(form.password)) {
+    //      errors.password = "La contraseña no es válida";
+    //  }
 
     return errors;
   };
@@ -586,39 +424,40 @@ export const Login = () => {
               required
               fullWidth
               name="email"
-              label="Correo electrónico"
+              label= {errors.email ? <p className="errors" >{errors.email}</p>  : "Correo electrónico"}
+                
+              autoComplete="false"
               type="email"
               id="email"
               onChange={handleChange}
-              onBlur={handleBlur}
+              onBlur={handleFocus}
               value={form.email}
+              
             />
-            {errors.email && ( // Si hay errores, se muestran
-              <div className="error">{errors.email}</div>
-            )}
+          
 
             <TextField
-
+autoComplete="false"
               margin="normal"
               required
               fullWidth
               name="password"
-              label="Contraseña"
+              label={errors.password ? <p className="errors">{errors.password}</p> : "Contraseña"}
               type="password"
               id="password"
               onChange={handleChange}
-              onBlur={handleBlur}
+              onBlur={handleFocus}
+             
 
 
 
 
               value={form.password}
-              autoComplete="current-password"
+             
             />
-            {errors.password && ( // Si hay errores, se muestran
+         
 
-              <div className="error">{errors.password}</div>
-            )}
+            
 
 
 
