@@ -1,9 +1,9 @@
 ## REPOSITORIO DE LA APLICACIÓN WEB DE PROMOCIÓN DE EMPRENDIMIENTOS
 ## Contenido 
-1. [Información general](#general-info)
-2. [Perfiles de usuario](#technologies)
-3. [Link de la aplicación](#installation)
-4. [Instalación](#collaboration)
+1. [Información general](#Información-General)
+2. [Perfiles de usuario](#Perfiles-de-usuarios)
+3. [Link de la aplicación](#Link)
+4. [Instalación](#Instalación)
 
 ### Información General
 ***
@@ -16,6 +16,10 @@ El presente componente es creado con el fin de dar funcionalidad visual y permit
 ![Login](https://user-images.githubusercontent.com/75056800/220556893-cf16a48f-4470-4cca-83e0-1e8f999468e0.png)
 ![Catálogo](https://user-images.githubusercontent.com/75056800/220557290-62750e45-6ac3-43d0-8165-bb25c47c6b66.png)
 ![Conferencias](https://user-images.githubusercontent.com/75056800/220557414-666db19a-d80e-4f8c-b022-5254b1d84b9a.png)
+![Administración de usuario](https://user-images.githubusercontent.com/75056800/220561006-9a3f5312-e071-44e3-b9f0-8e90a4b36a44.png)
+![Administración de emprendimientos](https://user-images.githubusercontent.com/75056800/220561138-30326960-ffb5-444e-886f-5204c58e1e6a.png)
+
+
 
 
 
