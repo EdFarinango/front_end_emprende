@@ -158,7 +158,7 @@ const ModalEmp = ({ emprendimientos }) => {
         </svg>
       </button>
 
-      <Modal isOpen={modal} toggle={toggle} size="lg">
+      <Modal isOpen={modal} toggle={toggle} size="lg" emprendimientos={emprendimientos}>
         <ModalHeader toggle={toggle}>Editar Emprendimiento</ModalHeader>
         <ModalBody className="show-grid">
           <Container>

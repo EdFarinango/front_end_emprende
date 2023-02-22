@@ -163,7 +163,7 @@ const SearchComponent = () => {
   const dato = !search
     ? data
     : data.filter((dato) =>
-      dato.nombre.toLowerCase().includes(search.toLocaleLowerCase())
+      dato.categoria.toLowerCase().includes(search.toLocaleLowerCase())
     );
 
   useEffect(() => {
@@ -320,7 +320,7 @@ const SearchComponent = () => {
                                       <img
                                       
                                        
-                                        src={item.imagen}
+                                        src={item.image}
                                         alt="imagen"
                                         className="img-fluid"
                                         width="100px"
@@ -351,13 +351,13 @@ const SearchComponent = () => {
                                       </button>
                                       <ModalEmp
                                         emprendimientos={item}
-                                        data={data}
+                                      
                                         setVerModal={true}
-                                        updateState={item}
+                                 
                                       />
                                       <ModalViewEmp
                                         emprendimientos={item}
-                                        data={data}
+                                        data={dato}
                                       />
                                     </td>
                                   </tr>
