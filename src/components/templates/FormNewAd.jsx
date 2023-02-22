@@ -33,7 +33,7 @@ const EditFormNew = () => {
       type: "text",
       placeholder: "Ingrese el nombre",
       errorMessage: "Debe ingresar un nombre válido!",
-      label: "Username",
+      label: "Nombre del administrador",
       pattern: "^[a-zA-ZÀ \s,-áéíóúÁÉÍÓÚñÑ]{3,255}$",
       required: true,
 
@@ -44,7 +44,7 @@ const EditFormNew = () => {
       type: "text",
       placeholder: "Ingrese el apellido",
       errorMessage: "Debe ingresar un apellido válido!",
-      label: "Apellido",
+      label: "Apellido del administrador",
       pattern: "^[a-zA-ZÀ \s,-áéíóúÁÉÍÓÚñÑ]{3,255}$",
       required: true,
 
@@ -55,7 +55,7 @@ const EditFormNew = () => {
       type: "email",
       placeholder: "Email",
       errorMessage: "Email no válido!",
-      label: "Email",
+      label: "Correo electrónico",
       pattern: "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$",
       required: true,
 
@@ -156,11 +156,11 @@ const EditFormNew = () => {
           ))}
         </FormGroup>
 
-        <Button color="info" type="submit">
+        <Button className="subir" type="submit">
 
           Crear
         </Button>
-        <Button color="danger" onClick={reset}>
+        <Button className="subir" onClick={reset}>
 
           Limpiar
         </Button>

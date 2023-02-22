@@ -61,7 +61,6 @@ const ModalEmp = ({ emprendimientos }) => {
       alert("Emprendimiento actualizado correctamente").then(() => {
     
 
-        toggle();
       });
     } catch (error) {
       //console.log(error);

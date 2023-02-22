@@ -27,7 +27,7 @@ const ModalForm = (propsNew) => {
     return (
         <div>
 
-            <Button color="success" onClick={toggle}>
+            <Button className="subir" onClick={toggle}>
                 {propsNew.buttonLabel}
             </Button>
             <Modal isOpen={modal}

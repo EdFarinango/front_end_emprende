@@ -33,7 +33,7 @@ const EditFormNew = () => {
       type: "text",
       placeholder: "Ingrese el nombre",
       errorMessage: "Debe ingresar un nombre válido!",
-      label: "Nombre",
+      label: "Nombre del administrador",
       pattern: "^[a-zA-ZÀ \s,-áéíóúÁÉÍÓÚñÑ]{3,255}$",
       required: true,
 
@@ -44,7 +44,7 @@ const EditFormNew = () => {
       type: "text",
       placeholder: "Ingrese el apellido",
       errorMessage: "Debe ingresar un apellido válido!",
-      label: "Apellido",
+      label: "Apellido del administrador",
       pattern: "^[a-zA-ZÀ \s,-áéíóúÁÉÍÓÚñÑ]{3,255}$",
       required: true,
 
@@ -155,15 +155,16 @@ const EditFormNew = () => {
             />
           ))}
         </FormGroup>
-
-        <Button color="info" type="submit">
+       <div className="d-flex justify-content-center">
+               <Button className="subir" type="submit">
 
           Crear
         </Button>
-        <Button color="danger" onClick={reset}>
+        <Button className="subir" onClick={reset}>
 
           Limpiar
         </Button>
+        </div>
       </Form>
       <br />
     </>

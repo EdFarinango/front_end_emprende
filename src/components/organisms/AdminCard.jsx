@@ -207,17 +207,27 @@ const AdminCard = () => {
                 <div className="d-flex justify-content-center w3-padding separacion">
                   {admin.id !== user.id && (
                     <Button
+
+                   
                       className="btnedit btn-secondary"
                       onClick={() => deleteSuAdmin(admin.id, admin.state)}
+                      title={
+                        admin.state === 1
+                          ? "Desactivar usuario"
+                          : "Activar usuario"
+                      }
                     >
                       {" "}
                       {admin.state === 1 ? (
+                    
                         <svg
+                          
                           width="16"
                           height="16"
                           viewBox="0 0 24 24"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
+                       
                         >
                           <path
                             d="M9.62 16L11.12 17.5L14.37 14.5"
@@ -253,6 +263,7 @@ const AdminCard = () => {
                           viewBox="0 0 24 24"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
+                          title="Activar"
                         >
                           <path
                             d="M8.49994 14.25C8.49994 16.17 10.0799 17.75 11.9999 17.75C13.9199 17.75 15.4999 16.17 15.4999 14.25M8.80994 2L5.18994 5.63M15.1899 2L18.8099 5.63"
@@ -296,6 +307,7 @@ const AdminCard = () => {
                       admins={admins}
                       setAdmins={setAdmin}
                       toggle={toggle}
+                      
                     />
                   ) : (
                     <></>
