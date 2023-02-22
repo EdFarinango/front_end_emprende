@@ -112,7 +112,7 @@ function Footer() {
                 target="_blank"
                 className="linktext  text-xl text-decoration-none"
               >
-                ESFOT EmPreNde
+                ESFOT EmPreNde.
               </Card.Link>
             </p>
           </Col>
