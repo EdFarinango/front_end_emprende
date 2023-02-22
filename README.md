@@ -1,7 +1,7 @@
 ## REPOSITORIO DE LA APLICACIÓN WEB DE PROMOCIÓN DE EMPRENDIMIENTOS
 ## Contenido 
 1. [Información general](#Información-General)
-2. [Perfiles de usuario](#Perfiles-de-usuarios)
+2. [Perfiles de usuario](#Perfiles-usuarios)
 3. [Link de la aplicación](#Link)
 4. [Instalación](#Instalación)
 
@@ -24,7 +24,7 @@ El presente componente es creado con el fin de dar funcionalidad visual y permit
 
 
 
-## Perfiles de usuario
+## Perfiles-usuario
 ***
 | Rol de usuario	 | Funciones |
 | ------ | ------ |
