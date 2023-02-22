@@ -288,7 +288,7 @@ export const Login = () => {
     //let regexName = /^[a-zA-ZÀ-ÿ\s]{1,40}$/; // Letras y espacios, pueden llevar acentos.
     let regexEmail =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; // Letras, numeros, guion y guion_bajo
-    let regexPassword = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,}$/; // 4 a 12 digitos.
+    //let regexPassword = /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,}$/; // 4 a 12 digitos.
     //let regexPhone = /^\d{7,10}$/; // 7 a 14 numeros.
 
     if (!form.email) {
@@ -297,9 +297,7 @@ export const Login = () => {
       errors.email = "El correo electrónico ingresado no es válido";
     } else if (!form.password) {
       errors.password = "*Por favor ingrese una contraseña";
-    } else if (!regexPassword.test(form.password)) {
-      errors.password = "La contraseña no es válida";
-    }
+    } 
 
     //else if (!regexPassword.test(form.password)) {
     //      errors.password = "La contraseña no es válida";
