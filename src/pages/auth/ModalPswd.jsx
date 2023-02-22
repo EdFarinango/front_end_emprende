@@ -167,10 +167,8 @@ const ModalPswd = () => {
     return (
         <>
             <div>
-                <div className='li'>
-                    <p clasName="pPswd" onClick={toggle}>Recuperar Contraseña </p>
-
-                </div>
+                <Button color="link" className='linkPswd' onClick={toggle}>¿Olvidaste tu contraseña?</Button>
+                
 
 
 
@@ -186,7 +184,7 @@ const ModalPswd = () => {
                                 <div>
                                     <Label description="Correo" htmlFor='email' />
                                     <input
-                                        className='rounded-2xl text-base px-4 py-2 border-0 border-b border-gray-300 focus:border-cyan-500 disabled:opacity-50 block mt-2 w-full'
+                                        className='rounded-2xl text-base px-4 py-2 border-gray-300 focus:border-cyan-500 disabled:opacity-50 mt-2'
                                         id='email'
                                         name='email'
                                         type='email'

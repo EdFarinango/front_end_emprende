@@ -71,6 +71,8 @@ const ModalVideo = ({ video }) => {
         );
         alert("El video ha actualizado correctamente").then(() => {
 
+            window.location.reload();
+
 
 
 
@@ -103,7 +105,7 @@ const ModalVideo = ({ video }) => {
 
 
             <Modal isOpen={modal} toggle={toggle} size="lg">
-                <ModalHeader toggle={toggle}>Editar video del repositorio</ModalHeader>
+                <ModalHeader toggle={toggle}>Editar información del video</ModalHeader>
                 <ModalBody className="show-grid">
                     <Container>
 

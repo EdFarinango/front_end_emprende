@@ -20,7 +20,7 @@ import Button from "@mui/material/Button";
 import ModalPswd from "./ModalPswd";
 import alert from "sweetalert2";
 
-import withReactContent from 'sweetalert2-react-content';
+import withReactContent from "sweetalert2-react-content";
 import X from "../../components/assets/logo_esfot_buho.png";
 import FormInput from "../../components/templates/Inputs";
 import { text } from "@fortawesome/fontawesome-svg-core";
@@ -47,9 +47,9 @@ const theme = createTheme();
 
 export const Login = () => {
   const [focused, setFocused] = useState(false);
+  const [showPswd, setShowPswd] = useState(false);
 
-
-  const Alerta = withReactContent(alert)
+  const Alerta = withReactContent(alert);
   const { login } = useContext(AuthContext);
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -63,69 +63,49 @@ export const Login = () => {
     password: "",
   });
   const handleLogout = async () => {
-
-
-
-
     //console.log("token desde logout", localStorage.getItem('token'));
 
     try {
       await axios.post(
-        'https://backend-emprende.herokuapp.com/api/v1/logout',
-        {}, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
-
-
-      )
+        "https://backend-emprende.herokuapp.com/api/v1/logout",
+        {},
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
       logout();
       //console.log("salio");
     } catch (error) {
       logout();
       //console.log(error);
-
-
-
-
     }
-
-
   };
 
   const handleFocus = (e) => {
     setFocused(true);
     handleChange(e);
     setErrors(validationsForm(form));
-
   };
   const onLogin = async (e) => {
-
     e.preventDefault();
     setErrors(validationsForm(form));
 
     if (Object.keys(errors).length === 0) {
-
-
       try {
         await axios
           .post("https://backend-emprende.herokuapp.com/api/v1/login", {
             ...form,
-          }).then((response) => {
-
+          })
+          .then((response) => {
             //console.log(response);
-
-
 
             const { access_token, token_type, user } = response.data.data;
 
-
-
-
-            setResponse(response)
+            setResponse(response);
 
             login(user, `${token_type} ${access_token}`);
 
-
             //console.log("Ingreso exitoso");
-
 
             Alerta.fire({
               title: <p>EMPRENDE</p>,
@@ -134,42 +114,31 @@ export const Login = () => {
               imageUrl: X,
               imageHeight: 100,
               imageWidth: "auto",
-              imageAlt: 'alertaEPN',
+              imageAlt: "alertaEPN",
               //boton desactivado
               showConfirmButton: false,
               //tiempo de desaparicion
               timer: 3000,
               //color de fondo
-              background: '#fff',
+              background: "#fff",
               //color de texto
               customClass: {
-                title: 'text-dark',
-                text: 'text-dark',
-                popup: 'bg-light',
-                icon: 'bg-light'
-              }
-
-
+                title: "text-dark",
+                text: "text-dark",
+                popup: "bg-light",
+                icon: "bg-light",
+              },
             }).then(() => {
               window.location.href = "/administracion";
             });
-
-
-
-
-          }
-
-          ).catch((error) => {
-
-
+          })
+          .catch((error) => {
             //console.log(error.response);
 
-            localStorage.setItem("token", error.response.data.data.access_token);
-
-
-
-
-
+            localStorage.setItem(
+              "token",
+              error.response.data.data.access_token
+            );
 
             if (error.response.data.errors) {
               Alerta.fire({
@@ -179,48 +148,47 @@ export const Login = () => {
                 imageUrl: X,
                 imageHeight: 100,
                 imageWidth: "auto",
-                imageAlt: 'alertaEPN',
+                imageAlt: "alertaEPN",
                 //boton desactivado
                 showConfirmButton: false,
                 //tiempo de desaparicion
                 timer: 3000,
                 //color de fondo
-                background: '#fff',
+                background: "#fff",
                 //color de texto
                 customClass: {
-                  title: 'text-dark',
-                  text: 'text-dark',
-                  popup: 'bg-light',
-                  icon: 'bg-light'
-                }
-
-
-              })
-            } else
-              if (error.response.data.message === "Usuario ya tiene una sesión iniciada") {
-
-
-
-                Alerta.fire({
-                  title: "Emprende",
-                  html:
-                    <div>
-                      <p>Este usuario ya tiene una sesión activa</p>
-                      <p>Para ingresar debe cerrar sesión en los otros dispositivos</p>
-                    </div>
-                  ,
-                  icon: "warning",
-                  showCancelButton: true,
-                  confirmButtonText: "Cerrar sesión",
-                  cancelButtonText: "Cancelar",
-                }).then((resultado) => {
-                  if (resultado.value) {
-
-                    setForm({
-                      email: "",
-                      password: "",
-                    });
-                    handleLogout().then(() => {
+                  title: "text-dark",
+                  text: "text-dark",
+                  popup: "bg-light",
+                  icon: "bg-light",
+                },
+              });
+            } else if (
+              error.response.data.message ===
+              "Usuario ya tiene una sesión iniciada"
+            ) {
+              Alerta.fire({
+                title: "Emprende",
+                html: (
+                  <div>
+                    <p>Este usuario ya tiene una sesión activa</p>
+                    <p>
+                      Para ingresar debe cerrar sesión en los otros dispositivos
+                    </p>
+                  </div>
+                ),
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Cerrar sesión",
+                cancelButtonText: "Cancelar",
+              }).then((resultado) => {
+                if (resultado.value) {
+                  setForm({
+                    email: "",
+                    password: "",
+                  });
+                  handleLogout()
+                    .then(() => {
                       Alerta.fire({
                         title: <p>Atención!</p>,
                         text: "Se cerró todas las sesiones activas relacionadas a este usuario",
@@ -228,80 +196,60 @@ export const Login = () => {
                         imageUrl: X,
                         imageHeight: 100,
                         imageWidth: "auto",
-                        imageAlt: 'alertaEPN',
+                        imageAlt: "alertaEPN",
                         //boton desactivado
                         showConfirmButton: false,
                         //tiempo de desaparicion
                         timer: 3000,
                         //color de fondo
-                        background: '#fff',
+                        background: "#fff",
                         //color de texto
                         customClass: {
-                          title: 'text-dark',
-                          text: 'text-dark',
-                          popup: 'bg-light',
-                          icon: 'bg-light'
-                        }
-
-
-                      })
-                    }).catch((error) => {
+                          title: "text-dark",
+                          text: "text-dark",
+                          popup: "bg-light",
+                          icon: "bg-light",
+                        },
+                      });
+                    })
+                    .catch((error) => {
                       //console.log(error);
                       handleLogout();
                     });
-
-
-
-
-
-
-                  } else {
-
-                    Alerta.fire("Cancelado", "No se cerró la sesión");
-                  }
-                });
-
-
-              } if (error.response.data.message === "Las credenciales ingresadas son incorrectas.") {
-
-                Alerta.fire({
-                  title: <p>Atención!</p>,
-                  text: "Las credenciales proporcionadas no coinciden con nuestros registros",
-                  //imagen con tamaño 100x100
-                  imageUrl: X,
-                  imageHeight: 100,
-                  imageWidth: "auto",
-                  imageAlt: 'alertaEPN',
-                  //boton desactivado
-                  showConfirmButton: false,
-                  //tiempo de desaparicion
-                  timer: 3000,
-                  //color de fondo
-                  background: '#fff',
-                  //color de texto
-                  customClass: {
-                    title: 'text-dark',
-                    text: 'text-dark',
-                    popup: 'bg-light',
-                    icon: 'bg-light'
-                  }
-                });
-              }
-
+                } else {
+                  Alerta.fire("Cancelado", "No se cerró la sesión");
+                }
+              });
+            }
+            if (
+              error.response.data.message ===
+              "Las credenciales ingresadas son incorrectas."
+            ) {
+              Alerta.fire({
+                title: <p>Atención!</p>,
+                text: "Las credenciales proporcionadas no coinciden con nuestros registros",
+                //imagen con tamaño 100x100
+                imageUrl: X,
+                imageHeight: 100,
+                imageWidth: "auto",
+                imageAlt: "alertaEPN",
+                //boton desactivado
+                showConfirmButton: false,
+                //tiempo de desaparicion
+                timer: 3000,
+                //color de fondo
+                background: "#fff",
+                //color de texto
+                customClass: {
+                  title: "text-dark",
+                  text: "text-dark",
+                  popup: "bg-light",
+                  icon: "bg-light",
+                },
+              });
+            }
           });
-
-
-
-
-
-
-
-
-
-
       } catch (error) {
-
-
         Alerta.fire({
           title: <p>Atención!</p>,
           text: "Las credenciales proporcionadas no coinciden con nuestros registros",
@@ -309,37 +257,23 @@ export const Login = () => {
           imageUrl: X,
           imageHeight: 100,
           imageWidth: "auto",
-          imageAlt: 'alertaEPN',
+          imageAlt: "alertaEPN",
           //boton desactivado
           showConfirmButton: false,
           //tiempo de desaparicion
           timer: 3000,
           //color de fondo
-          background: '#fff',
+          background: "#fff",
           //color de texto
           customClass: {
-            title: 'text-dark',
-            text: 'text-dark',
-            popup: 'bg-light',
-            icon: 'bg-light'
-          }
+            title: "text-dark",
+            text: "text-dark",
+            popup: "bg-light",
+            icon: "bg-light",
+          },
         });
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-    
   };
 
   const handleChange = (e) => {
@@ -348,8 +282,6 @@ export const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  
 
   const validationsForm = (form) => {
     let errors = {};
@@ -360,8 +292,7 @@ export const Login = () => {
     //let regexPhone = /^\d{7,10}$/; // 7 a 14 numeros.
 
     if (!form.email) {
-      errors.email =
-        "*La dirección de correo electrónico es obligatoria";
+      errors.email = "*La dirección de correo electrónico es obligatoria";
     } else if (!regexEmail.test(form.email)) {
       errors.email = "El correo electrónico ingresado no es válido";
     } else if (!form.password) {
@@ -370,7 +301,6 @@ export const Login = () => {
       errors.password = "La contraseña no es válida";
     }
 
-     
     //else if (!regexPassword.test(form.password)) {
     //      errors.password = "La contraseña no es válida";
     //  }
@@ -424,51 +354,59 @@ export const Login = () => {
               required
               fullWidth
               name="email"
-              label= {errors.email ? <p className="errors" >{errors.email}</p>  : "Correo electrónico"}
-                
+              label={
+                errors.email ? (
+                  <p className="errors">{errors.email}</p>
+                ) : (
+                  "Correo electrónico"
+                )
+              }
               autoComplete="false"
               type="email"
               id="email"
               onChange={handleChange}
               onBlur={handleFocus}
               value={form.email}
-              
             />
-          
 
+           
             <TextField
-autoComplete="false"
+              className="inputPswd"
               margin="normal"
               required
               fullWidth
               name="password"
-              label={errors.password ? <p className="errors">{errors.password}</p> : "Contraseña"}
-              type="password"
+              label={
+                errors.password ? ( 
+                  <p className="errors">{errors.password}</p>
+                ) : (
+                  "Contraseña"
+                )
+              }
+              type={showPswd ? "text" : "password"}
               id="password"
               onChange={handleChange}
               onBlur={handleFocus}
-             
-
-
-
-
               value={form.password}
-             
             />
-         
 
-            
+           
+            < div className="showPswd">
+            <input
+              type="checkbox"
+              onClick={() => setShowPswd(!showPswd)}
+              className="checkboxPswd"
+            />
+            <label className="labelpswd">Mostrar contraseña</label>
+            </div>
+             
 
 
-
-
+     
             <Grid container>
-
-
-
               <Button
                 disabled={errors.email || errors.password}
-                className="btn"
+                className="btnLogin"
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -476,10 +414,6 @@ autoComplete="false"
               >
                 Iniciar sesión
               </Button>
-
-
-
-
             </Grid>
           </Box>
           <ModalPswd variant="body2" />
