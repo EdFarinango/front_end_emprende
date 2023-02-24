@@ -111,10 +111,10 @@ const ModalNewEmp = () => {
         .catch((error) => {
 
           console.log(error.response);
-          if (error.response.data.message === 'El campo image no debe ser mayor que 512 kilobytes.') {
+          if (error.response.data.message === 'El campo de la imagen no debe ser mayor que 512 kilobytes.') {
             alert({
               title: "Emprende",
-              text: "Peso máximo del archivo 512kb, por favor seleccione una imagen mas liviana",
+              text: "Peso máximo del archivo 512kb, por favor seleccione una imagen más liviana",
               icon: "error",
               button: false,
             });
@@ -125,7 +125,7 @@ const ModalNewEmp = () => {
             if (error.response.statusText === "Unprocessable Content") {
               alert({
                 title: "Emprende",
-                text: "No se puede enviar un formulario vacio.",
+                text: "No se puede enviar un formulario vacío.",
                 icon: "error",
                 button: false,
               });
@@ -203,12 +203,12 @@ const ModalNewEmp = () => {
       errors.rol_esfot = "Obligatorio";
       //console.log("rol obligatorio");
     } else if (!regexRol.test(form.rol_esfot)) {
-      errors.rol_esfot = "El rol ingresado no es valido";
+      errors.rol_esfot = "El rol ingresado no es válido";
     } else
       if (!form.categoria) {
         errors.categoria = "Obligatoria";
       } else if (!regexCategoria.test(form.categoria)) {
-        errors.categoria = "La categoria ingresado no es valida";
+        errors.categoria = "La categoria ingresado no es válida";
       } else
 
 
@@ -245,7 +245,7 @@ const ModalNewEmp = () => {
               errors.nombre = "Obligatorio";
 
             } else if (!regexNombre.test(form.nombre)) {
-              errors.nombre = "El nombre ingresado no es valido";
+              errors.nombre = "El nombre ingresado no es válido";
             } else
 
               // Dirección
@@ -253,14 +253,14 @@ const ModalNewEmp = () => {
               if (!form.direccion) {
                 errors.direccion = "Obligatoria";
               } else if (!regexDireccion.test(form.direccion)) {
-                errors.direccion = "La direccion ingresado no es valida";
+                errors.direccion = "La direccion ingresado no es válida";
               } else
                 //telefono
 
                 if (!form.telefono) {
                   errors.telefono = "Obligatorio";
                 } else if (!regexTelefono.test(form.telefono)) {
-                  errors.telefono = "El telefono ingresado no es valido";
+                  errors.telefono = "El telefono ingresado no es válido";
                 } else
 
                   //instagram
@@ -272,7 +272,7 @@ const ModalNewEmp = () => {
                     if (!form.descripcion) {
                       errors.descripcion = "Obligatoria";
                     } else if (!regexDescripcion.test(form.descripcion)) {
-                      errors.descripcion = "La descripcion ingresado no es valida";
+                      errors.descripcion = "La descripcion ingresado no es válida";
                     } else
 
                       //Cobertura
@@ -286,7 +286,7 @@ const ModalNewEmp = () => {
                         if (!form.whatsapp) {
                           errors.whatsapp = "Obligatorio";
                         } else if (!regexWhatsapp.test(form.whatsapp)) {
-                          errors.whatsapp = "El whatsapp ingresado no es valido";
+                          errors.whatsapp = "El whatsapp ingresado no es válido";
                         } else if (form.whatsapp.length > 10) {
                           errors.whatsapp = "El whatsapp no puede tener mas de 10 caracteres";
                         } else if (form.whatsapp.length < 10) {
@@ -307,7 +307,7 @@ const ModalNewEmp = () => {
                               errors.image = "Obligatoria";
                             } else if (!regexFoto.test(image.name)) {
                               //console.log(image);
-                              errors.image = "La imagen ingresado no es valida";
+                              errors.image = "La imagen ingresado no es válida";
                             }
 
     return errors;
@@ -380,12 +380,12 @@ const ModalNewEmp = () => {
 
                 <Col xs={6} md={4}>
                   <FormGroup>
-                    <Label for="descripcion">Descripcion</Label>
+                    <Label for="descripcion">Descripción</Label>
                     <Input
                       type="text"
                       name="descripcion"
                       id="descripcion"
-                      placeholder="Descripcion"
+                      placeholder="Descripción"
                       value={form.descripcion}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -395,7 +395,7 @@ const ModalNewEmp = () => {
                 </Col>
                 <Col xs={6} md={4}>
                   <FormGroup>
-                    <InputLabel id="categoria">Categoria</InputLabel>
+                    <InputLabel id="categoria">Categoría</InputLabel>
                     <NativeSelect
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -418,12 +418,12 @@ const ModalNewEmp = () => {
 
                 <Col xs={6} md={4}>
                   <FormGroup>
-                    <Label for="direccion">Direccion</Label>
+                    <Label for="direccion">Dirección</Label>
                     <Input
                       type="text"
                       name="direccion"
                       id="direccion"
-                      placeholder="Direccion"
+                      placeholder="Dirección"
                       value={form.direccion === null ? "" : form.direccion}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -459,12 +459,12 @@ const ModalNewEmp = () => {
 
                 <Col xs={6} md={4}>
                   <FormGroup>
-                    <Label for="pagina_web">Pagina Web</Label>
+                    <Label for="pagina_web">Página Web</Label>
                     <Input
                       type="text"
                       name="pagina_web"
                       id="pagina_web"
-                      placeholder="Pagina Web"
+                      placeholder="Página Web"
                       value={form.pagina_web === null ? "" : form.pagina_web}
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -474,12 +474,12 @@ const ModalNewEmp = () => {
                 </Col>
                 <Col xs={6} md={4}>
                   <FormGroup>
-                    <Label for="telefono">Telefono</Label>
+                    <Label for="telefono">Número de teléfono</Label>
                     <Input
                       type="text"
                       name="telefono"
                       id="telefono"
-                      placeholder="Telefono"
+                      placeholder="Teléfono"
                       value={form.telefono === null ? "" : form.telefono}
                       onChange={handleChange}
                       onBlur={handleBlur}
