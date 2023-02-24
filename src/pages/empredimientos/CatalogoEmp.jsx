@@ -204,7 +204,7 @@ export const CatalogoEmp = () => {
                           <p className="card-info-code">{item.categoria} </p>
                           <hr className="divHr" />
 
-                          <h1 className="card-info-item">Descripción</h1>
+                          <h3 className="card-info-item">Descripción</h3>
                           <div className="card-info-block">
                             <p className="card-info-price">
                               {item.descripcion}
@@ -219,7 +219,7 @@ export const CatalogoEmp = () => {
                           <h2 className="card-title"> CONTÁCTANOS</h2>
                           <dl className="data-list">
                             <div className="data-list-row">
-                              <dt>Dirección</dt>
+                              <dt>Dirección: </dt>
                               <dd>{item.direccion}</dd>
                             </div>
                             <div className="data-list-row">
