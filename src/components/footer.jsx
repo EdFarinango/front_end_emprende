@@ -41,7 +41,7 @@ function Footer() {
             </div>
               <li className="list-inline-item px-0 px-sm-2">
                 <Card.Link
-                  href="https://front-end-emprende.vercel.app/comision"
+                  href="https://emprende-esfot.vercel.app/comision"
                   target="_blank"
                   className="linktext"
                   rel="noreferrer"

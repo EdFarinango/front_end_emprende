@@ -355,7 +355,7 @@ const ModalNewEmp = () => {
                     >
                       <option value={""}></option>
                       <option value={"Alimentación"}>Alimentación</option>
-                      <option value={"Educacion"}>Educacion</option>
+                      <option value={"Educación"}>Educación</option>
                       <option value={"Tecnología"}>Tecnología</option>
                       <option value={"Textil"}>Textil</option>
                       <option value={"Hogar y Limpieza"}>

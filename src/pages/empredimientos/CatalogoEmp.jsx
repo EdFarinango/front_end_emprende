@@ -27,7 +27,14 @@ import "swiper/css/pagination";
 
 import Loading from "../../components/atoms/Loading";
 
-import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
+import {
+  Navigation,
+  Pagination,
+  Mousewheel,
+  Keyboard,
+  EffectCoverflow,
+  Zoom,
+} from "swiper";
 
 export const CatalogoEmp = () => {
   //setear los hooks useState
@@ -61,8 +68,8 @@ export const CatalogoEmp = () => {
   const dato = !search
     ? data
     : data.filter((dato) =>
-      dato.categoria.toLowerCase().includes(search.toLocaleLowerCase())
-    );
+        dato.categoria.toLowerCase().includes(search.toLocaleLowerCase())
+      );
 
   useEffect(() => {
     getData();
@@ -80,18 +87,61 @@ export const CatalogoEmp = () => {
     <>
       <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
         <div className="w3-col m12">
-          <div className="w3-card w3-round w3-white">
-            <div className="w3-container w3-padding">
-              <h2 className="w3-opacity center">
-                Emprendimientos a tu servicio
-              </h2>
-              <div className="col-12">
+          <div className="w3-container w3-padding">
+            <h2 className="w3-opacity center">Emprendimientos a tu servicio</h2>
+
+            <div>
+              <Swiper
+                style={{
+                  "--swiper-navigation-color": "#fff",
+                  "--swiper-pagination-color": "#fff",
+                }}
+                zoom={true}
+                navigation={true}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[Zoom, Navigation, Pagination]}
+                className="mySwiper"
+              >
+                {dato.map((item) =>
+                  item.estado === 1 && item.estado1 === 1 ? (
+                    <SwiperSlide>
+                      <div
+                        className="card"
+                        style={{
+                          height: "450x",
+                          width: "auto",
+                          margin: "auto",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        <img
+                          src={item.image}
+                          className="card-img-bottom"
+                          alt="imgEmprendimiento"
+                          style={{ height: "300px", borderRadius: "10px" }}
+                        />
+
+                        <div className="card-body">
+                          <h5 className="card-title">{item.nombre}</h5>
+                          <p className="card-text">{item.descripcion}</p>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  ) : item.length > 1 ? (
+                    <h1>No hay emprendimientos</h1>
+                  ) : null
+                )}
+              </Swiper>
+            </div>
+            <div className="w3-row-padding" style={{ margin: 0 }}>
                 <div className="float-right">
                   <div className="input-group mb-3">
                     <input
                       type="text"
-                      className="form-control"
-                      placeholder="Buscar"
+                      className="form-control search"
+                      placeholder="Buscar por categoria"
                       aria-label="Buscar"
                       aria-describedby="basic-addon2"
                       value={search}
@@ -101,54 +151,13 @@ export const CatalogoEmp = () => {
                   </div>
                 </div>
               </div>
-
-              <div class="input-group rounded">
-                <Swiper
-                  cssMode={true}
-                  navigation={true}
-                  pagination={true}
-                  mousewheel={true}
-                  keyboard={true}
-                  modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-                >
-                  {dato.map((item) =>
-                    item.estado === 1 && item.estado1 === 1 ? (
-                      <SwiperSlide>
-                        <div
-                          className="card"
-                          style={{
-                            height: "450x",
-                            width: "auto",
-                            margin: "auto",
-                            borderRadius: "10px",
-                          }}
-                        >
-                          <img
-                            src={item.image}
-                            className="card-img-bottom"
-                            alt="imgEmprendimiento"
-                            style={{ height: "300px", borderRadius: "10px" }}
-                          />
-
-                          <div className="card-body">
-                            <h5 className="card-title">{item.nombre}</h5>
-                            <p className="card-text">{item.descripcion}</p>
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    ) : item.length > 1 ? (
-                      <h1>No hay emprendimientos</h1>
-                    ) : null
-                  )}
-                </Swiper>
-              </div>
-            </div>
           </div>
         </div>
+        
       </div>
 
       {/* catalodo de emprendimientos */}
-
+                      
       <div className="w3-content" style={{ maxWidth: 1400, marginTop: 15 }}>
         <div className="w3-col">
           <div className="w3-row-padding">
@@ -156,6 +165,7 @@ export const CatalogoEmp = () => {
               <div className="w3-card w3-round w3-white"></div>
             </div>
           </div>
+          
 
           {dato.map((item) =>
             item.estado === 1 && item.estado1 === 1 ? (
@@ -913,7 +923,6 @@ export const CatalogoEmp = () => {
                           </div>
                         </div>
                       </div>
-
                     </div>
                   </div>
                   <button
@@ -948,17 +957,29 @@ export const CatalogoEmp = () => {
             )
           )}
           {dato.length < 1 ? (
+            
             <div
-              className="w3-container w3-card w3-white w3-round w3-margin"
-              style={{ marginBottom: 10 }}
+              className="w3-container w3-card  w3-round w3-margin" 
+              style={{ marginBottom: 10, backgroundColor: "#15a0a08f" }}
             >
-              <br />
-              <img
-                src={Logo}
-                alt="fotoEmprendimiento"
-                className="w3-left w3-circle w3-margin-right"
-                style={{ width: "600px" }}
-              />
+               <br />
+                  <img
+                    src={Logo}
+                    alt="fotoEmprendimiento"
+                    className="w3-left w3-margin-right"
+                    style={{ width: "250px", padding: "10px" }}
+                  />
+                  <span className="w3-right w3-opacity">1 min</span>
+                  <h4 className="w3-margin-top  w3-margin-right"
+                  style={{  padding: "10px" }}
+                  
+                  >No existe esta categoría</h4>
+                  <br />
+             
+            
+           
+              
+              
             </div>
           ) : (
             <div></div>
@@ -970,13 +991,7 @@ export const CatalogoEmp = () => {
         <footer className="w3-container w3-theme-d3 w3-padding-16">
           <Footer />
         </footer>
-        <script src="https://www.w3schools.com/lib/w3.js" />
-        <script src="https://www.w3schools.com/lib/w3data.js" />
-        <script src="https://www.w3schools.com/lib/w3color.js" />
-        <script src="https://www.w3schools.com/lib/w3codecolor.js" />
-        <script src="https://www.w3schools.com/lib/w3colorpicker.js" />
-        <script src="https://www.w3schools.com/lib/w3cssmenu.js" />
-        <script src="https://www.w3schools.com/lib/w3cssfilter.js" />
+       
       </div>
     </>
   );
