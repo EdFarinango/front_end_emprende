@@ -219,7 +219,7 @@ export const CatalogoEmp = () => {
                           <h2 className="card-title"> CONTÁCTANOS</h2>
                           <dl className="data-list">
                             <div className="data-list-row">
-                              <dt>Dirección: </dt>
+                              <dt>Dirección:&nbsp </dt>
                               <dd>{item.direccion}</dd>
                             </div>
                             <div className="data-list-row">
