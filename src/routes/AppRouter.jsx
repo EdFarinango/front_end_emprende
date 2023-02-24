@@ -23,6 +23,7 @@ import Comision from "../pages/comision/Emprende";
 import { Dashboard } from "../pages/dashboard/Dashboard";
 import { ConfirmPassword } from "../pages/auth/ConfirmPassword";
 import { AuthRecovery } from "../components/templates/AuthRecovery";
+import NotFound from "../404/404";
 
 //import EditFormNew from '../components/templates/FormNewSu';
 
@@ -45,7 +46,10 @@ export const AppRouter = () => {
         />
         <Route
           path="*"
-          element={<h1>404: Especifique una ruta correctamente</h1>}
+          element={<NotFound />}
+            
+            
+            
         />
 
         <Route path="/" element={<Inicio />} />

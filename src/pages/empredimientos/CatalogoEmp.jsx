@@ -247,6 +247,16 @@ export const CatalogoEmp = () => {
                               </dd>
                             </div>
                             <div className="data-list-row">
+                              <dt>Instagram</dt>
+                              <dd>
+                                <a
+                                  href={item.instagram}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  <i className="fa fa-instagram" /> Síguenos
+                                </a>
+                              </dd>
                               <dt>Web</dt>
                               <dd>
                                 <a
