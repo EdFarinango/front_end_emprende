@@ -120,7 +120,7 @@ const SearchComponent = () => {
     try {
       alert({
         title: "¿Estas seguro de aprobar esta solicitud?",
-        text: "El emprendimiento no podra regresar a este estado",
+        text: "El emprendimiento no podrá regresar a este estado",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -299,9 +299,9 @@ const SearchComponent = () => {
                         <table className="table table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
-                              <th>Categoria</th>
+                              <th>Categoría</th>
                               <th>Nombre</th>
-                              <th>Descripcion</th>
+                              <th>Descripción</th>
 
                               <th>Imagen</th>
                               <th>Acciones</th>
@@ -369,9 +369,9 @@ const SearchComponent = () => {
                         <table className="table table-striped table-bordered zero-configuration">
                           <thead>
                             <tr>
-                              <th>Categoria</th>
+                              <th>Categoría</th>
                               <th>Nombre</th>
-                              <th>Descripcion</th>
+                              <th>Descripción</th>
 
                               <th>Imagen</th>
                               <th>Acciones</th>
